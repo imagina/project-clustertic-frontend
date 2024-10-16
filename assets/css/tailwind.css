@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
  
-/* primary: '#1DA1F2',
-secondary: '#14171A',
-accent: '#FFAD1F', */
+/* @import "./custom.css"; */
+
 @layer base {
   :root {
     --background: 0 0% 100%;

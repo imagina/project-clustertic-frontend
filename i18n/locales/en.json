@@ -1,1 +1,11 @@
-{}
+{
+    "appbar": {
+        "nav": {
+            "briefcase": "briefcase",
+            "explore":"explore projects",
+            "login":"login",
+            "register":"sign up"
+        },
+        "publish_project":"Publish a project"
+    }
+}
