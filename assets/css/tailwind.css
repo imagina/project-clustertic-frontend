@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
  
+/* primary: '#1DA1F2',
+secondary: '#14171A',
+accent: '#FFAD1F', */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -19,11 +22,12 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
  
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    /* --primary: 0 0% 9%; */
+    --primary: 157, 100%, 63%;
+    --primary-foreground: 240, 23%, 17%;
  
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 240, 19%, 10%;
+    --secondary-foreground: 0 0% 100%;
  
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;

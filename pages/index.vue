@@ -2,5 +2,5 @@
 </script>
 
 <template>
-inicio
+<AppbarPCT></AppbarPCT>
 </template>
