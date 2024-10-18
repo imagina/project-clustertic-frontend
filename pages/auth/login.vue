@@ -34,7 +34,7 @@ async function login() {
 
 <template>
   <div
-    class="tw-min-h-screen tw-bg-secondary tw-text-gray-900 tw-flex tw-justify-center"
+    class="sign-bg tw-min-h-screen tw-bg-secondary tw-text-gray-900 tw-flex tw-justify-center"
   >
     <AppbarSign />
     <div
