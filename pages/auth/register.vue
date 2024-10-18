@@ -46,7 +46,7 @@ async function login() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            Registrarse
+            {{$t("auth.register.title")}}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
@@ -57,7 +57,7 @@ async function login() {
                       filled
                       class="input-dark tw-mb-3"
                       v-model="auth.username"
-                      label="Nombre"
+                  :label="$t('auth.register.inputs.firstName')"
                       lazy-rules
                       :rules="[
                         (val) => !!val || 'Name is required.',
@@ -69,7 +69,7 @@ async function login() {
                       filled
                       class="input-dark tw-mb-3"
                       v-model="auth.username"
-                      label="Apellido"
+                  :label="$t('auth.register.inputs.lastName')"
                       lazy-rules
                       :rules="[
                         (val) => !!val || 'last name is required.',
@@ -81,7 +81,7 @@ async function login() {
                   filled
                   class="input-dark tw-mb-3"
                   v-model="auth.username"
-                  label="Email"
+                  :label="$t('auth.register.inputs.email')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'Email is required.',
@@ -97,7 +97,7 @@ async function login() {
                   filled
                   class="input-dark tw-mb-2"
                   v-model="auth.password"
-                  label="Password"
+                  :label="$t('auth.register.inputs.password')"
                   lazy-rules
                   :rules="PasswordValidator.rules"
                   :type="isPwd ? 'password' : 'text'"
@@ -113,37 +113,41 @@ async function login() {
                     />
                   </template>
                 </InputCPA>
-                <div class="tw-flex tw-justify-between tw-flex-row tw-mb-6">
+                <div class="tw-mb-6">
                   <label class="tw-flex tw-items-center">
                     <Checkbox
                       class="tw-bg-input !tw-border-input"
                       v-model:checked="auth.remember_me"
                     ></Checkbox>
-                    <span class="tw-text-white tw-ml-2">Recordar usuario</span>
+                    <span class="tw-text-white tw-ml-2">
+                    <i18n-t keypath="auth.register.inputs.termsAndCond.content">
+                      <template #highlight1>
+                        <a href="#" class="tw-text-primary tw-font-bold"> {{ $t("auth.register.inputs.termsAndCond.highlight1") }}</a>
+                      </template>
+                      <template #highlight2>
+                        <a href="#" class="tw-text-primary tw-font-bold"> {{ $t("auth.register.inputs.termsAndCond.highlight2") }}</a>
+                      </template>
+                    </i18n-t></span>
                   </label>
-                  <a class="tw-text-primary">¿Olvidaste tu contraseña?</a>
                 </div>
-                <div class="tw-flex tw-justify-center tw-mb-6">
-                  <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5">
-                    <img src="@/assets/svg/brand-google.svg" alt="" />
+                <transition name="hero">
+                  <Button
+                    :disabled="loading"
+                    type="submit"
+                    class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
+                  >
+                    <span class="tw-ml-3"> {{ $t("auth.register.submitBtn") }} </span>
                   </Button>
-                  <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14"
-                    ><img src="@/assets/svg/brand-facebook.svg" alt=""
-                  /></Button>
-                </div>
-                <Button
-                  :disabled="loading"
-                  type="submit"
-                  class="tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
-                >
-                  <span class="tw-ml-3"> Login </span>
-                </Button>
+                </transition>
               </q-form>
-              <p
-                class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
-              >
-                ¿No tienes una cuenta?
-                <a href="#" class="tw-text-primary tw-ml-1"> Regístrate </a>
+              <p class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center">
+                {{$t('auth.register.existAccount.content')}}
+                <NuxtLink
+                  to="/auth/login"
+                  class=" tw-text-primary tw-ml-1"
+                >
+                {{$t('auth.register.existAccount.link')}}
+                </NuxtLink>
               </p>
             </div>
           </div>
@@ -153,4 +157,8 @@ async function login() {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.hero {
+  view-transition-name: article-thumb;
+}
+</style>

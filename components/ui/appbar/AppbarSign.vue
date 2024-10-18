@@ -8,9 +8,12 @@ const { locale } = useI18n()
   <div class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-z-50">
     <div class="tw-px-10 tw-flex">
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
-        <Button variant="outline">
-          <ChevronsLeftIcon class="tw-text-primary"/>
-        </Button>
+        <NuxtLink to="/">
+          
+          <Button variant="outline">
+            <ChevronsLeftIcon class="tw-text-primary"/>
+          </Button>
+        </NuxtLink>
       </div>
 
       <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2 ">

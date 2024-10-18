@@ -1,17 +1,56 @@
 {
-    "appbar": {
-        "nav": {
-            "briefcase": "portafolio",
-            "explore":"explorar proyectos",
-            "login":"iniciar sesión",
-            "register":"registrarse"
-        },
-        "publish_project":"Publicar un proyecto"
+  "appbar": {
+    "nav": {
+      "briefcase": "portafolio",
+      "explore": "explorar proyectos",
+      "login": "iniciar sesión",
+      "register": "registrarse"
     },
-    "landing":{
-        "title":{
-            "content":"Conecta con manos expertas {highlight} para convertir {br} tus ideas en proyectos",
-            "highlight":"tolimenses"
+    "publish_project": "Publicar un proyecto"
+  },
+  "landing": {
+    "title": {
+      "content": "Conecta con manos expertas {highlight} para convertir {br} tus ideas en proyectos",
+      "highlight": "tolimenses"
+    },
+    "publishProject":"Publicar proyectos",
+    "findProject":"Buscar Proyectos"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Bienvenido nuevamente",
+      "inputs": {
+        "email": "Email",
+        "password": "Contraseña",
+        "rememberMe": "Recordar usuario"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submitBtn": "Ingresar",
+      "withoutAccount": {
+        "content": "¿No tienes una cuenta?",
+        "link": "Regístrate"
+      }
+    },
+    "register": {
+      "title": "Registro",
+      "inputs": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Email",
+        "password": "Contraseña",
+        "termsAndCond": {
+          "content": "Acepto el {highlight1} y la {highlight2}.",
+          "highlight1": "Acuerdo de usuario",
+          "highlight2": "Política de privacidad"
         }
+      },
+      "submitBtn": "Registrarme",
+      "existAccount": {
+        "content": "¿Ya tienes una cuenta?",
+        "link": "Ingresar"
+      }
     }
+  }
 }

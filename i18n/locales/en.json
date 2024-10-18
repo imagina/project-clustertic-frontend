@@ -12,6 +12,45 @@
         "title":{
             "content":"Connect with expert hands {highlight} to turn {br} your ideas into projects",
             "highlight":"tolimenses"
+        },
+        "publishProject":"Publish Projects",
+        "findProject":"Find Projects"
+    },
+    "auth" :{
+        "login": {
+            "title":"Login",
+            "subtitle":"Welcome Back",
+            "inputs":{
+                "email":"Email",
+                "password":"Password",
+                "rememberMe": "Remember me"
+            },
+            "forgotPassword":"Forgot your password?",
+            "submitBtn":"Login",
+            "withoutAccount":{
+                "content":"¿Does not have account?",
+                "link":"Register"
+            }
+        },
+        "register": {
+            "title":"Registro",
+            "inputs":{
+                "firstName":"Nombre",
+                "lastName":"Apellido",
+                "email":"Email",
+                "password":"Contraseña",
+                "termsAndCond": {
+                    "content":"Acepto el {highlight1} y la {highlight2}.",
+                    "highlight1":"Acuerdo de usuario",
+                    "highlight2":"Política de privacidad"
+                }
+            },
+            "forgotPassword":"¿Olvidaste tu contraseña?",
+            "submitBtn":"Ingresar",
+            "withoutAccount":{
+                "content":"¿No tienes una cuenta?",
+                "link":"Regístrate"
+            }
         }
     }
 }

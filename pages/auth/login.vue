@@ -48,9 +48,9 @@ async function login() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            Iniciar sesión
+            {{$t("auth.login.title")}}
           </h1>
-          <p class="tw-text-primary tw-mb-14 tw-text-[20px] tw-font-extralight">Bienvenido nuevamente</p>
+          <p class="tw-text-primary tw-mb-14 tw-text-[20px] tw-font-extralight">{{$t("auth.login.subtitle")}}</p>
           <div class="tw-w-full tw-flex-1">
             <div class="">
               <q-form @submit.prevent.stop="login" ref="refLogin">
@@ -58,7 +58,7 @@ async function login() {
                   filled
                   class="input-dark tw-mb-3"
                   v-model="auth.username"
-                  label="Email"
+                  :label="$t('auth.login.inputs.email')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'Email is required.',
@@ -74,7 +74,7 @@ async function login() {
                   filled
                   class="input-dark tw-mb-2"
                   v-model="auth.password"
-                  label="Password"
+                  :label="$t('auth.login.inputs.password')"
                   lazy-rules
                   :rules="[
                       val => !!val || 'Password is required',
@@ -104,10 +104,10 @@ async function login() {
                         v-model:checked="auth.remember_me"
                       ></Checkbox>
                       <span class="tw-text-white tw-ml-2"
-                        >Recordar usuario</span
+                        >{{$t('auth.login.inputs.rememberMe')}}</span
                       >
                     </label>
-                    <a class="tw-text-primary">¿Olvidaste tu contraseña?</a>
+                    <a class="tw-text-primary">{{$t('auth.login.forgotPassword')}}</a>
 
                 </div>
                 <div class="tw-flex tw-justify-center tw-mb-6"> 
@@ -116,22 +116,24 @@ async function login() {
                   </Button>
                   <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14"><img src="@/assets/svg/brand-facebook.svg" alt="" /></Button>
                 </div>
-                <Button
-                  :disabled="loading"
-                  type="submit"
-                  class="tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
-                >
-                  <span class="tw-ml-3"> Login </span>
-                </Button>
+                <transition name="hero">
+                  <Button
+                    :disabled="loading"
+                    type="submit"
+                    class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
+                    >
+                    <span class="tw-ml-3"> {{$t('auth.login.submitBtn')}} </span>
+                  </Button>
+                </transition>
               </q-form>
               <p class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center">
-                ¿No tienes una cuenta?
-                <a
-                  href="#"
+                {{$t('auth.login.withoutAccount.content')}}
+                <NuxtLink
+                  to="/auth/register"
                   class=" tw-text-primary tw-ml-1"
                 >
-                  Regístrate
-                </a>
+                {{$t('auth.login.withoutAccount.link')}}
+                </NuxtLink>
               </p>
             </div>
           </div>
@@ -141,4 +143,21 @@ async function login() {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+
+.hero {
+  transition: all 1s ease;
+  view-transition-name: article-thumb;
+}
+
+.hero-enter-active,
+.hero-leave-active {
+  transition: all 1s ease;
+}
+
+.hero-enter,
+.hero-leave-to {
+  transform: scale(0.5);
+  opacity: 0;
+}
+</style>

@@ -35,5 +35,9 @@ export default defineNuxtConfig({
   },
   quasar: {
     plugins: ['Notify']
-  }
+  },
+  experimental: {
+    viewTransition: true,
+      // ...
+  },
 })

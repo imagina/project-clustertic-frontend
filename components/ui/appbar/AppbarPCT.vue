@@ -35,14 +35,20 @@ const { locale } = useI18n()
             </Button>
           </li>
           <li>
-            <Button variant="ghost" class="tw-text-secondary">
-              <span class=" tw-font-bold tw-capitalize">{{$t('appbar.nav.login') }}</span>
-            </Button>
+            <NuxtLink to="/auth/login">
+              <Button variant="ghost" class="tw-text-secondary">
+                <span class=" tw-font-bold tw-capitalize">{{$t('appbar.nav.login') }}</span>
+              </Button>
+            </NuxtLink>
           </li>
           <li>
-            <Button variant="ghost" class="tw-text-secondary">
-              <span class=" tw-font-bold tw-capitalize">{{$t('appbar.nav.register') }}</span>
-            </Button>
+            
+            <NuxtLink to="/auth/register">
+
+              <Button variant="ghost" class="tw-text-secondary">
+                <span class=" tw-font-bold tw-capitalize">{{$t('appbar.nav.register') }}</span>
+              </Button>
+            </NuxtLink>
           </li>
         </ul>
       </nav>

@@ -26,8 +26,8 @@ const handleAnimationStart = (self: AnimationEvent) => {
           </i18n-t>
         </h1>
         <div class="tw-flex  tw-mb-10 lg:tw-mb-0">
-          <Button size="lg" class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]">Publicar proyectos</Button>
-          <Button variant="ghost" class="tw-ml-5 md:tw-text-[20px]">Buscar Proyectos <ArrowRightIcon class="tw-ml-3"/></Button>
+          <Button size="lg" class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]">{{ $t("landing.publishProject") }}</Button>
+          <Button variant="ghost" class="tw-ml-5 md:tw-text-[20px]"> {{ $t("landing.findProject") }}<ArrowRightIcon class="tw-ml-3"/></Button>
         </div>
       </div>
       <div class="tw-basis-3/12 lg:tw-basis-6/12">
@@ -54,7 +54,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .float-label{
   @apply tw-absolute tw-px-10  tw-py-2 tw-text-[25px] tw-rounded-lg tw-bg-white tw-animate-slide-down;
   animation-duration: 1s;
