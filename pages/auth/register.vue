@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import PasswordValidator from "@/utils/validators/passwordValidator";
-import { MailIcon, KeySquareIcon, } from "lucide-vue-next";
+import { MailIcon, KeySquareIcon } from "lucide-vue-next";
 
 const refLogin: any = ref(null);
 const isPwd = ref(true);
 const store = useAuthStore();
-definePageMeta({
-  middleware: "auth",
-});
+
 const auth = reactive<{
   username: string;
   password: string;
@@ -48,12 +46,37 @@ async function login() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            Iniciar sesión
+            Registrarse
           </h1>
-          <p class="tw-text-primary tw-mb-14 tw-text-[20px] tw-font-extralight">Bienvenido nuevamente</p>
           <div class="tw-w-full tw-flex-1">
             <div class="">
               <q-form @submit.prevent.stop="login" ref="refLogin">
+                <div class="tw-flex">
+                  <div class="tw-basis-1/2 tw-pr-2">
+                    <InputCPA
+                      filled
+                      class="input-dark tw-mb-3"
+                      v-model="auth.username"
+                      label="Nombre"
+                      lazy-rules
+                      :rules="[
+                        (val) => !!val || 'Name is required.',
+                      ]"
+                    />
+                  </div>
+                  <div class="tw-basis-1/2 tw-pl-2">
+                    <InputCPA
+                      filled
+                      class="input-dark tw-mb-3"
+                      v-model="auth.username"
+                      label="Apellido"
+                      lazy-rules
+                      :rules="[
+                        (val) => !!val || 'last name is required.',
+                      ]"
+                    />
+                  </div>
+                </div>
                 <InputCPA
                   filled
                   class="input-dark tw-mb-3"
@@ -76,14 +99,7 @@ async function login() {
                   v-model="auth.password"
                   label="Password"
                   lazy-rules
-                  :rules="[
-                      val => !!val || 'Password is required',
-                      val => val.length >= 8 || 'Password must be at least 8 characters long',
-                      val => /[A-Z]/.test(val) || 'Must contain at least one uppercase letter',
-                      val => /[a-z]/.test(val) || 'Must contain at least one lowercase letter',
-                      val => /\d/.test(val) || 'Must contain at least one number',
-                      val => /[\W_]/.test(val) || 'Must contain at least one special character'
-                    ]"
+                  :rules="PasswordValidator.rules"
                   :type="isPwd ? 'password' : 'text'"
                 >
                   <template v-slot:prepend>
@@ -98,23 +114,22 @@ async function login() {
                   </template>
                 </InputCPA>
                 <div class="tw-flex tw-justify-between tw-flex-row tw-mb-6">
-                    <label class="tw-flex tw-items-center">
-                      <Checkbox
-                        class="tw-bg-input !tw-border-input"
-                        v-model:checked="auth.remember_me"
-                      ></Checkbox>
-                      <span class="tw-text-white tw-ml-2"
-                        >Recordar usuario</span
-                      >
-                    </label>
-                    <a class="tw-text-primary">¿Olvidaste tu contraseña?</a>
-
+                  <label class="tw-flex tw-items-center">
+                    <Checkbox
+                      class="tw-bg-input !tw-border-input"
+                      v-model:checked="auth.remember_me"
+                    ></Checkbox>
+                    <span class="tw-text-white tw-ml-2">Recordar usuario</span>
+                  </label>
+                  <a class="tw-text-primary">¿Olvidaste tu contraseña?</a>
                 </div>
-                <div class="tw-flex tw-justify-center tw-mb-6"> 
+                <div class="tw-flex tw-justify-center tw-mb-6">
                   <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5">
                     <img src="@/assets/svg/brand-google.svg" alt="" />
                   </Button>
-                  <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14"><img src="@/assets/svg/brand-facebook.svg" alt="" /></Button>
+                  <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14"
+                    ><img src="@/assets/svg/brand-facebook.svg" alt=""
+                  /></Button>
                 </div>
                 <Button
                   :disabled="loading"
@@ -124,14 +139,11 @@ async function login() {
                   <span class="tw-ml-3"> Login </span>
                 </Button>
               </q-form>
-              <p class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center">
+              <p
+                class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
+              >
                 ¿No tienes una cuenta?
-                <a
-                  href="#"
-                  class=" tw-text-primary tw-ml-1"
-                >
-                  Regístrate
-                </a>
+                <a href="#" class="tw-text-primary tw-ml-1"> Regístrate </a>
               </p>
             </div>
           </div>

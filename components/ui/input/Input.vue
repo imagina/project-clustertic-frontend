@@ -1,24 +1,56 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { useVModel } from '@vueuse/core'
-import { cn } from '@/lib/utils'
+import { useVModel } from "@vueuse/core";
+import type { QInputProps } from "quasar";
 
-const props = defineProps<{
-  defaultValue?: string | number
-  modelValue?: string | number
-  class?: HTMLAttributes['class']
-}>()
+interface customInputProps extends QInputProps {
+  defaultValue?: string | number;
+  class?: string
+}
+
+const props = defineProps<customInputProps>();
 
 const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string | number): void
-}>()
+  (e: "update:modelValue", payload: string | number): void;
+}>();
 
-const modelValue = useVModel(props, 'modelValue', emits, {
+const modelValue = useVModel(props, "modelValue", emits, {
   passive: true,
   defaultValue: props.defaultValue,
-})
+});
 </script>
 
 <template>
-  <input v-model="modelValue" :class="cn('flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50', props.class)">
+  <q-input v-bind="props"  v-model="modelValue">
+    
+    <template v-slot:before v-if="$slots.before">
+      <slot name="before"></slot>
+        </template>
+    <template v-slot:prepend v-if="$slots.prepend">
+      <slot name="prepend"></slot>
+    </template>
+    <template v-slot:append v-if="$slots.append">
+      <slot name="append"></slot>
+    </template>
+    <template v-slot:hint v-if="$slots.hint">
+      <slot name="hint"></slot>
+    </template>
+    
+    <template v-slot:after v-if="$slots.after">
+      <slot name="after"></slot>
+        </template>
+  </q-input>
 </template>
+
+<style>
+.q-field__control{
+  @apply !tw-rounded-2xl
+}
+.input-dark {
+  & .q-field__control{
+    background-color: hsla(var(--input), 1);
+    .q-field__control-container *{
+      color: hsla(0, 0%, 90%, 1);
+    }
+  }
+}
+</style>

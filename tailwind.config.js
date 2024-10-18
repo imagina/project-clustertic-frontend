@@ -73,12 +73,22 @@ module.exports = {
           from: { height: 'var(--radix-collapsible-content-height)' },
           to: { height: 0 },
         },
+        "fade-in": {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        "slide-down": {
+          '0%': { transform: 'translateY(-110%)'},
+          '100%': { transform: 'translateY(0)'  },
+        }
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "collapsible-down": "collapsible-down 0.2s ease-in-out",
-        "collapsible-up": "collapsible-up 0.2s ease-in-out",
+        "accordion-down": "accordion-down .5s ease-out",
+        "accordion-up": "accordion-up .5s ease-out",
+        "collapsible-down": "collapsible-down .5s ease-in-out",
+        "collapsible-up": "collapsible-up .5s ease-in-out",
+        "fade-in": "fade-in .5s ease-in-out",
+        "slide-down": "slide-down .5s ease-in-out",
       },
     },
   },

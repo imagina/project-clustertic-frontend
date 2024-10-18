@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { BriefcaseIcon, CompassIcon } from "lucide-vue-next";
-const toggleState = ref(false)
 const { locale } = useI18n()
 
 </script>
 
 <template>
-  <div class="tw-p-5">
+  <div class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50">
     <div class="tw-container tw-flex">
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
         <img
           class="tw-h-14 tw-w-14"
-          src="@/assets/images/logo.svg"
+          src="@/assets/svg/logo.svg"
           alt="Mi SVG"
         />
         <div class="tw-ml-1">
-          <p class="tw-m-0 tw-leading-3">CLUSTER</p>
+          <p class="tw-m-0 tw-leading-3">CLÚSTER</p>
           <p class="tw-m-0 tw-leading-3">TECNOLÓGICO</p>
           <p class="tw-m-0 tw-leading-3">DEL TOLIMA</p>
         </div>
@@ -53,7 +52,7 @@ const { locale } = useI18n()
         </Button>
       </div>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
-        <select class="tw-bg-transparent tw-border-0" v-model="locale">
+        <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>
         </select>
