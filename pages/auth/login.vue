@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import PasswordValidator from "@/utils/validators/passwordValidator";
 import { MailIcon, KeySquareIcon, } from "lucide-vue-next";
 
 const refLogin: any = ref(null);
@@ -21,11 +20,9 @@ const auth = reactive<{
 const loading = computed(() => store.loading);
 async function login() {
   try {
-    debugger;
     const validateLogin = await refLogin.value.validate();
-    console.log(auth);
     if (!validateLogin) return;
-    // await store.login(auth);
+    await store.login(auth);
   } catch (erro) {
     console.log(erro);
   }

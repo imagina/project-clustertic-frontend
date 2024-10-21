@@ -3,7 +3,7 @@ import { reactive, ref } from "vue";
 import PasswordValidator from "@/utils/validators/passwordValidator";
 import { MailIcon, KeySquareIcon } from "lucide-vue-next";
 
-const refLogin: any = ref(null);
+const refRegister: any = ref(null);
 const isPwd = ref(true);
 const store = useAuthStore();
 
@@ -17,12 +17,12 @@ const auth = reactive<{
   remember_me: false,
 });
 const loading = computed(() => store.loading);
-async function login() {
+async function register() {
   try {
     debugger;
-    const validateLogin = await refLogin.value.validate();
+    const validateRegister = await refRegister.value.validate();
     console.log(auth);
-    if (!validateLogin) return;
+    if (!validateRegister) return;
     // await store.login(auth);
   } catch (erro) {
     console.log(erro);
@@ -50,7 +50,7 @@ async function login() {
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
-              <q-form @submit.prevent.stop="login" ref="refLogin">
+              <q-form @submit.prevent.stop="register" ref="refRegister">
                 <div class="tw-flex">
                   <div class="tw-basis-1/2 tw-pr-2">
                     <InputCPA

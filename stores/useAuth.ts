@@ -4,7 +4,7 @@ import { Notify } from 'quasar'
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
-        token: null,
+        token: "",
         expiresIn: null,
         loading: false,
     }),
