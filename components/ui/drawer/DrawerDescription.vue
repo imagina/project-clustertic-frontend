@@ -4,7 +4,9 @@ import { DrawerDescription } from 'vaul-vue'
 import { type HtmlHTMLAttributes, computed } from 'vue'
 import { cn } from '@/lib/utils'
 
-const props = defineProps<DrawerDescriptionProps & { class?: HtmlHTMLAttributes['class'] }>()
+const props = defineProps<
+  DrawerDescriptionProps & { class?: HtmlHTMLAttributes['class'] }
+>()
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props
@@ -14,7 +16,10 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <DrawerDescription v-bind="delegatedProps" :class="cn('text-sm text-muted-foreground', props.class)">
+  <DrawerDescription
+    v-bind="delegatedProps"
+    :class="cn('text-sm text-muted-foreground', props.class)"
+  >
     <slot />
   </DrawerDescription>
 </template>

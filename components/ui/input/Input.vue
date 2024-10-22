@@ -1,26 +1,32 @@
 <script setup lang="ts">
-import { useVModel } from "@vueuse/core";
-import type { QInputProps } from "quasar";
+import { useVModel } from '@vueuse/core'
+import type { QInputProps } from 'quasar'
+import { cn } from '~/lib/utils'
 
 interface customInputProps extends QInputProps {
-  defaultValue?: string | number;
-  class?: string;
+  defaultValue?: string | number
+  class?: string
+  dark?: boolean
 }
 
-const props = defineProps<customInputProps>();
+const props = defineProps<customInputProps>()
 
 const emits = defineEmits<{
-  (e: "update:modelValue", payload: string | number): void;
-}>();
+  (e: 'update:modelValue', payload: string | number): void
+}>()
 
-const modelValue = useVModel(props, "modelValue", emits, {
+const modelValue = useVModel(props, 'modelValue', emits, {
   passive: true,
   defaultValue: props.defaultValue,
-});
+})
 </script>
 
 <template>
-  <q-input v-bind="props" v-model="modelValue">
+  <q-input
+    v-bind="props"
+    v-model="modelValue"
+    :class="cn(props.class, props.dark ? 'input-dark' : '')"
+  >
     <template v-slot:before v-if="$slots.before">
       <slot name="before"></slot>
     </template>
@@ -40,16 +46,14 @@ const modelValue = useVModel(props, "modelValue", emits, {
   </q-input>
 </template>
 
-<style>
-.q-field__control {
+<style scoped>
+:deep(.q-field__contro)l {
   @apply !tw-rounded-2xl;
 }
-.input-dark {
-  & .q-field__control {
-    background-color: hsla(var(--input), 1);
-    .q-field__control-container * {
-      color: hsla(0, 0%, 90%, 1);
-    }
+.input-dark :deep(.q-field__control) {
+  background-color: hsla(var(--input), 1) !important;
+  .q-field__control-container * {
+    color: hsla(0, 0%, 90%, 1) !important;
   }
 }
 </style>

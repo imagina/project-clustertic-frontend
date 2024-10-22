@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import PasswordValidator from "@/utils/validators/passwordValidator";
-import { MailIcon, KeySquareIcon } from "lucide-vue-next";
+import { reactive, ref } from 'vue'
+import PasswordValidator from '@/utils/validators/passwordValidator'
+import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
-const refRegister: any = ref(null);
-const isPwd = ref(true);
-const store = useAuthStore();
+const refRegister: any = ref(null)
+const isPwd = ref(true)
+const store = useAuthStore()
 
 const auth = reactive<{
-  username: string;
-  password: string;
-  remember_me: boolean;
+  username: string
+  password: string
+  remember_me: boolean
 }>({
-  username: "",
-  password: "",
+  username: '',
+  password: '',
   remember_me: false,
-});
-const loading = computed(() => store.loading);
+})
+const loading = computed(() => store.loading)
 async function register() {
   try {
-    debugger;
-    const validateRegister = await refRegister.value.validate();
-    console.log(auth);
-    if (!validateRegister) return;
+    debugger
+    const validateRegister = await refRegister.value.validate()
+    console.log(auth)
+    if (!validateRegister) return
     // await store.login(auth);
   } catch (erro) {
-    console.log(erro);
+    console.log(erro)
   }
 }
 </script>
@@ -46,7 +46,7 @@ async function register() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            {{$t("auth.register.title")}}
+            {{ $t('auth.register.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
@@ -55,31 +55,30 @@ async function register() {
                   <div class="tw-basis-1/2 tw-pr-2">
                     <InputCPA
                       filled
-                      class="input-dark tw-mb-3"
+                      dark
+                      class="tw-mb-3"
                       v-model="auth.username"
-                  :label="$t('auth.register.inputs.firstName')"
+                      :label="$t('auth.register.inputs.firstName')"
                       lazy-rules
-                      :rules="[
-                        (val) => !!val || 'Name is required.',
-                      ]"
+                      :rules="[(val) => !!val || 'Name is required.']"
                     />
                   </div>
                   <div class="tw-basis-1/2 tw-pl-2">
                     <InputCPA
                       filled
-                      class="input-dark tw-mb-3"
+                      dark
+                      class="tw-mb-3"
                       v-model="auth.username"
-                  :label="$t('auth.register.inputs.lastName')"
+                      :label="$t('auth.register.inputs.lastName')"
                       lazy-rules
-                      :rules="[
-                        (val) => !!val || 'last name is required.',
-                      ]"
+                      :rules="[(val) => !!val || 'last name is required.']"
                     />
                   </div>
                 </div>
                 <InputCPA
                   filled
-                  class="input-dark tw-mb-3"
+                  dark
+                  class="tw-mb-3"
                   v-model="auth.username"
                   :label="$t('auth.register.inputs.email')"
                   lazy-rules
@@ -95,7 +94,8 @@ async function register() {
                 </InputCPA>
                 <InputCPA
                   filled
-                  class="input-dark tw-mb-2"
+                  dark
+                  class="tw-mb-2"
                   v-model="auth.password"
                   :label="$t('auth.register.inputs.password')"
                   lazy-rules
@@ -120,14 +120,25 @@ async function register() {
                       v-model:checked="auth.remember_me"
                     ></Checkbox>
                     <span class="tw-text-white tw-ml-2">
-                    <i18n-t keypath="auth.register.inputs.termsAndCond.content">
-                      <template #highlight1>
-                        <a href="#" class="tw-text-primary tw-font-bold"> {{ $t("auth.register.inputs.termsAndCond.highlight1") }}</a>
-                      </template>
-                      <template #highlight2>
-                        <a href="#" class="tw-text-primary tw-font-bold"> {{ $t("auth.register.inputs.termsAndCond.highlight2") }}</a>
-                      </template>
-                    </i18n-t></span>
+                      <i18n-t
+                        keypath="auth.register.inputs.termsAndCond.content"
+                      >
+                        <template #highlight1>
+                          <a href="#" class="tw-text-primary tw-font-bold">
+                            {{
+                              $t('auth.register.inputs.termsAndCond.highlight1')
+                            }}</a
+                          >
+                        </template>
+                        <template #highlight2>
+                          <a href="#" class="tw-text-primary tw-font-bold">
+                            {{
+                              $t('auth.register.inputs.termsAndCond.highlight2')
+                            }}</a
+                          >
+                        </template>
+                      </i18n-t></span
+                    >
                   </label>
                 </div>
                 <transition name="hero">
@@ -136,17 +147,18 @@ async function register() {
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
-                    <span class="tw-ml-3"> {{ $t("auth.register.submitBtn") }} </span>
+                    <span class="tw-ml-3">
+                      {{ $t('auth.register.submitBtn') }}
+                    </span>
                   </Button>
                 </transition>
               </q-form>
-              <p class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center">
-                {{$t('auth.register.existAccount.content')}}
-                <NuxtLink
-                  to="/auth/login"
-                  class=" tw-text-primary tw-ml-1"
-                >
-                {{$t('auth.register.existAccount.link')}}
+              <p
+                class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
+              >
+                {{ $t('auth.register.existAccount.content') }}
+                <NuxtLink to="/auth/login" class="tw-text-primary tw-ml-1">
+                  {{ $t('auth.register.existAccount.link') }}
                 </NuxtLink>
               </p>
             </div>

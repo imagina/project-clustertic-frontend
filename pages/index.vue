@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ArrowRightIcon } from "lucide-vue-next";
+import { ArrowRightIcon } from 'lucide-vue-next'
 const handleAnimationStart = (self: AnimationEvent) => {
-  (<HTMLElement>self.currentTarget)?.classList.remove("tw-opacity-0"); // Añade la clase de Tailwind al finalizar
-  (<HTMLElement>self.currentTarget)?.classList.add("tw-opacity-80"); // Añade la clase de Tailwind al finalizar
-};
+  ;(<HTMLElement>self.currentTarget)?.classList.remove('tw-opacity-0') // Añade la clase de Tailwind al finalizar
+  ;(<HTMLElement>self.currentTarget)?.classList.add('tw-opacity-80') // Añade la clase de Tailwind al finalizar
+}
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
           >
             <i18n-t keypath="landing.title.content">
               <template #highlight>
-                <b class="tw-font-bold"> {{ $t("landing.title.highlight") }}</b>
+                <b class="tw-font-bold"> {{ $t('landing.title.highlight') }}</b>
               </template>
               <template #br>
                 <br />
@@ -33,10 +33,10 @@ const handleAnimationStart = (self: AnimationEvent) => {
             <Button
               size="lg"
               class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
-              >{{ $t("landing.publishProject") }}</Button
+              >{{ $t('landing.publishProject') }}</Button
             >
             <Button variant="ghost" class="tw-ml-5 md:tw-text-[20px]">
-              {{ $t("landing.findProject") }}<ArrowRightIcon class="tw-ml-3"
+              {{ $t('landing.findProject') }}<ArrowRightIcon class="tw-ml-3"
             /></Button>
           </div>
         </div>
@@ -66,9 +66,8 @@ const handleAnimationStart = (self: AnimationEvent) => {
       </div>
     </div>
   </div>
-  <SearchProject/>
+  <SearchProject />
   <div class="tw-container tw-py-10">
-
     <CardProject></CardProject>
   </div>
 </template>

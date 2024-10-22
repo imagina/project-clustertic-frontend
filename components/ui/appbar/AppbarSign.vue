@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ChevronsLeftIcon } from "lucide-vue-next";
+import { ChevronsLeftIcon } from 'lucide-vue-next'
 const { locale } = useI18n()
-
 </script>
 
 <template>
@@ -9,18 +8,20 @@ const { locale } = useI18n()
     <div class="tw-px-10 tw-flex">
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
         <NuxtLink to="/">
-          
           <Button variant="outline">
-            <ChevronsLeftIcon class="tw-text-primary"/>
+            <ChevronsLeftIcon class="tw-text-primary" />
           </Button>
         </NuxtLink>
       </div>
 
-      <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2 ">
-
-      </nav>
+      <nav
+        class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2"
+      ></nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
-        <select class="tw-bg-transparent tw-text-primary tw-border-0 tw-p-2" v-model="locale">
+        <select
+          class="tw-bg-transparent tw-text-primary tw-border-0 tw-p-2"
+          v-model="locale"
+        >
           <option value="en">EN</option>
           <option value="es">ES</option>
         </select>

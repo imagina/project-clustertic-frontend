@@ -13,8 +13,8 @@
       "content": "Conecta con manos expertas {highlight} para convertir {br} tus ideas en proyectos",
       "highlight": "tolimenses"
     },
-    "publishProject":"Publicar proyectos",
-    "findProject":"Buscar Proyectos"
+    "publishProject": "Publicar proyectos",
+    "findProject": "Buscar Proyectos"
   },
 
   "auth": {

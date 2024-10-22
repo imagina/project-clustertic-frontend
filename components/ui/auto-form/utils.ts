@@ -38,8 +38,7 @@ export function getIndexIfArray(string: string) {
 export function getBaseSchema<
   ChildType extends z.ZodAny | z.AnyZodObject = z.ZodAny,
 >(schema: ChildType | z.ZodEffects<ChildType>): ChildType | null {
-  if (!schema)
-    return null
+  if (!schema) return null
   if ('innerType' in schema._def)
     return getBaseSchema(schema._def.innerType as ChildType)
 
@@ -101,8 +100,7 @@ function isIndex(value: unknown): value is number {
  */
 export function normalizeFormPath(path: string): string {
   const pathArr = path.split('.')
-  if (!pathArr.length)
-    return ''
+  if (!pathArr.length) return ''
 
   let fullPath = String(pathArr[0])
   for (let i = 1; i < pathArr.length; i++) {
@@ -131,8 +129,7 @@ function isContainerValue(value: unknown): value is Record<string, unknown> {
   return isObject(value) || Array.isArray(value)
 }
 function cleanupNonNestedPath(path: string) {
-  if (isNotNestedPath(path))
-    return path.replace(/\[|\]/g, '')
+  if (isNotNestedPath(path)) return path.replace(/\[|\]/g, '')
 
   return path
 }
@@ -140,7 +137,10 @@ function cleanupNonNestedPath(path: string) {
 /**
  * Gets a nested property value from an object
  */
-export function getFromPath<TValue = unknown>(object: NestedRecord | undefined, path: string): TValue | undefined
+export function getFromPath<TValue = unknown>(
+  object: NestedRecord | undefined,
+  path: string,
+): TValue | undefined
 export function getFromPath<TValue = unknown, TFallback = TValue>(
   object: NestedRecord | undefined,
   path: string,
@@ -151,8 +151,7 @@ export function getFromPath<TValue = unknown, TFallback = TValue>(
   path: string,
   fallback?: TFallback,
 ): TValue | TFallback | undefined {
-  if (!object)
-    return fallback
+  if (!object) return fallback
 
   if (isNotNestedPath(path))
     return object[cleanupNonNestedPath(path)] as TValue | undefined
@@ -161,8 +160,7 @@ export function getFromPath<TValue = unknown, TFallback = TValue>(
     .split(/\.|\[(\d+)\]/)
     .filter(Boolean)
     .reduce((acc, propKey) => {
-      if (isContainerValue(acc) && propKey in acc)
-        return acc[propKey]
+      if (isContainerValue(acc) && propKey in acc) return acc[propKey]
 
       return fallback
     }, object as unknown)

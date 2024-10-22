@@ -3,13 +3,21 @@ import { computed } from 'vue'
 import { beautifyObjectName } from './utils'
 import type { FieldProps } from './interface'
 import AutoFormLabel from './AutoFormLabel.vue'
-import { FormControl, FormDescription, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
 import { Switch } from '@/components/ui/switch'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const props = defineProps<FieldProps>()
 
-const booleanComponent = computed(() => props.config?.component === 'switch' ? Switch : Checkbox)
+const booleanComponent = computed(() =>
+  props.config?.component === 'switch' ? Switch : Checkbox,
+)
 </script>
 
 <template>

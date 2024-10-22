@@ -9,10 +9,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vesp/nuxt-fontawesome',
     '@nuxtjs/i18n',
-    'nuxt-quasar-ui'
+    'nuxt-quasar-ui',
   ],
   i18n: {
-    vueI18n: './i18n/i18n.config.ts' // if you are using custom path, default 
+    vueI18n: './i18n/i18n.config.ts', // if you are using custom path, default
   },
   shadcn: {
     /**
@@ -23,21 +23,21 @@ export default defineNuxtConfig({
      * Directory that the component lives in.
      * @default "./components/ui"
      */
-    componentDir: './components/ui'
+    componentDir: './components/ui',
   },
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
   runtimeConfig: {
     public: {
-      apiRoute: process.env.API_ROUTE || ''
-    }
+      apiRoute: process.env.API_ROUTE || '',
+    },
   },
   quasar: {
-    plugins: ['Notify']
+    plugins: ['Notify'],
   },
   experimental: {
     viewTransition: true,
-      // ...
+    // ...
   },
 })
