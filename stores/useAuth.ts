@@ -7,6 +7,8 @@ export const useAuthStore = defineStore('auth', {
     token: '',
     expiresIn: null,
     loading: false,
+    facebookClientId: null,
+    googleClientId: null
   }),
   getters: {
     isAuthenticated(state) {
@@ -67,5 +69,31 @@ export const useAuthStore = defineStore('auth', {
         },
       })
     },
+    //get isite settings
+    async getSettings(settings: string[]){
+      const config = useRuntimeConfig()
+
+      await $fetch(`${config.public.apiRoute}/api/isite/v1/site/settings`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: {
+          filter: {
+            "name": settings
+          }
+        }
+      }).then(response => {
+        if(response?.data)  return response.data
+      })
+    },
+    async getFacebookSettings(){
+      const settings = this.getSettings(['isite::facebookClientId'])
+      this.facebookClientId = settings['isite::facebookClientId']
+    },
+    async getGoogleSettings(){
+      const settings = this.getSettings(['isite::googleClientId'])
+      this.googleClientId = settings['isite::googleClientId']
+    }
   },
 })
