@@ -18,6 +18,9 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
+    getToken(state){
+      return state.token ? state.token : localStorage.getItem('userToken')
+    },
     getFacebookClientId(state){
       return state.facebookClientId
     }
@@ -29,26 +32,21 @@ export const useAuthStore = defineStore('auth', {
     }): Promise<void> {
       try {
         this.loading = true
-        const config = useRuntimeConfig()
-        const response: any = await $fetch(
-          `${config.public.apiRoute}/api/profile/v1/auth/login`,
+        const path = '/api/profile/v1/auth/login'
+        await apiAuth(path,
           {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
             body: credentials,
           },
-        )
-
-        this.user = response.data.userData
-        this.token = response.data.userToken
-        this.expiresIn = response.data.expiresIn
-
-        localStorage.setItem('userToken', this.token)
-        const router = useRouter()
-        router.push('/home')
-        this.loading = false
+        ).then(response => {
+            this.user = response.data.userData
+            this.token = response.data.userToken
+            this.expiresIn = response.data.expiresIn
+            localStorage.setItem('userToken', this.token)
+            const router = useRouter()
+            router.push('/home')
+            this.loading = false
+        })        
       } catch (error) {
         this.loading = false
         console.error('Login failed:', error)
@@ -59,26 +57,23 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout() {
-      const config = useRuntimeConfig()
-      this.user = null
-      this.token = null
-      this.expiresIn = null
-      localStorage.removeItem('userToken')
-
-      await $fetch(`${config.public.apiRoute}/api/profile/v1/auth/logout`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const path = '/api/profile/v1/auth/logout'
+      await apiAuth(path, {
+        method: 'GET'
+      }).then(response => {
+        this.user = null;
+        this.token = null;
+        this.expiresIn = null
+        localStorage.removeItem('userToken')
       })
 
-      //const router = useRouter()
-      //router.push('/login')
+      const router = useRouter()
+      router.push('/auth/login')
     },
-    //get isite settings
+    
+    /* site settings */
     async getSettings(settings: string[]){
       const config = useRuntimeConfig()
-
       await $fetch(`${config.public.apiRoute}/api/isite/v1/site/settings`, {
         method: 'GET',
         headers: {
@@ -93,10 +88,12 @@ export const useAuthStore = defineStore('auth', {
         if(response?.data)  return response.data
       })
     },
+    /* facebook settings */
     async getFacebookSettings(){
       const settings = this.getSettings(['isite::facebookClientId'])
       this.facebookClientId = settings['isite::facebookClientId']
     },
+    /* google settings */
     async getGoogleSettings(){
       const settings = this.getSettings(['isite::googleClientId'])
       this.googleClientId = settings['isite::googleClientId']
