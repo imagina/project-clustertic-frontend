@@ -18,6 +18,9 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
+    getFacebookClientId(state){
+      return state.facebookClientId
+    }
   },
   actions: {
     async login(credentials: {
@@ -68,6 +71,9 @@ export const useAuthStore = defineStore('auth', {
           'Content-Type': 'application/json',
         },
       })
+
+      //const router = useRouter()
+      //router.push('/login')
     },
     //get isite settings
     async getSettings(settings: string[]){
