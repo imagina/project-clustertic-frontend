@@ -244,6 +244,7 @@ function handleChangeStep(next_or_prev: number) {
                     </p>
                     <Button
                       size="xs"
+                      type="button"
                       variant="ghost"
                       class="hover:tw-bg-transparent !tw-pr-0"
                       ><XIcon
