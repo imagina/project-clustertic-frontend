@@ -56,9 +56,11 @@ const { locale } = useI18n()
         </ul>
       </nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center tw-mr-2">
-        <Button>
-          <span class="tw-font-bold">{{ $t('appbar.publish_project') }}</span>
-        </Button>
+        <NuxtLink to="/projects/create">
+          <Button>
+            <span class="tw-font-bold">{{ $t('appbar.publish_project') }}</span>
+          </Button>
+        </NuxtLink>
       </div>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
         <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">

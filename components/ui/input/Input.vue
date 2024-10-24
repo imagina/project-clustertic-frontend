@@ -47,8 +47,14 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 </template>
 
 <style scoped>
-:deep(.q-field__contro)l {
+:deep(.q-field__control) {
   @apply !tw-rounded-2xl;
+}
+:deep(.q-field__label) {
+  @apply !tw-pl-2;
+}
+.input-dark :deep(.q-field__control):before {
+  @apply !tw-border-none;
 }
 .input-dark :deep(.q-field__control) {
   background-color: hsla(var(--input), 1) !important;

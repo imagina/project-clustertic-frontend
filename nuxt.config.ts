@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
   pages: true,
+  // Configurar los layouts predeterminados
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',

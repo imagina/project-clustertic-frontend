@@ -39,5 +39,8 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 .input-dark {
   background-color: hsla(var(--input), 1) !important;
   color: hsla(0, 0%, 90%, 1) !important;
+  &::placeholder {
+    color: hsla(0, 0%, 90%, 1) !important;
+  }
 }
 </style>
