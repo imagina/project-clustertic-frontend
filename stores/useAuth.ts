@@ -38,6 +38,10 @@ export const useAuthStore = defineStore('auth', {
     getExpiresIn(state){
       return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
     },
+    getUsername(state){
+      return state.username ? state.username : localStorage.getItem('username')
+    },
+
     getFacebookClientId(state){
       return state.facebookClientId
     }
@@ -59,15 +63,17 @@ export const useAuthStore = defineStore('auth', {
     }): Promise<void> {
       try {
         this.loading = true
-        await apiAuth(apiRoutes.authLogin, 'POST', credentials ).then(response => {
-            this.user = response.data.userData
-            this.token = response.data.userToken
-            this.expiresIn = response.data.expiresIn
-            localStorage.setItem('userToken', this.token)
-            localStorage.setItem('expiresIn', this.expiresIn)
-            const router = useRouter()
-            router.push(routes.home)
-            this.loading = false
+        await apiAuth.post(apiRoutes.authLogin, credentials ).then(response => {
+          this.user = response.data.userData
+          this.token = response.data.userToken
+          this.expiresIn = response.data.expiresIn
+          this.username = credentials.username
+          localStorage.setItem('userToken', this.token)
+          localStorage.setItem('expiresIn', this.expiresIn)
+          localStorage.setItem('username', this.username)
+          const router = useRouter()
+          router.push(routes.home)
+          this.loading = false
         })        
       } catch (error) {
         this.loading = false
@@ -79,17 +85,21 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout() {
-      console.log('logout')
-      await apiAuth(apiRoutes.authLogout, 'GET').then(response => {
+      await apiAuth.get(apiRoutes.authLogout).then(response => {
         this.user = null;
         this.token = null;
         this.expiresIn = null
+        this.username = null
         localStorage.removeItem('userToken')
         localStorage.removeItem('expiresIn')
+        localStorage.removeItem('username')
       })
-
       const router = useRouter()
       router.push(routes.login)
+      Notify.create({
+        message: 'Has cerrado sesión exitosamente. ¡Hasta pronto!',
+        type: 'positive',
+      })
     },
 
     async register(dataForm){
@@ -102,16 +112,19 @@ export const useAuthStore = defineStore('auth', {
           language: (navigator.language || navigator.userLanguage)
         }
       }
-
-      console.log(credentials)
-      await apiAuth(apiRoutes.authRegister, 'POST',
-        {          
-         // body: toSnakeCase(credentials),
-        }).then(response => {
-          //{"data":{"checkEmail":false}}
-          //update store, and redirect
-          console.log(response)
+      
+      await apiAuth.post(apiRoutes.authRegister, credentials).then(response => {
+        //{"data":{"checkEmail":false}}          
+        //update store, and redirect
+        this.username = dataForm.email
+        this.password = dataForm.password
+        const router = useRouter()
+        router.push(routes.login)
+        Notify.create({
+          message: '¡Usuario creado! Ahora puedes iniciar sesión.',
+          type: 'positive',
         })
+      })
     },
     
     /* site settings */

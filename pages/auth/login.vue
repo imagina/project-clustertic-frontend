@@ -11,11 +11,11 @@ definePageMeta({
 const auth = reactive<{
   username: string
   password: string
-  remember_me: boolean
+  rememberMe: boolean
 }>({
   username: '',
   password: '',
-  remember_me: false,
+  rememberMe: false,
 })
 const loading = computed(() => store.loading)
 
@@ -117,7 +117,7 @@ async function login() {
                   <label class="tw-flex tw-items-center">
                     <Checkbox
                       class="tw-bg-input !tw-border-input"
-                      v-model:checked="auth.remember_me"
+                      v-model:checked="auth.rememberMe"
                     ></Checkbox>
                     <span class="tw-text-white tw-ml-2">{{
                       $t('auth.login.inputs.rememberMe')
