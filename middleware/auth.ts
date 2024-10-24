@@ -4,9 +4,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const pathHome = '/home'
 
   if (import.meta.client) {
-    const tokenFromStorage = localStorage.getItem('userToken')
-    authStore.token = tokenFromStorage
-    if (tokenFromStorage) {
+    if (authStore.getToken && authStore.validateToken()) {
       if (to.path === pathLogin) {
         if (from.path !== pathHome) {
           return navigateTo(pathHome)

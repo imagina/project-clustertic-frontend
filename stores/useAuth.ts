@@ -21,11 +21,24 @@ export const useAuthStore = defineStore('auth', {
     getToken(state){
       return state.token ? state.token : localStorage.getItem('userToken')
     },
+    getExpiresIn(state){
+      return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
+    },
     getFacebookClientId(state){
       return state.facebookClientId
     }
   },
-  actions: {
+  actions: {   
+    //add to helper 
+    timestamp(date = false ) {
+      date = date ? date : new Date();
+      return date / 1000 | 0;
+    },
+
+    validateToken(){
+      return (this.timestamp(this.getExpiresIn) <= this.timestamp())      
+    },
+
     async login(credentials: {
       username: string
       password: string
@@ -43,6 +56,7 @@ export const useAuthStore = defineStore('auth', {
             this.token = response.data.userToken
             this.expiresIn = response.data.expiresIn
             localStorage.setItem('userToken', this.token)
+            localStorage.setItem('expiresIn', this.expiresIn)
             const router = useRouter()
             router.push('/home')
             this.loading = false
@@ -65,6 +79,7 @@ export const useAuthStore = defineStore('auth', {
         this.token = null;
         this.expiresIn = null
         localStorage.removeItem('userToken')
+        localStorage.removeItem('expiresIn')
       })
 
       const router = useRouter()
