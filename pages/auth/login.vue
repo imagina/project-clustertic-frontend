@@ -18,6 +18,12 @@ const auth = reactive<{
   remember_me: false,
 })
 const loading = computed(() => store.loading)
+
+onMounted(() => {
+  if(store.username) auth.username = store.username;
+  if(store.password) auth.password = store.password;
+})
+
 async function login() {
   try {
     const validateLogin = await refLogin.value.validate()
