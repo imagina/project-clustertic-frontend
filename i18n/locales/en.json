@@ -52,5 +52,64 @@
         "link": "Regístrate"
       }
     }
+  },
+  "projects": {
+    "singular": "Project ",
+    "create": {
+      "pages": {
+        "one": {
+          "title": "Tell us what you need",
+          "description": "Receive offers from top industry experts and choose the proposal that best fits your needs."
+        },
+        "two": {
+          "title": "What skills are needed?",
+          "description": "Enter up to 5 skills that best describe your project. Freelancers will use these skills to find projects they are most interested and experienced in."
+        },
+        "three": {
+          "title": "How do you want to pay?"
+        },
+        "four": {
+          "title": "Are your details correct?"
+        }
+      },
+      "form": {
+        "name": {
+          "label": "Choose a name for your project",
+          "placeholder": "e.g., I need a website"
+        },
+        "description": {
+          "label": "Describe your project",
+          "placeholder": "Describe your project here...",
+          "clearBtn": "Clear description"
+        },
+        "files": {
+          "empty": {
+            "title": "Attach Documents",
+            "description": "Drag and drop any images or documents that might help explain your project here (max file size 25 MB)"
+          },
+          "loadedMsg": "Documents attached"
+        },
+        "skills": {
+          "label": "Choose the skills needed for your project",
+          "placeholder": "Enter skills here...",
+          "suggested": "Suggested skills:"
+        },
+        "prices": {
+          "details": {
+            "title": "Fixed price",
+            "description": "Accept a fixed price and release payment when the work is done. Best for sporadic tasks."
+          },
+          "label": "Choose a price range for your project"
+        },
+        "final": {
+          "label": "Project details"
+        },
+        "buttons": {
+          "back": "Back",
+          "next": "Next",
+          "submit": "Create"
+        }
+      }
+    }
   }
 }

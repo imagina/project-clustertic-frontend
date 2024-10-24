@@ -26,25 +26,24 @@ definePageMeta({
   layout: 'dark-bg',
 })
 
+const router = useRouter()
 const refForm: any = ref(null)
 const step = ref<number>(0)
 const stepsTitles: any = ref([
   {
-    title: 'Cuéntanos qué necesitas',
-    description:
-      'Recibe ofertas de los principales expertos de la industria TIC y escoge la propuesta que mejor se adapte a tu necesidad.',
+    title: 'projects.create.pages.one.title',
+    description: 'projects.create.pages.one.description',
   },
   {
-    title: '¿Qué habilidades se necesitan?',
-    description:
-      'Ingresa hasta 5 habilidades que describen mejor tu proyecto. Los freelancers utilizarán estas habilidades para encontrar proyectos en los que están más interesados y experimentados.',
+    title: 'projects.create.pages.two.title',
+    description: 'projects.create.pages.two.description',
   },
   {
-    title: '¿Como quieres pagar?',
+    title: 'projects.create.pages.three.title',
     description: '',
   },
   {
-    title: '¿Son correctos tus datos?',
+    title: 'projects.create.pages.four.title',
     description: '',
   },
 ])
@@ -117,6 +116,7 @@ async function create() {
   try {
     const validateForm = await refForm.value.validate()
     if (!validateForm) return
+    router.push('/')
   } catch (erro) {
     console.log(erro)
   }
@@ -150,31 +150,37 @@ function handleChangeStep(next_or_prev: number) {
         v-if="stepsTitles[step].title"
         class="tw-text-3xl lg:tw-text-[35px] xl:tw-text-5xl tw-font-extralight tw-text-white tw-mb-6 lg:tw-mb-8"
       >
-        {{ stepsTitles[step].title }}
+        {{ $t(stepsTitles[step].title) }}
       </h1>
       <p
         v-if="stepsTitles[step].description"
         class="h2 tw-text-white tw-w-4/6 tw-text-center tw-mb-10 tw-text-[14px] tw-font-extralight"
       >
-        {{ stepsTitles[step].description }}
+        {{ $t(stepsTitles[step].description) }}
       </p>
       <div class="tw-w-full tw-flex-1">
         <div class="tw-relative">
           <q-form @submit.prevent="create" ref="refForm">
             <div class="step-container step-0" :class="`show-${step}`">
-              <p class="input-details">Elige un nombre para tu proyecto</p>
+              <p class="input-details">
+                {{ $t('projects.create.form.name.label') }}
+              </p>
               <InputCPA
                 id="input_uno"
                 filled
                 dark
                 class="tw-mb-3"
                 v-model="projectData.name"
-                label="p. ej., Necesito un sitio web"
+                :label="$t('projects.create.form.name.placeholder')"
               >
               </InputCPA>
-              <p class="input-details">Elige un nombre para tu proyecto</p>
+              <p class="input-details">
+                {{ $t('projects.create.form.description.label') }}
+              </p>
               <Textarea
-                placeholder="Describe tu proyecto aquí..."
+                :placeholder="
+                  $t('projects.create.form.description.placeholder')
+                "
                 v-model="projectData.description"
                 dark
                 class="tw-h-28"
@@ -186,7 +192,7 @@ function handleChangeStep(next_or_prev: number) {
                   type="button"
                   variant="ghost"
                   class="tw-text-white tw-underline"
-                  >Borrar descripción</Button
+                  >{{ $t('projects.create.form.description.clearBtn') }}</Button
                 >
               </div>
               <Dropzone v-model="projectData.files" dark>
@@ -194,8 +200,8 @@ function handleChangeStep(next_or_prev: number) {
                   <p class="tw-text-primary tw-text-base tw-mb-5">
                     {{
                       projectData.files
-                        ? 'Documentos adjuntados'
-                        : 'Adjuntar archivos'
+                        ? $t('projects.create.form.files.empty.title')
+                        : $t('projects.create.form.files.loadedMsg')
                     }}
                   </p>
                 </template>
@@ -212,16 +218,16 @@ function handleChangeStep(next_or_prev: number) {
                     </span>
                   </p>
                   <p v-else class="tw-text-white tw-text-xs tw-text-center">
-                    Arrastra y suelta cualquier imagen o documento que podría
-                    resultar útil para explicar aquí tu proyecto (tamaño de
-                    archivo máx 25 MB)
+                    {{ $t('projects.create.form.files.empty.description') }}
                   </p>
                 </template>
               </Dropzone>
             </div>
 
             <div class="step-container step-1" :class="`show-${step}`">
-              <p class="input-details">Elige un nombre para tu proyecto</p>
+              <p class="input-details">
+                {{ $t('projects.create.form.skills.label') }}
+              </p>
               <div
                 class="tw-bg-input tw-rounded-2xl tw-px-4 tw-pt-3 tw-relative"
               >
@@ -249,7 +255,7 @@ function handleChangeStep(next_or_prev: number) {
                 </ul>
                 <input
                   class="skills-input"
-                  placeholder="Ingresa habilidades aquí..."
+                  :placeholder="$t('projects.create.form.skills.placeholder')"
                   v-model="projectData.searchSkills"
                 />
 
@@ -267,7 +273,7 @@ function handleChangeStep(next_or_prev: number) {
                 </div>
               </div>
               <p class="tw-mt-2 tw-text-white tw-w-10/12 tw-m-auto">
-                Habilidades sugeridas:
+                {{ $t('projects.create.form.skills.suggested') }}
 
                 <span
                   v-for="(item, index) in suggestedSkills"
@@ -292,15 +298,16 @@ function handleChangeStep(next_or_prev: number) {
                 </div>
                 <div class="tw-text-white tw-ml-8 lg:tw-w-2/5">
                   <h3 class="tw-mb-2 tw-text-lg tw-font-extrabold">
-                    Precio fijo
+                    {{ $t('projects.create.form.prices.details.title') }}
                   </h3>
                   <p class="tw-font-extralight tw-text-xs">
-                    Acepta un precio fijo y libera el pago cuando se realice el
-                    trabajo. Es mejor para tareas esporádicas.
+                    {{ $t('projects.create.form.prices.details.description') }}
                   </p>
                 </div>
               </div>
-              <p class="input-details">Elige un nombre para tu proyecto</p>
+              <p class="input-details">
+                {{ $t('projects.create.form.prices.label') }}
+              </p>
               <div class="tw-flex">
                 <div class="tw-basis-1/3 sm:tw-basis-1/5 lg:tw-basis-2/12">
                   <Select
@@ -331,7 +338,7 @@ function handleChangeStep(next_or_prev: number) {
                 </div>
                 <div class="tw-text-white tw-ml-8">
                   <p class="tw-text-sm">
-                    Proyecto
+                    {{ $t('projects.singular') }}
                     <span class="tw-text-primary"
                       >"{{ projectData.name }}"</span
                     >
@@ -341,7 +348,9 @@ function handleChangeStep(next_or_prev: number) {
                   </p>
                 </div>
               </div>
-              <p class="input-details">Detalles del proyecto</p>
+              <p class="input-details">
+                {{ $t('projects.create.form.final.label') }}
+              </p>
               <div
                 class="tw-bg-input tw-rounded-2xl tw-p-6 tw-relative tw-min-h-44"
               >
@@ -372,7 +381,9 @@ function handleChangeStep(next_or_prev: number) {
                 variant="secondary"
                 class="hero tw-mt-8 tw-tracking-wide tw-w-full tw-font-semibold tw-py-4 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-mx-1"
               >
-                <span class="tw-ml-3"> Volver </span>
+                <span class="tw-ml-3">
+                  {{ $t('projects.create.form.buttons.back') }}
+                </span>
               </Button>
               <Button
                 @click="handleChangeStep(1)"
@@ -380,7 +391,13 @@ function handleChangeStep(next_or_prev: number) {
                 class="hero tw-mt-8 tw-tracking-wide tw-w-full tw-font-semibold tw-py-4 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-mx-1"
               >
                 <span class="tw-ml-3">
-                  {{ step < 3 ? 'Siguiente' : 'Crear' }}
+                  {{
+                    $t(
+                      step < 3
+                        ? 'projects.create.form.buttons.next'
+                        : 'projects.create.form.buttons.submit',
+                    )
+                  }}
                 </span>
               </Button>
             </div>
