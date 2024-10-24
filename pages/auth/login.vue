@@ -29,8 +29,8 @@ async function login() {
     const validateLogin = await refLogin.value.validate()
     if (!validateLogin) return
     await store.login(auth)
-  } catch (erro) {
-    console.log(erro)
+  } catch (error) {
+    console.log(error)
   }
 }
 </script>

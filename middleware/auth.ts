@@ -7,7 +7,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (authStore.getToken && authStore.validateToken()) {
       if (to.path === pathLogin) {
         if (from.path !== pathHome) {
-          console.log('to home')
           return navigateTo(pathHome)
         }
       }
