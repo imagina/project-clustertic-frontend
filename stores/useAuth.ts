@@ -2,20 +2,20 @@ import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
 
 const apiRoutes = {
-  authLogin: '/api/profile/v1/auth/login', 
-  authLogout: '/api/profile/v1/auth/logout',   
+  authLogin: '/api/profile/v1/auth/login',
+  authLogout: '/api/profile/v1/auth/logout',
   authRegister: '/api/profile/v1/users/register',
-  settings: '/api/isite/v1/site/settings', 
+  settings: '/api/isite/v1/site/settings',
 };
 
 const routes = {
-  home: '/home', 
+  home: '/admin/home',
   login: '/auth/login'
 }
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    username: '', 
+    username: '',
     password: '',
     user: null,
     token: '',
@@ -32,23 +32,45 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
-    getToken(state){
+    getToken(state) {
       return state.token ? state.token : localStorage.getItem('userToken')
     },
-    getExpiresIn(state){
+    getExpiresIn(state) {
       return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
     },
-    getUsername(state){
+    getUsername(state) {
       return state.username ? state.username : localStorage.getItem('username')
     },
-
-    getFacebookClientId(state){
+    getFacebookClientId(state) {
       return state.facebookClientId
+    },
+    getGoogleClientId(state) {
+      return state.googleClientId
     }
   },
-  actions: {       
-    validateToken(){
-      return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())      
+  actions: {
+    setToken(token) {
+      this.token = token
+    },
+    validateToken() {
+      return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())
+    },
+
+    authSocialNetwork(token){
+      console.log(token)
+      // todo AUTH_SOCIAL_NETWORK
+    },
+    authSuccess(userData) {
+      this.user = userData.userData
+      this.token = userData.data.userToken
+      this.expiresIn = userData.data.expiresIn
+      
+      localStorage.setItem('userToken', this.token)
+      localStorage.setItem('expiresIn', this.expiresIn)
+      localStorage.setItem('username', this.username)
+      const router = useRouter()
+      router.push(routes.home)
+      this.loading = false
     },
 
     async login(credentials: {
@@ -57,18 +79,12 @@ export const useAuthStore = defineStore('auth', {
     }): Promise<void> {
       try {
         this.loading = true
-        await apiAuth.post(apiRoutes.authLogin, credentials ).then(response => {
-          this.user = response.data.userData
-          this.token = response.data.userToken
-          this.expiresIn = response.data.expiresIn
-          this.username = credentials.username
-          localStorage.setItem('userToken', this.token)
-          localStorage.setItem('expiresIn', this.expiresIn)
-          localStorage.setItem('username', this.username)
+        await apiAuth.post(apiRoutes.authLogin, credentials).then(response => {
+          this.authSuccess(response)
           const router = useRouter()
           router.push(routes.home)
           this.loading = false
-        })        
+        })
       } catch (error) {
         this.loading = false
         console.error('Login failed:', error)
@@ -96,17 +112,17 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async register(dataForm){
+    async register(dataForm) {
       const currentDate = new Date()
       const credentials = {
-        attributes :{
+        attributes: {
           ...dataForm,
-          password_confirmation: dataForm.password, 
+          password_confirmation: dataForm.password,
           timezone: (currentDate.getTimezoneOffset() / 60),
           language: (navigator.language || navigator.userLanguage)
         }
       }
-      
+
       await apiAuth.post(apiRoutes.authRegister, credentials).then(response => {
         //update store, and redirect
         this.username = dataForm.email
@@ -119,9 +135,9 @@ export const useAuthStore = defineStore('auth', {
         })
       })
     },
-    
+
     /* site settings */
-    async getSettings(settings: string[]){      
+    async getSettings(settings: string[]) {
       const config = useRuntimeConfig()
       return await $fetch(`${config.public.apiRoute}${apiRoutes.settings}`, {
         method: 'GET',
@@ -136,18 +152,18 @@ export const useAuthStore = defineStore('auth', {
       })
     },
     /* facebook settings */
-    async getFacebookSettings(){
+    async getFacebookSettings() {
       await this.getSettings(['isite::facebookClientId']).then(response => {
-        if(response?.data){
+        if (response?.data) {
           this.facebookClientId = response.data['isite::facebookClientId']
         }
       })
     },
     /* google settings */
-    async getGoogleSettings(){
+    async getGoogleSettings() {
       await this.getSettings(['isite::googleClientId']).then(response => {
-        if(response?.data){
-          this.googleClientId = response.data['isite::googleClientId']          
+        if (response?.data) {
+          this.googleClientId = response.data['isite::googleClientId']
         }
       })
     }

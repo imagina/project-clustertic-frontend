@@ -1,18 +1,10 @@
 <script setup lang="ts">
 
-const proxy = getCurrentInstance()!.appContext.config.globalProperties
+	const proxy = getCurrentInstance()!.appContext.config.globalProperties
 
-const store = useAuthStore()
+	const store = useAuthStore()
 
- const emit = defineEmits(['logged'])
-	const props = defineProps({
-		buttonProps: {
-			default: () => {
-				return {}
-			}
-		}
-	})
-
+ 	const emit = defineEmits(['logged'])
 	const state = reactive({
 		success: true,
 		loading: false
@@ -24,17 +16,7 @@ const store = useAuthStore()
     
   
   const appIdFacebook = computed(() => store.getFacebookClientId);
-	
-	const propsButton = computed( () => {
-		return {
-			color: 'blue',
-			icon: 'fab fa-facebook',
-			loading: state.loading,
-			vIf: state.success,
-			...props.buttonProps
-		}
-	})
-  
+
 	////add CDN  to head
 	async function  addCDN() {
 		let appId = appIdFacebook.value
@@ -77,19 +59,22 @@ const store = useAuthStore()
 		if (response.status != 'connected') return state.loading = false
 		//Get access Token
 		let token = response.authResponse.accessToken
-
+		store.authSocialNetwork(token)
+		state.loading = false;
+		emit('logged')
 	}   
 
  </script>
   
 
 <template>
-	<SocialAuthSocialBtn
-		@click.native="signIn()"
+	<Button 
 		v-if="appIdFacebook"
+		@click="signIn()"		
+		class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
 		:loading="state.loading"
-		:title="'--'"
-		icon=""
-	/>
+	>
+		<img src="@/assets/svg/brand-facebook.svg" alt="facebook" />
+	</Button>
 </template>
   
