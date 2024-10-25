@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-//import socialBtn from '@components/socialAuth/socialBtn.vue';
+const proxy = getCurrentInstance()!.appContext.config.globalProperties
 
 const store = useAuthStore()
 
@@ -18,9 +18,8 @@ const store = useAuthStore()
 		loading: false
 	})
 
-  onMounted(() => {
-		store.getFacebookSettings()
-		addCDN()
+   onMounted(() => {
+		store.getFacebookSettings().then(() => addCDN())
 	})	
     
   
@@ -38,7 +37,7 @@ const store = useAuthStore()
   
 	////add CDN  to head
 	async function  addCDN() {
-		let appId = appIdFacebook
+		let appId = appIdFacebook.value
 		window.fbAsyncInit = function () {
 			FB.init({
 				appId: appId,
@@ -73,11 +72,12 @@ const store = useAuthStore()
 		})
 	}
       //Request Login
-  async function login(response) {
+  async function login(response) {		
 		//Validate response
 		if (response.status != 'connected') return state.loading = false
-			//Get access Token
+		//Get access Token
 		let token = response.authResponse.accessToken
+
 	}   
 
  </script>
@@ -89,7 +89,7 @@ const store = useAuthStore()
 		v-if="appIdFacebook"
 		:loading="state.loading"
 		:title="'--'"
-		:icon="'@components/socialAuth/icons/facebook.svg'"
+		icon=""
 	/>
 </template>
   

@@ -140,7 +140,6 @@ export const useAuthStore = defineStore('auth', {
       await this.getSettings(['isite::facebookClientId']).then(response => {
         if(response?.data){
           this.facebookClientId = response.data['isite::facebookClientId']
-          console.log(this.facebookClientId)
         }
       })
     },
