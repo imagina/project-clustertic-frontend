@@ -34,5 +34,10 @@ export const Helper = {
 	},
 
 	//Convert strings to snake_case
-	convertStringToSnakeCase: (string) => string.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
+	convertStringToSnakeCase: (string) => string.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`),
+	
+	timestamp: (date = false ) => {
+		date = date ? date : new Date();
+		return date / 1000 | 0;
+	}
 }

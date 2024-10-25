@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import socialBtn from '@components/socialAuth/socialBtn.vue';
+//import socialBtn from '@components/socialAuth/socialBtn.vue';
 
 const store = useAuthStore()
 
@@ -74,37 +74,22 @@ const store = useAuthStore()
 	}
       //Request Login
   async function login(response) {
-        //Validate response
-			if (response.status != 'connected') return state.loading = false
-
+		//Validate response
+		if (response.status != 'connected') return state.loading = false
 			//Get access Token
-			let token = response.authResponse.accessToken
+		let token = response.authResponse.accessToken
+	}   
 
-			/*
-			//Dispath auth social network
-			this.$store.dispatch('quserAuth/AUTH_SOCIAL_NETWORK', {
-				type: 'facebook',
-				token: token
-			}).then(response => {
-				emit('logged')
-				console.log(response)
-				state.loading = false
-			}).catch(error => {
-				console.log(error)
-			})
-				*/
-		}   
-  
-  </script>
+ </script>
   
 
 <template>
-	<socialBtn
+	<SocialAuthSocialBtn
 		@click.native="signIn()"
 		v-if="appIdFacebook"
 		:loading="state.loading"
-		:title="''"
-		:icon="require('@components/socialAuth/icons/facebook.svg')"
+		:title="'--'"
+		:icon="'@components/socialAuth/icons/facebook.svg'"
 	/>
 </template>
   
