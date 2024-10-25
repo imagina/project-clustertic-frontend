@@ -2,8 +2,25 @@
 definePageMeta({
   middleware: 'auth',
 })
+const store = useAuthStore()
+
 </script>
-
-<template>Home</template>
-
+<template>
+	<div class="flex justify-center">
+		<div>
+			<h1>Home Page</h1>
+			<p>
+      username:	{{ store.getUsername }}
+    	</p>
+		</div>
+		<div>
+			<q-btn
+				label="Logout"
+				color="primary"
+				no-caps
+				@click="store.logout()"
+			/>			
+		</div>
+	</div>
+</template>
 <style scoped lang="css"></style>

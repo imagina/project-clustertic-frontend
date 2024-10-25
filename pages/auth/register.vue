@@ -8,24 +8,26 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  username: string
+  firstName: string,
+  lastName: string,
+  email: string,
   password: string
   remember_me: boolean
 }>({
-  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
   password: '',
   remember_me: false,
 })
 const loading = computed(() => store.loading)
 async function register() {
-  try {
-    debugger
+  try {    
     const validateRegister = await refRegister.value.validate()
-    console.log(auth)
     if (!validateRegister) return
-    // await store.login(auth);
-  } catch (erro) {
-    console.log(erro)
+    await store.register(auth);
+  } catch (error) {
+    console.log(error)
   }
 }
 </script>
@@ -57,7 +59,7 @@ async function register() {
                       filled
                       dark
                       class="tw-mb-3"
-                      v-model="auth.username"
+                      v-model="auth.firstName"
                       :label="$t('auth.register.inputs.firstName')"
                       lazy-rules
                       :rules="[(val) => !!val || 'Name is required.']"
@@ -68,7 +70,7 @@ async function register() {
                       filled
                       dark
                       class="tw-mb-3"
-                      v-model="auth.username"
+                      v-model="auth.lastName"
                       :label="$t('auth.register.inputs.lastName')"
                       lazy-rules
                       :rules="[(val) => !!val || 'last name is required.']"
@@ -79,7 +81,7 @@ async function register() {
                   filled
                   dark
                   class="tw-mb-3"
-                  v-model="auth.username"
+                  v-model="auth.email"
                   :label="$t('auth.register.inputs.email')"
                   lazy-rules
                   :rules="[

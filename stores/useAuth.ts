@@ -1,12 +1,28 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
 
+const apiRoutes = {
+  authLogin: '/api/profile/v1/auth/login', 
+  authLogout: '/api/profile/v1/auth/logout',   
+  authRegister: '/api/profile/v1/users/register',
+  settings: '/api/isite/v1/site/settings', 
+};
+
+const routes = {
+  home: '/home', 
+  login: '/auth/login'
+}
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
+    username: '', 
+    password: '',
     user: null,
     token: '',
     expiresIn: null,
     loading: false,
+    facebookClientId: null,
+    googleClientId: null
   }),
   getters: {
     isAuthenticated(state) {
@@ -16,34 +32,43 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
+    getToken(state){
+      return state.token ? state.token : localStorage.getItem('userToken')
+    },
+    getExpiresIn(state){
+      return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
+    },
+    getUsername(state){
+      return state.username ? state.username : localStorage.getItem('username')
+    },
+
+    getFacebookClientId(state){
+      return state.facebookClientId
+    }
   },
-  actions: {
+  actions: {       
+    validateToken(){
+      return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())      
+    },
+
     async login(credentials: {
       username: string
       password: string
     }): Promise<void> {
       try {
         this.loading = true
-        const config = useRuntimeConfig()
-        const response: any = await $fetch(
-          `${config.public.apiRoute}/api/profile/v1/auth/login`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: credentials,
-          },
-        )
-
-        this.user = response.data.userData
-        this.token = response.data.userToken
-        this.expiresIn = response.data.expiresIn
-
-        localStorage.setItem('userToken', this.token)
-        const router = useRouter()
-        router.push('/home')
-        this.loading = false
+        await apiAuth.post(apiRoutes.authLogin, credentials ).then(response => {
+          this.user = response.data.userData
+          this.token = response.data.userToken
+          this.expiresIn = response.data.expiresIn
+          this.username = credentials.username
+          localStorage.setItem('userToken', this.token)
+          localStorage.setItem('expiresIn', this.expiresIn)
+          localStorage.setItem('username', this.username)
+          const router = useRouter()
+          router.push(routes.home)
+          this.loading = false
+        })        
       } catch (error) {
         this.loading = false
         console.error('Login failed:', error)
@@ -54,18 +79,77 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout() {
-      const config = useRuntimeConfig()
-      this.user = null
-      this.token = null
-      this.expiresIn = null
-      localStorage.removeItem('userToken')
+      await apiAuth.get(apiRoutes.authLogout).then(response => {
+        this.user = null;
+        this.token = null;
+        this.expiresIn = null
+        this.username = null
+        localStorage.removeItem('userToken')
+        localStorage.removeItem('expiresIn')
+        localStorage.removeItem('username')
+      })
+      const router = useRouter()
+      router.push(routes.login)
+      Notify.create({
+        message: 'Has cerrado sesión exitosamente. ¡Hasta pronto!',
+        type: 'positive',
+      })
+    },
 
-      await $fetch(`${config.public.apiRoute}/api/profile/v1/auth/logout`, {
+    async register(dataForm){
+      const currentDate = new Date()
+      const credentials = {
+        attributes :{
+          ...dataForm,
+          password_confirmation: dataForm.password, 
+          timezone: (currentDate.getTimezoneOffset() / 60),
+          language: (navigator.language || navigator.userLanguage)
+        }
+      }
+      
+      await apiAuth.post(apiRoutes.authRegister, credentials).then(response => {
+        //update store, and redirect
+        this.username = dataForm.email
+        this.password = dataForm.password
+        const router = useRouter()
+        router.push(routes.login)
+        Notify.create({
+          message: '¡Usuario creado! Ahora puedes iniciar sesión.',
+          type: 'positive',
+        })
+      })
+    },
+    
+    /* site settings */
+    async getSettings(settings: string[]){      
+      const config = useRuntimeConfig()
+      return await $fetch(`${config.public.apiRoute}${apiRoutes.settings}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
+        params: {
+          filter: {
+            "name": settings
+          }
+        }
       })
     },
+    /* facebook settings */
+    async getFacebookSettings(){
+      await this.getSettings(['isite::facebookClientId']).then(response => {
+        if(response?.data){
+          this.facebookClientId = response.data['isite::facebookClientId']
+        }
+      })
+    },
+    /* google settings */
+    async getGoogleSettings(){
+      await this.getSettings(['isite::googleClientId']).then(response => {
+        if(response?.data){
+          this.googleClientId = response.data['isite::googleClientId']          
+        }
+      })
+    }
   },
 })
