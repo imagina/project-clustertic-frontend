@@ -8,24 +8,16 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-  remember_me: boolean
-}>({
-  firstName: '',
-  lastName: '',
+  email: string,  
+}>({  
   email: '',
-  password: '',
-  remember_me: false,
 })
 const loading = computed(() => store.loading)
 async function register() {
   try {    
-    const validateRegister = await refRegister.value.validate()
-    if (!validateRegister) return
-    await store.register(auth);
+    //const validateRegister = await refRegister.value.validate()
+    //if (!validateRegister) return
+    //await store.register(auth);
   } catch (error) {
     console.log(error)
   }
@@ -71,27 +63,6 @@ async function register() {
                     <MailIcon class="!tw-text-primary" />
                   </template>
                 </InputCPA>
-                <InputCPA
-                  filled
-                  dark
-                  class="tw-mb-2"
-                  v-model="auth.password"
-                  :label="$t('auth.register.inputs.password')"
-                  lazy-rules
-                  :rules="PasswordValidator.rules"
-                  :type="isPwd ? 'password' : 'text'"
-                >
-                  <template v-slot:prepend>
-                    <KeySquareIcon class="!tw-text-primary" />
-                  </template>
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd = !isPwd"
-                    />
-                  </template>
-                </InputCPA>               
                 <transition name="hero">
                   <Button
                     :disabled="loading"

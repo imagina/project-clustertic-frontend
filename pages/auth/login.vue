@@ -11,11 +11,9 @@ definePageMeta({
 const auth = reactive<{
   username: string
   password: string
-  rememberMe: boolean
 }>({
   username: '',
   password: '',
-  rememberMe: false,
 })
 const loading = computed(() => store.loading)
 
@@ -113,27 +111,16 @@ async function login() {
                     />
                   </template>
                 </InputCPA>
-                <div class="tw-flex tw-justify-between tw-flex-row tw-mb-6">
-                  <label class="tw-flex tw-items-center">
-                    <Checkbox
-                      class="tw-bg-input !tw-border-input"
-                      v-model:checked="auth.rememberMe"
-                    ></Checkbox>
-                    <span class="tw-text-white tw-ml-2">{{
-                      $t('auth.login.inputs.rememberMe')
-                    }}</span>
-                  </label>
+                <div class="tw-flex tw-justify-center tw-flex-row tw-mb-6">
                   <NuxtLink 
-                    to="/auth/reset"
+                    to="/auth/resetPassword"
                     class="tw-text-primary"
                   >
                     {{ $t('auth.login.forgotPassword') }}
                   </NuxtLink>
                 </div>
                 <div class="tw-flex tw-justify-center tw-mb-6">
-                  <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5">
-                    <img src="@/assets/svg/brand-google.svg" alt="" />
-                  </Button>
+                  <SocialAuthGoogle />
                   <SocialAuthFacebook />
                   
                 </div>

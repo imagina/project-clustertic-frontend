@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const authStore: any = useAuthStore()
   const pathLogin = '/auth/login'
-  const pathHome = '/home'
+  const pathHome = '/admin/home'
 
   if (import.meta.client) {
     if (authStore.getToken && authStore.validateToken()) {

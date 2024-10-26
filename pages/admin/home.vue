@@ -10,7 +10,7 @@ const store = useAuthStore()
 		<div>
 			<h1>Home Page</h1>
 			<p>
-      username:	{{ store.getUsername }}
+      
     	</p>
 		</div>
 		<div>
