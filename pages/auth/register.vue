@@ -12,13 +12,13 @@ const auth = reactive<{
   lastName: string,
   email: string,
   password: string
-  accept: boolean
+  remember_me: boolean
 }>({
   firstName: '',
   lastName: '',
   email: '',
   password: '',
-  accept: false,
+  remember_me: false,
 })
 const loading = computed(() => store.loading)
 async function register() {
@@ -119,7 +119,7 @@ async function register() {
                   <label class="tw-flex tw-items-center">
                     <Checkbox
                       class="tw-bg-input !tw-border-input"
-                      v-model:checked="auth.accept"
+                      v-model:checked="auth.remember_me"
                     ></Checkbox>
                     <span class="tw-text-white tw-ml-2">
                       <i18n-t

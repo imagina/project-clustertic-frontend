@@ -67,10 +67,8 @@ export const useAuthStore = defineStore('auth', {
       
       localStorage.setItem('userToken', this.token)
       localStorage.setItem('expiresIn', this.expiresIn)
-      localStorage.setItem('username', this.username)
-      const router = useRouter()
-      router.push(routes.home)
-      this.loading = false
+      localStorage.setItem('username', this.username)      
+      this.redirectTo(routes.home)
     },
 
     async login(credentials: {
@@ -81,12 +79,9 @@ export const useAuthStore = defineStore('auth', {
         this.loading = true
         await apiAuth.post(apiRoutes.authLogin, credentials).then(response => {
           this.authSuccess(response)
-          const router = useRouter()
-          router.push(routes.home)
-          this.loading = false
+          this.redirectTo(routes.home)
         })
       } catch (error) {
-        this.loading = false
         console.error('Login failed:', error)
         Notify.create({
           message: 'Algo salio mal en el login',
@@ -104,8 +99,7 @@ export const useAuthStore = defineStore('auth', {
         localStorage.removeItem('expiresIn')
         localStorage.removeItem('username')
       })
-      const router = useRouter()
-      router.push(routes.login)
+      this.redirectTo(routes.login)
       Notify.create({
         message: 'Has cerrado sesión exitosamente. ¡Hasta pronto!',
         type: 'positive',
@@ -127,8 +121,8 @@ export const useAuthStore = defineStore('auth', {
         //update store, and redirect
         this.username = dataForm.email
         this.password = dataForm.password
-        const router = useRouter()
-        router.push(routes.login)
+        
+        this.redirectTo(routes.login)
         Notify.create({
           message: '¡Usuario creado! Ahora puedes iniciar sesión.',
           type: 'positive',
@@ -166,6 +160,11 @@ export const useAuthStore = defineStore('auth', {
           this.googleClientId = response.data['isite::googleClientId']
         }
       })
+    },
+    /* redirect with router instance*/
+    redirectTo(route){
+      const router = useRouter()
+      router.push(route)
     }
   },
 })
