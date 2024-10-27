@@ -54,7 +54,9 @@ const openFileDialog = () => {
     @click="openFileDialog"
   >
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-      <slot name="title"></slot>
+      <div class="title">
+        <slot name="title"></slot>
+      </div>
       <slot name="subtitle"></slot>
     </div>
 
@@ -70,18 +72,29 @@ const openFileDialog = () => {
 
 <style scoped>
 .dropzone {
-  @apply tw-rounded-2xl tw-min-h-16 tw-border tw-border-input tw-p-10;
+  @apply tw-rounded-2xl tw-min-h-16 tw-border tw-border-black tw-border-opacity-25  tw-p-10;
   transition: all 0.5s;
 }
 .dropzone-dark {
   @apply tw-bg-input;
+  .title {
+    @apply !tw-text-primary;
+    transition: all 0.5s;
+  }
 }
 .dropzone:hover,
 .dropzone-hover {
+  @apply !tw-text-blue-500 tw-border-blue-500 !tw-bg-blue-50;
   background-color: #f0f0f0;
 }
 .dropzone-dark:hover,
 .dropzone-dark.dropzone-hover {
   @apply tw-bg-primary;
+  .title {
+    @apply !tw-text-input tw-font-bold;
+  }
+  * {
+    @apply !tw-text-input;
+  }
 }
 </style>

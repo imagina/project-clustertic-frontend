@@ -58,7 +58,7 @@ async function login() {
                     />
                   </svg>
                 </div>
-                <span class="tw-ml-4 tw-text-white"> Login with Google </span>
+                <span class="tw-ml-4 tw-text-white">Login with Google</span>
               </Button>
             </div>
 
@@ -154,7 +154,7 @@ async function login() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  <span class="tw-ml-3"> Login </span>
+                  <span class="tw-ml-3">Login</span>
                 </Button>
               </q-form>
               <p class="tw-mt-6 tw-text-xs tw-text-gray-600 tw-text-center">

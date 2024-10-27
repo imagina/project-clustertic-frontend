@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { XIcon } from 'lucide-vue-next'
-import { boolean } from 'zod'
+import { XIcon, DollarSignIcon } from 'lucide-vue-next'
+import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
+import ShieldDollarSVG from '@/assets/svg/shield-dollar.svg'
+import FileShredderSVG from '@/assets/svg/file-shredder.svg'
 
 interface rangePriceOptionsInterface {
   label: string
@@ -18,6 +20,7 @@ interface createDataInterface {
   searchSkills: string
   currency: string
   rangePrice: rangePriceOptionsInterface
+  customPrice: number
 }
 
 definePageMeta({
@@ -84,6 +87,13 @@ const rangePriceOptions = ref<rangePriceOptionsInterface[]>([
     category: '5',
     range: '($2250 - 2750 USD)',
   },
+  {
+    label: 'Personalizar proyecto',
+    value: 'custom',
+    description: 'Personalizar proyecto',
+    category: '6',
+    range: '-',
+  },
 ])
 
 const suggestedSkills = ref<string[]>([
@@ -108,6 +118,7 @@ const projectData = reactive<createDataInterface>({
     category: '1',
     range: '($250 - 750 USD)',
   },
+  customPrice: 0,
 })
 
 async function create() {
@@ -141,10 +152,12 @@ function handleChangeStep(next_or_prev: number) {
 </script>
 
 <template>
-  <div class="lg:tw-w-2/3 xl:tw-w-8/12 tw-px-6 sm:tw-px-12">
+  <div class="lg:tw-w-2/3 xl:tw-w-7/12 tw-px-6 sm:tw-px-12">
     <div class="tw-flex tw-flex-col tw-items-center">
       <div class="tw-mb-8">
-        <img src="@/assets/svg/logo-green.svg" alt="" />
+        <NuxtLink to="/">
+          <LogoGreenSVG filled class="tw-text-[10rem] !tw-h-auto" />
+        </NuxtLink>
       </div>
       <h1
         v-if="stepsTitles[step].title"
@@ -169,11 +182,11 @@ function handleChangeStep(next_or_prev: number) {
                 id="input_uno"
                 filled
                 dark
+                rounded
                 class="tw-mb-3"
                 v-model="projectData.name"
                 :label="$t('projects.create.form.name.placeholder')"
-              >
-              </InputCPA>
+              ></InputCPA>
               <p class="input-details">
                 {{ $t('projects.create.form.description.label') }}
               </p>
@@ -184,20 +197,20 @@ function handleChangeStep(next_or_prev: number) {
                 v-model="projectData.description"
                 dark
                 class="tw-h-28"
-              >
-              </Textarea>
+              ></Textarea>
               <div class="tw-flex tw-justify-end tw-mb-2">
                 <Button
                   @click="projectData.description = ''"
                   type="button"
                   variant="ghost"
                   class="tw-text-white tw-underline"
-                  >{{ $t('projects.create.form.description.clearBtn') }}</Button
                 >
+                  {{ $t('projects.create.form.description.clearBtn') }}
+                </Button>
               </div>
               <Dropzone v-model="projectData.files" dark>
                 <template v-slot:title>
-                  <p class="tw-text-primary tw-text-base tw-mb-5">
+                  <p class="tw-text-base tw-mb-5">
                     {{
                       projectData.files
                         ? $t('projects.create.form.files.empty.title')
@@ -214,7 +227,8 @@ function handleChangeStep(next_or_prev: number) {
                       class="tw-mr-2"
                       v-for="(file, index) in projectData.files"
                       :key="index"
-                      >{{ file.name }}
+                    >
+                      {{ file.name }}
                     </span>
                   </p>
                   <p v-else class="tw-text-white tw-text-xs tw-text-center">
@@ -247,11 +261,13 @@ function handleChangeStep(next_or_prev: number) {
                       type="button"
                       variant="ghost"
                       class="hover:tw-bg-transparent !tw-pr-0"
-                      ><XIcon
+                    >
+                      <XIcon
                         @click="handleRemoveSkill(index)"
                         class="tw-text-primary tw-text-xs"
                         :size="20"
-                    /></Button>
+                      />
+                    </Button>
                   </li>
                 </ul>
                 <input
@@ -273,7 +289,7 @@ function handleChangeStep(next_or_prev: number) {
                   </ul>
                 </div>
               </div>
-              <p class="tw-mt-2 tw-text-white tw-w-10/12 tw-m-auto">
+              <p class="tw-mt-4 tw-text-white tw-w-10/12 tw-m-auto tw-text-xs">
                 {{ $t('projects.create.form.skills.suggested') }}
 
                 <span
@@ -291,11 +307,7 @@ function handleChangeStep(next_or_prev: number) {
             <div class="step-container step-2 tw-mt-5" :class="`show-${step}`">
               <div class="info-extra">
                 <div class="tw-text-primary">
-                  <img
-                    class="tw-h-20 tw-w-20"
-                    src="@/assets/svg/shield-dollar.svg"
-                    alt="Mi SVG"
-                  />
+                  <ShieldDollarSVG filled class="tw-text-8xl" />
                 </div>
                 <div class="tw-text-white tw-ml-8 lg:tw-w-2/5">
                   <h3 class="tw-mb-2 tw-text-lg tw-font-extrabold">
@@ -310,20 +322,39 @@ function handleChangeStep(next_or_prev: number) {
                 {{ $t('projects.create.form.prices.label') }}
               </p>
               <div class="tw-flex">
-                <div class="tw-basis-1/3 sm:tw-basis-1/5 lg:tw-basis-2/12">
+                <div
+                  class="tw-basis-1/3 sm:tw-basis-1/5 lg:tw-basis-2/12 tw-flex tw-items-end"
+                >
                   <Select
+                    class="tw-w-full"
                     center
                     dark
                     v-model="projectData.currency"
                     :options="currencyOptions"
                   />
                 </div>
-                <div class="tw-grow tw-pl-5 lg:tw-pl-10">
+                <div
+                  class="tw-grow tw-pl-5 lg:tw-pl-10 tw-flex tw-flex-col tw-items-end"
+                >
                   <Select
+                    class="tw-w-full"
                     dark
                     v-model="projectData.rangePrice"
                     :options="rangePriceOptions"
                   />
+                  <InputCPA
+                    v-if="projectData.rangePrice.value === 'custom'"
+                    dark
+                    rounded
+                    type="number"
+                    v-model="projectData.customPrice"
+                    filled
+                    class="tw-w-full"
+                  >
+                    <template v-slot:prepend>
+                      <DollarSignIcon class="!tw-text-primary" />
+                    </template>
+                  </InputCPA>
                 </div>
               </div>
             </div>
@@ -331,18 +362,14 @@ function handleChangeStep(next_or_prev: number) {
             <div class="step-container step-3 tw-mt-5" :class="`show-${step}`">
               <div class="info-extra">
                 <div class="tw-text-primary">
-                  <img
-                    class="tw-h-20 tw-w-20"
-                    src="@/assets/svg/file-shredder.svg"
-                    alt="Mi SVG"
-                  />
+                  <FileShredderSVG filled class="tw-text-8xl" />
                 </div>
                 <div class="tw-text-white tw-ml-8">
                   <p class="tw-text-sm">
                     {{ $t('projects.singular') }}
-                    <span class="tw-text-primary"
-                      >"{{ projectData.name }}"</span
-                    >
+                    <span class="tw-text-primary">
+                      "{{ projectData.name }}"
+                    </span>
                   </p>
                   <p class="tw-font-extrabold tw-text-sm">
                     {{ projectData.rangePrice.range }}

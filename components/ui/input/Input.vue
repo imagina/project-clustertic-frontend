@@ -7,6 +7,7 @@ interface customInputProps extends QInputProps {
   defaultValue?: string | number
   class?: string
   dark?: boolean
+  size?: 'sm'
 }
 
 const props = defineProps<customInputProps>()
@@ -19,13 +20,21 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: true,
   defaultValue: props.defaultValue,
 })
+const onModelUpdate = (newValue: string | number | null) => {
+  if (!newValue) newValue = ''
+  if (!/[a-zA-Z]/.test(`${newValue}`)) newValue = parseFloat(`${newValue}`)
+  emits('update:modelValue', newValue)
+  modelValue.value = newValue
+  // Aquí puedes manejar la lógica adicional que necesites cuando modelValue se actualice
+}
 </script>
 
 <template>
   <q-input
     v-bind="props"
     v-model="modelValue"
-    :class="cn(props.class, props.dark ? 'input-dark' : '')"
+    :class="cn(props.class, props.dark ? 'input-dark' : '', `input-${size}`)"
+    @update:modelValue="onModelUpdate"
   >
     <template v-slot:before v-if="$slots.before">
       <slot name="before"></slot>
@@ -47,8 +56,16 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 </template>
 
 <style scoped>
-:deep(.q-field__control) {
+/* :deep(.q-field__control) {
   @apply !tw-rounded-2xl;
+} */
+.input-sm {
+  :deep(.q-field__control) {
+    height: 32px;
+    .q-field__marginal {
+      height: 32px;
+    }
+  }
 }
 :deep(.q-field__label) {
   @apply !tw-pl-2;

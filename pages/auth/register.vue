@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import { reactive, ref } from 'vue'
 import PasswordValidator from '@/utils/validators/passwordValidator'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
@@ -36,9 +37,9 @@ async function register() {
 <template>
   <div class="lg:tw-w-1/2 xl:tw-w-5/12 tw-p-6 sm:tw-p-12">
     <div class="tw-mt-12 tw-flex tw-flex-col tw-items-center">
-      <div class="tw-mb-8">
-        <img src="@/assets/svg/logo-green-text.svg" alt="" />
-      </div>
+      <NuxtLink to="/">
+        <LogoGreenSVG filled class="tw-text-[10rem] !tw-h-auto" />
+      </NuxtLink>
       <h1
         class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
       >
@@ -52,6 +53,7 @@ async function register() {
                 <InputCPA
                   filled
                   dark
+                  rounded
                   class="tw-mb-3"
                   v-model="auth.username"
                   :label="$t('auth.register.inputs.firstName')"
@@ -63,6 +65,7 @@ async function register() {
                 <InputCPA
                   filled
                   dark
+                  rounded
                   class="tw-mb-3"
                   v-model="auth.username"
                   :label="$t('auth.register.inputs.lastName')"
@@ -74,6 +77,7 @@ async function register() {
             <InputCPA
               filled
               dark
+              rounded
               class="tw-mb-3"
               v-model="auth.username"
               :label="$t('auth.register.inputs.email')"
@@ -90,6 +94,7 @@ async function register() {
             <InputCPA
               filled
               dark
+              rounded
               class="tw-mb-2"
               v-model="auth.password"
               :label="$t('auth.register.inputs.password')"
@@ -118,20 +123,16 @@ async function register() {
                   <i18n-t keypath="auth.register.inputs.termsAndCond.content">
                     <template #highlight1>
                       <a href="#" class="tw-text-primary tw-font-bold">
-                        {{
-                          $t('auth.register.inputs.termsAndCond.highlight1')
-                        }}</a
-                      >
+                        {{ $t('auth.register.inputs.termsAndCond.highlight1') }}
+                      </a>
                     </template>
                     <template #highlight2>
                       <a href="#" class="tw-text-primary tw-font-bold">
-                        {{
-                          $t('auth.register.inputs.termsAndCond.highlight2')
-                        }}</a
-                      >
+                        {{ $t('auth.register.inputs.termsAndCond.highlight2') }}
+                      </a>
                     </template>
-                  </i18n-t></span
-                >
+                  </i18n-t>
+                </span>
               </label>
             </div>
             <transition name="hero">

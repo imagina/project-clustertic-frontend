@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@vesp/nuxt-fontawesome',
     '@nuxtjs/i18n',
     'nuxt-quasar-ui',
+    'nuxt-svgo',
   ],
   i18n: {
     vueI18n: './i18n/i18n.config.ts', // if you are using custom path, default
@@ -37,6 +38,7 @@ export default defineNuxtConfig({
   quasar: {
     plugins: ['Notify'],
   },
+
   experimental: {
     viewTransition: true,
     // ...

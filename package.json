@@ -24,6 +24,7 @@
     "lucide-vue-next": "^0.439.0",
     "nuxt": "^3.13.0",
     "nuxt-quasar-ui": "^2.1.6",
+    "nuxt-svgo": "^4.0.6",
     "quasar": "^2.17.0",
     "radix-vue": "^1.9.5",
     "sass": "^1.79.1",

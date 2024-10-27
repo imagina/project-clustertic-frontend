@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
+import FacebookSVG from '@/assets/svg/brand-facebook.svg'
+import GoogleSVG from '@/assets/svg/brand-google.svg'
 import { reactive, ref } from 'vue'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
@@ -33,9 +36,9 @@ async function login() {
 <template>
   <div class="lg:tw-w-1/2 xl:tw-w-5/12 tw-p-6 sm:tw-p-12">
     <div class="tw-mt-12 tw-flex tw-flex-col tw-items-center">
-      <div class="tw-mb-8">
-        <img src="@/assets/svg/logo-green-text.svg" alt="" />
-      </div>
+      <NuxtLink to="/">
+        <LogoGreenSVG filled class="tw-text-[10rem] !tw-h-auto" />
+      </NuxtLink>
       <h1
         class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
       >
@@ -50,6 +53,7 @@ async function login() {
             <InputCPA
               filled
               dark
+              rounded
               class="tw-mb-3"
               v-model="auth.username"
               :label="$t('auth.login.inputs.email')"
@@ -66,6 +70,7 @@ async function login() {
             <InputCPA
               filled
               dark
+              rounded
               class="tw-mb-2"
               v-model="auth.password"
               :label="$t('auth.login.inputs.password')"
@@ -105,21 +110,21 @@ async function login() {
                   class="tw-bg-input !tw-border-input"
                   v-model:checked="auth.remember_me"
                 ></Checkbox>
-                <span class="tw-text-white tw-ml-2">{{
-                  $t('auth.login.inputs.rememberMe')
-                }}</span>
+                <span class="tw-text-white tw-ml-2">
+                  {{ $t('auth.login.inputs.rememberMe') }}
+                </span>
               </label>
-              <a class="tw-text-primary">{{
-                $t('auth.login.forgotPassword')
-              }}</a>
+              <a class="tw-text-primary">
+                {{ $t('auth.login.forgotPassword') }}
+              </a>
             </div>
             <div class="tw-flex tw-justify-center tw-mb-6">
               <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5">
-                <img src="@/assets/svg/brand-google.svg" alt="" />
+                <FacebookSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
               </Button>
-              <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14"
-                ><img src="@/assets/svg/brand-facebook.svg" alt=""
-              /></Button>
+              <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14">
+                <GoogleSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
+              </Button>
             </div>
             <transition name="hero">
               <Button

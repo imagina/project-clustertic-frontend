@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { BriefcaseIcon, CompassIcon } from 'lucide-vue-next'
+import LogoSVG from '~/assets/svg/logo.svg'
 const { locale } = useI18n()
 </script>
 
 <template>
   <div
-    class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50"
+    class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50 tw-min-h-20"
   >
     <div class="tw-container tw-flex">
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
-        <img class="tw-h-14 tw-w-14" src="@/assets/svg/logo.svg" alt="Mi SVG" />
+        <LogoSVG filled class="tw-text-primary tw-text-5xl" />
         <div class="tw-ml-1">
           <p class="tw-m-0 tw-leading-3">CLÚSTER</p>
           <p class="tw-m-0 tw-leading-3">TECNOLÓGICO</p>
@@ -22,34 +23,34 @@ const { locale } = useI18n()
           <li>
             <Button variant="ghost" class="tw-text-secondary">
               <BriefcaseIcon class="tw-text-primary tw-mr-3" />
-              <span class="tw-font-bold tw-capitalize">{{
-                $t('appbar.nav.briefcase')
-              }}</span>
+              <span class="tw-font-bold tw-capitalize">
+                {{ $t('appbar.nav.briefcase') }}
+              </span>
             </Button>
           </li>
           <li>
             <Button variant="ghost" class="tw-text-secondary">
               <CompassIcon class="tw-text-primary tw-mr-3" />
-              <span class="tw-font-bold tw-capitalize">{{
-                $t('appbar.nav.explore')
-              }}</span>
+              <span class="tw-font-bold tw-capitalize">
+                {{ $t('appbar.nav.explore') }}
+              </span>
             </Button>
           </li>
           <li>
             <NuxtLink to="/auth/login">
               <Button variant="ghost" class="tw-text-secondary">
-                <span class="tw-font-bold tw-capitalize">{{
-                  $t('appbar.nav.login')
-                }}</span>
+                <span class="tw-font-bold tw-capitalize">
+                  {{ $t('appbar.nav.login') }}
+                </span>
               </Button>
             </NuxtLink>
           </li>
           <li>
             <NuxtLink to="/auth/register">
               <Button variant="ghost" class="tw-text-secondary">
-                <span class="tw-font-bold tw-capitalize">{{
-                  $t('appbar.nav.register')
-                }}</span>
+                <span class="tw-font-bold tw-capitalize">
+                  {{ $t('appbar.nav.register') }}
+                </span>
               </Button>
             </NuxtLink>
           </li>

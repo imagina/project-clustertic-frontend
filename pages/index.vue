@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import { ArrowRightIcon } from 'lucide-vue-next'
+definePageMeta({
+  layout: 'default',
+})
 const handleAnimationStart = (self: AnimationEvent) => {
   ;(<HTMLElement>self.currentTarget)?.classList.remove('tw-opacity-0') // Añade la clase de Tailwind al finalizar
   ;(<HTMLElement>self.currentTarget)?.classList.add('tw-opacity-80') // Añade la clase de Tailwind al finalizar
@@ -7,7 +11,6 @@ const handleAnimationStart = (self: AnimationEvent) => {
 </script>
 
 <template>
-  <AppbarPCT></AppbarPCT>
   <div class="tw-h-svh tw-relative">
     <div
       class="tw-absolute tw-inset-0 tw-z-[-1] tw-bg-primary tw-opacity-10"
@@ -22,7 +25,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
           >
             <i18n-t keypath="landing.title.content">
               <template #highlight>
-                <b class="tw-font-bold"> {{ $t('landing.title.highlight') }}</b>
+                <b class="tw-font-bold">{{ $t('landing.title.highlight') }}</b>
               </template>
               <template #br>
                 <br />
@@ -33,16 +36,24 @@ const handleAnimationStart = (self: AnimationEvent) => {
             <Button
               size="lg"
               class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
-              >{{ $t('landing.publishProject') }}</Button
             >
-            <Button variant="ghost" class="tw-ml-5 md:tw-text-[20px]">
-              {{ $t('landing.findProject') }}<ArrowRightIcon class="tw-ml-3"
-            /></Button>
+              {{ $t('landing.publishProject') }}
+            </Button>
+
+            <NuxtLink to="/projects">
+              <Button
+                variant="ghost"
+                class="tw-ml-5 md:tw-text-[20px] hover:tw-bg-transparent hover:tw-underline"
+              >
+                {{ $t('landing.findProject') }}
+                <ArrowRightIcon class="tw-ml-3" />
+              </Button>
+            </NuxtLink>
           </div>
         </div>
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
           <div class="tw-relative">
-            <img class="" src="@/assets/svg/desk-landing.svg" alt="Mi SVG" />
+            <DeskLandingSVG filled class="tw-text-[36rem]" />
             <div
               class="float-label first add-shadow tw-top-[5px] tw-opacity-0"
               @animationstart="handleAnimationStart"
@@ -68,7 +79,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
   </div>
   <SearchProject />
   <div class="tw-container tw-py-10">
-    <CardProject></CardProject>
+    <CardProject id="1"></CardProject>
   </div>
 </template>
 
