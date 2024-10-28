@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
+import ResetPassword from '~/pages/auth/resetPassword.vue';
 
 const apiRoutes = {
   authLogin: '/api/profile/v1/auth/login',
   authLogout: '/api/profile/v1/auth/logout',
   authRegister: '/api/profile/v1/users/register',
   settings: '/api/isite/v1/site/settings',
-  authLoginSocialNetwork: `/auth/social/`
+  authLoginSocialNetwork: `/auth/social`, 
+  authReset: '/api/auth/reset',
 };
 
 const routes = {
@@ -50,7 +52,7 @@ export const useAuthStore = defineStore('auth', {
     }
   },
   actions: {
-    setToken(token) {
+    setToken(token: string) {
       this.token = token
     },
     validateToken() {
@@ -144,6 +146,14 @@ export const useAuthStore = defineStore('auth', {
           message: '¡Usuario creado! Ahora puedes iniciar sesión.',
           type: 'positive',
         })
+      })
+    },
+
+    /* reset password request */
+    async resetPassword(dataForm) {
+      apiAuth.post(apiRoutes.authReset, dataForm).then(response => {
+        console.log(response)
+        //this.logout()
       })
     },
 

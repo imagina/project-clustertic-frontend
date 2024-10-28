@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import PasswordValidator from '@/utils/validators/passwordValidator'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
-const refRegister: any = ref(null)
+const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
 
@@ -13,11 +13,11 @@ const auth = reactive<{
   email: '',
 })
 const loading = computed(() => store.loading)
-async function register() {
+async function reset() {
   try {    
-    //const validateRegister = await refRegister.value.validate()
-    //if (!validateRegister) return
-    //await store.register(auth);
+    const validateReset = await refReset.value.validate()
+    if (!validateReset) return
+    await store.resetPassword(auth);
   } catch (error) {
     console.log(error)
   }
@@ -40,11 +40,11 @@ async function register() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            {{ $t('auth.register.title') }}
+            Reset Password
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
-              <q-form @submit.prevent.stop="register" ref="refRegister">
+              <q-form @submit.prevent.stop="reset" ref="refReset">
                 
                 <InputCPA
                   filled
@@ -65,12 +65,12 @@ async function register() {
                 </InputCPA>
                 <transition name="hero">
                   <Button
-                    :disabled="loading"
+                    :disabled="!auth.email"
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
                     <span class="tw-ml-3">
-                      {{ $t('auth.register.submitBtn') }}
+                      Reset Password
                     </span>
                   </Button>
                 </transition>
