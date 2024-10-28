@@ -46,13 +46,13 @@
     //Request Login
   async function login(response) {
 		let token = response.credential
-		//Validate response
-		if (!token) {			
-			//error
-		}		
-		store.authSocialNetwork(token)
-		state.loading = false;
-		emit('logged')
+		store.authSocialNetwork({
+			token,
+			type: 'google'
+		}).then(response => {
+			state.loading = false;
+			emit('logged')
+		})
 	}
 
 </script>

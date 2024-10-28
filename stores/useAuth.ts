@@ -6,6 +6,7 @@ const apiRoutes = {
   authLogout: '/api/profile/v1/auth/logout',
   authRegister: '/api/profile/v1/users/register',
   settings: '/api/isite/v1/site/settings',
+  authLoginSocialNetwork: `/auth/social/`
 };
 
 const routes = {
@@ -56,10 +57,26 @@ export const useAuthStore = defineStore('auth', {
       return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())
     },
 
-    authSocialNetwork(token){
-      console.log(token)
-      // todo AUTH_SOCIAL_NETWORK
+
+    /* Request login with Social Networks */
+    authSocialNetwork(params){
+      return new Promise((resolve, reject) => {
+        const requestUrl = `${apiRoutes.authLoginSocialNetwork}/${params.type}`
+        const socialData = params.socialData ? params.socialData : '';
+        let requestParams = { attributes: { token: params.token, socialData, device: Helper.detectDevice()}, type: params.type }
+        this.token = ''
+        apiAuth.post(requestUrl, requestParams).then(response => {
+          if(response?.data){
+            this.authSuccess(response.data)
+            resolve(response.data)
+          }
+        }).catch(error => {
+          console.warn(error)
+          reject(error)
+        })
+      })
     },
+
     authSuccess(userData) {
       this.user = userData.userData
       this.token = userData.data.userToken
