@@ -45,14 +45,16 @@
 	}
     //Request Login
   async function login(response) {
-		let token = response.credential
-		store.authSocialNetwork({
-			token,
-			type: 'google'
-		}).then(response => {
-			state.loading = false;
-			emit('logged')
-		})
+		if(response?.credential){
+			let token = response.credential
+			store.authSocialNetwork({
+				token,
+				type: 'google'
+			}).then(response => {
+				state.loading = false;
+				emit('logged')
+			})
+		}		
 	}
 
 </script>

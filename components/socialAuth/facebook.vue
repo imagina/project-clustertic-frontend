@@ -58,14 +58,16 @@
 		//Validate response
 		if (response.status != 'connected') return state.loading = false
 		//Get access Token
-		let token = response.authResponse.accessToken
-		store.authSocialNetwork({
-			token,
-			type: 'facebook'
-		}).then(response => {
-			state.loading = false;
-			emit('logged')
-		})
+		let token = response?.authResponse?.accessToken || false
+		if(token){
+			store.authSocialNetwork({
+				token,
+				type: 'facebook'
+			}).then(response => {
+				state.loading = false;
+				emit('logged')
+			})
+		}
 	}
 
  </script>
