@@ -8,9 +8,9 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  email: string,  
+  username: string,  
 }>({  
-  email: '',
+  username: '',
 })
 const loading = computed(() => store.loading)
 async function reset() {
@@ -50,7 +50,7 @@ async function reset() {
                   filled
                   dark
                   class="tw-mb-3"
-                  v-model="auth.email"
+                  v-model="auth.username"
                   :label="$t('auth.register.inputs.email')"
                   lazy-rules
                   :rules="[
@@ -65,7 +65,7 @@ async function reset() {
                 </InputCPA>
                 <transition name="hero">
                   <Button
-                    :disabled="!auth.email"
+                    :disabled="!auth.username"
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >

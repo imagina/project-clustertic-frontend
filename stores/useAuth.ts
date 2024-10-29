@@ -153,7 +153,8 @@ export const useAuthStore = defineStore('auth', {
 
     /* reset password request */
     async resetPassword(dataForm) {
-      apiAuth.post(apiRoutes.authReset, dataForm).then(response => {
+
+      apiAuth.post(apiRoutes.authReset, {attributes: dataForm}).then(response => {
         console.log(response)
         //this.logout()
       })
