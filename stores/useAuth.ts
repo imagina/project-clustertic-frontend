@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
     password: '',
     user: null,
     token: '',
-    expiresIn: null,
+    expiresIn: '',
     loading: false,
     facebookClientId: null,
     googleClientId: null
@@ -54,9 +54,20 @@ export const useAuthStore = defineStore('auth', {
     }
   },
   actions: {
-    setToken(token: string) {
+    setToken(token: string, expiresIn: '') {
       this.token = token
+      this.expiresIn = expiresIn
+      localStorage.setItem('userToken', token)
+      localStorage.setItem('expiresIn', expiresIn)
     },
+
+    clearToken() {
+      this.token = ''
+      this.expiresIn = ''
+      localStorage.removeItem('userToken')
+      localStorage.removeItem('expiresIn')
+    },
+
     validateToken() {
       return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())
     },
@@ -153,15 +164,19 @@ export const useAuthStore = defineStore('auth', {
 
     /* reset password request */
     async resetPassword(dataForm) {
-
+      this.clearToken()
       apiAuth.post(apiRoutes.authReset, {attributes: dataForm}).then(response => {
-        console.log(response)
-        //this.logout()
+        Helper.redirectTo(routes.login)
+        Notify.create({
+          message: 'Revisa tu email para reiniciar tu contraseña.',
+          type: 'positive',
+        })
       })
     },
 
     /* Change password */ 
     async changedPasswordRequest(dataForm) {
+      this.clearToken()
       //Request Data
       let dataRequest = {
         password: dataForm.password,
@@ -170,8 +185,11 @@ export const useAuthStore = defineStore('auth', {
         code: dataForm.token
       }
       apiAuth.post(apiRoutes.authChanged, dataRequest).then( response => {
-        console.log(response)
-
+        Helper.redirectTo(routes.login)
+        Notify.create({
+          message: 'Tu contraseña se actualizó correctamente.',
+          type: 'positive',
+        })
       })      
     },
 
