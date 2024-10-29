@@ -51,6 +51,10 @@
         "content": "¿Ya tienes una cuenta?",
         "link": "Ingresar"
       }
+    },
+    "reset": {
+      "title": "Recuperar Contraseña",
+      "submitBtn": "Resetear Contraseña"
     }
   }
 }

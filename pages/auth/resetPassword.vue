@@ -40,7 +40,7 @@ async function reset() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            Reset Password
+          {{ $t('auth.reset.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
@@ -70,7 +70,7 @@ async function reset() {
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
                     <span class="tw-ml-3">
-                      Reset Password
+                      {{ $t('auth.reset.submitBtn') }}
                     </span>
                   </Button>
                 </transition>
