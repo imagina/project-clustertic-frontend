@@ -54,7 +54,8 @@
     },
     "reset": {
       "title": "Recuperar Contraseña",
-      "submitBtn": "Resetear Contraseña"
+      "submitBtn": "Recuperar Contraseña",
+      "confirmPassword": "Confirmar Contraseña"
     }
   }
 }

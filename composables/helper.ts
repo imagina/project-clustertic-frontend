@@ -75,5 +75,13 @@ export const Helper = {
     }
 
     return `${device} ${version}`;
+  },
+
+  /* redirect with router instance*/
+  redirectTo(route){
+		const router = useRouter()
+		router.push(route)
   }
+
+
 }

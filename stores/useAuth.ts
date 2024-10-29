@@ -1,14 +1,16 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
-import ResetPassword from '~/pages/auth/resetPassword.vue';
 
 const apiRoutes = {
+  /* auth */
   authLogin: '/api/profile/v1/auth/login',
   authLogout: '/api/profile/v1/auth/logout',
   authRegister: '/api/profile/v1/users/register',
-  settings: '/api/isite/v1/site/settings',
-  authLoginSocialNetwork: `/auth/social`, 
-  authReset: '/api/auth/reset',
+  authLoginSocialNetwork: '/api/profile/v1/auth/social', 
+  authReset: '/api/profile/v1/auth/reset',
+  authChanged: '/api/profile/v1/auth/reset-complete',
+  /* settings */
+  settings: '/api/isite/v1/site/settings'  
 };
 
 const routes = {
@@ -87,7 +89,7 @@ export const useAuthStore = defineStore('auth', {
       localStorage.setItem('userToken', this.token)
       localStorage.setItem('expiresIn', this.expiresIn)
       localStorage.setItem('username', this.username)      
-      this.redirectTo(routes.home)
+      Helper.redirectTo(routes.home)
     },
 
     async login(credentials: {
@@ -98,7 +100,7 @@ export const useAuthStore = defineStore('auth', {
         this.loading = true
         await apiAuth.post(apiRoutes.authLogin, credentials).then(response => {
           this.authSuccess(response)
-          this.redirectTo(routes.home)
+          Helper.redirectTo(routes.home)
         })
       } catch (error) {
         console.error('Login failed:', error)
@@ -118,7 +120,7 @@ export const useAuthStore = defineStore('auth', {
         localStorage.removeItem('expiresIn')
         localStorage.removeItem('username')
       })
-      this.redirectTo(routes.login)
+      Helper.redirectTo(routes.login)
       Notify.create({
         message: 'Has cerrado sesión exitosamente. ¡Hasta pronto!',
         type: 'positive',
@@ -141,7 +143,7 @@ export const useAuthStore = defineStore('auth', {
         this.username = dataForm.email
         this.password = dataForm.password
         
-        this.redirectTo(routes.login)
+        Helper.redirectTo(routes.login)
         Notify.create({
           message: '¡Usuario creado! Ahora puedes iniciar sesión.',
           type: 'positive',
@@ -156,6 +158,22 @@ export const useAuthStore = defineStore('auth', {
         //this.logout()
       })
     },
+
+    /* Change password */ 
+    async changedPasswordRequest(dataForm) {
+      //Request Data
+      let dataRequest = {
+        password: dataForm.password,
+        password_confirmation: dataForm.passwordConfirmation,
+        userId: dataForm.userId,
+        code: dataForm.token
+      }
+      apiAuth.post(apiRoutes.authChanged, dataRequest).then( response => {
+        console.log(response)
+
+      })      
+    },
+
 
     /* site settings */
     async getSettings(settings: string[]) {
@@ -188,10 +206,6 @@ export const useAuthStore = defineStore('auth', {
         }
       })
     },
-    /* redirect with router instance*/
-    redirectTo(route){
-      const router = useRouter()
-      router.push(route)
-    }
+    
   },
 })

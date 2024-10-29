@@ -54,7 +54,8 @@
     }, 
     "reset": {
       "title": "Recover Password",
-      "submitBtn": "Reset password"
+      "submitBtn": "Recover Password", 
+      "confirmPassword": "Confirm Password"
     }
   }
 }
