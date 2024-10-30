@@ -171,6 +171,11 @@ export const useAuthStore = defineStore('auth', {
           message: 'Revisa tu email para reiniciar tu contraseña.',
           type: 'positive',
         })
+      }).catch(error => {
+        Notify.create({
+          message: 'Ningún usuario con esa dirección de correo electrónico se encuentra registrado en nuestro sistema.',
+          type: 'negative',
+        })
       })
     },
 
@@ -190,7 +195,12 @@ export const useAuthStore = defineStore('auth', {
           message: 'Tu contraseña se actualizó correctamente.',
           type: 'positive',
         })
-      })      
+      }).catch(error => {
+        Notify.create({
+          message: 'No se pudo actualizar la contraseña',
+          type: 'negative',
+        })
+      })
     },
 
 
