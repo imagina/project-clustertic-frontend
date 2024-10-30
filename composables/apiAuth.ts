@@ -23,9 +23,9 @@ import { useAuthStore } from "@/stores/useAuth";
     }, 
 
     /**/
-    post: (url: string, data?: {}) => {
+    post: (url: string, data?: {}, toSnakeCase = true) => {
       const config = apiAuth.config()
-      const body = Helper.toSnakeCase(data)
+      const body = toSnakeCase? Helper.toSnakeCase(data) : data
       return $fetch(`${config.url}${url}`,  { headers: config.headers, method: 'POST', body});      
     }
   };

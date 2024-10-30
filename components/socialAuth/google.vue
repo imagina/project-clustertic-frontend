@@ -24,10 +24,8 @@
 
 	//Load Client ID
 	async function loadClientId() {
-		console.log('loadClientId')
 		setTimeout(() => {
 			let clientId = clientIdGoogle.value || null;
-			console.log(clientIdGoogle)
 			if(!clientId) return;
 
 			// Initialize Google Identity Services

@@ -9,9 +9,9 @@ const store = useAuthStore()
 	<div class="flex justify-center">
 		<div>
 			<h1>Home Page</h1>
-			<p>
+			<p> {{ store.getUsername }}
       
-    	</p>
+    		</p>
 		</div>
 		<div>
 			<q-btn

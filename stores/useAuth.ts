@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
+import ChangePassword from '~/pages/admin/changePassword.vue';
 
 const apiRoutes = {
   /* auth */
@@ -23,29 +24,25 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     username: '',
     password: '',
-    user: null,
+    userData: null,
     token: '',
     expiresIn: '',
     loading: false,
     facebookClientId: null,
     googleClientId: null
   }),
-  getters: {
-    isAuthenticated(state) {
-      if (import.meta.client) {
-        const tokenFromStorage = localStorage.getItem('userToken')
-        return !!tokenFromStorage
-      }
-      return false
-    },
-    getToken(state) {
+  getters: {    
+    getToken(state) {    
       return state.token ? state.token : localStorage.getItem('userToken')
     },
     getExpiresIn(state) {
       return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
     },
     getUsername(state) {
-      return state.username ? state.username : localStorage.getItem('username')
+      return state.userData ? state.userData?.email : localStorage.getItem('username')
+    },
+    getUserData(state) {
+      return state.userData
     },
     getFacebookClientId(state) {
       return state.facebookClientId
@@ -55,18 +52,20 @@ export const useAuthStore = defineStore('auth', {
     }
   },
   actions: {
-    setToken(token: string, expiresIn: '') {
+    async setToken(token: string, expiresIn: '') {
       this.token = token
       this.expiresIn = expiresIn
       localStorage.setItem('userToken', token)
       localStorage.setItem('expiresIn', expiresIn)
     },
 
-    clearToken() {
+    async clearToken() {
       this.token = ''
       this.expiresIn = ''
+      this.userData = null
       localStorage.removeItem('userToken')
       localStorage.removeItem('expiresIn')
+      localStorage.removeItem('username')
     },
 
     validateToken() {
@@ -93,15 +92,14 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    authSuccess(userData) {
-      this.user = userData.userData.email
+    async authSuccess(userData) {
+      this.userData = userData.userData
       this.token = userData.userToken
       this.expiresIn = userData.expiresIn
       
       localStorage.setItem('userToken', this.token)
       localStorage.setItem('expiresIn', this.expiresIn)
-      localStorage.setItem('username', this.username)
-      localStorage.setItem('user', this.user)
+      localStorage.setItem('username', this.userData.email)
       Helper.redirectTo(routes.home)
     },
 
@@ -127,13 +125,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       await apiAuth.get(apiRoutes.authLogout).then(response => {
-        this.user = null;
-        this.token = null;
-        this.expiresIn = null
-        this.username = null
-        localStorage.removeItem('userToken')
-        localStorage.removeItem('expiresIn')
-        localStorage.removeItem('username')
+        this.clearToken()
       })
       Helper.redirectTo(routes.login)
       Notify.create({
@@ -166,6 +158,29 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
+    /* change the password form admin/changePassword */
+    async changePassword(dataForm){
+      const requestData = {
+        attributes: {
+          ...dataForm,
+          email: this.getUsername
+        }
+      }
+      apiAuth.post(apiRoutes.changePassword, requestData, false).then(response => {
+        Helper.redirectTo(routes.login)
+        Notify.create({
+          message: 'contraseña actualizada!',
+          type: 'positive',
+        })
+      }).catch(error => {
+        Notify.create({
+          message: 'error al cambiar la contraseña',
+          type: 'negative',
+        })
+      })
+    },
+
+
     /* reset password request */
     async resetPassword(dataForm) {
       this.clearToken()
@@ -183,7 +198,9 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    /* Change password */ 
+    /* 
+      Change password from reset email url
+    */ 
     async changedPasswordRequest(dataForm) {
       this.clearToken()
       //Request Data
