@@ -12,13 +12,13 @@ const auth = reactive<{
   lastName: string,
   email: string,
   password: string
-  remember_me: boolean
+  agreement: boolean
 }>({
   firstName: '',
   lastName: '',
   email: '',
   password: '',
-  remember_me: false,
+  agreement: false,
 })
 const loading = computed(() => store.loading)
 async function register() {
@@ -119,7 +119,7 @@ async function register() {
                   <label class="tw-flex tw-items-center">
                     <Checkbox
                       class="tw-bg-input !tw-border-input"
-                      v-model:checked="auth.remember_me"
+                      v-model:checked="auth.agreement"
                     ></Checkbox>
                     <span class="tw-text-white tw-ml-2">
                       <i18n-t
@@ -145,7 +145,7 @@ async function register() {
                 </div>
                 <transition name="hero">
                   <Button
-                    :disabled="loading"
+                    :disabled="!auth.agreement"
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >

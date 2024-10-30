@@ -33,24 +33,29 @@
       }
     },
     "register": {
-      "title": "Registro",
+      "title": "Register",
       "inputs": {
-        "firstName": "Nombre",
-        "lastName": "Apellido",
+        "firstName": "Name",
+        "lastName": "Last name",
         "email": "Email",
-        "password": "Contraseña",
+        "password": "Password",
         "termsAndCond": {
-          "content": "Acepto el {highlight1} y la {highlight2}.",
-          "highlight1": "Acuerdo de usuario",
-          "highlight2": "Política de privacidad"
+          "content": "I accept {highlight1} and {highlight2}.",
+          "highlight1": "User agreement",
+          "highlight2": "Privacy Policy"
         }
       },
-      "forgotPassword": "¿Olvidaste tu contraseña?",
-      "submitBtn": "Ingresar",
-      "withoutAccount": {
-        "content": "¿No tienes una cuenta?",
-        "link": "Regístrate"
+      "forgotPassword": "Forgot your password?",
+      "submitBtn": "Enter",
+      "existAccount": {
+        "content": "Already have an account?",
+        "link": "Log in"
       }
+    }, 
+    "reset": {
+      "title": "Recover Password",
+      "submitBtn": "Recover Password", 
+      "confirmPassword": "Confirm Password"
     }
   }
 }

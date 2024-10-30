@@ -3,29 +3,21 @@ import { reactive, ref } from 'vue'
 import PasswordValidator from '@/utils/validators/passwordValidator'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
-const refRegister: any = ref(null)
+const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-  remember_me: boolean
-}>({
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  remember_me: false,
+  username: string,  
+}>({  
+  username: '',
 })
 const loading = computed(() => store.loading)
-async function register() {
+async function reset() {
   try {    
-    const validateRegister = await refRegister.value.validate()
-    if (!validateRegister) return
-    await store.register(auth);
+    const validateReset = await refReset.value.validate()
+    if (!validateReset) return
+    await store.resetPassword(auth);
   } catch (error) {
     console.log(error)
   }
@@ -48,17 +40,17 @@ async function register() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            {{ $t('auth.register.title') }}
+          {{ $t('auth.reset.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
-              <q-form @submit.prevent.stop="register" ref="refRegister">
+              <q-form @submit.prevent.stop="reset" ref="refReset">
                 
                 <InputCPA
                   filled
                   dark
                   class="tw-mb-3"
-                  v-model="auth.email"
+                  v-model="auth.username"
                   :label="$t('auth.register.inputs.email')"
                   lazy-rules
                   :rules="[
@@ -71,35 +63,14 @@ async function register() {
                     <MailIcon class="!tw-text-primary" />
                   </template>
                 </InputCPA>
-                <InputCPA
-                  filled
-                  dark
-                  class="tw-mb-2"
-                  v-model="auth.password"
-                  :label="$t('auth.register.inputs.password')"
-                  lazy-rules
-                  :rules="PasswordValidator.rules"
-                  :type="isPwd ? 'password' : 'text'"
-                >
-                  <template v-slot:prepend>
-                    <KeySquareIcon class="!tw-text-primary" />
-                  </template>
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd = !isPwd"
-                    />
-                  </template>
-                </InputCPA>               
                 <transition name="hero">
                   <Button
-                    :disabled="loading"
+                    :disabled="!auth.username"
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
                     <span class="tw-ml-3">
-                      {{ $t('auth.register.submitBtn') }}
+                      {{ $t('auth.reset.submitBtn') }}
                     </span>
                   </Button>
                 </transition>

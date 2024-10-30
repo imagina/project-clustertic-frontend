@@ -2,24 +2,29 @@ import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
 
 const apiRoutes = {
-  authLogin: '/api/profile/v1/auth/login', 
-  authLogout: '/api/profile/v1/auth/logout',   
+  /* auth */
+  authLogin: '/api/profile/v1/auth/login',
+  authLogout: '/api/profile/v1/auth/logout',
   authRegister: '/api/profile/v1/users/register',
-  settings: '/api/isite/v1/site/settings', 
+  authLoginSocialNetwork: '/api/profile/v1/auth/social', 
+  authReset: '/api/profile/v1/auth/reset',
+  authChanged: '/api/profile/v1/auth/reset-complete',
+  /* settings */
+  settings: '/api/isite/v1/site/settings'  
 };
 
 const routes = {
-  home: '/home', 
+  home: '/admin/home',
   login: '/auth/login'
 }
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    username: '', 
+    username: '',
     password: '',
     user: null,
     token: '',
-    expiresIn: null,
+    expiresIn: '',
     loading: false,
     facebookClientId: null,
     googleClientId: null
@@ -32,23 +37,70 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
-    getToken(state){
+    getToken(state) {
       return state.token ? state.token : localStorage.getItem('userToken')
     },
-    getExpiresIn(state){
+    getExpiresIn(state) {
       return state.expiresIn ? state.expiresIn : localStorage.getItem('expiresIn')
     },
-    getUsername(state){
+    getUsername(state) {
       return state.username ? state.username : localStorage.getItem('username')
     },
-
-    getFacebookClientId(state){
+    getFacebookClientId(state) {
       return state.facebookClientId
+    },
+    getGoogleClientId(state) {
+      return state.googleClientId
     }
   },
-  actions: {       
-    validateToken(){
-      return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())      
+  actions: {
+    setToken(token: string, expiresIn: '') {
+      this.token = token
+      this.expiresIn = expiresIn
+      localStorage.setItem('userToken', token)
+      localStorage.setItem('expiresIn', expiresIn)
+    },
+
+    clearToken() {
+      this.token = ''
+      this.expiresIn = ''
+      localStorage.removeItem('userToken')
+      localStorage.removeItem('expiresIn')
+    },
+
+    validateToken() {
+      return (Helper.timestamp(this.getExpiresIn) <= Helper.timestamp())
+    },
+
+
+    /* Request login with Social Networks */
+    authSocialNetwork(params){
+      return new Promise((resolve, reject) => {
+        const requestUrl = `${apiRoutes.authLoginSocialNetwork}/${params.type}`
+        const socialData = params.socialData ? params.socialData : '';
+        let requestParams = { attributes: { token: params.token, socialData, device: Helper.detectDevice()}, type: params.type }
+        this.token = ''
+        apiAuth.post(requestUrl, requestParams).then(response => {
+          if(response?.data){
+            this.authSuccess(response.data)
+            resolve(response.data)
+          }
+        }).catch(error => {
+          console.warn(error)
+          reject(error)
+        })
+      })
+    },
+
+    authSuccess(userData) {
+      this.user = userData.userData
+      this.token = userData.data.userToken
+      this.expiresIn = userData.data.expiresIn
+      
+      localStorage.setItem('userToken', this.token)
+      localStorage.setItem('expiresIn', this.expiresIn)
+      localStorage.setItem('username', this.username)      
+      Helper.redirectTo(routes.home)
     },
 
     async login(credentials: {
@@ -57,20 +109,11 @@ export const useAuthStore = defineStore('auth', {
     }): Promise<void> {
       try {
         this.loading = true
-        await apiAuth.post(apiRoutes.authLogin, credentials ).then(response => {
-          this.user = response.data.userData
-          this.token = response.data.userToken
-          this.expiresIn = response.data.expiresIn
-          this.username = credentials.username
-          localStorage.setItem('userToken', this.token)
-          localStorage.setItem('expiresIn', this.expiresIn)
-          localStorage.setItem('username', this.username)
-          const router = useRouter()
-          router.push(routes.home)
-          this.loading = false
-        })        
+        await apiAuth.post(apiRoutes.authLogin, credentials).then(response => {
+          this.authSuccess(response)
+          Helper.redirectTo(routes.home)
+        })
       } catch (error) {
-        this.loading = false
         console.error('Login failed:', error)
         Notify.create({
           message: 'Algo salio mal en el login',
@@ -88,40 +131,81 @@ export const useAuthStore = defineStore('auth', {
         localStorage.removeItem('expiresIn')
         localStorage.removeItem('username')
       })
-      const router = useRouter()
-      router.push(routes.login)
+      Helper.redirectTo(routes.login)
       Notify.create({
         message: 'Has cerrado sesión exitosamente. ¡Hasta pronto!',
         type: 'positive',
       })
     },
 
-    async register(dataForm){
+    async register(dataForm) {
       const currentDate = new Date()
       const credentials = {
-        attributes :{
+        attributes: {
           ...dataForm,
-          password_confirmation: dataForm.password, 
+          password_confirmation: dataForm.password,
           timezone: (currentDate.getTimezoneOffset() / 60),
           language: (navigator.language || navigator.userLanguage)
         }
       }
-      
+
       await apiAuth.post(apiRoutes.authRegister, credentials).then(response => {
         //update store, and redirect
         this.username = dataForm.email
         this.password = dataForm.password
-        const router = useRouter()
-        router.push(routes.login)
+        
+        Helper.redirectTo(routes.login)
         Notify.create({
           message: '¡Usuario creado! Ahora puedes iniciar sesión.',
           type: 'positive',
         })
       })
     },
-    
+
+    /* reset password request */
+    async resetPassword(dataForm) {
+      this.clearToken()
+      apiAuth.post(apiRoutes.authReset, {attributes: dataForm}).then(response => {
+        Helper.redirectTo(routes.login)
+        Notify.create({
+          message: 'Revisa tu email para reiniciar tu contraseña.',
+          type: 'positive',
+        })
+      }).catch(error => {
+        Notify.create({
+          message: 'Ningún usuario con esa dirección de correo electrónico se encuentra registrado en nuestro sistema.',
+          type: 'negative',
+        })
+      })
+    },
+
+    /* Change password */ 
+    async changedPasswordRequest(dataForm) {
+      this.clearToken()
+      //Request Data
+      let dataRequest = {
+        password: dataForm.password,
+        password_confirmation: dataForm.passwordConfirmation,
+        userId: dataForm.userId,
+        code: dataForm.token
+      }
+      apiAuth.post(apiRoutes.authChanged, dataRequest).then( response => {
+        Helper.redirectTo(routes.login)
+        Notify.create({
+          message: 'Tu contraseña se actualizó correctamente.',
+          type: 'positive',
+        })
+      }).catch(error => {
+        Notify.create({
+          message: 'No se pudo actualizar la contraseña',
+          type: 'negative',
+        })
+      })
+    },
+
+
     /* site settings */
-    async getSettings(settings: string[]){      
+    async getSettings(settings: string[]) {
       const config = useRuntimeConfig()
       return await $fetch(`${config.public.apiRoute}${apiRoutes.settings}`, {
         method: 'GET',
@@ -136,20 +220,21 @@ export const useAuthStore = defineStore('auth', {
       })
     },
     /* facebook settings */
-    async getFacebookSettings(){
+    async getFacebookSettings() {
       await this.getSettings(['isite::facebookClientId']).then(response => {
-        if(response?.data){
+        if (response?.data) {
           this.facebookClientId = response.data['isite::facebookClientId']
         }
       })
     },
     /* google settings */
-    async getGoogleSettings(){
+    async getGoogleSettings() {
       await this.getSettings(['isite::googleClientId']).then(response => {
-        if(response?.data){
-          this.googleClientId = response.data['isite::googleClientId']          
+        if (response?.data) {
+          this.googleClientId = response.data['isite::googleClientId']
         }
       })
-    }
+    },
+    
   },
 })

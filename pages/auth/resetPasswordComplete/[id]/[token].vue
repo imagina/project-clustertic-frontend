@@ -2,31 +2,37 @@
 import { reactive, ref } from 'vue'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
-const refLogin: any = ref(null)
+const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
-definePageMeta({
-  middleware: 'auth',
-})
+const route = useRoute()	
+
 const auth = reactive<{
-  username: string
-  password: string
-}>({
-  username: '',
-  password: '',
+  password: string,  
+  confirmPassword: string
+}>({  
+    password: '',
+    confirmPassword: ''
 })
+
 const loading = computed(() => store.loading)
+const isEmpty = computed(() => auth.password == '' || auth.confirmPassword == '')
+const isDiferent = computed(() => auth.password !=  auth.confirmPassword) 
 
-onMounted(() => {
-  if(store.username) auth.username = store.username;
-  if(store.password) auth.password = store.password;
-})
+async function reset() {
+  try {    
+    const validateReset = await refReset.value.validate()
+    if (!validateReset) return    
 
-async function login() {
-  try {
-    const validateLogin = await refLogin.value.validate()
-    if (!validateLogin) return
-    await store.login(auth)
+    if(route?.params){
+      const formData = {
+        password: auth.password,
+        passwordConfirmation: auth.confirmPassword,
+        userId: route.params.id, 
+        token: route.params.token
+      }
+      store.changedPasswordRequest(formData)
+    }
   } catch (error) {
     console.log(error)
   }
@@ -49,31 +55,12 @@ async function login() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            {{ $t('auth.login.title') }}
+          {{ $t('auth.reset.title') }}
           </h1>
-          <p class="tw-text-primary tw-mb-14 tw-text-[20px] tw-font-extralight">
-            {{ $t('auth.login.subtitle') }}
-          </p>
           <div class="tw-w-full tw-flex-1">
             <div class="">
-              <q-form @submit.prevent.stop="login" ref="refLogin">
-                <InputCPA
-                  filled
-                  dark
-                  class="tw-mb-3"
-                  v-model="auth.username"
-                  :label="$t('auth.login.inputs.email')"
-                  lazy-rules
-                  :rules="[
-                    (val) => !!val || 'Email is required.',
-                    (val) =>
-                      /.+@.+\..+/.test(val) || 'Please enter a valid email',
-                  ]"
-                >
-                  <template v-slot:prepend>
-                    <MailIcon class="!tw-text-primary" />
-                  </template>
-                </InputCPA>
+              <q-form @submit.prevent.stop="reset" ref="refReset">
+                
                 <InputCPA
                   filled
                   dark
@@ -111,27 +98,52 @@ async function login() {
                     />
                   </template>
                 </InputCPA>
-                <div class="tw-flex tw-justify-center tw-flex-row tw-mb-6">
-                  <NuxtLink 
-                    to="/auth/resetPassword"
-                    class="tw-text-primary"
-                  >
-                    {{ $t('auth.login.forgotPassword') }}
-                  </NuxtLink>
-                </div>
-                <div class="tw-flex tw-justify-center tw-mb-6">
-                  <SocialAuthGoogle />
-                  <SocialAuthFacebook />
-                  
-                </div>
+                <InputCPA
+                  filled
+                  dark
+                  class="tw-mb-2"
+                  v-model="auth.confirmPassword"
+                  :label="$t('auth.reset.confirmPassword')"
+                  lazy-rules
+                  :rules="[
+                    (val) => !!val || 'Password is required',
+                    (val) =>
+                      val.length >= 8 ||
+                      'Password must be at least 8 characters long',
+                    (val) =>
+                      /[A-Z]/.test(val) ||
+                      'Must contain at least one uppercase letter',
+                    (val) =>
+                      /[a-z]/.test(val) ||
+                      'Must contain at least one lowercase letter',
+                    (val) =>
+                      /\d/.test(val) || 'Must contain at least one number',
+                    (val) =>
+                      /[\W_]/.test(val) ||
+                      'Must contain at least one special character',                    
+                    (val) => val == auth.password || 'Password does not match'  
+                  ]"
+                  :type="isPwd ? 'password' : 'text'"
+                >
+                  <template v-slot:prepend>
+                    <KeySquareIcon class="!tw-text-primary" />
+                  </template>
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </InputCPA>
                 <transition name="hero">
                   <Button
-                    :disabled="loading"
+                    :disabled="isEmpty || isDiferent"
                     type="submit"
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
                     <span class="tw-ml-3">
-                      {{ $t('auth.login.submitBtn') }}
+                      {{ $t('auth.reset.submitBtn') }}
                     </span>
                   </Button>
                 </transition>
@@ -139,9 +151,9 @@ async function login() {
               <p
                 class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
               >
-                {{ $t('auth.login.withoutAccount.content') }}
-                <NuxtLink to="/auth/register" class="tw-text-primary tw-ml-1">
-                  {{ $t('auth.login.withoutAccount.link') }}
+                {{ $t('auth.register.existAccount.content') }}
+                <NuxtLink to="/auth/login" class="tw-text-primary tw-ml-1">
+                  {{ $t('auth.register.existAccount.link') }}
                 </NuxtLink>
               </p>
             </div>
@@ -154,18 +166,6 @@ async function login() {
 
 <style scoped>
 .hero {
-  transition: all 1s ease;
   view-transition-name: article-thumb;
-}
-
-.hero-enter-active,
-.hero-leave-active {
-  transition: all 1s ease;
-}
-
-.hero-enter,
-.hero-leave-to {
-  transform: scale(0.5);
-  opacity: 0;
 }
 </style>
