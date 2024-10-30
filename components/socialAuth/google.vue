@@ -24,14 +24,18 @@
 
 	//Load Client ID
 	async function loadClientId() {
+		console.log('loadClientId')
 		setTimeout(() => {
-			let clientId = clientIdGoogle || null;
+			let clientId = clientIdGoogle.value || null;
+			console.log(clientIdGoogle)
 			if(!clientId) return;
 
 			// Initialize Google Identity Services
 			google.accounts.id.initialize({
 				client_id: clientId,
-				callback: login(),
+				callback: (response) => {
+					login(response)
+				},
 				scope: 'profile email openid',
 				cancel_on_tap_outside: false,
 				context: 'use'
@@ -44,7 +48,7 @@
 		google.accounts.id.prompt()
 	}
     //Request Login
-  async function login(response) {
+	async function login(response) {
 		if(response?.credential){
 			let token = response.credential
 			store.authSocialNetwork({
