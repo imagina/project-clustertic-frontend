@@ -22,7 +22,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 })
 const onModelUpdate = (newValue: string | number | null) => {
   if (!newValue) newValue = ''
-  if (!/[a-zA-Z]/.test(`${newValue}`)) newValue = parseFloat(`${newValue}`)
+  if (`${newValue}`.length>0 && !/[a-zA-Z]/.test(`${newValue}`)) newValue = parseFloat(`${newValue}`)
   emits('update:modelValue', newValue)
   modelValue.value = newValue
   // Aquí puedes manejar la lógica adicional que necesites cuando modelValue se actualice
@@ -56,9 +56,9 @@ const onModelUpdate = (newValue: string | number | null) => {
 </template>
 
 <style scoped>
-/* :deep(.q-field__control) {
+.q-field--rounded :deep(.q-field__control) {
   @apply !tw-rounded-2xl;
-} */
+}
 .input-sm {
   :deep(.q-field__control) {
     height: 32px;

@@ -3,6 +3,7 @@ import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import { reactive, ref } from 'vue'
 import PasswordValidator from '@/utils/validators/passwordValidator'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
+
 definePageMeta({
   layout: 'dark-bg',
 })
@@ -12,13 +13,17 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  username: string
+  first_name: string
+  last_name: string
+  email: string
   password: string
-  remember_me: boolean
+  terms_and_conditions: boolean
 }>({
-  username: '',
+  first_name: '',
+  last_name: '',
+  email: '',
   password: '',
-  remember_me: false,
+  terms_and_conditions: false,
 })
 const loading = computed(() => store.loading)
 async function register() {
@@ -27,7 +32,7 @@ async function register() {
     const validateRegister = await refRegister.value.validate()
     console.log(auth)
     if (!validateRegister) return
-    // await store.login(auth);
+    await store.register(auth);
   } catch (erro) {
     console.log(erro)
   }
@@ -55,10 +60,10 @@ async function register() {
                   dark
                   rounded
                   class="tw-mb-3"
-                  v-model="auth.username"
+                  v-model="auth.first_name"
                   :label="$t('auth.register.inputs.firstName')"
                   lazy-rules
-                  :rules="[(val) => !!val || 'Name is required.']"
+                  :rules="[(val) => !!val || 'Name is required.', (val)=> val.length >= 3 || 'Password must be at least 8 characters long',]"
                 />
               </div>
               <div class="tw-basis-1/2 tw-pl-2">
@@ -67,10 +72,10 @@ async function register() {
                   dark
                   rounded
                   class="tw-mb-3"
-                  v-model="auth.username"
+                  v-model="auth.last_name"
                   :label="$t('auth.register.inputs.lastName')"
                   lazy-rules
-                  :rules="[(val) => !!val || 'last name is required.']"
+                  :rules="[(val) => !!val || 'last name is required.', (val)=> val.length >= 3 || 'Password must be at least 8 characters long',]"
                 />
               </div>
             </div>
@@ -79,7 +84,7 @@ async function register() {
               dark
               rounded
               class="tw-mb-3"
-              v-model="auth.username"
+              v-model="auth.email"
               :label="$t('auth.register.inputs.email')"
               lazy-rules
               :rules="[
@@ -117,7 +122,7 @@ async function register() {
               <label class="tw-flex tw-items-center">
                 <Checkbox
                   class="tw-bg-input !tw-border-input"
-                  v-model:checked="auth.remember_me"
+                  v-model:checked="auth.terms_and_conditions"
                 ></Checkbox>
                 <span class="tw-text-white tw-ml-2">
                   <i18n-t keypath="auth.register.inputs.termsAndCond.content">
@@ -137,7 +142,7 @@ async function register() {
             </div>
             <transition name="hero">
               <Button
-                :disabled="loading"
+                :disabled="loading || !auth.terms_and_conditions"
                 type="submit"
                 class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
               >

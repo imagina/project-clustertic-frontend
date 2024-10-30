@@ -8,8 +8,9 @@ import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 const refLogin: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
+const $q = useQuasar()
 definePageMeta({
-  middleware: 'auth',
+  // middleware: 'auth',
   layout: 'dark-bg',
 })
 const auth = reactive<{
@@ -28,7 +29,7 @@ async function login() {
     if (!validateLogin) return
     await store.login(auth)
   } catch (erro) {
-    console.log(erro)
+    console.error(erro)
   }
 }
 </script>

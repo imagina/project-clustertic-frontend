@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiRoute: process.env.API_ROUTE || '',
+      apiRoute: process.env.NUXT_API_ROUTE || '',
     },
   },
   quasar: {
