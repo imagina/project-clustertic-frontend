@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { MessageSquareTextIcon, CircleDollarSignIcon, FlagIcon } from 'lucide-vue-next'
+import {
+  MessageSquareTextIcon,
+  CircleDollarSignIcon,
+  FlagIcon,
+} from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
 
 const props = defineProps<{
@@ -23,7 +27,7 @@ const props = defineProps<{
         </div>
         <div class="tw-pl-7 tw-grow">
           <div class="tw-flex tw-mb-1">
-            <CardTitle class="tw-font-bold  tw-text-xl">
+            <CardTitle class="tw-font-bold tw-text-xl">
               <slot name="name">Titulo de ejemplo</slot>
               <span class="tw-ml-3 tw-font-light tw-text-blue-500">
                 <slot name="username">@titulo_de_ejemplo</slot>
@@ -38,18 +42,26 @@ const props = defineProps<{
                 starClass="tw-text-base tw-mr-1"
                 :rating="props.rating"
               />
-              <p class="tw-mb-0 tw-ml-3 tw-text-sm">{{ props.rating?.toFixed(1) }}</p>
+              <p class="tw-mb-0 tw-ml-3 tw-text-sm">
+                {{ props.rating?.toFixed(1) }}
+              </p>
             </div>
             <div class="tw-flex">
               <MessageSquareTextIcon class="comment-icon tw-mr-2" :size="20" />
               <p>50</p>
             </div>
             <div class="tw-flex">
-              <CircleDollarSignIcon class="circle-dollar-icon tw-mr-2" :size="20" />
+              <CircleDollarSignIcon
+                class="circle-dollar-icon tw-mr-2"
+                :size="20"
+              />
               <p>50</p>
             </div>
             <div class="tw-flex">
-              <div class="comment-icon tw-rounded-full tw-border-dashed tw-border-blue-500 tw-border-spacing-80 tw-border-2 tw-h-5 tw-w-5 tw-mr-2" :size="20" />
+              <div
+                class="comment-icon tw-rounded-full tw-border-dashed tw-border-blue-500 tw-border-spacing-80 tw-border-2 tw-h-5 tw-w-5 tw-mr-2"
+                :size="20"
+              />
               <p>50</p>
             </div>
             <div class="tw-flex">
@@ -59,12 +71,18 @@ const props = defineProps<{
             <div class="tw-grow"></div>
             <p>En 3 Dia(s)</p>
           </div>
-          <p class="tw-text-base tw-font-semibold"><slot name="subtitle">We are a team that is passionate about technology!</slot></p>
+          <p class="tw-text-base tw-font-semibold">
+            <slot name="subtitle">
+              We are a team that is passionate about technology!
+            </slot>
+          </p>
         </div>
       </div>
       <p class="lg:tw-w-2/3">
         <slot name="description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed soluta ex sapiente hic qui suscipit cumque, culpa rerum? Quod, sint ea ex vitae sed recusandae laborum neque exercitationem soluta odio.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed soluta ex
+          sapiente hic qui suscipit cumque, culpa rerum? Quod, sint ea ex vitae
+          sed recusandae laborum neque exercitationem soluta odio.
         </slot>
       </p>
     </div>
@@ -83,8 +101,8 @@ const props = defineProps<{
 .user-img {
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 }
-.comment-icon{
-  color:hsla(40, 95%, 52%, 1);
+.comment-icon {
+  color: hsla(40, 95%, 52%, 1);
 }
 .circle-dollar-icon {
   color: hsla(157, 94%, 41%, 1);

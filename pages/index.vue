@@ -85,9 +85,8 @@ const handleAnimationStart = (self: AnimationEvent) => {
 
 <style scoped>
 .float-label {
-  @apply tw-absolute tw-px-10  tw-py-2 tw-text-[25px] tw-rounded-lg tw-bg-white tw-animate-slide-down;
+  @apply tw-absolute tw-px-10  tw-py-2 tw-text-[25px] tw-rounded-lg tw-bg-white tw-animate-slide-down tw-text-muted-custom;
   animation-duration: 1s;
-  color: hsla(240, 24%, 31%, 0.56);
   &.add-shadow {
     box-shadow: 30px 45px 50px 0px hsla(157, 47%, 67%, 0.57);
   }

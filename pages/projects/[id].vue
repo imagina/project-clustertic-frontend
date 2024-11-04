@@ -252,14 +252,13 @@ async function sendProposal() {
 
           <q-tab-panel class="tw-p-0" name="proposal">
             <div class="tw-mb-10">
-
               <CardProposal id="1" :rating="0"></CardProposal>
             </div>
-            
+
             <div class="tw-flex tw-justify-center tw-mt-10">
               <Paginator :btn-per-side="3" :current="7" />
             </div>
-            </q-tab-panel>
+          </q-tab-panel>
         </q-tab-panels>
       </div>
       <aside class="tw-basis-full lg:tw-basis-80">

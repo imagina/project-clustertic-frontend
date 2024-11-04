@@ -3,20 +3,22 @@ import { XIcon, DollarSignIcon } from 'lucide-vue-next'
 import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import ShieldDollarSVG from '@/assets/svg/shield-dollar.svg'
 import FileShredderSVG from '@/assets/svg/file-shredder.svg'
+import type { ProjectTag } from '~/models/projects'
 
 interface rangePriceOptionsInterface {
   label: string
   value: string
   description: string
   category: string
-  range: string
+  min?: number
+  max?: number
 }
 
 interface createDataInterface {
   name: string
   description: string
   files?: FileList
-  skills: string[]
+  skills: ProjectTag[]
   searchSkills: string
   currency: string
   rangePrice: rangePriceOptionsInterface
@@ -28,10 +30,29 @@ definePageMeta({
 
   layout: 'dark-bg',
 })
-
+const page = ref(1)
+const config = useRuntimeConfig()
+const { data, status, error, refresh, clear } = await useAsyncData(
+  'categories',
+  () =>
+    $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
+      params: {
+        page: page.value,
+      },
+    }),
+  {
+    watch: [page],
+  },
+)
+console.log(data)
 const router = useRouter()
 const refForm: any = ref(null)
 const step = ref<number>(0)
+
+const categories = computed<ProjectTag[]>(() => {
+  return (<any>data.value).data
+})
+
 const stepsTitles: any = ref([
   {
     title: 'projects.create.pages.one.title',
@@ -57,58 +78,121 @@ const rangePriceOptions = ref<rangePriceOptionsInterface[]>([
     value: 'range_xs',
     description: 'Proyecto muy pequeño',
     category: '1',
-    range: '($250 - 750 USD)',
+    min: 250,
+    max: 750,
   },
   {
     label: 'Proyecto pequeño ($750 - 1250 USD)',
     value: 'range_sm',
     description: 'Proyecto pequeño',
     category: '2',
-    range: '($750 - 1250 USD)',
+    min: 750,
+    max: 1250,
   },
   {
     label: 'Proyecto mediano ($1250 - 1750 USD)',
     value: 'range_md',
     description: 'Proyecto mediano',
     category: '3',
-    range: '($1250 - 1750 USD)',
+    min: 1250,
+    max: 1750,
   },
   {
     label: 'Proyecto grande ($1750 - 2250 USD)',
     value: 'range_lg',
     description: 'Proyecto grande',
     category: '4',
-    range: '($1750 - 2250 USD)',
+    min: 1750,
+    max: 2250,
   },
   {
     label: 'Proyecto muy grande ($2250 - 2750 USD)',
     value: 'range_xl',
     description: 'Proyecto muy grande',
     category: '5',
-    range: '($2250 - 2750 USD)',
+    min: 2250,
+    max: 2750,
   },
   {
     label: 'Personalizar proyecto',
     value: 'custom',
     description: 'Personalizar proyecto',
     category: '6',
-    range: '-',
   },
 ])
 
-const suggestedSkills = ref<string[]>([
-  'Ingeniería',
-  'Web Hosting',
-  'Verificación de software',
-  'Arquitectura de software',
-  'Verificación de páginas web',
+// TODO: Reemplazar estos datos de ejemplo por datos que devuelva un endpoint de sugeridos
+const suggestedSkills = ref<ProjectTag[]>([
+  {
+    createdAt: new Date('2024-10-21 11:48:14'),
+    createdBy: 1,
+    deletedAt: null,
+    deletedBy: null,
+    depth: null,
+    description: '<p>APIs de Red</p>',
+    id: 41,
+    lft: 35,
+    options: null,
+    organizationId: null,
+    parentId: 6,
+    rgt: 36,
+    slug: 'apis-de-red',
+    sortOrder: 0,
+    status: 1,
+    title: 'APIs de Red',
+    updatedAt: new Date('2024-10-21 11:48:14'),
+    updatedBy: 1,
+    url: 'https://dev-clustertic.ozonohosting.com/anuncios/c/apis-de-red',
+  },
+  {
+    createdAt: new Date('2024-10-21 11:47:34'),
+    createdBy: 1,
+    deletedAt: null,
+    deletedBy: null,
+    depth: null,
+    description: '<p>PowerShell</p>',
+    id: 40,
+    lft: 33,
+    options: null,
+    organizationId: null,
+    parentId: 6,
+    rgt: 34,
+    slug: 'powershell',
+    sortOrder: 0,
+    status: 1,
+    title: 'PowerShell',
+    updatedAt: new Date('2024-10-21 11:47:34'),
+    updatedBy: 1,
+    url: 'https://dev-clustertic.ozonohosting.com/anuncios/c/powershell',
+  },
+  {
+    createdAt: new Date('2024-10-21 11:47:00'),
+    createdBy: 1,
+    deletedAt: null,
+    deletedBy: null,
+    depth: null,
+    description: '<p>Bash</p>',
+    id: 39,
+    lft: 31,
+    options: null,
+    organizationId: null,
+    parentId: 6,
+    rgt: 32,
+    slug: 'bash',
+    sortOrder: 0,
+    status: 1,
+    title: 'Bash',
+    updatedAt: new Date('2024-10-21 11:47:00'),
+    updatedBy: 1,
+    url: 'https://dev-clustertic.ozonohosting.com/anuncios/c/bash',
+  },
 ])
 
 const projectData = reactive<createDataInterface>({
   name: '',
   description: '',
   files: undefined,
-  skills: ['PHP', 'HTML', 'Diseño de sitios web', 'Diseño gráfico', 'MySQL'],
+  skills: [],
   searchSkills: '',
   currency: 'USD',
   rangePrice: {
@@ -116,14 +200,13 @@ const projectData = reactive<createDataInterface>({
     value: 'range_xs',
     description: 'Proyecto muy pequeño',
     category: '1',
-    range: '($250 - 750 USD)',
+    min: 250,
+    max: 750,
   },
   customPrice: 0,
 })
 
 async function create() {
-  debugger
-  console.log(projectData)
   try {
     const validateForm = await refForm.value.validate()
     if (!validateForm) return
@@ -136,8 +219,8 @@ async function create() {
 function handleRemoveSkill(index: number) {
   projectData.skills.splice(index, 1)
 }
-function handleAddSkill(skill: string) {
-  if (projectData.skills.includes(skill)) return
+function handleAddSkill(skill: ProjectTag) {
+  if (projectData.skills.findIndex((s) => s.id === skill.id) >= 0) return
   projectData.skills.push(skill)
 }
 
@@ -248,13 +331,13 @@ function handleChangeStep(next_or_prev: number) {
                 <ul class="tw-min-h-28 tw-flex tw-flex-wrap">
                   <li
                     v-for="(item, index) in projectData.skills"
-                    :key="`skill_${index}`"
+                    :key="`skill_${item.id}`"
                     class="tw-border tw-border-primary tw-rounded-md tw-flex tw-px-5 tw-py-1 tw-h-min tw-mr-2 tw-mb-1"
                   >
                     <p
                       class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose"
                     >
-                      {{ item }}
+                      {{ item.title }}
                     </p>
                     <Button
                       size="xs"
@@ -278,14 +361,16 @@ function handleChangeStep(next_or_prev: number) {
 
                 <div class="option-skill-list">
                   <ul class="">
-                    <li>skill1</li>
-                    <li>skill2</li>
-                    <li>skill3</li>
-                    <li>skill4</li>
-                    <li>skill5</li>
-                    <li>skill6</li>
-                    <li>skill7</li>
-                    <li>skill8</li>
+                    <li v-for="item in categories" :key="`category_${item.id}`">
+                      <Button
+                        @click="handleAddSkill(item)"
+                        variant="ghost"
+                        type="button"
+                        class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
+                      >
+                        {{ item.title }}
+                      </Button>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -298,7 +383,7 @@ function handleChangeStep(next_or_prev: number) {
                   @click="handleAddSkill(item)"
                   class="tw-text-primary hover:tw-underline tw-cursor-pointer"
                 >
-                  {{ item
+                  {{ item.title
                   }}{{ index === suggestedSkills.length - 1 ? '.' : ', ' }}
                 </span>
               </p>
@@ -372,7 +457,9 @@ function handleChangeStep(next_or_prev: number) {
                     </span>
                   </p>
                   <p class="tw-font-extrabold tw-text-sm">
-                    {{ projectData.rangePrice.range }}
+                    (${{ projectData.rangePrice.min }} - ${{
+                      projectData.rangePrice.min
+                    }})
                   </p>
                 </div>
               </div>
@@ -407,7 +494,7 @@ function handleChangeStep(next_or_prev: number) {
                 @click="handleChangeStep(-1)"
                 type="button"
                 variant="secondary"
-                class="hero tw-mt-8 tw-tracking-wide tw-w-full tw-font-semibold tw-py-4 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-mx-1"
+                class="hero tw-mt-8 tw-tracking-wide tw-w-full tw-font-semibold tw-py-4 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-mx-1 !tw-text-primary"
               >
                 <span class="tw-ml-3">
                   {{ $t('projects.create.form.buttons.back') }}
@@ -484,10 +571,10 @@ function handleChangeStep(next_or_prev: number) {
 }
 
 .option-skill-list {
-  @apply tw-absolute tw-top-full tw-left-0 tw-right-0 tw-bg-white tw-rounded-b-2xl tw-rounded-t-sm tw-z-50 tw-overflow-y-scroll;
+  @apply tw-absolute tw-top-full tw-left-0 tw-right-0 tw-bg-white tw-rounded-b-2xl tw-rounded-t-sm tw-z-50;
   ul {
-    @apply tw-max-h-0;
-    transition: max-height 0.5s;
+    @apply tw-max-h-0  tw-overflow-y-scroll;
+    transition: max-height 1s;
     li {
       @apply tw-p-2 tw-rounded-xl tw-mb-1 tw-cursor-pointer;
       transition: background 0.3s;
@@ -498,6 +585,9 @@ function handleChangeStep(next_or_prev: number) {
   }
 }
 
+.skills-input:focus ~ .option-skill-list {
+  @apply tw-pb-1;
+}
 .skills-input:focus ~ .option-skill-list ul {
   @apply tw-max-h-40;
 }

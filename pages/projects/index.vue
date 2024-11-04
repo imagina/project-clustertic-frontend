@@ -6,6 +6,7 @@ definePageMeta({
 })
 
 const refForm: any = ref(null)
+const projectsStore = useProjectsStore()
 
 const filters = reactive<{
   minPrice: string
@@ -13,6 +14,11 @@ const filters = reactive<{
 }>({
   minPrice: '',
   maxPrice: '',
+})
+
+onMounted(() => {
+  debugger
+  projectsStore.requestPage(1)
 })
 
 async function filter() {
@@ -98,34 +104,18 @@ async function filter() {
         </li>
         <li>
           <CardProject
-            id="1"
+            v-for="project in projectsStore.projects"
+            :key="`project-card=${project.id}`"
+            :id="project.id"
             :rating="4.5"
-            :skills="[
-              'PHP',
-              'Website Design',
-              'Graphic Design',
-              'User Interface / IA ',
-              'HTML',
-            ]"
+            :skills="project.categories?.map((cat) => cat.title) ?? []"
           >
-            <template v-slot:title>Hola como estas</template>
-            <template v-slot:subtitle>Presupuesto 250 - 300$</template>
+            <template v-slot:title>{{ project.title }}</template>
+            <template v-slot:subtitle>
+              Presupuesto {{ project.minPrice }} - {{ project.maxPrice }}$
+            </template>
             <template v-slot:description>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Architecto aspernatur molestiae possimus quibusdam quasi
-              reiciendis at non ipsa culpa commodi suscipit fugit laudantium
-              animi unde, rerum fugiat vero sapiente blanditiis? Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Architecto
-              aspernatur molestiae possimus quibusdam quasi reiciendis at non
-              ipsa culpa commodi suscipit fugit laudantium animi unde, rerum
-              fugiat vero sapiente blanditiis? Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Architecto aspernatur molestiae
-              possimus quibusdam quasi reiciendis at non ipsa culpa commodi
-              suscipit fugit laudantium animi unde, rerum fugiat vero sapiente
-              blanditiis? Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit. Architecto aspernatur molestiae possimus quibusdam quasi
-              reiciendis at non ipsa culpa commodi suscipit fugit laudantium
-              animi unde, rerum fugiat vero sapiente blanditiis?
+              {{ project.description }}
             </template>
           </CardProject>
         </li>

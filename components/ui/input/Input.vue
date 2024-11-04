@@ -22,7 +22,8 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 })
 const onModelUpdate = (newValue: string | number | null) => {
   if (!newValue) newValue = ''
-  if (`${newValue}`.length>0 && !/[a-zA-Z]/.test(`${newValue}`)) newValue = parseFloat(`${newValue}`)
+  if (`${newValue}`.length > 0 && !/[a-zA-Z]/.test(`${newValue}`))
+    newValue = parseFloat(`${newValue}`)
   emits('update:modelValue', newValue)
   modelValue.value = newValue
   // Aquí puedes manejar la lógica adicional que necesites cuando modelValue se actualice

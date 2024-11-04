@@ -1,7 +1,7 @@
-import type { UserData } from "./user";
+import type { UserData } from './user'
 
 export interface LoginResponse {
-    userToken: string;
-    expiresIn: Date;
-    userData:  UserData;
+  userToken: string
+  expiresIn: Date
+  userData: UserData
 }

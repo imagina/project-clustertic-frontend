@@ -6,7 +6,7 @@ import {
   BellIcon,
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
-import { cn } from '~/lib/utils';
+import { cn } from '~/lib/utils'
 import type { UserData } from '~/models/user'
 const { locale } = useI18n()
 
@@ -29,15 +29,35 @@ const user = computed<UserData | null>(() => authStore.user)
       </div>
 
       <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2">
-        <ul class="tw-hidden md:tw-flex tw-flex-wrap" :class="cn(
-          !user? ' tw-justify-end': 'tw-flex-row-reverse tw-justify-start'
-        )">
-          <li>
-            <Button variant="ghost" class="tw-text-secondary">
-              <span class="tw-font-bold tw-capitalize">
-                {{ user?.fullName }}
-              </span>
-            </Button>
+        <ul
+          class="tw-hidden md:tw-flex tw-flex-wrap"
+          :class="
+            cn(
+              !user
+                ? ' tw-justify-end'
+                : 'tw-flex-row-reverse tw-justify-start',
+            )
+          "
+        >
+          <li v-if="user">
+            <NuxtLink to="/profile">
+              <Button variant="ghost" class="tw-text-secondary">
+                <div class="user-img tw-inline-block">
+                  <div>
+                    {{
+                      user.fullName
+                        .split(' ')
+                        .slice(0, 2)
+                        .map((n) => n[0])
+                        .join('')
+                    }}
+                  </div>
+                </div>
+                <span class="tw-font-bold tw-capitalize">
+                  {{ user.fullName }}
+                </span>
+              </Button>
+            </NuxtLink>
           </li>
           <li>
             <Button variant="ghost" class="tw-text-secondary">
@@ -84,13 +104,13 @@ const user = computed<UserData | null>(() => authStore.user)
           </li>
           <li v-if="user">
             <Button variant="ghost">
-              <MessageSquareIcon :size="20"/>
+              <MessageSquareIcon :size="20" />
             </Button>
           </li>
 
           <li v-if="user">
             <Button variant="ghost">
-              <BellIcon  :size="20"/>
+              <BellIcon :size="20" />
             </Button>
           </li>
         </ul>
@@ -105,4 +125,16 @@ const user = computed<UserData | null>(() => authStore.user)
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.user-img {
+  @apply tw-inline-block tw-p-1 tw-border tw-border-muted-custom tw-rounded-full tw-h-8 tw-w-8 tw-mr-2;
+  & > div {
+    @apply tw-rounded-full;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-image: url('@/assets/images/login-bg.png');
+    @apply tw-text-primary tw-flex tw-justify-center tw-items-center tw-text-xs;
+  }
+}
+</style>

@@ -3,8 +3,6 @@ import { Notify } from 'quasar'
 import type { LoginResponse } from '~/models/auth'
 import type { AuthState } from '~/models/stores'
 
-
-
 export const useAuthStore = defineStore('auth', {
   state: (): AuthState => ({
     user: null,
@@ -40,7 +38,7 @@ export const useAuthStore = defineStore('auth', {
             body: credentials,
           },
         )
-        const loginResponse : LoginResponse = response.data
+        const loginResponse: LoginResponse = response.data
         this.user = loginResponse.userData
         this.token = loginResponse.userToken
         this.expiresIn = loginResponse.expiresIn
@@ -49,20 +47,19 @@ export const useAuthStore = defineStore('auth', {
         const router = useRouter()
         router.push('/')
         this.loading = false
-      } catch (error:any) {
+      } catch (error: any) {
         this.loading = false
         console.error('Login failed:', error)
         let msg = 'Algo salio mal en el login'
-        if (error.data.errors) 
-          msg = 'Usuario o contraseña invalido'
-        
+        if (error.data.errors) msg = 'Usuario o contraseña invalido'
+
         Notify.create({
-            message: msg,
-            type: 'negative',
-          })
+          message: msg,
+          type: 'negative',
+        })
       }
     },
-    async register(credentials:{
+    async register(credentials: {
       first_name: string
       last_name: string
       email: string
@@ -81,19 +78,21 @@ export const useAuthStore = defineStore('auth', {
             'Content-Type': 'application/json',
           },
           body: {
-            attributes:  {...credentials, password_confirmation:credentials.password}
+            attributes: {
+              ...credentials,
+              password_confirmation: credentials.password,
+            },
           },
         })
         this.login({
           username: credentials.email,
-          password: credentials.password
+          password: credentials.password,
         })
-      } catch (error:any) {
+      } catch (error: any) {
         const errors = JSON.parse(error.data.errors)
         let msg = 'Algo salio mal con el registro'
-        if (errors['email']) 
-          msg = errors['email'].join(',')
-        
+        if (errors['email']) msg = errors['email'].join(',')
+
         Notify.create({
           message: msg,
           type: 'negative',

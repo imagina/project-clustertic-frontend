@@ -8,7 +8,6 @@ import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 const refLogin: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
-const $q = useQuasar()
 definePageMeta({
   // middleware: 'auth',
   layout: 'dark-bg',

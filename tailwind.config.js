@@ -48,6 +48,8 @@ module.exports = {
         muted: {
           DEFAULT: 'hsla(var(--muted),var(--tw-bg-opacity))',
           foreground: 'hsla(var(--muted-foreground),var(--tw-bg-opacity))',
+          custom: 'hsla(var(--custom-muted),0.55)',
+          light: 'hsla(var(--custom-muted),0.17)',
         },
         accent: {
           DEFAULT: 'hsla(var(--accent),var(--tw-bg-opacity))',

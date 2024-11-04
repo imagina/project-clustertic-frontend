@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']
-  id: string
+  id: string | number
   rating?: number
   skills?: string[]
 }>()

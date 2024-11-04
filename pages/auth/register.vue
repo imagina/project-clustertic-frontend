@@ -32,7 +32,7 @@ async function register() {
     const validateRegister = await refRegister.value.validate()
     console.log(auth)
     if (!validateRegister) return
-    await store.register(auth);
+    await store.register(auth)
   } catch (erro) {
     console.log(erro)
   }
@@ -63,7 +63,12 @@ async function register() {
                   v-model="auth.first_name"
                   :label="$t('auth.register.inputs.firstName')"
                   lazy-rules
-                  :rules="[(val) => !!val || 'Name is required.', (val)=> val.length >= 3 || 'Password must be at least 8 characters long',]"
+                  :rules="[
+                    (val) => !!val || 'Name is required.',
+                    (val) =>
+                      val.length >= 3 ||
+                      'Password must be at least 8 characters long',
+                  ]"
                 />
               </div>
               <div class="tw-basis-1/2 tw-pl-2">
@@ -75,7 +80,12 @@ async function register() {
                   v-model="auth.last_name"
                   :label="$t('auth.register.inputs.lastName')"
                   lazy-rules
-                  :rules="[(val) => !!val || 'last name is required.', (val)=> val.length >= 3 || 'Password must be at least 8 characters long',]"
+                  :rules="[
+                    (val) => !!val || 'last name is required.',
+                    (val) =>
+                      val.length >= 3 ||
+                      'Password must be at least 8 characters long',
+                  ]"
                 />
               </div>
             </div>

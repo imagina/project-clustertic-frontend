@@ -29,7 +29,12 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
               </div>
               <div class="tw-text-white tw-ml-3">
                 <p class="tw-mb-1 tw-text-sm tw-font-bold">Info</p>
-                <a href="#" class="tw-mb-2 tw-text-xs tw-font-extralight tw-inline-block">Ayuda y soporte</a>
+                <a
+                  href="#"
+                  class="tw-mb-2 tw-text-xs tw-font-extralight tw-inline-block"
+                >
+                  Ayuda y soporte
+                </a>
               </div>
             </div>
             <div class="tw-flex tw-items-center tw-mb-4">
@@ -51,22 +56,52 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Términos</p>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Política de Tratamiento de Datos</a>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Términos del Servicio</a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Política de Tratamiento de Datos
+              </a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Términos del Servicio
+              </a>
             </div>
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">
             <div
               class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full"
             >
-              <CategoriesSVG class="tw-text-primary tw-text-3xl" filled/>
+              <CategoriesSVG class="tw-text-primary tw-text-3xl" filled />
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Categorías</p>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Infraestructura TI y Conectividad</a>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Transformación Digital y Desarrollo de Software</a>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Producción de Contenidos y Marketing Digital</a>
-              <a href="#" class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block">Videojuegos, Realidad Aumentada y Virtual</a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Infraestructura TI y Conectividad
+              </a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Transformación Digital y Desarrollo de Software
+              </a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Producción de Contenidos y Marketing Digital
+              </a>
+              <a
+                href="#"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Videojuegos, Realidad Aumentada y Virtual
+              </a>
             </div>
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">
@@ -77,11 +112,22 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Acerca del Cluster</p>
-              <a href="#" class="tw-mb-7 tw-text-xs tw-font-extralight tw-inline-block">Recursos de ayuda</a>
+              <a
+                href="#"
+                class="tw-mb-7 tw-text-xs tw-font-extralight tw-inline-block"
+              >
+                Recursos de ayuda
+              </a>
               <div class="tw-flex tw-justify-between">
-                <a href="#" class="tw-inline-block"><InstagramSVG class="tw-text-primary tw-text-4xl" filled/></a>
-                <a href="#" class="tw-inline-block"><FacebookSVG class="tw-text-primary tw-text-4xl" filled/></a>
-                <a href="#" class="tw-inline-block"><TwitterSVG class="tw-text-primary tw-text-4xl" filled/></a>
+                <a href="#" class="tw-inline-block">
+                  <InstagramSVG class="tw-text-primary tw-text-4xl" filled />
+                </a>
+                <a href="#" class="tw-inline-block">
+                  <FacebookSVG class="tw-text-primary tw-text-4xl" filled />
+                </a>
+                <a href="#" class="tw-inline-block">
+                  <TwitterSVG class="tw-text-primary tw-text-4xl" filled />
+                </a>
               </div>
             </div>
           </div>
@@ -92,16 +138,22 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
       <div class="tw-grid tw-grid-cols-3 tw-max-w-6xl">
         <div class="">
           <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">1,456,789</p>
-            <p class="tw-mb-1 tw-text-sm tw-text-primary">Registered Users</p>
+          <p class="tw-mb-1 tw-text-sm tw-text-primary">Registered Users</p>
         </div>
         <div class="">
           <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">1,456,789</p>
-            <p class="tw-mb-1 tw-text-sm tw-text-primary">Registered Users</p>
+          <p class="tw-mb-1 tw-text-sm tw-text-primary">Registered Users</p>
         </div>
         <div class="">
-            <p class="tw-mb-1 text-muted tw-text-sm tw-font-extralight tw-text-nowrap">Cluster ® is a registered Trademark of Cluster TIC (ABC 123 456 789)
-               </p>
-            <p class="tw-mb-0 text-muted tw-text-sm tw-font-extralight">Copyright © 2024 Cluster TIC (ABC 123 456 789)</p>
+          <p
+            class="tw-mb-1 text-muted tw-text-sm tw-font-extralight tw-text-nowrap"
+          >
+            Cluster ® is a registered Trademark of Cluster TIC (ABC 123 456
+            789)
+          </p>
+          <p class="tw-mb-0 text-muted tw-text-sm tw-font-extralight">
+            Copyright © 2024 Cluster TIC (ABC 123 456 789)
+          </p>
         </div>
       </div>
     </div>
@@ -115,20 +167,18 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
   background-repeat: no-repeat;
   background-position: right;
 }
-.text-muted{
+.text-muted {
   color: hsla(240, 6%, 51%, 0.56);
 }
-.footer{
+.footer {
   position: relative;
-  &::before{
+  &::before {
     content: '';
     height: 2px;
     left: 10%;
     right: 10%;
-  
-    @apply tw-absolute tw-top-0 tw-rounded-xl tw-bg-input tw-opacity-75;
-    
 
-}
+    @apply tw-absolute tw-top-0 tw-rounded-xl tw-bg-input tw-opacity-75;
+  }
 }
 </style>
