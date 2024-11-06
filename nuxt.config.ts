@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
   pages: true,
+  // Configurar los layouts predeterminados
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
@@ -10,6 +11,7 @@ export default defineNuxtConfig({
     '@vesp/nuxt-fontawesome',
     '@nuxtjs/i18n',
     'nuxt-quasar-ui',
+    'nuxt-svgo',
   ],
   i18n: {
     vueI18n: './i18n/i18n.config.ts', // if you are using custom path, default
@@ -30,12 +32,13 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiRoute: process.env.API_ROUTE || '',
+      apiRoute: process.env.NUXT_API_ROUTE || '',
     },
   },
   quasar: {
     plugins: ['Notify'],
   },
+
   experimental: {
     viewTransition: true,
     // ...

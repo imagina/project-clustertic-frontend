@@ -15,39 +15,53 @@ module.exports = {
       },
     },
     extend: {
+      container: {
+        center: true,
+        padding: '2rem',
+        screens: {
+          sm: '100%',
+          md: '100%',
+          lg: '1148px',
+          xl: '1530px',
+        },
+      },
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        border: 'hsla(var(--border),var(--tw-bg-opacity))',
+        input: 'hsla(var(--input),var(--tw-bg-opacity))',
+        link: 'hsla(var(--link),var(--tw-bg-opacity))',
+        ring: 'hsla(var(--ring),var(--tw-bg-opacity))',
+        background: 'hsla(var(--background),var(--tw-bg-opacity))',
+        foreground: 'hsla(var(--foreground),var(--tw-bg-opacity))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'hsla(var(--primary),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--primary-foreground),var(--tw-bg-opacity))',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'hsla(var(--secondary),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--secondary-foreground),var(--tw-bg-opacity))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'hsla(var(--destructive),var(--tw-bg-opacity))',
+          foreground:
+            'hsla(var(--destructive-foreground),var(--tw-bg-opacity))',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'hsla(var(--muted),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--muted-foreground),var(--tw-bg-opacity))',
+          custom: 'hsla(var(--custom-muted),0.55)',
+          light: 'hsla(var(--custom-muted),0.17)',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: 'hsla(var(--accent),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--accent-foreground),var(--tw-bg-opacity))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'hsla(var(--popover),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--popover-foreground),var(--tw-bg-opacity))',
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'hsla(var(--card),var(--tw-bg-opacity))',
+          foreground: 'hsla(var(--card-foreground),var(--tw-bg-opacity))',
         },
       },
       borderRadius: {

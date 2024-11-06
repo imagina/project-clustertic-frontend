@@ -5,4 +5,7 @@ export { default as CardDescription } from './CardDescription.vue'
 export { default as CardContent } from './CardContent.vue'
 export { default as CardFooter } from './CardFooter.vue'
 
-export { default as CardProject } from './CardProject.vue'
+export { default as CardProject } from './layouts/CardProject.vue'
+export { default as CardProposal } from './layouts/CardProposal.vue'
+export { default as CardPortfolio } from './layouts/CardPortfolio.vue'
+export { default as CardExperience } from './layouts/CardExperience.vue'

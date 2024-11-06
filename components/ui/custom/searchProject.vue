@@ -16,6 +16,7 @@ const search = ref('')
         <InputCPA
           outlined
           dark
+          rounded
           class="input-custom-outline tw-mb-3 search-input-border"
           v-model="search"
           label="Explorar proyectos de..."

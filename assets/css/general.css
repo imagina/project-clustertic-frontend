@@ -23,7 +23,7 @@ h6,
     'Helvetica Neue',
     sans-serif;
 }
-.sign-bg {
+.dark-layout-bg {
   background-image: url('../images/login-bg.png');
   background-size: cover;
 }
