@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
-import { ArrowRightIcon } from 'lucide-vue-next'
+import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
 definePageMeta({
   layout: 'default',
 })
@@ -78,8 +78,159 @@ const handleAnimationStart = (self: AnimationEvent) => {
     </div>
   </div>
   <SearchProject />
-  <div class="tw-container tw-py-10">
-    <CardProject id="1"></CardProject>
+
+  <div class="tw-bg-gray-200">
+    <h3
+      class="tw-font-extralight tw-text-black tw-text-center tw-text-[30px] tw-py-10"
+    >
+      ¿Que estas buscando?
+    </h3>
+    <div class="tw-flex tw-justify-center tw-w-full">
+      <PlayIcon style="transform: rotate(90deg)" />
+    </div>
+    <div class="tw-container tw-py-10 lg:tw-px-40 tw-mb-10">
+      <CardProject
+        id="project.id"
+        class="card-shadow"
+        :rating="4.5"
+        :skills="[]"
+      >
+        <template v-slot:title>project.title</template>
+        <template v-slot:subtitle>Presupuesto 0 - 5555$</template>
+        <template v-slot:description>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quasi
+          modi fugiat officiis harum minus voluptas accusantium, reprehenderit
+          molestias quas unde aut officia laboriosam? Distinctio sint
+          consequuntur maxime nisi explicabo? Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Id explicabo dolor, laboriosam tenetur
+          sunt possimus a! Eos, ratione saepe! Unde eius itaque fuga nesciunt
+          doloremque laborum enim maxime nam laboriosam.
+        </template>
+      </CardProject>
+    </div>
+    <div class="tw-flex tw-justify-center tw-pb-20">
+      <Button
+        variant="ghost"
+        type="button"
+        class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
+      >
+        Ver más
+        <ArrowRightIcon class="tw-ml-3" />
+      </Button>
+    </div>
+  </div>
+
+  <div class="tw-bg-secondary tw-pb-">
+    <div class="tw-container tw-flex">
+      <div class="lg:tw-basis-1/2 tw-my-20">
+        <h3
+          class="tw-text-white tw-font-light tw-text-[30px] sm:tw-text-[45px] md:tw-text-[55px] tw-leading-tight tw-mb-10"
+        >
+          <span class="tw-text-primary">Hazlo realidad</span>
+          <br />
+          con Clúster
+        </h3>
+        <div class="tw-px-20 line-variant">
+          <div class="tw-grid tw-grid-cols-2 tw-gap-x-20 tw-gap-y-5 tw-mb-20">
+            <div class="">
+              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
+                El mejor talento
+              </h4>
+              <p class="tw-text-white">
+                Descubre profesionales confiables al explorar sus portafolios y
+                sumergirte en los comentarios compartidos en sus perfiles.
+              </p>
+            </div>
+            <div class="">
+              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
+                El mejor talento
+              </h4>
+              <p class="tw-text-white">
+                Descubre profesionales confiables al explorar sus portafolios y
+                sumergirte en los comentarios compartidos en sus perfiles.
+              </p>
+            </div>
+            <div class="">
+              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
+                El mejor talento
+              </h4>
+              <p class="tw-text-white">
+                Descubre profesionales confiables al explorar sus portafolios y
+                sumergirte en los comentarios compartidos en sus perfiles.
+              </p>
+            </div>
+            <div class="">
+              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
+                El mejor talento
+              </h4>
+              <p class="tw-text-white">
+                Descubre profesionales confiables al explorar sus portafolios y
+                sumergirte en los comentarios compartidos en sus perfiles.
+              </p>
+            </div>
+          </div>
+          <div class="">
+            <p class="tw-text-white tw-text-2xl tw-font-semibold tw-mb-3">
+              Haz realidad tus sueños
+            </p>
+            <Button
+              variant="ghost"
+              type="button"
+              class="!tw-text-2xl !tw-font-semibold tw-text-primary hover:tw-text-primary hover:tw-underline !tw-p-0"
+            >
+              Comienza Ya
+              <ArrowRightIcon :size="35" class="tw-text-primary tw-ms-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div class="lg:tw-basis-1/2"></div>
+    </div>
+  </div>
+
+  <div class="tw-bg-gray-200">
+    <h3
+      class="tw-font-extralight tw-text-black tw-text-center tw-text-[30px] tw-py-10"
+    >
+      ¿Que estas buscando?
+    </h3>
+    <div class="tw-flex tw-justify-center tw-w-full">
+      <PlayIcon style="transform: rotate(90deg)" />
+    </div>
+    <div class="tw-container tw-py-10 lg:tw-px-40 tw-mb-10">
+      <CardProject
+        id="project.id"
+        class="card-shadow"
+        :rating="4.5"
+        :skills="[]"
+      >
+        <template v-slot:title>project.title</template>
+        <template v-slot:subtitle>Presupuesto 0 - 5555$</template>
+        <template v-slot:description>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quasi
+          modi fugiat officiis harum minus voluptas accusantium, reprehenderit
+          molestias quas unde aut officia laboriosam? Distinctio sint
+          consequuntur maxime nisi explicabo? Lorem, ipsum dolor sit amet
+          consectetur adipisicing elit. Id explicabo dolor, laboriosam tenetur
+          sunt possimus a! Eos, ratione saepe! Unde eius itaque fuga nesciunt
+          doloremque laborum enim maxime nam laboriosam.
+        </template>
+      </CardProject>
+    </div>
+    <div class="tw-flex tw-justify-center tw-pb-20">
+      <Button
+        variant="ghost"
+        type="button"
+        class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
+      >
+        Ver más
+        <ArrowRightIcon class="tw-ml-3" />
+      </Button>
+    </div>
   </div>
 </template>
 
@@ -101,6 +252,23 @@ const handleAnimationStart = (self: AnimationEvent) => {
   &.third {
     animation-delay: 1.2s;
     transition: all 0.5s linear;
+  }
+}
+
+:deep(.card-shadow) {
+  @apply tw-bg-white;
+  box-shadow: 0px 25px 60px 0px hsla(0, 0%, 0%, 0.1);
+}
+.line-variant {
+  position: relative;
+  &::before {
+    content: '';
+    @apply tw-bg-gradient-to-b tw-from-primary tw-to-secondary;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
   }
 }
 </style>
