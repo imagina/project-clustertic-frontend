@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FacebookSVG from '@/assets/svg/brand-facebook.svg'
 
 	const proxy = getCurrentInstance()!.appContext.config.globalProperties
 
@@ -80,7 +81,7 @@
 		class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
 		:loading="state.loading"
 	>
-		<img src="@/assets/svg/brand-facebook.svg" alt="facebook" />
+	<FacebookSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
 	</Button>
 </template>
   

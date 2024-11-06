@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GoogleSVG from '@/assets/svg/brand-google.svg'
 
 	const proxy = getCurrentInstance()!.appContext.config.globalProperties
 	const store = useAuthStore()
@@ -69,7 +70,7 @@
 		class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
 		:loading="state.loading"
 	>
-		<img src="@/assets/svg/brand-google.svg" alt="google" />
+		<GoogleSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
 	</Button>
 </template>
   

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook.svg'
-import GoogleSVG from '@/assets/svg/brand-google.svg'
 import { reactive, ref } from 'vue'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
@@ -125,12 +123,8 @@ async function login() {
               </a>
             </div>
             <div class="tw-flex tw-justify-center tw-mb-6">
-              <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5">
-                <FacebookSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
-              </Button>
-              <Button class="!tw-rounded-[100%] tw-w-14 tw-h-14">
-                <GoogleSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
-              </Button>
+                <SocialAuthGoogle />
+                <SocialAuthFacebook />
             </div>
             <transition name="hero">
               <Button

@@ -20,7 +20,7 @@ const apiRoutes = {
 }
 
 const routes = {
-  home: '/admin/home',
+  home: '/',
   login: '/auth/login',
 }
 

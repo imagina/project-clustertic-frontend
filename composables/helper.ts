@@ -1,5 +1,43 @@
 
 export const Helper = {
+	//convert a date string with the format "YYYY-MM-DD HH:mm:ss" to a date
+	parseStringToDate : (fechaString?: string | null, formato: string = 'YYYY-MM-DD HH:mm:ss') => {
+		debugger
+		if (!fechaString) return null
+		const separadores = formato.match(/[^A-Za-z]/g) || []
+		const partesFechaHora = fechaString.split(new RegExp(`[${separadores.join('')}]`))
+	  
+		let anio = 0, mes = 0, dia = 0, horas = 0, minutos = 0, segundos = 0
+	  
+		formato.split(/[^A-Za-z]/).forEach((parte, index) => {
+		  switch (parte) {
+			case 'YYYY':
+			  anio = Number(partesFechaHora[index])
+			  break
+			case 'MM':
+			  mes = Number(partesFechaHora[index]) - 1
+			  break
+			case 'DD':
+			  dia = Number(partesFechaHora[index])
+			  break
+			case 'HH':
+			  horas = Number(partesFechaHora[index])
+			  break
+			case 'mm':
+			  minutos = Number(partesFechaHora[index])
+			  break
+			case 'ss':
+			  segundos = Number(partesFechaHora[index])
+			  break
+			default:
+			  throw new Error(`Formato desconocido: ${parte}`)
+		  }
+		})
+	  
+		return new Date(anio, mes, dia, horas, minutos, segundos)
+	  },
+	  
+
 	//Convert object keys to snake_case
 	toSnakeCase: (object, params = {}) => {
 		//Items to ignore when try to convert to snakeCase
@@ -34,11 +72,11 @@ export const Helper = {
 	},
 
 	//Convert strings to snake_case
-	convertStringToSnakeCase: (string) => string.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`),
+	convertStringToSnakeCase: (string:string) => string.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`),
 	
-	timestamp: (date = false ) => {
+	timestamp: (date?: Date | null ) => {
 		date = date ? date : new Date();
-		return date / 1000 | 0;
+		return date.getTime() / 1000 | 0;
 	}, 
 
 	// Detect Device

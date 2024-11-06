@@ -38,7 +38,7 @@ async function reset() {
             <img src="@/assets/svg/logo-green-text.svg" alt="" />
           </div>
           <h1
-            class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
+            class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-center tw-leading-tight  tw-text-white tw-mb-4"
           >
           {{ $t('auth.reset.title') }}
           </h1>
