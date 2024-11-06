@@ -66,7 +66,8 @@ import GoogleSVG from '@/assets/svg/brand-google.svg'
 <template>
 	<Button 
 		v-if="clientIdGoogle"
-		@click="signIn()"		
+		@click="signIn()"	
+		type="button"	
 		class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
 		:loading="state.loading"
 	>

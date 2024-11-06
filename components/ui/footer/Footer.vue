@@ -12,7 +12,7 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
     <div class="footer-container tw-pb-52 tw-pt-14">
       <div class="tw-container">
         <LogoGreenTextSVG class="tw-text-9xl !tw-h-auto !tw-mb-10" filled />
-        <div class="tw-grid tw-grid-cols-4 tw-max-w-6xl">
+        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-max-w-6xl">
           <div>
             <div class="tw-flex tw-items-center tw-mb-4">
               <div class="tw-border-r-2 tw-border-white tw-px-3 tw-py-5">
@@ -135,7 +135,7 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
       </div>
     </div>
     <div class="tw-container tw-pb-5 tw-pt-7 footer">
-      <div class="tw-grid tw-grid-cols-3 tw-max-w-6xl">
+      <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-max-w-6xl">
         <div class="">
           <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">1,456,789</p>
           <p class="tw-mb-1 tw-text-sm tw-text-primary">Registered Users</p>
@@ -146,12 +146,12 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
         </div>
         <div class="">
           <p
-            class="tw-mb-1 text-muted tw-text-sm tw-font-extralight tw-text-nowrap"
+            class="tw-mb-1 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight tw-text-nowrap"
           >
             Cluster ® is a registered Trademark of Cluster TIC (ABC 123 456
             789)
           </p>
-          <p class="tw-mb-0 text-muted tw-text-sm tw-font-extralight">
+          <p class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight">
             Copyright © 2024 Cluster TIC (ABC 123 456 789)
           </p>
         </div>

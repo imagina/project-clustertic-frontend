@@ -78,6 +78,7 @@ import FacebookSVG from '@/assets/svg/brand-facebook.svg'
 	<Button 
 		v-if="appIdFacebook"
 		@click="signIn()"		
+		type="button"	
 		class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
 		:loading="state.loading"
 	>

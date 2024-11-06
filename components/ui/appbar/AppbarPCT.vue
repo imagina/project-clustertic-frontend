@@ -4,6 +4,7 @@ import {
   CompassIcon,
   MessageSquareIcon,
   BellIcon,
+  LogInIcon
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
 import { cn } from '~/lib/utils'
@@ -22,9 +23,9 @@ const user = computed<UserData | null>(() => authStore.user)
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
         <LogoSVG filled class="tw-text-primary tw-text-5xl" />
         <div class="tw-ml-1">
-          <p class="tw-m-0 tw-leading-3">CLÚSTER</p>
-          <p class="tw-m-0 tw-leading-3">TECNOLÓGICO</p>
-          <p class="tw-m-0 tw-leading-3">DEL TOLIMA</p>
+          <p class="tw-m-0 tw-leading-3 tw-text-xs">CLÚSTER</p>
+          <p class="tw-m-0 tw-leading-3 tw-text-xs">TECNOLÓGICO</p>
+          <p class="tw-m-0 tw-leading-3 tw-text-xs">DEL TOLIMA</p>
         </div>
       </div>
 
@@ -78,17 +79,9 @@ const user = computed<UserData | null>(() => authStore.user)
           <li v-if="!user">
             <NuxtLink to="/auth/login">
               <Button variant="ghost" class="tw-text-secondary">
+                <LogInIcon class="tw-text-primary tw-mr-3"  style="transform: rotate(180deg)" />
                 <span class="tw-font-bold tw-capitalize">
                   {{ $t('appbar.nav.login') }}
-                </span>
-              </Button>
-            </NuxtLink>
-          </li>
-          <li v-if="!user">
-            <NuxtLink to="/auth/register">
-              <Button variant="ghost" class="tw-text-secondary">
-                <span class="tw-font-bold tw-capitalize">
-                  {{ $t('appbar.nav.register') }}
                 </span>
               </Button>
             </NuxtLink>

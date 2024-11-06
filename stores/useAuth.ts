@@ -111,11 +111,7 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async authSuccess(userData: {
-      userData: UserData
-      userToken: string
-      expiresIn: string
-    }) {
+    async authSuccess(userData: LoginResponse) {
       this.user = userData.userData
       this.token = userData.userToken
       this.expiresIn = Helper.parseStringToDate(userData.expiresIn)

@@ -5,7 +5,11 @@ export const Helper = {
 		debugger
 		if (!fechaString) return null
 		const separadores = formato.match(/[^A-Za-z]/g) || []
-		const partesFechaHora = fechaString.split(new RegExp(`[${separadores.join('')}]`))
+		const partesFechaHora = fechaString.split(new RegExp(`[${separadores.map(sep=>{
+			if (sep === '-' || sep ==='\\' || sep ==='.' )
+				return `\\${sep}`
+			return sep
+		}).join('')}]`))
 	  
 		let anio = 0, mes = 0, dia = 0, horas = 0, minutos = 0, segundos = 0
 	  

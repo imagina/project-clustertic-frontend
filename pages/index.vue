@@ -33,12 +33,15 @@ const handleAnimationStart = (self: AnimationEvent) => {
             </i18n-t>
           </h1>
           <div class="tw-flex tw-mb-10 lg:tw-mb-0">
-            <Button
+            <NuxtLink to="/projects/create">
+
+              <Button
               size="lg"
               class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
-            >
+              >
               {{ $t('landing.publishProject') }}
             </Button>
+          </NuxtLink>
 
             <NuxtLink to="/projects">
               <Button
@@ -201,25 +204,37 @@ const handleAnimationStart = (self: AnimationEvent) => {
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />
     </div>
-    <div class="tw-container tw-py-10 lg:tw-px-40 tw-mb-10">
-      <CardProject
+    <div class=" tw-flex tw-flex-nowrap tw-gap-4 tw-py-10 lg:tw-px-40 tw-mb-10">
+      <CardSmallProfile
         id="project.id"
-        class="card-shadow"
+        name="CompanyName"
+        username="CompanyName"
+        class="tw-basis-1/3"
         :rating="4.5"
-        :skills="[]"
-      >
-        <template v-slot:title>project.title</template>
-        <template v-slot:subtitle>Presupuesto 0 - 5555$</template>
-        <template v-slot:description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quasi
-          modi fugiat officiis harum minus voluptas accusantium, reprehenderit
-          molestias quas unde aut officia laboriosam? Distinctio sint
-          consequuntur maxime nisi explicabo? Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Id explicabo dolor, laboriosam tenetur
-          sunt possimus a! Eos, ratione saepe! Unde eius itaque fuga nesciunt
-          doloremque laborum enim maxime nam laboriosam.
-        </template>
-      </CardProject>
+        location="Ibagué, Colombia"
+        number-jobs="175"
+        price="47"
+      />
+      <CardSmallProfile
+        id="project.id"
+        name="CompanyName"
+        username="CompanyName"
+        class="tw-basis-1/3"
+        :rating="4.5"
+        location="Ibagué, Colombia"
+        number-jobs="175"
+        price="47"
+      />
+      <CardSmallProfile
+        id="project.id"
+        name="CompanyName"
+        username="CompanyName"
+        class="tw-basis-1/3"
+        :rating="4.5"
+        location="Ibagué, Colombia"
+        number-jobs="175"
+        price="47"
+      />
     </div>
     <div class="tw-flex tw-justify-center tw-pb-20">
       <Button

@@ -2,6 +2,6 @@ import type { UserData } from './user'
 
 export interface LoginResponse {
   userToken: string
-  expiresIn: Date
+  expiresIn: string
   userData: UserData
 }
