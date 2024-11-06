@@ -481,7 +481,7 @@ function handleChangeStep(next_or_prev: number) {
                     <p
                       class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose"
                     >
-                      {{ item }}
+                      {{ item.title }}
                     </p>
                   </li>
                 </ul>

@@ -3,6 +3,8 @@ import { MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
+
+const show_modal = ref(false)
 </script>
 
 <template>
@@ -44,6 +46,7 @@ import ShareSVG from '~/assets/svg/share.svg'
           <ShareSVG filled class="tw-text-xl" />
         </Button>
         <Button
+          @click="show_modal = true"
           type="button"
           variant="outline"
           class="tw-border-none profile-btn"
@@ -166,8 +169,8 @@ import ShareSVG from '~/assets/svg/share.svg'
         </div>
 
         <!-- aside -->
-        <aside class="tw-basis-full lg:tw-flex-none tw-w-80">
-          <Card class="tw-py-3 tw-px-6">
+        <aside class="tw-basis-full lg:tw-flex-none tw-w-80 tw-pb-20">
+          <Card class="tw-py-3 tw-px-6 tw-sticky tw-top-28 tw-bottom-20">
             <CardHeader
               class="tw-h-full tw-justify-center tw-border-b-2 tw-border-muted-light !tw-p-2 !tw-pb-4 !tw-rounded-4xl"
             >
@@ -224,6 +227,7 @@ import ShareSVG from '~/assets/svg/share.svg'
       </div>
     </div>
   </div>
+  <ProfileEdit v-model="show_modal"></ProfileEdit>
 </template>
 
 <style lang="css" scoped>

@@ -8,7 +8,7 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="tw-bg-secondary tw-min-h-10 tw-mt-16">
+  <div class="tw-bg-secondary tw-min-h-10">
     <div class="footer-container tw-pb-52 tw-pt-14">
       <div class="tw-container">
         <LogoGreenTextSVG class="tw-text-9xl !tw-h-auto !tw-mb-10" filled />

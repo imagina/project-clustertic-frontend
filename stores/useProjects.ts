@@ -56,7 +56,7 @@ export const useProjectsStore = defineStore('projects', {
         `${config.public.apiRoute}/api/ipin/v1/pins/?page=${page}&include=categories`,
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `${auth.token}`,
           },
           method: 'GET',
         },

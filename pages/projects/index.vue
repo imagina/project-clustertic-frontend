@@ -34,7 +34,7 @@ async function filter() {
 </script>
 <template>
   <SearchProject class="tw-mt-20" />
-  <div class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5">
+  <div class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16">
     <aside class="tw-basis-80 tw-px-5">
       <div
         class="filters-form tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
