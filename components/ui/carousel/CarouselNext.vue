@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRight } from 'lucide-vue-next'
+import { PlayIcon } from 'lucide-vue-next'
 import { useCarousel } from './useCarousel'
 import type { WithClassAsProps } from './interface'
 import { cn } from '@/lib/utils'
@@ -15,10 +15,10 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     :disabled="!canScrollNext"
     :class="
       cn(
-        'touch-manipulation absolute h-8 w-8 rounded-full p-0',
+        'tw-touch-manipulation tw-absolute tw-rounded-full tw-p-0 tw-z-50 tw-border-none',
         orientation === 'horizontal'
-          ? '-right-12 top-1/2 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'tw-right-12 tw-top-1/2 tw-translate-y-1/2'
+          : 'tw-bottom-12 tw-left-1/2 tw-translate-x-1/2 rotate-90',
         props.class,
       )
     "
@@ -26,7 +26,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     @click="scrollNext"
   >
     <slot>
-      <ArrowRight class="h-4 w-4 text-current" />
+      <PlayIcon  class="h-4 w-4 text-current"/>
       <span class="sr-only">Next Slide</span>
     </slot>
   </Button>

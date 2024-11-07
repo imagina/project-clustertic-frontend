@@ -8,6 +8,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
   ;(<HTMLElement>self.currentTarget)?.classList.remove('tw-opacity-0') // Añade la clase de Tailwind al finalizar
   ;(<HTMLElement>self.currentTarget)?.classList.add('tw-opacity-80') // Añade la clase de Tailwind al finalizar
 }
+const slide = ref(1)
 </script>
 
 <template>
@@ -204,37 +205,62 @@ const handleAnimationStart = (self: AnimationEvent) => {
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />
     </div>
-    <div class=" tw-flex tw-flex-nowrap tw-gap-4 tw-py-10 lg:tw-px-40 tw-mb-10">
-      <CardSmallProfile
-        id="project.id"
-        name="CompanyName"
-        username="CompanyName"
-        class="tw-basis-1/3"
-        :rating="4.5"
-        location="Ibagué, Colombia"
-        number-jobs="175"
-        price="47"
-      />
-      <CardSmallProfile
-        id="project.id"
-        name="CompanyName"
-        username="CompanyName"
-        class="tw-basis-1/3"
-        :rating="4.5"
-        location="Ibagué, Colombia"
-        number-jobs="175"
-        price="47"
-      />
-      <CardSmallProfile
-        id="project.id"
-        name="CompanyName"
-        username="CompanyName"
-        class="tw-basis-1/3"
-        :rating="4.5"
-        location="Ibagué, Colombia"
-        number-jobs="175"
-        price="47"
-      />
+    <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-mb-10">
+      <Carousel>
+        <CarouselPrevious class="lg:tw-left-[-5%]"/>
+        <CarouselContent>
+          <CarouselItem class=" lg:!tw-basis-1/3">
+  
+            <CardSmallProfile
+              id="project.id"
+              name="CompanyName"
+              username="CompanyName"
+              :rating="4.5"
+              location="Ibagué, Colombia"
+              number-jobs="175"
+              price="47"
+            />
+          </CarouselItem>
+          <CarouselItem class=" lg:!tw-basis-1/3">
+  
+            <CardSmallProfile
+              id="project.id"
+              name="CompanyName"
+              username="CompanyName"
+              :rating="4.5"
+              location="Ibagué, Colombia"
+              number-jobs="175"
+              price="47"
+            />
+          </CarouselItem>
+          <CarouselItem class=" lg:!tw-basis-1/3">
+  
+            <CardSmallProfile
+              id="project.id"
+              name="CompanyName"
+              username="CompanyName"
+              :rating="4.5"
+              location="Ibagué, Colombia"
+              number-jobs="175"
+              price="47"
+            />
+          </CarouselItem>
+          <CarouselItem class=" lg:!tw-basis-1/3">
+  
+            <CardSmallProfile
+              id="project.id"
+              name="CompanyName"
+              username="CompanyName"
+              :rating="4.5"
+              location="Ibagué, Colombia"
+              number-jobs="175"
+              price="47"
+            />
+          </CarouselItem>
+  
+        </CarouselContent>
+        <CarouselNext class="lg:tw-right-[-5%]"/>
+      </Carousel>
     </div>
     <div class="tw-flex tw-justify-center tw-pb-20">
       <Button
