@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
+import CharacterLandingSVG from '~/assets/svg/character.svg'
 import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
 definePageMeta({
   layout: 'default',
@@ -57,7 +58,7 @@ const slide = ref(1)
         </div>
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
           <div class="tw-relative">
-            <DeskLandingSVG filled class="tw-text-[36rem]" />
+            <DeskLandingSVG filled class="tw-text-9xl lg:tw-text-[36rem]" />
             <div
               class="float-label first add-shadow tw-top-[5px] tw-opacity-0"
               @animationstart="handleAnimationStart"
@@ -125,8 +126,8 @@ const slide = ref(1)
   </div>
 
   <div class="tw-bg-secondary tw-pb-">
-    <div class="tw-container tw-flex">
-      <div class="lg:tw-basis-1/2 tw-my-20">
+    <div class="tw-pl-5 lg:tw-pl-56 tw-pr-0 tw-flex">
+      <div class="tw-basis-full lg:tw-basis-1/2 tw-my-20">
         <h3
           class="tw-text-white tw-font-light tw-text-[30px] sm:tw-text-[45px] md:tw-text-[55px] tw-leading-tight tw-mb-10"
         >
@@ -192,7 +193,9 @@ const slide = ref(1)
           </div>
         </div>
       </div>
-      <div class="lg:tw-basis-1/2"></div>
+      <div class="tw-hidden lg:tw-basis-1/2 lg:tw-flex tw-items-end tw-justify-center cluster-details-img tw-pb-20 ">
+        <CharacterLandingSVG filled class="tw-text-9xl lg:tw-text-[36rem] !tw-m-0"/>c
+      </div>
     </div>
   </div>
 
@@ -200,12 +203,12 @@ const slide = ref(1)
     <h3
       class="tw-font-extralight tw-text-black tw-text-center tw-text-[30px] tw-py-10"
     >
-      ¿Que estas buscando?
+    De la mano de <b class="tw-font-bold"> expertos </b>en múltiples campos <b class="tw-font-bold">creativos</b>.
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />
     </div>
-    <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-mb-10">
+    <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>
         <CarouselPrevious class="lg:tw-left-[-5%]"/>
         <CarouselContent>
@@ -262,20 +265,19 @@ const slide = ref(1)
         <CarouselNext class="lg:tw-right-[-5%]"/>
       </Carousel>
     </div>
-    <div class="tw-flex tw-justify-center tw-pb-20">
-      <Button
-        variant="ghost"
-        type="button"
-        class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
-      >
-        Ver más
-        <ArrowRightIcon class="tw-ml-3" />
-      </Button>
-    </div>
   </div>
 </template>
 
 <style scoped>
+
+
+.cluster-details-img {
+  background-image: url('@/assets/images/cluster-details-bg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 .float-label {
   @apply tw-absolute tw-px-10  tw-py-2 tw-text-[25px] tw-rounded-lg tw-bg-white tw-animate-slide-down tw-text-muted-custom;
   animation-duration: 1s;

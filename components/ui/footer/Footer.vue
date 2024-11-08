@@ -114,7 +114,13 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Acerca del Cluster</p>
               <a
                 href="#"
-                class="tw-mb-7 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
+              >
+                Sobre el cluster
+              </a>
+              <a
+                href="#"
+                class="tw-mb-7 tw-text-xs tw-font-extralight tw-block"
               >
                 Recursos de ayuda
               </a>

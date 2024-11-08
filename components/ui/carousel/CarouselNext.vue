@@ -15,10 +15,10 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     :disabled="!canScrollNext"
     :class="
       cn(
-        'tw-touch-manipulation tw-absolute tw-rounded-full tw-p-0 tw-z-50 tw-border-none',
+        'tw-touch-manipulation tw-absolute tw-rounded-full tw-p-0 tw-z-40 tw-border-none',
         orientation === 'horizontal'
-          ? 'tw-right-12 tw-top-1/2 tw-translate-y-1/2'
-          : 'tw-bottom-12 tw-left-1/2 tw-translate-x-1/2 rotate-90',
+          ? 'tw-right-12 tw-top-1/2 -tw-translate-y-1/2'
+          : 'tw-bottom-12 tw-left-1/2 -tw-translate-x-1/2 rotate-90',
         props.class,
       )
     "
