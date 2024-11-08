@@ -51,10 +51,10 @@
         "content": "Already have an account?",
         "link": "Log in"
       }
-    }, 
+    },
     "reset": {
       "title": "Recover Password",
-      "submitBtn": "Recover Password", 
+      "submitBtn": "Recover Password",
       "confirmPassword": "Confirm Password"
     }
   },

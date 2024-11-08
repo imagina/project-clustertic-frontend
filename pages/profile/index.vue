@@ -3,6 +3,13 @@ import { MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
+definePageMeta({
+  middleware: 'auth',
+})
+
+const auth = useAuthStore()
+
+const user = computed(() => auth.user)
 
 const show_modal = ref(false)
 </script>
@@ -14,7 +21,10 @@ const show_modal = ref(false)
       <div class="tw-flex tw-mt-5">
         <div class="tw-basis-64 tw-relative">
           <div class="img-container">
-            <div class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"></div>
+            <div
+              class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
+              :style="{ backgroundImage: `url(${user?.mediumImage})` }"
+            ></div>
             <Button
               type="button"
               variant="outline"
@@ -33,9 +43,11 @@ const show_modal = ref(false)
         </div>
       </div>
       <div class="tw-mt-10 tw-flex tw-items-center tw-gap-4">
-        <h3 class="tw-font-bold tw-text-4xl">Nombre del usuario</h3>
+        <h3 class="tw-font-bold tw-text-4xl">
+          {{ user?.firstName }} {{ user?.lastName }}
+        </h3>
         <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
-          @username_del_usuario
+          {{ user?.email }}
         </p>
         <div class="tw-grow"></div>
         <Button
@@ -202,7 +214,7 @@ const show_modal = ref(false)
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">Email</p>
-                  <p class="tw-mb-0 tw-text-xs">+57 310 5885854</p>
+                  <p class="tw-mb-0 tw-text-xs">{{ user?.email }}</p>
                 </div>
               </div>
               <div class="tw-flex tw-items-center tw-mb-4">

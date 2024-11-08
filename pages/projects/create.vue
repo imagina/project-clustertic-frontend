@@ -4,6 +4,7 @@ import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import ShieldDollarSVG from '@/assets/svg/shield-dollar.svg'
 import FileShredderSVG from '@/assets/svg/file-shredder.svg'
 import type { ProjectTag } from '~/models/projects'
+import type { NewProjectFormValue } from '~/models/stores'
 
 interface rangePriceOptionsInterface {
   label: string
@@ -26,8 +27,7 @@ interface createDataInterface {
 }
 
 definePageMeta({
-  // middleware: "auth",
-
+  middleware: 'auth',
   layout: 'dark-bg',
 })
 const page = ref(1)
@@ -46,6 +46,7 @@ const { data, status, error, refresh, clear } = await useAsyncData(
 )
 console.log(data)
 const router = useRouter()
+const projectStore = useProjectsStore()
 const refForm: any = ref(null)
 const step = ref<number>(0)
 
@@ -210,7 +211,30 @@ async function create() {
   try {
     const validateForm = await refForm.value.validate()
     if (!validateForm) return
-    router.push('/')
+    const dataToSend: NewProjectFormValue = {
+      es: {
+        title: projectData.name,
+        slug: projectData.name.toLowerCase().replace(/\s/g, '-'),
+        description: projectData.description,
+      },
+      min_price:
+        (projectData.rangePrice.value === 'custom'
+          ? projectData.customPrice
+          : projectData.rangePrice.min) ?? 0,
+      max_price:
+        (projectData.rangePrice.value === 'custom'
+          ? projectData.customPrice
+          : projectData.rangePrice.max) ?? 0,
+      categories: projectData.skills.map((skill) => skill.id),
+    }
+    projectStore
+      .create(dataToSend)
+      .then((data) => {
+        router.push('/')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   } catch (erro) {
     console.log(erro)
   }

@@ -17,13 +17,13 @@ const auth = reactive<{
 }>({
   username: '',
   password: '',
-  remember_me:false
+  remember_me: false,
 })
 const loading = computed(() => store.loading)
 
 onMounted(() => {
-  if(store.username) auth.username = store.username;
-  if(store.password) auth.password = store.password;
+  if (store.username) auth.username = store.username
+  if (store.password) auth.password = store.password
 })
 
 async function login() {
@@ -123,8 +123,8 @@ async function login() {
               </a>
             </div>
             <div class="tw-flex tw-justify-center tw-mb-6">
-                <SocialAuthGoogle />
-                <SocialAuthFacebook />
+              <SocialAuthGoogle />
+              <SocialAuthFacebook />
             </div>
             <transition name="hero">
               <Button

@@ -8,16 +8,16 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  username: string,  
-}>({  
+  username: string
+}>({
   username: '',
 })
 const loading = computed(() => store.loading)
 async function reset() {
-  try {    
+  try {
     const validateReset = await refReset.value.validate()
     if (!validateReset) return
-    await store.resetPassword(auth);
+    await store.resetPassword(auth)
   } catch (error) {
     console.log(error)
   }
@@ -38,14 +38,13 @@ async function reset() {
             <img src="@/assets/svg/logo-green-text.svg" alt="" />
           </div>
           <h1
-            class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-center tw-leading-tight  tw-text-white tw-mb-4"
+            class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-center tw-leading-tight tw-text-white tw-mb-4"
           >
-          {{ $t('auth.reset.title') }}
+            {{ $t('auth.reset.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
               <q-form @submit.prevent.stop="reset" ref="refReset">
-                
                 <InputCPA
                   filled
                   dark

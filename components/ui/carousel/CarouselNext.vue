@@ -26,7 +26,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     @click="scrollNext"
   >
     <slot>
-      <PlayIcon  class="h-4 w-4 text-current"/>
+      <PlayIcon class="h-4 w-4 text-current" />
       <span class="sr-only">Next Slide</span>
     </slot>
   </Button>

@@ -5,31 +5,33 @@ import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
-const route = useRoute()	
+const route = useRoute()
 
 const auth = reactive<{
-  password: string,  
+  password: string
   confirmPassword: string
-}>({  
-    password: '',
-    confirmPassword: ''
+}>({
+  password: '',
+  confirmPassword: '',
 })
 
 const loading = computed(() => store.loading)
-const isEmpty = computed(() => auth.password == '' || auth.confirmPassword == '')
-const isDiferent = computed(() => auth.password !=  auth.confirmPassword) 
+const isEmpty = computed(
+  () => auth.password == '' || auth.confirmPassword == '',
+)
+const isDiferent = computed(() => auth.password != auth.confirmPassword)
 
 async function reset() {
-  try {    
+  try {
     const validateReset = await refReset.value.validate()
-    if (!validateReset) return    
+    if (!validateReset) return
 
-    if(route?.params){
+    if (route?.params) {
       const formData = {
         password: auth.password,
         passwordConfirmation: auth.confirmPassword,
-        userId: route.params.id, 
-        token: route.params.token
+        userId: route.params.id,
+        token: route.params.token,
       }
       store.changedPasswordRequest(formData)
     }
@@ -55,12 +57,11 @@ async function reset() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-          {{ $t('auth.reset.title') }}
+            {{ $t('auth.reset.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
               <q-form @submit.prevent.stop="reset" ref="refReset">
-                
                 <InputCPA
                   filled
                   dark
@@ -120,8 +121,8 @@ async function reset() {
                       /\d/.test(val) || 'Must contain at least one number',
                     (val) =>
                       /[\W_]/.test(val) ||
-                      'Must contain at least one special character',                    
-                    (val) => val == auth.password || 'Password does not match'  
+                      'Must contain at least one special character',
+                    (val) => val == auth.password || 'Password does not match',
                   ]"
                   :type="isPwd ? 'password' : 'text'"
                 >

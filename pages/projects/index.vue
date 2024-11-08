@@ -17,13 +17,11 @@ const filters = reactive<{
 })
 
 onMounted(() => {
-  debugger
   projectsStore.requestPage(1)
 })
 
 async function filter() {
   try {
-    debugger
     const validate = await refForm.value.validate()
     if (!validate) return
     // await store.login(auth);

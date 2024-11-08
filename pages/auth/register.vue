@@ -13,9 +13,9 @@ const isPwd = ref(true)
 const store = useAuthStore()
 
 const auth = reactive<{
-  firstName: string,
-  lastName: string,
-  email: string,
+  firstName: string
+  lastName: string
+  email: string
   password: string
   agreement: boolean
 }>({
@@ -27,10 +27,10 @@ const auth = reactive<{
 })
 const loading = computed(() => store.loading)
 async function register() {
-  try {    
+  try {
     const validateRegister = await refRegister.value.validate()
     if (!validateRegister) return
-    await store.register(auth);
+    await store.register(auth)
   } catch (error) {
     console.log(error)
   }

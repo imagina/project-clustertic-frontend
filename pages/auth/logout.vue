@@ -9,7 +9,6 @@ definePageMeta({
 onMounted(() => {
   store.logout()
 })
-
 </script>
 
 <template>
@@ -18,5 +17,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

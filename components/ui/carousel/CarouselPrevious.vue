@@ -26,7 +26,10 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
     @click="scrollPrev"
   >
     <slot>
-      <PlayIcon  style="transform: rotate(180deg)" class="h-4 w-4 text-current" />
+      <PlayIcon
+        style="transform: rotate(180deg)"
+        class="h-4 w-4 text-current"
+      />
       <span class="sr-only">Previous Slide</span>
     </slot>
   </Button>

@@ -47,9 +47,6 @@ export const useAuthStore = defineStore('auth', {
     getUsername(state) {
       return state.user ? state.user?.email : localStorage.getItem('username')
     },
-    getUserData(state) {
-      return state.user
-    },
     getFacebookClientId(state) {
       return state.facebookClientId
     },
@@ -75,7 +72,7 @@ export const useAuthStore = defineStore('auth', {
     },
 
     validateToken() {
-      return Helper.timestamp(this.getExpiresIn) <= Helper.timestamp()
+      return Helper.timestamp(this.getExpiresIn) >= Helper.timestamp()
     },
 
     /* Request login with Social Networks */
@@ -243,11 +240,10 @@ export const useAuthStore = defineStore('auth', {
     /* 
       Change password from reset email url
     */
-    async changedPasswordRequest(dataForm:{
-      
-      password: string,
-      passwordConfirmation: string,
-      userId: string, 
+    async changedPasswordRequest(dataForm: {
+      password: string
+      passwordConfirmation: string
+      userId: string
       token: string
     }) {
       this.clearToken()
@@ -278,7 +274,7 @@ export const useAuthStore = defineStore('auth', {
     /* site settings */
     async getSettings(settings: string[]) {
       const config = useRuntimeConfig()
-      debugger
+
       return await $fetch(`${config.public.apiRoute}${apiRoutes.settings}`, {
         method: 'GET',
         headers: {
@@ -293,19 +289,23 @@ export const useAuthStore = defineStore('auth', {
     },
     /* facebook settings */
     async getFacebookSettings() {
-      await this.getSettings(['isite::facebookClientId']).then((response:any) => {
-        if (response?.data) {
-          this.facebookClientId = response.data['isite::facebookClientId']
-        }
-      })
+      await this.getSettings(['isite::facebookClientId']).then(
+        (response: any) => {
+          if (response?.data) {
+            this.facebookClientId = response.data['isite::facebookClientId']
+          }
+        },
+      )
     },
     /* google settings */
     async getGoogleSettings() {
-      await this.getSettings(['isite::googleClientId']).then((response:any) => {
-        if (response?.data) {
-          this.googleClientId = response.data['isite::googleClientId']
-        }
-      })
+      await this.getSettings(['isite::googleClientId']).then(
+        (response: any) => {
+          if (response?.data) {
+            this.googleClientId = response.data['isite::googleClientId']
+          }
+        },
+      )
     },
   },
 })

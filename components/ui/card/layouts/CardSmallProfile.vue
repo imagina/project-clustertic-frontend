@@ -36,9 +36,9 @@ const props = defineProps<{
         </div>
         <div class="tw-pl-7 tw-py-5 tw-grow">
           <CardTitle class="tw-font-bold tw-text-lg tw-mb-4">
-            {{props.name}}
+            {{ props.name }}
             <span class="tw-ml-2 tw-font-light tw-text-blue-500">
-              @{{props.username}}
+              @{{ props.username }}
             </span>
           </CardTitle>
 

@@ -36,14 +36,13 @@ const slide = ref(1)
           </h1>
           <div class="tw-flex tw-mb-10 lg:tw-mb-0">
             <NuxtLink to="/projects/create">
-
               <Button
-              size="lg"
-              class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
+                size="lg"
+                class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
               >
-              {{ $t('landing.publishProject') }}
-            </Button>
-          </NuxtLink>
+                {{ $t('landing.publishProject') }}
+              </Button>
+            </NuxtLink>
 
             <NuxtLink to="/projects">
               <Button
@@ -63,19 +62,25 @@ const slide = ref(1)
               class="float-label first add-shadow tw-top-[5px] tw-opacity-0"
               @animationstart="handleAnimationStart"
             >
-              UI UX
+              Infraestructura TI y Conectividad
             </div>
             <div
               class="float-label second tw-top-[35%] md:tw-right-[8%] lg:tw-right-[0%] xl:tw-right-[-4%] tw-opacity-0"
               @animationstart="handleAnimationStart"
             >
-              Marketing
+              Videojuegos, Realidad Aumentada y Virtual
+            </div>
+            <div
+              class="float-label second tw-top-[35%] md:tw-right-[8%] lg:tw-left-[0%] xl:tw-right-[-4%] tw-opacity-0"
+              @animationstart="handleAnimationStart"
+            >
+              Producción de Contenidos y Marketing Digital
             </div>
             <div
               class="float-label third tw-top-[56%] tw-opacity-0"
               @animationstart="handleAnimationStart"
             >
-              Developers
+              Transformación Digital y Desarrollo de Software
             </div>
           </div>
         </div>
@@ -193,8 +198,14 @@ const slide = ref(1)
           </div>
         </div>
       </div>
-      <div class="tw-hidden lg:tw-basis-1/2 lg:tw-flex tw-items-end tw-justify-center cluster-details-img tw-pb-20 ">
-        <CharacterLandingSVG filled class="tw-text-9xl lg:tw-text-[36rem] !tw-m-0"/>c
+      <div
+        class="tw-hidden lg:tw-basis-1/2 lg:tw-flex tw-items-end tw-justify-center cluster-details-img tw-pb-20"
+      >
+        <CharacterLandingSVG
+          filled
+          class="tw-text-9xl lg:tw-text-[36rem] !tw-m-0"
+        />
+        c
       </div>
     </div>
   </div>
@@ -203,17 +214,20 @@ const slide = ref(1)
     <h3
       class="tw-font-extralight tw-text-black tw-text-center tw-text-[30px] tw-py-10"
     >
-    De la mano de <b class="tw-font-bold"> expertos </b>en múltiples campos <b class="tw-font-bold">creativos</b>.
+      De la mano de
+      <b class="tw-font-bold">expertos</b>
+      en múltiples campos
+      <b class="tw-font-bold">creativos</b>
+      .
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />
     </div>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>
-        <CarouselPrevious class="lg:tw-left-[-5%]"/>
+        <CarouselPrevious class="lg:tw-left-[-5%]" />
         <CarouselContent>
-          <CarouselItem class=" lg:!tw-basis-1/3">
-  
+          <CarouselItem class="lg:!tw-basis-1/3">
             <CardSmallProfile
               id="project.id"
               name="CompanyName"
@@ -224,8 +238,7 @@ const slide = ref(1)
               price="47"
             />
           </CarouselItem>
-          <CarouselItem class=" lg:!tw-basis-1/3">
-  
+          <CarouselItem class="lg:!tw-basis-1/3">
             <CardSmallProfile
               id="project.id"
               name="CompanyName"
@@ -236,8 +249,7 @@ const slide = ref(1)
               price="47"
             />
           </CarouselItem>
-          <CarouselItem class=" lg:!tw-basis-1/3">
-  
+          <CarouselItem class="lg:!tw-basis-1/3">
             <CardSmallProfile
               id="project.id"
               name="CompanyName"
@@ -248,8 +260,7 @@ const slide = ref(1)
               price="47"
             />
           </CarouselItem>
-          <CarouselItem class=" lg:!tw-basis-1/3">
-  
+          <CarouselItem class="lg:!tw-basis-1/3">
             <CardSmallProfile
               id="project.id"
               name="CompanyName"
@@ -260,17 +271,14 @@ const slide = ref(1)
               price="47"
             />
           </CarouselItem>
-  
         </CarouselContent>
-        <CarouselNext class="lg:tw-right-[-5%]"/>
+        <CarouselNext class="lg:tw-right-[-5%]" />
       </Carousel>
     </div>
   </div>
 </template>
 
 <style scoped>
-
-
 .cluster-details-img {
   background-image: url('@/assets/images/cluster-details-bg.png');
   background-size: 100% 100%;

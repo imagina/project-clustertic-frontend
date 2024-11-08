@@ -157,7 +157,9 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
             Cluster ® is a registered Trademark of Cluster TIC (ABC 123 456
             789)
           </p>
-          <p class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight">
+          <p
+            class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight"
+          >
             Copyright © 2024 Cluster TIC (ABC 123 456 789)
           </p>
         </div>

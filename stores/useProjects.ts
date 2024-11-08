@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
 import type { Project } from '~/models/projects'
-import type { ProjectsState } from '~/models/stores'
+import type { NewProjectFormValue, ProjectsState } from '~/models/stores'
 
 export const useProjectsStore = defineStore('projects', {
   state: (): ProjectsState => ({
@@ -12,43 +12,33 @@ export const useProjectsStore = defineStore('projects', {
   }),
   getters: {},
   actions: {
-    async create(attributes: {
-      es: {
-        title: string
-        slug: string
-        description: string
-      }
-      min_price: number
-      max_price: number
-      status?: 0 | 1 | 2
-      categories: number[]
-
-      medias_single?: {
-        mainimage: number
-      }
-      medias_multi?: {
-        gallery: {
-          files: number[]
-        }
-      }
-      user_id?: any
-      country_id?: any
-      province_id?: any
-      city_id?: any
-    }) {
+    async create(attributes: NewProjectFormValue) {
       const config = useRuntimeConfig()
-      localStorage.removeItem('userToken')
-      attributes = { ...attributes, user_id: '' }
-      await $fetch(`${config.public.apiRoute}/api/ipin/v1/pins/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const auth = useAuthStore()
+
+      if (!auth.user) throw new Error('you need be logged')
+      attributes = {
+        ...attributes,
+        user_id: auth.user.id,
+        country_id: 48,
+        province_id: 721,
+        city_id: 956,
+      }
+      const response = await $fetch(
+        `${config.public.apiRoute}/api/ipin/v1/pins/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${auth.getToken}`,
+          },
+          body: { attributes },
         },
-        body: { attributes },
-      })
+      )
+
+      console.log(response)
     },
     async requestPage(page: number) {
-      debugger
       const config = useRuntimeConfig()
       if (this.page === page) return
       const auth = useAuthStore()
@@ -56,12 +46,12 @@ export const useProjectsStore = defineStore('projects', {
         `${config.public.apiRoute}/api/ipin/v1/pins/?page=${page}&include=categories`,
         {
           headers: {
-            Authorization: `${auth.token}`,
+            Authorization: `${auth.getToken}`,
           },
           method: 'GET',
         },
       )
-      debugger
+
       const loginResponse: Project[] = response.data
       this.page = page
     },

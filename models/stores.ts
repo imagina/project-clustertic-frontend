@@ -2,13 +2,13 @@ import type { Project } from './projects'
 import type { UserData } from './user'
 
 export interface AuthState {
-  username: string,
-  password: string,
+  username: string
+  password: string
   user: UserData | null
-  token: string 
+  token: string
   expiresIn: Date | null
   loading: boolean
-  facebookClientId: any,
+  facebookClientId: any
   googleClientId: any
 }
 export interface ProjectsState {
@@ -16,4 +16,29 @@ export interface ProjectsState {
   page: number
   filters: any
   loading: boolean
+}
+
+export interface NewProjectFormValue {
+  es: {
+    title: string
+    slug: string
+    description: string
+  }
+  min_price: number
+  max_price: number
+  status?: 0 | 1 | 2
+  categories: number[]
+
+  medias_single?: {
+    mainimage: number
+  }
+  medias_multi?: {
+    gallery: {
+      files: number[]
+    }
+  }
+  user_id?: any
+  country_id?: any
+  province_id?: any
+  city_id?: any
 }

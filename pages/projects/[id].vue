@@ -27,7 +27,6 @@ const proposalData = reactive<{
 
 async function sendProposal() {
   try {
-    debugger
     const validateRegister = await refForm.value.validate()
     if (!validateRegister) return
     // await store.login(auth);
