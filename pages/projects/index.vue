@@ -3,10 +3,13 @@ import { DollarSignIcon, CompassIcon } from 'lucide-vue-next'
 
 definePageMeta({
   layout: 'default',
+  middleware: 'auth',
 })
 
 const refForm: any = ref(null)
 const projectsStore = useProjectsStore()
+const page = computed(() => projectsStore.pagination.currentPage)
+const totalPages = computed(() => projectsStore.pagination.lastPage)
 
 const filters = reactive<{
   minPrice: string
@@ -119,7 +122,7 @@ async function filter() {
         </li>
       </ul>
       <div class="tw-flex tw-justify-center tw-mt-10">
-        <Paginator :btn-per-side="3" :current="7" />
+        <Paginator :pages="totalPages" :btn-per-side="3" :current="page" />
       </div>
     </section>
   </div>

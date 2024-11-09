@@ -93,7 +93,7 @@ export const useAuthStore = defineStore('auth', {
           type: params.type,
         }
         this.token = ''
-        apiAuth
+        apiCluster
           .post(requestUrl, requestParams)
           .then((response: any) => {
             if (response?.data) {
@@ -125,7 +125,7 @@ export const useAuthStore = defineStore('auth', {
     }): Promise<void> {
       try {
         this.loading = true
-        await apiAuth
+        await apiCluster
           .post(apiRoutes.authLogin, credentials)
           .then((response: any) => {
             if (response?.data) {
@@ -145,7 +145,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout() {
-      await apiAuth.get(apiRoutes.authLogout).then((response) => {
+      await apiCluster.get(apiRoutes.authLogout).then((response) => {
         this.clearToken()
       })
       Helper.redirectTo(routes.login)
@@ -172,7 +172,7 @@ export const useAuthStore = defineStore('auth', {
         },
       }
 
-      await apiAuth
+      await apiCluster
         .post(apiRoutes.authRegister, credentials)
         .then((response) => {
           //update store, and redirect
@@ -199,7 +199,7 @@ export const useAuthStore = defineStore('auth', {
           email: this.getUsername,
         },
       }
-      apiAuth
+      apiCluster
         .post(apiRoutes.changePassword, requestData, false)
         .then((response) => {
           Helper.redirectTo(routes.login)
@@ -219,7 +219,7 @@ export const useAuthStore = defineStore('auth', {
     /* reset password request */
     async resetPassword(dataForm: { username: string }) {
       this.clearToken()
-      apiAuth
+      apiCluster
         .post(apiRoutes.authReset, { attributes: dataForm })
         .then((response) => {
           Helper.redirectTo(routes.login)
@@ -254,7 +254,7 @@ export const useAuthStore = defineStore('auth', {
         userId: dataForm.userId,
         code: dataForm.token,
       }
-      apiAuth
+      apiCluster
         .post(apiRoutes.authResetComplete, dataRequest)
         .then((response) => {
           Helper.redirectTo(routes.login)

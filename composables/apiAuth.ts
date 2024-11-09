@@ -2,7 +2,7 @@ import { useAuthStore } from '@/stores/useAuth'
 /*
  Adds the Authorization token in evey api call
 */
-export const apiAuth = {
+export const apiCluster = {
   config: () => {
     const authStore = useAuthStore()
     const token = authStore.getToken
@@ -18,7 +18,7 @@ export const apiAuth = {
   },
 
   get: (url: string) => {
-    const config = apiAuth.config()
+    const config = apiCluster.config()
     return $fetch(`${config.url}${url}`, {
       headers: config.headers,
       method: 'GET',
@@ -27,7 +27,7 @@ export const apiAuth = {
 
   /**/
   post: (url: string, data?: {}, toSnakeCase = true) => {
-    const config = apiAuth.config()
+    const config = apiCluster.config()
     const body = toSnakeCase ? Helper.toSnakeCase(data) : data
     return $fetch(`${config.url}${url}`, {
       headers: config.headers,

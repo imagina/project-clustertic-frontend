@@ -8,10 +8,12 @@ import {
 const props = withDefaults(
   defineProps<{
     current?: number
+    pages: number
     btnPerSide?: number
   }>(),
   {
     btnPerSide: 2,
+    pages: 5,
     current: 3,
   },
 )
@@ -20,16 +22,29 @@ const range = computed(() => {
     end = props.current + props.btnPerSide
   return Array.from({ length: end - start + 1 }, (_, i) => i + start)
 })
+const instance = getCurrentInstance()
+const handleSelectPage = (page: number) => {
+  instance?.emit('onPageSelected', page)
+}
 </script>
 
 <template>
   <div class="paginator-container">
-    <Button variant="ghost" class="paginator-btn"><ChevronsLeftIcon /></Button>
-    <Button variant="ghost" class="paginator-btn"><ChevronLeftIcon /></Button>
+    <Button @click="handleSelectPage(1)" variant="ghost" class="paginator-btn">
+      <ChevronsLeftIcon />
+    </Button>
+    <Button
+      @click="handleSelectPage(props.current > 1 ? props.current - 1 : 1)"
+      variant="ghost"
+      class="paginator-btn"
+    >
+      <ChevronLeftIcon />
+    </Button>
     <div></div>
     <template v-for="n in range" :key="`paginator-btn-${n}`">
       <Button
-        v-if="n > 0"
+        v-if="0 < n && n <= props.pages"
+        @click="handleSelectPage(n)"
         type="button"
         variant="ghost"
         class="paginator-btn"
@@ -41,8 +56,24 @@ const range = computed(() => {
     </template>
 
     <div></div>
-    <Button variant="ghost" class="paginator-btn"><ChevronRightIcon /></Button>
-    <Button variant="ghost" class="paginator-btn"><ChevronsRightIcon /></Button>
+    <Button
+      @click="
+        handleSelectPage(
+          props.current < props.pages ? props.current + 1 : props.pages,
+        )
+      "
+      variant="ghost"
+      class="paginator-btn"
+    >
+      <ChevronRightIcon />
+    </Button>
+    <Button
+      @click="handleSelectPage(props.pages)"
+      variant="ghost"
+      class="paginator-btn"
+    >
+      <ChevronsRightIcon />
+    </Button>
   </div>
 </template>
 

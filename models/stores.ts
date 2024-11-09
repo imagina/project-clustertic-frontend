@@ -1,5 +1,6 @@
 import type { Project } from './projects'
 import type { UserData } from './user'
+import type { PaginationInfo } from './utils'
 
 export interface AuthState {
   username: string
@@ -13,7 +14,7 @@ export interface AuthState {
 }
 export interface ProjectsState {
   projects: Project[]
-  page: number
+  pagination: PaginationInfo
   filters: any
   loading: boolean
 }

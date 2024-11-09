@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia'
-import { Notify } from 'quasar'
-import type { Project } from '~/models/projects'
 import type { NewProjectFormValue, ProjectsState } from '~/models/stores'
+import type { PaginationInfo } from '~/models/utils'
 
+const apiRoutes = {
+  /* auth */
+  projects: '/api/ipin/v1/pins/',
+}
 export const useProjectsStore = defineStore('projects', {
   state: (): ProjectsState => ({
     projects: [],
-    page: 0,
+    pagination: {
+      total: 0,
+      lastPage: 1,
+      perPage: 12,
+      currentPage: 0,
+    },
     filters: {},
     loading: false,
   }),
@@ -15,6 +23,7 @@ export const useProjectsStore = defineStore('projects', {
     async create(attributes: NewProjectFormValue) {
       const config = useRuntimeConfig()
       const auth = useAuthStore()
+      debugger
 
       if (!auth.user) throw new Error('you need be logged')
       attributes = {
@@ -23,37 +32,30 @@ export const useProjectsStore = defineStore('projects', {
         country_id: 48,
         province_id: 721,
         city_id: 956,
+        status: 2,
       }
-      const response = await $fetch(
-        `${config.public.apiRoute}/api/ipin/v1/pins/`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${auth.getToken}`,
-          },
-          body: { attributes },
-        },
-      )
+      const response = await apiCluster.post(apiRoutes.projects, { attributes })
 
       console.log(response)
     },
     async requestPage(page: number) {
-      const config = useRuntimeConfig()
-      if (this.page === page) return
-      const auth = useAuthStore()
-      const response: any = await $fetch(
-        `${config.public.apiRoute}/api/ipin/v1/pins/?page=${page}&include=categories`,
-        {
-          headers: {
-            Authorization: `${auth.getToken}`,
-          },
-          method: 'GET',
-        },
-      )
+      debugger
+      if (this.pagination.currentPage === page) return
+      try {
+        const response: any = await apiCluster.get(
+          `${apiRoutes.projects}?page=${page}&include=categories`,
+        )
 
-      const loginResponse: Project[] = response.data
-      this.page = page
+        const metadata: {
+          page: PaginationInfo
+        } = response.meta
+
+        this.projects = response.data
+        this.pagination = metadata.page
+      } catch (error) {
+        debugger
+        console.error(error)
+      }
     },
   },
 })

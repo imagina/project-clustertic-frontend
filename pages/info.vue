@@ -2,7 +2,6 @@
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import CharacterLandingSVG from '~/assets/svg/character.svg'
 import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
-import ProjectsCarousel from '~/components/sections/projectsCarousel.vue'
 definePageMeta({
   layout: 'default',
 })
@@ -59,30 +58,6 @@ const slide = ref(1)
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
           <div class="tw-relative">
             <DeskLandingSVG filled class="tw-text-9xl lg:tw-text-[36rem]" />
-            <div
-              class="float-label tw-opacity-0 first add-shadow tw-top-[5px]"
-              @animationstart="handleAnimationStart"
-            >
-              Infraestructura TI y Conectividad
-            </div>
-            <div
-              class="float-label tw-opacity-0 second tw-top-[15%] md:tw-right-[8%] xl:tw-right-[-4%]"
-              @animationstart="handleAnimationStart"
-            >
-              Videojuegos, Realidad Aumentada y Virtual
-            </div>
-            <div
-              class="float-label tw-opacity-0 second tw-top-[35%] md:tw-left-[-8%] xl:tw-left-[-35%]"
-              @animationstart="handleAnimationStart"
-            >
-              Producción de Contenidos y Marketing Digital
-            </div>
-            <div
-              class="float-label tw-opacity-0 third tw-top-[56%] tw-left-[-30%]"
-              @animationstart="handleAnimationStart"
-            >
-              Transformación Digital y Desarrollo de Software
-            </div>
           </div>
         </div>
       </div>
@@ -210,8 +185,6 @@ const slide = ref(1)
       </div>
     </div>
   </div>
-
-  <ProjectsCarousel />
 </template>
 
 <style scoped>
@@ -220,26 +193,6 @@ const slide = ref(1)
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: right;
-}
-
-.float-label {
-  @apply tw-absolute tw-px-10  tw-py-2 tw-text-lg tw-rounded-lg tw-bg-white tw-animate-slide-down tw-text-muted-custom;
-  animation-duration: 1s;
-  &.add-shadow {
-    box-shadow: 30px 45px 50px 0px hsla(157, 47%, 67%, 0.57);
-  }
-  &.first {
-    animation-delay: 500ms;
-    transition: all 0.5s linear;
-  }
-  &.second {
-    animation-delay: 800ms;
-    transition: all 0.5s linear;
-  }
-  &.third {
-    animation-delay: 1.2s;
-    transition: all 0.5s linear;
-  }
 }
 
 :deep(.card-shadow) {
