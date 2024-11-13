@@ -35,7 +35,8 @@ const config = useRuntimeConfig()
 
 const { data, status, error, refresh, clear } = await useAsyncData(
   'categories',
-  () => $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
+  () =>
+    $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
       params: {
         page: page.value,
       },

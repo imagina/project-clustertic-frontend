@@ -132,7 +132,12 @@ function handleSelectProject(id: number) {
         </li>
       </ul>
       <div class="tw-flex tw-justify-center tw-mt-10">
-        <Paginator :pages="totalPages" :btn-per-side="3" :current="page" />
+        <Paginator
+          @on-page-selected="projectsStore.get"
+          :pages="totalPages"
+          :btn-per-side="3"
+          :current="page"
+        />
       </div>
     </section>
   </div>

@@ -17,14 +17,14 @@ const props = withDefaults(
     current: 3,
   },
 )
+const emit = defineEmits<{ (event: 'onPageSelected', payload: number): void }>()
 const range = computed(() => {
   let start = props.current - props.btnPerSide,
     end = props.current + props.btnPerSide
   return Array.from({ length: end - start + 1 }, (_, i) => i + start)
 })
-const instance = getCurrentInstance()
 const handleSelectPage = (page: number) => {
-  instance?.emit('onPageSelected', page)
+  emit('onPageSelected', page)
 }
 </script>
 

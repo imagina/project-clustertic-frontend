@@ -49,6 +49,7 @@ export const useProjectsStore = defineStore('projects', {
         const response: any = await apiCluster.get(apiRoutes.projects, {
           page: page,
           include: 'categories',
+          take: 2,
         })
         const metadata: {
           page: PaginationInfo
