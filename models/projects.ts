@@ -18,6 +18,10 @@ export interface ProjectTag {
   updatedAt: Date
   updatedBy: number
   url: string
+  pivot?: {
+    adId: number
+    categoryId: number
+  }
 }
 
 export interface Project {
@@ -58,6 +62,8 @@ export interface Project {
   uploadedAt: Date
   url: string
   userId: number
+
+  user?: UserInfo
 }
 
 export interface Proposal {
@@ -139,4 +145,25 @@ export interface MediasMulti {
 
 export interface Gallery {
   files: number[]
+}
+
+export interface UserInfo {
+  createdAt: Date
+  createdBy: number
+  deletedAt: null
+  deletedBy: null
+  email: string
+  firstName: string
+  id: number
+  isGuest: number
+  language: null
+  lastLogin: Date
+  lastName: string
+  organizationId: null
+  permissions: any[] | null
+  phone: null | string
+  timezone: null
+  updatedAt: Date
+  updatedBy: number
+  userName: null
 }

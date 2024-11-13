@@ -22,7 +22,11 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 })
 const onModelUpdate = (newValue: string | number | null) => {
   if (!newValue) newValue = ''
-  if (`${newValue}`.length > 0 && !/[a-zA-Z]/.test(`${newValue}`))
+  if (
+    `${newValue}`.length > 0 &&
+    /^-?[0-9.,]+$/.test(`${newValue}`) &&
+    newValue !== '-'
+  )
     newValue = parseFloat(`${newValue}`)
   emits('update:modelValue', newValue)
   modelValue.value = newValue

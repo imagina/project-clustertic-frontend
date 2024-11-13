@@ -32,10 +32,10 @@ definePageMeta({
 })
 const page = ref(1)
 const config = useRuntimeConfig()
+
 const { data, status, error, refresh, clear } = await useAsyncData(
   'categories',
-  () =>
-    $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
+  () => $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
       params: {
         page: page.value,
       },
@@ -44,14 +44,14 @@ const { data, status, error, refresh, clear } = await useAsyncData(
     watch: [page],
   },
 )
-console.log(data)
 const router = useRouter()
 const projectStore = useProjectsStore()
 const refForm: any = ref(null)
 const step = ref<number>(0)
 
 const categories = computed<ProjectTag[]>(() => {
-  return (<any>data.value).data
+  debugger
+  return (<any>data.value)?.data
 })
 
 const stepsTitles: any = ref([
@@ -230,7 +230,7 @@ async function create() {
     projectStore
       .create(dataToSend)
       .then((data) => {
-        router.push('/')
+        debugger
       })
       .catch((error) => {
         console.error(error)

@@ -31,7 +31,6 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         props.center ? 'input-center' : '',
       )
     "
-    filled
     v-model="modelValue"
   />
 </template>
@@ -40,8 +39,8 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 :deep(.q-field__control) {
   @apply !tw-rounded-2xl;
 }
-:deep(.q-field__label) {
-  @apply !tw-pl-2;
+:deep(span) {
+  @apply !tw-pl-4;
 }
 .input-center :deep(.q-field__native) {
   @apply tw-justify-center;

@@ -15,6 +15,7 @@ export interface AuthState {
 export interface ProjectsState {
   projects: Project[]
   pagination: PaginationInfo
+  selected: Project | null | undefined
   filters: any
   loading: boolean
 }
@@ -42,4 +43,17 @@ export interface NewProjectFormValue {
   country_id?: any
   province_id?: any
   city_id?: any
+}
+export interface NewProposalFormValue {
+  ad_id: number
+  description: string
+  amount: number
+  delivery_days: number
+  currency: 'USD' | 'COL'
+
+  medias_multi?: {
+    documents: {
+      files: number[]
+    }
+  }
 }

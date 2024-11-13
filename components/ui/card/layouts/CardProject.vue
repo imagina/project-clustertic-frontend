@@ -23,7 +23,7 @@ const props = defineProps<{
     </CardHeader>
     <CardContent>
       <div v-if="$slots.description" class="tw-relative">
-        <p class="tw-text-sm tw-line-clamp-3 tw-px-1">
+        <p class="tw-text-sm tw-line-clamp-3">
           <slot name="description" />
         </p>
 

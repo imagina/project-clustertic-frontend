@@ -1,18 +1,30 @@
 <script setup lang="ts">
-import { Paperclip } from 'lucide-vue-next'
+import {
+  Paperclip,
+  MapPinIcon,
+  FlagIcon,
+  UserIcon,
+  Clock9Icon,
+  IdCardIcon,
+  ShieldCheckIcon,
+  WalletIcon,
+  MailCheckIcon,
+  UserCheck2Icon,
+  PhoneIcon,
+} from 'lucide-vue-next'
+import type { Project, Proposal } from '~/models/projects'
+import type { NewProposalFormValue } from '~/models/stores'
+import { projectExample1 } from '~/utils/examples/project'
 
-const project = ref({
-  id: '154687623',
-  title: 'Modern Minimalistic Restaurant Website Design',
-  description:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic harum autem fuga maiores? Dolorum sapiente perspiciatis possimus! <br/>Perspiciatis quod ut natus eveniet soluta provident itaque beatae, laudantium quia inventore autem.',
-  open: true,
-  skills: ['PHP', 'HTML', 'Diseño de sitios web', 'Diseño gráfico', 'MySQL'],
-  currency: 'USD',
-})
+// const project = ref<Project>(projectExample1)
 const tab = ref('details')
 const refForm: any = ref()
 
+const projectsStore = useProjectsStore()
+
+const project = computed<Project>(
+  () => projectsStore.selected ?? projectExample1,
+)
 const proposalData = reactive<{
   amount: number
   days: number
@@ -25,11 +37,31 @@ const proposalData = reactive<{
   files: null,
 })
 
+onBeforeUnmount(() => {
+  projectsStore.removeSelected()
+})
+
 async function sendProposal() {
   try {
     const validateRegister = await refForm.value.validate()
     if (!validateRegister) return
+
     // await store.login(auth);
+    const data: NewProposalFormValue = {
+      ad_id: project.value.id,
+      amount: proposalData.amount,
+      currency: 'USD',
+      delivery_days: proposalData.days,
+      description: proposalData.description,
+    }
+    if (proposalData.files) {
+      //TODO: crear los archivos multimedia y enviar los id
+
+      data['medias_multi'] = {
+        documents: proposalData.files,
+      }
+    }
+    projectsStore.addProposal(data)
   } catch (erro) {
     console.log(erro)
   }
@@ -47,7 +79,7 @@ async function sendProposal() {
             <span
               class="tw-bg-primary tw-bg-opacity-50 tw-px-5 tw-py-1 tw-font-normal tw-rounded-md"
             >
-              {{ project.open ? 'Abierto' : 'Cerrado' }}
+              {{ project.status === 2 ? 'Abierto' : 'Cerrado' }}
             </span>
           </CardTitle>
         </CardHeader>
@@ -104,11 +136,11 @@ async function sendProposal() {
                 </CardTitle>
                 <ul class="tw-flex tw-flex-wrap">
                   <li
-                    v-for="(item, index) in project.skills"
+                    v-for="(item, index) in project.categories"
                     :key="`skill_${index}`"
                     class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min tw-mr-3 tw-mb-1"
                   >
-                    {{ item }}
+                    {{ item.title }}
                   </li>
                 </ul>
                 <p class="tw-mb-0 tw-text-xs tw-mt-5">
@@ -149,7 +181,9 @@ async function sendProposal() {
                         <template v-slot:prepend>$</template>
                         <template v-slot:append>
                           <span class="tw-text-sm">
-                            {{ project.currency }}
+                            {{
+                              'USD' /**TODO: colocar currency de cada projecto */
+                            }}
                           </span>
                         </template>
                         <template v-slot:hint>
@@ -251,11 +285,22 @@ async function sendProposal() {
 
           <q-tab-panel class="tw-p-0" name="proposal">
             <div class="tw-mb-10">
-              <CardProposal id="1" :rating="0"></CardProposal>
+              <CardProposal
+                v-for="proposal in project.bids"
+                :key="`proposal_${proposal.id}`"
+                id="1"
+                :rating="0"
+                :delivery-days="proposal.deliveryDays"
+                :amount="proposal.amount"
+              >
+                <template v-slot:description>
+                  {{ proposal.description }}
+                </template>
+              </CardProposal>
             </div>
 
             <div class="tw-flex tw-justify-center tw-mt-10">
-              <Paginator :btn-per-side="3" :current="7" />
+              <Paginator :pages="1" :btn-per-side="3" :current="7" />
             </div>
           </q-tab-panel>
         </q-tab-panels>
@@ -264,16 +309,84 @@ async function sendProposal() {
         <div
           class="tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6 tw-ml-5"
         >
-          <h2 class="tw-text-xl tw-font-bold tw-mb-8">Filtros</h2>
-          <q-form>
-            <div class="tw-mb-5 tw-flex">
-              <h4
-                class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
-              >
-                Precio
-              </h4>
-            </div>
-          </q-form>
+          <h2 class="tw-text-xl tw-font-bold tw-mb-8">Acerca del Cliente</h2>
+
+          <div class="tw-flex tw-mb-4">
+            <MapPinIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>ibague</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <FlagIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>Miembro</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <UserIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <RatingIndicator starClass="tw-text-lg tw-mr-1" :rating="4" />
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <Clock9Icon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>Miembro desde 19 de Septiembre de 2024</p>
+          </div>
+          <h4
+            class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1 tw-mt-8 tw-mb-5"
+          >
+            Verificación del cliente
+          </h4>
+
+          <div class="tw-flex tw-mb-4">
+            <IdCardIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <ShieldCheckIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <WalletIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <MailCheckIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <UserCheck2Icon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
+          <div class="tw-flex tw-mb-4">
+            <PhoneIcon
+              class="tw-text-primary tw-inline-block tw-mr-3"
+              :size="20"
+            />
+            <p>xxx-xxx</p>
+          </div>
         </div>
       </aside>
     </div>

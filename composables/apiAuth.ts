@@ -17,22 +17,45 @@ export const apiCluster = {
     return { url, headers }
   },
 
-  get: (url: string) => {
+  get: (url: string, params = {}) => {
     const config = apiCluster.config()
     return $fetch(`${config.url}${url}`, {
       headers: config.headers,
+      params: params,
       method: 'GET',
     })
   },
 
   /**/
-  post: (url: string, data?: {}, toSnakeCase = true) => {
+  post: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
     const config = apiCluster.config()
     const body = toSnakeCase ? Helper.toSnakeCase(data) : data
     return $fetch(`${config.url}${url}`, {
       headers: config.headers,
       method: 'POST',
       body,
+      params: params,
+    })
+  },
+
+  patch: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
+    const config = apiCluster.config()
+    const body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    return $fetch(`${config.url}${url}`, {
+      headers: config.headers,
+      method: 'PATCH',
+      body,
+      params: params,
+    })
+  },
+  delete: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
+    const config = apiCluster.config()
+    const body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    return $fetch(`${config.url}${url}`, {
+      headers: config.headers,
+      method: 'DELETE',
+      body,
+      params: params,
     })
   },
 }

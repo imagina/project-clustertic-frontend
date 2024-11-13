@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { DollarSignIcon, CompassIcon } from 'lucide-vue-next'
+import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 
 definePageMeta({
   layout: 'default',
-  middleware: 'auth',
 })
 
 const refForm: any = ref(null)
 const projectsStore = useProjectsStore()
 const page = computed(() => projectsStore.pagination.currentPage)
 const totalPages = computed(() => projectsStore.pagination.lastPage)
+const perPage = computed(() => projectsStore.pagination.perPage)
 
 const filters = reactive<{
   minPrice: string
@@ -18,9 +19,8 @@ const filters = reactive<{
   minPrice: '',
   maxPrice: '',
 })
-
 onMounted(() => {
-  projectsStore.requestPage(1)
+  projectsStore.get(1)
 })
 
 async function filter() {
@@ -32,10 +32,18 @@ async function filter() {
     console.log(erro)
   }
 }
+
+function handleSelectProject(id: number) {
+  debugger
+  projectsStore.viewDetails(id)
+}
 </script>
 <template>
   <SearchProject class="tw-mt-20" />
-  <div class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16">
+  <LoadingScreen :loading="projectsStore.loading" />
+  <div
+    class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16 tw-relative"
+  >
     <aside class="tw-basis-80 tw-px-5">
       <div
         class="filters-form tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
@@ -97,16 +105,18 @@ async function filter() {
               <CardTitle class="tw-font-extrabold">
                 Top results
                 <span class="tw-font-normal tw-text-base tw-ml-5">
-                  1 - 20 of 164 results
+                  Página {{ page }} de {{ totalPages }}
                 </span>
               </CardTitle>
             </CardHeader>
           </Card>
         </li>
-        <li>
+        <li
+          v-for="project in projectsStore.projects"
+          :key="`project-card=${project.id}`"
+          @click="handleSelectProject(project.id)"
+        >
           <CardProject
-            v-for="project in projectsStore.projects"
-            :key="`project-card=${project.id}`"
             :id="project.id"
             :rating="4.5"
             :skills="project.categories?.map((cat) => cat.title) ?? []"

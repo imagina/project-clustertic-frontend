@@ -11,7 +11,8 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
   id: string
   rating?: number
-  skills?: string[]
+  amount?: number
+  deliveryDays?: number
 }>()
 </script>
 
@@ -19,7 +20,7 @@ const props = defineProps<{
   <slot name="before"></slot>
 </template> -->
 <template>
-  <Card :class="cn(props.class)">
+  <Card :class="cn(props.class, 'tw-mb-2')">
     <div class="tw-p-5">
       <div class="tw-flex tw-mb-10">
         <div class="user-img tw-rounded tw-w-20 tw-h-20 tw-bg-secondary">
@@ -34,7 +35,9 @@ const props = defineProps<{
               </span>
             </CardTitle>
             <div class="tw-grow"></div>
-            <p class="tw-font-bold tw-text-xl tw-mb-0">$500 USD</p>
+            <p class="tw-font-bold tw-text-xl tw-mb-0">
+              ${{ props.amount }} USD
+            </p>
           </div>
           <div class="tw-flex tw-gap-3 tw-mb-1">
             <div class="tw-flex">
@@ -69,7 +72,7 @@ const props = defineProps<{
               <p>50</p>
             </div>
             <div class="tw-grow"></div>
-            <p>En 3 Dia(s)</p>
+            <p>En {{ props.deliveryDays }} Dia(s)</p>
           </div>
           <p class="tw-text-base tw-font-semibold">
             <slot name="subtitle">
