@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
-import CharacterLandingSVG from '~/assets/svg/character.svg'
+import CharacterLandingSVG from '~/assets/svg/character-landing.svg'
 import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
 import ProjectsCarousel from '~/components/sections/projectsCarousel.vue'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
