@@ -4,7 +4,7 @@ export const Helper = {
     fechaString?: string | null,
     formato: string = 'YYYY-MM-DD HH:mm:ss',
   ) => {
-    if (!fechaString) return null
+    if (!fechaString) return new Date()
     const separadores = formato.match(/[^A-Za-z]/g) || []
     const partesFechaHora = fechaString.split(
       new RegExp(

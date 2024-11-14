@@ -26,7 +26,16 @@ export const useProjectsStore = defineStore('projects', {
   actions: {
     async create(attributes: NewProjectFormValue) {
       const auth = useAuthStore()
-      if (!auth.user) throw new Error('you need be logged')
+      if (!auth.user) {
+        Notify.create({
+          message: 'Debes Ingresar para poder crear un proyecto',
+          type: 'negative',
+        })
+        throw new Error('you need be logged')
+      }
+      const files = attributes.files
+      delete attributes.files
+
       attributes = {
         ...attributes,
         user_id: auth.user.id,
@@ -34,6 +43,30 @@ export const useProjectsStore = defineStore('projects', {
         province_id: 721,
         city_id: 956,
         status: 2,
+      }
+      if (files && files.length > 0) {
+        attributes.medias_multi = {
+          gallery: {
+            files: [],
+          },
+        }
+        for (const fileIndex in files) {
+          const formData = new FormData()
+          formData.append('disk', 's3')
+          formData.append('parent_id', '0')
+          formData.append('file', files[fileIndex])
+          const { data: dataMedia }: any = await apiCluster.post(
+            '/api/imedia/v1/files',
+            formData,
+          )
+          if (fileIndex === '0') {
+            attributes.medias_single = {
+              mainimage: dataMedia.id,
+            }
+          } else {
+            attributes.medias_multi.gallery.files.push(dataMedia.id)
+          }
+        }
       }
       const response: any = await apiCluster.post(apiRoutes.projects, {
         attributes,
@@ -65,7 +98,6 @@ export const useProjectsStore = defineStore('projects', {
     },
 
     async viewDetails(id: number) {
-      debugger
       try {
         const filtros = {
           order: {
@@ -78,7 +110,7 @@ export const useProjectsStore = defineStore('projects', {
         const projectResponse: any = await apiCluster.get(
           `${apiRoutes.projects}/${id}`,
           {
-            include: 'categories,user',
+            include: 'categories,user,province,country,city',
           },
         )
         const proposalResponse: any = await apiCluster.get(
@@ -106,9 +138,14 @@ export const useProjectsStore = defineStore('projects', {
     async addProposal(attributes: NewProposalFormValue) {
       const config = useRuntimeConfig()
       const auth = useAuthStore()
-      debugger
 
-      if (!auth.user) throw new Error('you need be logged')
+      if (!auth.user) {
+        Notify.create({
+          message: 'Debes Ingresar para poder crear una propuesta',
+          type: 'negative',
+        })
+        throw new Error('you need be logged')
+      }
       try {
         const response: any = await apiCluster.post(apiRoutes.proposals, {
           attributes,
@@ -118,6 +155,11 @@ export const useProjectsStore = defineStore('projects', {
           bids.unshift(response.data)
           this.selected.bids = bids
         }
+
+        Notify.create({
+          message: 'Se ha enviado la propuesta exitosamente',
+          type: 'positive',
+        })
         console.log(response)
       } catch (error) {
         console.error(error)

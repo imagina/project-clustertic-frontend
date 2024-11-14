@@ -51,7 +51,6 @@ const refForm: any = ref(null)
 const step = ref<number>(0)
 
 const categories = computed<ProjectTag[]>(() => {
-  debugger
   return (<any>data.value)?.data
 })
 
@@ -212,6 +211,9 @@ async function create() {
   try {
     const validateForm = await refForm.value.validate()
     if (!validateForm) return
+
+    let mainFile
+    const multimedia = []
     const dataToSend: NewProjectFormValue = {
       es: {
         title: projectData.name,
@@ -228,11 +230,12 @@ async function create() {
           : projectData.rangePrice.max) ?? 0,
       categories: projectData.skills.map((skill) => skill.id),
     }
+    if (projectData.files && projectData.files.length > 0) {
+      dataToSend.files = projectData.files
+    }
     projectStore
       .create(dataToSend)
-      .then((data) => {
-        debugger
-      })
+      .then((data) => {})
       .catch((error) => {
         console.error(error)
       })

@@ -68,7 +68,7 @@ const slide = ref(1)
               Infraestructura TI y Conectividad
             </div>
             <div
-              class="float-label tw-opacity-0 second tw-top-[15%] md:tw-right-[8%] xl:tw-right-[-4%]"
+              class="float-label tw-opacity-0 second tw-top-[25%] md:tw-right-[8%] xl:tw-right-[-4%]"
               @animationstart="handleAnimationStart"
             >
               Videojuegos, Realidad Aumentada y Virtual

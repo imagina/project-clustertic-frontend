@@ -34,7 +34,6 @@ async function filter() {
 }
 
 function handleSelectProject(id: number) {
-  debugger
   projectsStore.viewDetails(id)
 }
 </script>

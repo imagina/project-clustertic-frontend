@@ -12,6 +12,7 @@ import {
   UserCheck2Icon,
   PhoneIcon,
 } from 'lucide-vue-next'
+import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 import type { Project, Proposal } from '~/models/projects'
 import type { NewProposalFormValue } from '~/models/stores'
 import { projectExample1 } from '~/utils/examples/project'
@@ -21,10 +22,20 @@ const tab = ref('details')
 const refForm: any = ref()
 
 const projectsStore = useProjectsStore()
+const route = useRoute()
 
 const project = computed<Project>(
   () => projectsStore.selected ?? projectExample1,
 )
+
+const memberSince = computed<Date>(() => {
+  if (!projectsStore.selected?.user || !projectsStore.selected.user?.createdAt)
+    return new Date()
+  return typeof projectsStore.selected.user?.createdAt == typeof ''
+    ? Helper.parseStringToDate(<string>projectsStore.selected.user?.createdAt)
+    : <Date>projectsStore.selected.user?.createdAt
+})
+
 const proposalData = reactive<{
   amount: number
   days: number
@@ -37,6 +48,14 @@ const proposalData = reactive<{
   files: null,
 })
 
+onMounted(() => {
+  if (
+    !projectsStore.selected ||
+    `${projectsStore.selected.id}` !== `${route.params.id}`
+  ) {
+    projectsStore.viewDetails(parseInt(`${route.params.id}`))
+  }
+})
 onBeforeUnmount(() => {
   projectsStore.removeSelected()
 })
@@ -69,6 +88,7 @@ async function sendProposal() {
 </script>
 
 <template>
+  <LoadingScreen :loading="projectsStore.loading" />
   <SearchProject class="tw-mt-20" />
   <div class="tw-container tw-px-20 tw-mt-10">
     <div class="tw-flex tw-mb-5">
@@ -92,7 +112,7 @@ async function sendProposal() {
                 Ofertas
               </p>
               <p class="tw-text-2xl tw-font-semibold tw-mb-0 tw-text-center">
-                146
+                {{ project.bids?.length ?? 0 }}
               </p>
             </div>
             <div class="">
@@ -100,7 +120,7 @@ async function sendProposal() {
                 Ofertas media
               </p>
               <p class="tw-text-2xl tw-font-semibold tw-mb-0 tw-text-center">
-                $ 146 USD
+                $ {{ project.defaultPrice ?? 0 }} USD
               </p>
             </div>
           </div>
@@ -299,9 +319,9 @@ async function sendProposal() {
               </CardProposal>
             </div>
 
-            <div class="tw-flex tw-justify-center tw-mt-10">
+            <!-- <div class="tw-flex tw-justify-center tw-mt-10">
               <Paginator :pages="1" :btn-per-side="3" :current="7" />
-            </div>
+            </div> -->
           </q-tab-panel>
         </q-tab-panels>
       </div>
@@ -316,14 +336,14 @@ async function sendProposal() {
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>ibague</p>
+            <p>{{ project.city?.name }}</p>
           </div>
           <div class="tw-flex tw-mb-4">
             <FlagIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>Miembro</p>
+            <p>{{ project.country?.name }}</p>
           </div>
           <div class="tw-flex tw-mb-4">
             <UserIcon
@@ -337,7 +357,11 @@ async function sendProposal() {
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>Miembro desde 19 de Septiembre de 2024</p>
+            <p>
+              Miembro desde el {{ memberSince.getDate() }}/{{
+                memberSince.getMonth() + 1
+              }}/{{ memberSince.getFullYear() }}
+            </p>
           </div>
           <h4
             class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1 tw-mt-8 tw-mb-5"

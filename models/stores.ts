@@ -43,6 +43,7 @@ export interface NewProjectFormValue {
   country_id?: any
   province_id?: any
   city_id?: any
+  files?: FileList
 }
 export interface NewProposalFormValue {
   ad_id: number

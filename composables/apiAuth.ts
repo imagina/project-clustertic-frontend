@@ -27,7 +27,12 @@ export const apiCluster = {
   },
 
   /**/
-  post: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
+  post: (
+    url: string,
+    data?: {} | FormData,
+    toSnakeCase = true,
+    params = {},
+  ) => {
     const config = apiCluster.config()
     const body = toSnakeCase ? Helper.toSnakeCase(data) : data
     return $fetch(`${config.url}${url}`, {

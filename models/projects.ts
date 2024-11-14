@@ -1,3 +1,5 @@
+import type { City, Country, Province } from './locations'
+
 export interface ProjectTag {
   createdAt: Date
   createdBy: number
@@ -29,7 +31,9 @@ export interface Project {
   categories?: ProjectTag[]
   checked: string
   cityId: number
+  city?: City
   countryId: number
+  country?: Country
   createdAt: Date
   createdBy: number
   defaultPrice: number
@@ -52,6 +56,7 @@ export interface Project {
   options: null
   organizationId: null
   provinceId: number
+  province?: Province
   slug: string
   sortOrder: number
   status: number
@@ -148,7 +153,7 @@ export interface Gallery {
 }
 
 export interface UserInfo {
-  createdAt: Date
+  createdAt: Date | string
   createdBy: number
   deletedAt: null
   deletedBy: null
@@ -157,13 +162,52 @@ export interface UserInfo {
   id: number
   isGuest: number
   language: null
-  lastLogin: Date
+  lastLogin: Date | string
   lastName: string
   organizationId: null
   permissions: any[] | null
   phone: null | string
   timezone: null
-  updatedAt: Date
+  updatedAt: Date | string
   updatedBy: number
   userName: null
+}
+export interface MediaData {
+  id: number
+  filename: string
+  mimeType: string
+  fileSize: number
+  path: string
+  relativePath: string
+  isImage: boolean
+  isVideo: boolean
+  isFolder: boolean
+  mediaType: string
+  folderId: string
+  description: null
+  alt: null
+  keywords: null
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+  faIcon: string
+  disk: string
+  extension: string
+  url: string
+  tags: any[]
+  thumbnails: Thumbnail[]
+  smallThumb: string
+  relativeSmallThumb: string
+  mediumThumb: string
+  relativeMediumThumb: string
+  largeThumb: string
+  relativeLargeThumb: string
+  extraLargeThumb: string
+  relativeExtraLargeThumb: string
+}
+
+export interface Thumbnail {
+  name: string
+  path: string
+  size: string
 }
