@@ -142,6 +142,8 @@ export const useAuthStore = defineStore('auth', {
           message: msg,
           type: 'negative',
         })
+      } finally {
+        this.loading = false
       }
     },
     async logout() {
