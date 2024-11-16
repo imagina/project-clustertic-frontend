@@ -7,11 +7,10 @@ import {
   LogInIcon,
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
-import { cn } from '~/lib/utils'
 import type { UserData } from '~/models/user'
 const { locale } = useI18n()
 
-const authStore: any = useAuthStore()
+const authStore = useAuthStore()
 const user = computed<UserData | null>(() => authStore.user)
 </script>
 
@@ -35,11 +34,9 @@ const user = computed<UserData | null>(() => authStore.user)
         <ul
           class="tw-hidden md:tw-flex tw-flex-wrap"
           :class="
-            cn(
-              !user
-                ? ' tw-justify-end'
-                : 'tw-flex-row-reverse tw-justify-start',
-            )
+            !authStore.user
+              ? ' tw-justify-end'
+              : 'tw-flex-row-reverse tw-justify-start'
           "
         >
           <li v-if="user">

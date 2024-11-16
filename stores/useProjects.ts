@@ -44,28 +44,25 @@ export const useProjectsStore = defineStore('projects', {
         city_id: 956,
         status: 2,
       }
+      debugger
       if (files && files.length > 0) {
         attributes.medias_multi = {
-          gallery: {
+          documents: {
             files: [],
           },
         }
-        for (const fileIndex in files) {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i]
           const formData = new FormData()
           formData.append('disk', 's3')
           formData.append('parent_id', '0')
-          formData.append('file', files[fileIndex])
+          formData.append('file', file)
           const { data: dataMedia }: any = await apiCluster.post(
             '/api/imedia/v1/files',
             formData,
+            false,
           )
-          if (fileIndex === '0') {
-            attributes.medias_single = {
-              mainimage: dataMedia.id,
-            }
-          } else {
-            attributes.medias_multi.gallery.files.push(dataMedia.id)
-          }
+          attributes.medias_multi.documents?.files.push(dataMedia.id)
         }
       }
       const response: any = await apiCluster.post(apiRoutes.projects, {
@@ -136,6 +133,7 @@ export const useProjectsStore = defineStore('projects', {
     },
 
     async addProposal(attributes: NewProposalFormValue) {
+      debugger
       const config = useRuntimeConfig()
       const auth = useAuthStore()
 
@@ -147,6 +145,26 @@ export const useProjectsStore = defineStore('projects', {
         throw new Error('you need be logged')
       }
       try {
+        const files = attributes.files
+        delete attributes.files
+        if (files && files.length > 0) {
+          attributes.medias_multi = {
+            documents: {
+              files: [],
+            },
+          }
+          for (let i = 0; i < files.length; i++) {
+            const formData = new FormData()
+            formData.append('disk', 's3')
+            formData.append('parent_id', '0')
+            formData.append('file', files[i])
+            const { data: dataMedia }: any = await apiCluster.post(
+              '/api/imedia/v1/files',
+              formData,
+            )
+            attributes.medias_multi.documents?.files.push(dataMedia.id)
+          }
+        }
         const response: any = await apiCluster.post(apiRoutes.proposals, {
           attributes,
         })

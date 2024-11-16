@@ -10,6 +10,7 @@ const apiRoutes = {
   /* auth */
   authLogin: '/api/profile/v1/auth/login',
   authLogout: '/api/profile/v1/auth/logout',
+  authMe: '/api/profile/v1/auth/me',
   authRegister: '/api/profile/v1/users/register',
   authLoginSocialNetwork: '/api/profile/v1/auth/social',
   authReset: '/api/profile/v1/auth/reset',
@@ -22,6 +23,7 @@ const apiRoutes = {
 const routes = {
   home: '/',
   login: '/auth/login',
+  users: '/api/profile/v1/users',
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -173,20 +175,30 @@ export const useAuthStore = defineStore('auth', {
           language: navigator.language || navigator.userLanguage,
         },
       }
+      try {
+        await apiCluster
+          .post(apiRoutes.authRegister, credentials)
+          .then((response) => {
+            //update store, and redirect
+            this.username = dataForm.email
+            this.password = dataForm.password
 
-      await apiCluster
-        .post(apiRoutes.authRegister, credentials)
-        .then((response) => {
-          //update store, and redirect
-          this.username = dataForm.email
-          this.password = dataForm.password
-
-          Helper.redirectTo(routes.login)
-          Notify.create({
-            message: '¡Usuario creado! Ahora puedes iniciar sesión.',
-            type: 'positive',
+            Helper.redirectTo(routes.login)
+            Notify.create({
+              message: '¡Usuario creado! Ahora puedes iniciar sesión.',
+              type: 'positive',
+            })
           })
+      } catch (error: any) {
+        console.error('Login failed:', error)
+        let msg = 'Algo salio mal en el login'
+        if (error.data.errors) msg = 'Correo no disponible'
+
+        Notify.create({
+          message: msg,
+          type: 'negative',
         })
+      }
     },
 
     /* change the password form admin/changePassword */
@@ -218,6 +230,20 @@ export const useAuthStore = defineStore('auth', {
         })
     },
 
+    /* reset password request */
+    async refreshSession() {
+      try {
+        const response: any = await apiCluster.get(apiRoutes.authMe)
+        this.user = response.data.userData
+        this.expiresIn = Helper.parseStringToDate(
+          localStorage.getItem('expiresIn'),
+        )
+        this.token = localStorage.getItem('userToken') ?? ''
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+    },
     /* reset password request */
     async resetPassword(dataForm: { username: string }) {
       this.clearToken()
@@ -308,6 +334,30 @@ export const useAuthStore = defineStore('auth', {
           }
         },
       )
+    },
+
+    //user edit
+    async changeProfileImage(img: File) {
+      if (!this.user) throw Error('you must be logged')
+      const formData = new FormData()
+      formData.append('disk', 's3')
+      formData.append('parent_id', '0')
+      formData.append('file', img)
+      const { data: dataMedia }: any = await apiCluster.post(
+        '/api/imedia/v1/files',
+        formData,
+      )
+      const body = {
+        'attributes[id]': this.user?.id,
+        'attributes[is_activated]': 1,
+        'attributes[medias_single][profile]': dataMedia.id,
+      }
+
+      await apiCluster
+        .put(routes.users + `/${this.user?.id}`, {}, false, body)
+        .then((response) => {
+          this.refreshSession()
+        })
     },
   },
 })

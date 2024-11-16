@@ -35,7 +35,10 @@ export interface NewProjectFormValue {
     mainimage: number
   }
   medias_multi?: {
-    gallery: {
+    gallery?: {
+      files: number[]
+    }
+    documents?: {
       files: number[]
     }
   }
@@ -53,8 +56,10 @@ export interface NewProposalFormValue {
   currency: 'USD' | 'COL'
 
   medias_multi?: {
-    documents: {
+    documents?: {
       files: number[]
     }
   }
+
+  files?: FileList
 }

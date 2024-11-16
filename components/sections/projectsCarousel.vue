@@ -10,9 +10,6 @@
       <b class="tw-font-bold">creativos</b>
       .
     </h3>
-    <div class="tw-flex tw-justify-center tw-w-full">
-      <PlayIcon style="transform: rotate(90deg)" />
-    </div>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>
         <CarouselPrevious class="lg:tw-left-[-5%]" />

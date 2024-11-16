@@ -34,21 +34,57 @@ export const apiCluster = {
     params = {},
   ) => {
     const config = apiCluster.config()
-    const body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    let body: {} | FormData | undefined = {}
+    let headers = { ...config.headers }
+    if (data instanceof FormData) {
+      body = data
+      delete headers['Content-Type']
+    } else {
+      body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    }
     return $fetch(`${config.url}${url}`, {
-      headers: config.headers,
+      headers,
       method: 'POST',
       body,
       params: params,
     })
   },
 
-  patch: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
+  patch: (
+    url: string,
+    data?: {} | FormData,
+    toSnakeCase = true,
+    params = {},
+  ) => {
     const config = apiCluster.config()
-    const body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    let body: {} | FormData | undefined = {}
+    let headers = { ...config.headers }
+    if (data instanceof FormData) {
+      body = data
+      delete headers['Content-Type']
+    } else {
+      body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    }
     return $fetch(`${config.url}${url}`, {
-      headers: config.headers,
+      headers: headers,
       method: 'PATCH',
+      body,
+      params: params,
+    })
+  },
+  put: (url: string, data?: {} | FormData, toSnakeCase = true, params = {}) => {
+    const config = apiCluster.config()
+    let body: {} | FormData | undefined = {}
+    let headers = { ...config.headers }
+    if (data instanceof FormData) {
+      body = data
+      delete headers['Content-Type']
+    } else {
+      body = toSnakeCase ? Helper.toSnakeCase(data) : data
+    }
+    return $fetch(`${config.url}${url}`, {
+      headers: headers,
+      method: 'PUT',
       body,
       params: params,
     })

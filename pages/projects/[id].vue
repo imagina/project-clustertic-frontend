@@ -73,12 +73,11 @@ async function sendProposal() {
       delivery_days: proposalData.days,
       description: proposalData.description,
     }
+    debugger
     if (proposalData.files) {
       //TODO: crear los archivos multimedia y enviar los id
 
-      data['medias_multi'] = {
-        documents: proposalData.files,
-      }
+      data.files = proposalData.files
     }
     projectsStore.addProposal(data)
   } catch (erro) {
@@ -214,7 +213,7 @@ async function sendProposal() {
                               ((proposalData.amount ?? 0) * 0.05).toFixed(2)
                             }}
                             tarifa = ${{
-                              ((proposalData.amount ?? 0) * 1.95).toFixed(2)
+                              ((proposalData.amount ?? 0) * 0.95).toFixed(2)
                             }}
                           </p>
                         </template>

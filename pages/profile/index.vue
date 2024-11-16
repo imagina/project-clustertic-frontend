@@ -3,6 +3,8 @@ import { MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
+import ProfileEdit from '~/components/modals/ProfileEdit.vue'
+import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
 definePageMeta({
   middleware: 'auth',
 })
@@ -11,7 +13,8 @@ const auth = useAuthStore()
 
 const user = computed(() => auth.user)
 
-const show_modal = ref(false)
+const show_modal_editSkills = ref(false)
+const show_modal_editPhoto = ref(false)
 </script>
 
 <template>
@@ -23,9 +26,12 @@ const show_modal = ref(false)
           <div class="img-container">
             <div
               class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
-              :style="{ backgroundImage: `url(${user?.mediumImage})` }"
+              :style="{
+                backgroundImage: `url(${user?.mediaFiles.profile.path ?? user?.mediumImage})`,
+              }"
             ></div>
             <Button
+              @click="show_modal_editPhoto = true"
               type="button"
               variant="outline"
               class="tw-border-none profile-btn !tw-p-3"
@@ -58,7 +64,7 @@ const show_modal = ref(false)
           <ShareSVG filled class="tw-text-xl" />
         </Button>
         <Button
-          @click="show_modal = true"
+          @click="show_modal_editSkills = true"
           type="button"
           variant="outline"
           class="tw-border-none profile-btn"
@@ -239,7 +245,10 @@ const show_modal = ref(false)
       </div>
     </div>
   </div>
-  <ProfileEdit v-model="show_modal"></ProfileEdit>
+  <ProfileEdit v-model="show_modal_editSkills"></ProfileEdit>
+  <ProfileChangeProfileImage
+    v-model="show_modal_editPhoto"
+  ></ProfileChangeProfileImage>
 </template>
 
 <style lang="css" scoped>
