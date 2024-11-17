@@ -142,4 +142,22 @@ export const Helper = {
     const router = useRouter()
     router.push(route)
   },
+
+  toggleItem<T>(list: T[], item: T, searchField?: string): T[] {
+    list = [...list]
+    const itemIndex = list.findIndex((listItem) => {
+      if (!searchField) return listItem === item
+      else
+        return (
+          (<Record<string, any>>listItem)[searchField] ===
+          (<Record<string, any>>listItem)[searchField]
+        )
+    })
+    if (itemIndex >= 0) {
+      list.splice(itemIndex, 1)
+    } else {
+      list.push(item)
+    }
+    return list
+  },
 }

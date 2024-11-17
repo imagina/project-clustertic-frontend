@@ -33,15 +33,19 @@ export const useProjectsStore = defineStore('projects', {
       search?: string
       minPrice?: number
       maxPrice?: number
+      categories?: number[]
     }) {
       if (typeof filters.search === 'string')
         this.filters['search'] = filters.search ?? undefined
       if (typeof filters.minPrice === 'number')
-        this.filters['search'] =
+        this.filters['minPrice'] =
           filters.minPrice > 0 ? filters.minPrice : undefined
       if (typeof filters.maxPrice === 'number')
-        this.filters['search'] =
+        this.filters['maxPrice'] =
           filters.maxPrice < 100000000 ? filters.maxPrice : undefined
+      if (Array.isArray(filters.categories))
+        this.filters['categories'] =
+          filters.categories.length > 0 ? filters.categories : undefined
     },
     async create(attributes: NewProjectFormValue) {
       const auth = useAuthStore()
@@ -63,7 +67,7 @@ export const useProjectsStore = defineStore('projects', {
         city_id: 956,
         status: 2,
       }
-      debugger
+
       if (files && files.length > 0) {
         attributes.medias_multi = {
           documents: {
@@ -87,16 +91,17 @@ export const useProjectsStore = defineStore('projects', {
       const response: any = await apiCluster.post(apiRoutes.projects, {
         attributes,
       })
-      this.get(1, true)
+      this.get(1)
       Helper.redirectTo(`/projects`)
       return response
     },
-    async get(page: number, force?: boolean) {
+    async get(page: number, take: number = 10) {
       // if (this.pagination.currentPage === page && !force) return
       try {
         this.loading = true
         const response: any = await apiCluster.get(apiRoutes.projects, {
-          page: page,
+          page,
+          take,
           include: 'categories',
           filter: JSON.stringify(this.filters),
         })
@@ -152,7 +157,6 @@ export const useProjectsStore = defineStore('projects', {
     },
 
     async addProposal(attributes: NewProposalFormValue) {
-      debugger
       const config = useRuntimeConfig()
       const auth = useAuthStore()
 

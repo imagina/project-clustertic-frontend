@@ -24,7 +24,6 @@ const dataToSave = reactive<{
 })
 
 async function sendProposal() {
-  debugger
   try {
     const is_valid = await refForm.value.validate()
     if (!is_valid) return

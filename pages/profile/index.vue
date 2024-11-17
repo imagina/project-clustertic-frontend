@@ -59,6 +59,14 @@ const show_modal_editPhoto = ref(false)
         <Button
           type="button"
           variant="outline"
+          @click="auth.logout"
+          class="tw-border-none profile-btn"
+        >
+          Log Out
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
           class="tw-border-none profile-btn"
         >
           <ShareSVG filled class="tw-text-xl" />

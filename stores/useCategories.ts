@@ -30,12 +30,13 @@ export const useCategoryStore = defineStore('categories', {
       if (typeof filters.search === 'string')
         this.filters['search'] = filters.search ?? undefined
     },
-    async get(page: number, force?: boolean) {
+    async get(page: number, take: number = 10) {
       // if (this.pagination.currentPage === page && !force) return
       try {
         this.loading = true
         const response: any = await apiCluster.get(apiRoutes.categories, {
-          page: page,
+          page,
+          take,
           filter: JSON.stringify(this.filters),
         })
         const metadata: {

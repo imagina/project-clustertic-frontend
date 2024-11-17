@@ -233,6 +233,7 @@ export const useAuthStore = defineStore('auth', {
     /* reset password request */
     async refreshSession() {
       try {
+        if (!this.getToken) return
         const response: any = await apiCluster.get(apiRoutes.authMe)
         this.user = response.data.userData
         this.expiresIn = Helper.parseStringToDate(

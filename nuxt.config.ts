@@ -13,9 +13,7 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui',
     'nuxt-svgo',
   ],
-  plugins: [
-    // './plugins/LoadUserBeforeMount.ts'
-  ],
+  plugins: ['./plugins/LoadUserBeforeMount.ts'],
   i18n: {
     vueI18n: './i18n/i18n.config.ts', // if you are using custom path, default
   },

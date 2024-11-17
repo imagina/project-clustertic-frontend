@@ -72,7 +72,7 @@ async function sendProposal() {
       delivery_days: proposalData.days,
       description: proposalData.description,
     }
-    debugger
+
     if (proposalData.files) {
       //TODO: crear los archivos multimedia y enviar los id
 

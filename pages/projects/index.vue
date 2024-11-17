@@ -13,17 +13,19 @@ const projectsStore = useProjectsStore()
 const categoryStore = useCategoryStore()
 const page = computed(() => projectsStore.pagination.currentPage)
 const totalPages = computed(() => projectsStore.pagination.lastPage)
-const perPage = computed(() => projectsStore.pagination.perPage)
+// const perPage = computed(() => projectsStore.pagination.perPage)
 let debounceTimeout: any = null
 
 const filters = reactive<{
   minPrice: string
   maxPrice: string
   searchSkills: string
+  skills: number[]
 }>({
   minPrice: '0',
   maxPrice: '100000000',
   searchSkills: '',
+  skills: [],
 })
 
 onMounted(() => {
@@ -46,14 +48,15 @@ function handleRefreshPage() {
 
 async function filter() {
   try {
-    debugger
     const validate = await refForm.value.validate()
     if (!validate) return
     projectsStore.setFilters({
       search: router.query['search'] ? `${router.query['search']}` : '',
       minPrice: parseInt(filters.minPrice),
       maxPrice: parseInt(filters.maxPrice),
+      categories: filters.skills,
     })
+    projectsStore.get(1)
   } catch (erro) {
     console.log(erro)
   }
@@ -61,6 +64,9 @@ async function filter() {
 
 function handleSelectProject(id: number) {
   projectsStore.viewDetails(id)
+}
+function handleToggleSkill(idSkill: number) {
+  filters.skills = Helper.toggleItem(filters.skills, idSkill)
 }
 function handleEndWrite() {
   clearTimeout(debounceTimeout)
@@ -87,7 +93,7 @@ function searchCategories(query?: string) {
         <q-form @submit.prevent.stop="filter" ref="refForm">
           <div class="tw-flex tw-justify-between">
             <h2 class="tw-text-xl tw-font-bold tw-mb-8">Filtros</h2>
-            const
+
             <Button size="xs" type="submit">Go</Button>
           </div>
           <div class="tw-mb-5 tw-flex">
@@ -145,8 +151,9 @@ function searchCategories(query?: string) {
           <li
             v-for="category in categoryStore.categories"
             class="tw-flex tw-items-center tw-mb-2"
+            @click="handleToggleSkill(category.id)"
           >
-            <Checkbox />
+            <Checkbox :checked="filters.skills.includes(category.id)" />
             <label class="tw-ml-2">{{ category.title }}</label>
           </li>
         </ul>

@@ -22,7 +22,6 @@ const handleDragEnterLeave = (event: DragEvent) => {
 }
 
 const handleDrop = (event: DragEvent) => {
-  debugger
   event.preventDefault()
   const files = event.dataTransfer!.files
   const target = event.currentTarget as HTMLInputElement

@@ -3,7 +3,6 @@ import { CompassIcon } from 'lucide-vue-next'
 
 const search = ref('')
 function handleSearch() {
-  debugger
   Helper.redirectTo(`/projects?search=${search.value}`)
 }
 </script>
