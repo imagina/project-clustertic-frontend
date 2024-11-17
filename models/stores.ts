@@ -1,4 +1,4 @@
-import type { Project } from './projects'
+import type { Project, ProjectTag } from './projects'
 import type { UserData } from './user'
 import type { PaginationInfo } from './utils'
 
@@ -16,6 +16,12 @@ export interface ProjectsState {
   projects: Project[]
   pagination: PaginationInfo
   selected: Project | null | undefined
+  filters: any
+  loading: boolean
+}
+export interface CategoriesState {
+  categories: ProjectTag[]
+  pagination: PaginationInfo
   filters: any
   loading: boolean
 }

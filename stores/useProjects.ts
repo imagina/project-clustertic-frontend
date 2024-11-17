@@ -19,11 +19,30 @@ export const useProjectsStore = defineStore('projects', {
       currentPage: 0,
     },
     selected: null,
-    filters: {},
+    filters: {
+      order: {
+        field: 'id',
+        way: 'desc',
+      },
+    },
     loading: false,
   }),
   getters: {},
   actions: {
+    setFilters(filters: {
+      search?: string
+      minPrice?: number
+      maxPrice?: number
+    }) {
+      if (typeof filters.search === 'string')
+        this.filters['search'] = filters.search ?? undefined
+      if (typeof filters.minPrice === 'number')
+        this.filters['search'] =
+          filters.minPrice > 0 ? filters.minPrice : undefined
+      if (typeof filters.maxPrice === 'number')
+        this.filters['search'] =
+          filters.maxPrice < 100000000 ? filters.maxPrice : undefined
+    },
     async create(attributes: NewProjectFormValue) {
       const auth = useAuthStore()
       if (!auth.user) {
@@ -73,13 +92,13 @@ export const useProjectsStore = defineStore('projects', {
       return response
     },
     async get(page: number, force?: boolean) {
-      if (this.pagination.currentPage === page && !force) return
+      // if (this.pagination.currentPage === page && !force) return
       try {
         this.loading = true
         const response: any = await apiCluster.get(apiRoutes.projects, {
           page: page,
           include: 'categories',
-          take: 2,
+          filter: JSON.stringify(this.filters),
         })
         const metadata: {
           page: PaginationInfo

@@ -1,33 +1,59 @@
 <script setup lang="ts">
-import { DollarSignIcon, CompassIcon } from 'lucide-vue-next'
+import { DollarSignIcon, CompassIcon, Search } from 'lucide-vue-next'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
+import { useCategoryStore } from '~/stores/useCategories'
 
 definePageMeta({
   layout: 'default',
 })
 
 const refForm: any = ref(null)
+const router = useRoute()
 const projectsStore = useProjectsStore()
+const categoryStore = useCategoryStore()
 const page = computed(() => projectsStore.pagination.currentPage)
 const totalPages = computed(() => projectsStore.pagination.lastPage)
 const perPage = computed(() => projectsStore.pagination.perPage)
+let debounceTimeout: any = null
 
 const filters = reactive<{
   minPrice: string
   maxPrice: string
+  searchSkills: string
 }>({
-  minPrice: '',
-  maxPrice: '',
+  minPrice: '0',
+  maxPrice: '100000000',
+  searchSkills: '',
 })
+
 onMounted(() => {
-  projectsStore.get(1)
+  handleRefreshPage()
+  categoryStore.get(1)
 })
+watch(
+  () => router.query,
+  (newQuery, oldQuery) => {
+    if (oldQuery['search'] !== newQuery['search']) handleRefreshPage()
+  },
+)
+
+function handleRefreshPage() {
+  projectsStore.setFilters({
+    search: router.query['search'] ? `${router.query['search']}` : '',
+  })
+  projectsStore.get(1)
+}
 
 async function filter() {
   try {
+    debugger
     const validate = await refForm.value.validate()
     if (!validate) return
-    // await store.login(auth);
+    projectsStore.setFilters({
+      search: router.query['search'] ? `${router.query['search']}` : '',
+      minPrice: parseInt(filters.minPrice),
+      maxPrice: parseInt(filters.maxPrice),
+    })
   } catch (erro) {
     console.log(erro)
   }
@@ -35,6 +61,17 @@ async function filter() {
 
 function handleSelectProject(id: number) {
   projectsStore.viewDetails(id)
+}
+function handleEndWrite() {
+  clearTimeout(debounceTimeout)
+  debounceTimeout = setTimeout(() => {
+    console.log('El usuario ha terminado de escribir:', filters.searchSkills) // Aquí puedes ejecutar la función que necesites
+    searchCategories(filters.searchSkills)
+  }, 500) // 500 ms de espera
+}
+function searchCategories(query?: string) {
+  categoryStore.setFilters({ search: query })
+  categoryStore.get(1)
 }
 </script>
 <template>
@@ -47,8 +84,12 @@ function handleSelectProject(id: number) {
       <div
         class="filters-form tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
       >
-        <h2 class="tw-text-xl tw-font-bold tw-mb-8">Filtros</h2>
         <q-form @submit.prevent.stop="filter" ref="refForm">
+          <div class="tw-flex tw-justify-between">
+            <h2 class="tw-text-xl tw-font-bold tw-mb-8">Filtros</h2>
+            const
+            <Button size="xs" type="submit">Go</Button>
+          </div>
           <div class="tw-mb-5 tw-flex">
             <label
               class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
@@ -69,13 +110,19 @@ function handleSelectProject(id: number) {
             <input outlined type="number" v-model="filters.minPrice" />
             <p class="tw-mb-0">USD</p>
           </div>
+          <label class="tw-text-xs tw-font-extralight">max</label>
+          <div class="filter-money tw-mb-2">
+            <DollarSignIcon class="tw-w-4 tw-mr-3" />
+            <input outlined type="number" v-model="filters.maxPrice" />
+            <p class="tw-mb-0">USD</p>
+          </div>
         </q-form>
 
         <div class="tw-mb-5 tw-flex">
           <label
             class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
           >
-            Precio
+            Skills
           </label>
           <Button
             variant="ghost"
@@ -88,12 +135,21 @@ function handleSelectProject(id: number) {
 
         <div class="filter-skills tw-mb-2">
           <CompassIcon class="tw-w-4 tw-text-primary tw-mr-3" />
-          <input placeholder="Search skills" v-model="filters.minPrice" />
+          <input
+            @input="handleEndWrite"
+            placeholder="Search skills"
+            v-model="filters.searchSkills"
+          />
         </div>
-        <div class="tw-flex tw-items-center">
-          <Checkbox />
-          <label class="tw-ml-2">Website Design</label>
-        </div>
+        <ul>
+          <li
+            v-for="category in categoryStore.categories"
+            class="tw-flex tw-items-center tw-mb-2"
+          >
+            <Checkbox />
+            <label class="tw-ml-2">{{ category.title }}</label>
+          </li>
+        </ul>
       </div>
     </aside>
     <section class="md:tw-basis-2/3 lg:tw-basis-9/12">
@@ -102,7 +158,12 @@ function handleSelectProject(id: number) {
           <Card>
             <CardHeader>
               <CardTitle class="tw-font-extrabold">
-                Top results
+                Resultados
+                {{
+                  router.query['search']
+                    ? `que contengan "${router.query['search']}"`
+                    : ``
+                }}
                 <span class="tw-font-normal tw-text-base tw-ml-5">
                   Página {{ page }} de {{ totalPages }}
                 </span>

@@ -2,6 +2,10 @@
 import { CompassIcon } from 'lucide-vue-next'
 
 const search = ref('')
+function handleSearch() {
+  debugger
+  Helper.redirectTo(`/projects?search=${search.value}`)
+}
 </script>
 
 <template>
@@ -13,18 +17,20 @@ const search = ref('')
         >
           ¿Que estas buscando?
         </h3>
-        <InputCPA
-          outlined
-          dark
-          rounded
-          class="input-custom-outline tw-mb-3 search-input-border"
-          v-model="search"
-          label="Explorar proyectos de..."
-        >
-          <template v-slot:prepend>
-            <CompassIcon class="!tw-text-primary" />
-          </template>
-        </InputCPA>
+        <q-form @submit.prevent.stop="handleSearch">
+          <InputCPA
+            outlined
+            dark
+            rounded
+            class="input-custom-outline tw-mb-3 search-input-border"
+            v-model="search"
+            label="Explorar proyectos de..."
+          >
+            <template v-slot:prepend>
+              <CompassIcon class="!tw-text-primary" />
+            </template>
+          </InputCPA>
+        </q-form>
       </div>
     </div>
   </div>

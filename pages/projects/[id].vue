@@ -59,7 +59,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   projectsStore.removeSelected()
 })
-
 async function sendProposal() {
   try {
     const validateRegister = await refForm.value.validate()

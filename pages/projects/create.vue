@@ -5,6 +5,7 @@ import ShieldDollarSVG from '@/assets/svg/shield-dollar.svg'
 import FileShredderSVG from '@/assets/svg/file-shredder.svg'
 import type { ProjectTag } from '~/models/projects'
 import type { NewProjectFormValue } from '~/models/stores'
+import { useCategoryStore } from '~/stores/useCategories'
 
 interface rangePriceOptionsInterface {
   label: string
@@ -30,28 +31,15 @@ definePageMeta({
   middleware: 'auth',
   layout: 'dark-bg',
 })
-const page = ref(1)
-const config = useRuntimeConfig()
 
-const { data, status, error, refresh, clear } = await useAsyncData(
-  'categories',
-  () =>
-    $fetch(`${config.public.apiRoute}/api/ipin/v1/categories`, {
-      params: {
-        page: page.value,
-      },
-    }),
-  {
-    watch: [page],
-  },
-)
-const router = useRouter()
+let debounceTimeout: any = null
 const projectStore = useProjectsStore()
+const categoryStore = useCategoryStore()
 const refForm: any = ref(null)
 const step = ref<number>(0)
 
 const categories = computed<ProjectTag[]>(() => {
-  return (<any>data.value)?.data
+  return categoryStore.categories
 })
 
 const stepsTitles: any = ref([
@@ -207,6 +195,10 @@ const projectData = reactive<createDataInterface>({
   customPrice: 0,
 })
 
+onMounted(() => {
+  categoryStore.get(1)
+})
+
 async function create() {
   try {
     const validateForm = await refForm.value.validate()
@@ -251,7 +243,6 @@ function handleAddSkill(skill: ProjectTag) {
   if (projectData.skills.findIndex((s) => s.id === skill.id) >= 0) return
   projectData.skills.push(skill)
 }
-
 function handleChangeStep(next_or_prev: number) {
   let new_step = step.value + next_or_prev
 
@@ -259,6 +250,21 @@ function handleChangeStep(next_or_prev: number) {
   else if (new_step > 3 && refForm.value) {
     create()
   }
+}
+
+function handleEndWrite() {
+  clearTimeout(debounceTimeout)
+  debounceTimeout = setTimeout(() => {
+    console.log(
+      'El usuario ha terminado de escribir:',
+      projectData.searchSkills,
+    ) // Aquí puedes ejecutar la función que necesites
+    searchCategories(projectData.searchSkills)
+  }, 500) // 500 ms de espera
+}
+function searchCategories(query?: string) {
+  categoryStore.setFilters({ search: query })
+  categoryStore.get(1)
 }
 </script>
 
@@ -382,6 +388,7 @@ function handleChangeStep(next_or_prev: number) {
                   </li>
                 </ul>
                 <input
+                  @input="handleEndWrite"
                   class="skills-input"
                   :placeholder="$t('projects.create.form.skills.placeholder')"
                   v-model="projectData.searchSkills"
