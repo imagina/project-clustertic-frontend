@@ -37,12 +37,12 @@ export const useProjectsStore = defineStore('projects', {
     }) {
       if (typeof filters.search === 'string')
         this.filters['search'] = filters.search ?? undefined
-      if (typeof filters.minPrice === 'number')
-        this.filters['minPrice'] =
-          filters.minPrice > 0 ? filters.minPrice : undefined
-      if (typeof filters.maxPrice === 'number')
-        this.filters['maxPrice'] =
-          filters.maxPrice < 100000000 ? filters.maxPrice : undefined
+      if (typeof filters.minPrice === 'number' && typeof filters.maxPrice === 'number')
+        this.filters['priceRange'] = {
+            from: filters.minPrice > 0 ? filters.minPrice : 0,
+            to : filters.maxPrice > 0 ? filters.maxPrice : 1000000000000
+        }
+          
       if (Array.isArray(filters.categories))
         this.filters['categories'] =
           filters.categories.length > 0 ? filters.categories : undefined

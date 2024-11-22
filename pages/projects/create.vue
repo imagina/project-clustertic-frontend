@@ -255,10 +255,6 @@ function handleChangeStep(next_or_prev: number) {
 function handleEndWrite() {
   clearTimeout(debounceTimeout)
   debounceTimeout = setTimeout(() => {
-    console.log(
-      'El usuario ha terminado de escribir:',
-      projectData.searchSkills,
-    ) // Aquí puedes ejecutar la función que necesites
     searchCategories(projectData.searchSkills)
   }, 500) // 500 ms de espera
 }
@@ -598,12 +594,6 @@ function searchCategories(query?: string) {
 .input-details {
   @apply tw-text-white tw-font-bold tw-mb-4;
 }
-.skills-input {
-  @apply tw-bg-input tw-w-full tw-text-white tw-border-none tw-py-4 tw-px-2 tw-rounded-2xl;
-  &:focus {
-    @apply tw-border-none tw-outline-none;
-  }
-}
 
 .option-skill-list {
   @apply tw-absolute tw-top-full tw-left-0 tw-right-0 tw-bg-white tw-rounded-b-2xl tw-rounded-t-sm tw-z-50;
@@ -620,6 +610,12 @@ function searchCategories(query?: string) {
   }
 }
 
+.skills-input {
+  @apply tw-bg-input tw-w-full tw-text-white tw-border-none tw-py-4 tw-px-2 tw-rounded-2xl;
+  &:focus {
+    @apply tw-border-none tw-outline-none;
+  }
+}
 .skills-input:focus ~ .option-skill-list {
   @apply tw-pb-1;
 }

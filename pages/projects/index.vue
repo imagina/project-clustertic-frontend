@@ -30,7 +30,7 @@ const filters = reactive<{
 
 onMounted(() => {
   handleRefreshPage()
-  categoryStore.get(1)
+  categoryStore.get(1,5)
 })
 watch(
   () => router.query,
@@ -52,6 +52,7 @@ async function filter() {
     if (!validate) return
     projectsStore.setFilters({
       search: router.query['search'] ? `${router.query['search']}` : '',
+
       minPrice: parseInt(filters.minPrice),
       maxPrice: parseInt(filters.maxPrice),
       categories: filters.skills,
@@ -71,13 +72,13 @@ function handleToggleSkill(idSkill: number) {
 function handleEndWrite() {
   clearTimeout(debounceTimeout)
   debounceTimeout = setTimeout(() => {
-    console.log('El usuario ha terminado de escribir:', filters.searchSkills) // Aquí puedes ejecutar la función que necesites
+    // console.log('El usuario ha terminado de escribir:', filters.searchSkills) // Aquí puedes ejecutar la función que necesites
     searchCategories(filters.searchSkills)
   }, 500) // 500 ms de espera
 }
 function searchCategories(query?: string) {
   categoryStore.setFilters({ search: query })
-  categoryStore.get(1)
+  categoryStore.get(1,5)
 }
 </script>
 <template>
@@ -86,9 +87,9 @@ function searchCategories(query?: string) {
   <div
     class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16 tw-relative"
   >
-    <aside class="tw-basis-80 tw-px-5">
+    <aside class="lg:tw-basis-80 tw-px-5">
       <div
-        class="filters-form tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
+        class="filters-form tw-sticky tw-top-28 tw-mb-2 tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
       >
         <q-form @submit.prevent.stop="filter" ref="refForm">
           <div class="tw-flex tw-justify-between">
@@ -213,7 +214,7 @@ function searchCategories(query?: string) {
 <style scoped>
 .projects-list {
   li {
-    @apply tw-mb-5;
+    @apply tw-mb-5 tw-cursor-pointer;
   }
 }
 .filters-form {

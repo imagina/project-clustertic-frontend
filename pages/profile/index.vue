@@ -11,10 +11,14 @@ definePageMeta({
 
 const auth = useAuthStore()
 
+
 const user = computed(() => auth.user)
 
 const show_modal_editSkills = ref(false)
 const show_modal_editPhoto = ref(false)
+onMounted(()=>{
+  auth.requestFullUser()
+})
 </script>
 
 <template>
@@ -24,12 +28,14 @@ const show_modal_editPhoto = ref(false)
       <div class="tw-flex tw-mt-5">
         <div class="tw-basis-64 tw-relative">
           <div class="img-container">
-            <div
-              class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
-              :style="{
-                backgroundImage: `url(${user?.mediaFiles.profile.path ?? user?.mediumImage})`,
-              }"
-            ></div>
+            <client-only>
+              <div
+                class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
+                :style="{
+                  backgroundImage: `url(${user?.mediaFiles.profile.path ?? user?.mediumImage})`,
+                }"
+              ></div>
+            </client-only>
             <Button
               @click="show_modal_editPhoto = true"
               type="button"

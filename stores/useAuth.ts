@@ -5,6 +5,7 @@ import type { LoginResponse } from '~/models/auth'
 import type { AuthState } from '~/models/stores'
 import { boolean } from 'zod'
 import type { UserData } from '~/models/user'
+import type { ProjectTag } from '~/models/projects'
 
 const apiRoutes = {
   /* auth */
@@ -18,12 +19,14 @@ const apiRoutes = {
   changePassword: `/api/profile/v1/users/change-password`,
   /* settings */
   settings: '/api/isite/v1/site/settings',
+  
+  profileUsers: '/api/profile/v1/users',
+  profileSkills: '/api/profile/v1/skills',
 }
 
 const routes = {
   home: '/',
   login: '/auth/login',
-  users: '/api/profile/v1/users',
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -39,7 +42,10 @@ export const useAuthStore = defineStore('auth', {
   }),
   getters: {
     getToken(state) {
-      return state.token ? state.token : localStorage.getItem('userToken')
+      if (process.client) {
+        return state.token ? state.token : localStorage.getItem('userToken')
+      }
+      return state.token
     },
     getExpiresIn(state) {
       return state.expiresIn
@@ -245,6 +251,19 @@ export const useAuthStore = defineStore('auth', {
         throw error
       }
     },
+    async requestFullUser() {
+      try {
+        if (!this.getToken) return
+        debugger
+        const response: any = await apiCluster.get(apiRoutes.profileUsers + `/${this.user?.id}`, {
+            include:'information,skills'
+          })
+        this.user = {...this.user, ...response.data}
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+    },
     /* reset password request */
     async resetPassword(dataForm: { username: string }) {
       this.clearToken()
@@ -354,10 +373,31 @@ export const useAuthStore = defineStore('auth', {
         'attributes[medias_single][profile]': dataMedia.id,
       }
 
-      await apiCluster
-        .put(routes.users + `/${this.user?.id}`, {}, false, body)
+      apiCluster
+        .put(apiRoutes.profileUsers + `/${this.user?.id}`, {}, false, body)
         .then((response) => {
-          this.refreshSession()
+          this.requestFullUser()
+        })
+    },
+
+    async addSkill(tagToAttach: ProjectTag) {
+      debugger
+      if (!this.user) throw Error('you must be logged')
+      const body = {
+        'attributes[title]': tagToAttach.title,
+        'attributes[user_id]': this.user.id,
+        'attributes[entity_type]': EntityTypes.Categories,
+        'attributes[entity_id]': tagToAttach.id,
+      }
+
+      apiCluster
+        .post(apiRoutes.profileSkills, body)
+        .then((response) => {
+          debugger
+          this.requestFullUser()
+        }).catch((e)=>{
+          debugger
+          console.error(e)
         })
     },
   },

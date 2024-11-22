@@ -23,6 +23,7 @@ export interface UserData {
   allPermissions: Permissions
   allSettings: AllSettings
   files: any[]
+  skills?: UserSkill[]
   mediaFiles: MediaFiles
 }
 
@@ -130,4 +131,20 @@ export interface RolePivot {
   roleId: number
   updatedAt: Date
   userId: number
+}
+
+
+export interface UserSkill {
+  createdAt:      Date;
+  createdBy:      number;
+  deletedAt:      null;
+  deletedBy:      null;
+  entityId:       string;
+  entityType:     string;
+  id:             number;
+  organizationId: null;
+  title:          string;
+  updatedAt:      Date;
+  updatedBy:      number;
+  userId:         number;
 }

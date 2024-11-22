@@ -31,84 +31,83 @@ const user = computed<UserData | null>(() => authStore.user)
       </div>
 
       <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2">
-        <ul
-          class="tw-hidden md:tw-flex tw-flex-wrap"
-          :class="
-            !authStore.user
-              ? ' tw-justify-end'
-              : 'tw-flex-row-reverse tw-justify-start'
-          "
-        >
-          <li v-if="user">
-            <NuxtLink to="/profile">
-              <Button variant="ghost" class="tw-text-secondary">
-                <div class="user-img tw-inline-block">
-                  <div>
-                    {{
-                      user.fullName
-                        .split(' ')
-                        .slice(0, 2)
-                        .map((n) => n[0])
-                        .join('')
-                    }}
+        
+        <client-only> 
+          <ul
+            class="tw-hidden md:tw-flex tw-flex-wrap"
+            :class="!authStore.getToken ? ' tw-justify-end' : 'tw-flex-row-reverse tw-justify-start'"
+          >
+            <li v-if="user">
+              <NuxtLink to="/profile">
+                <Button variant="ghost" class="tw-text-secondary">
+                  <div class="user-img tw-inline-block">
+                    <div>
+                      {{
+                        user.fullName
+                          .split(' ')
+                          .slice(0, 2)
+                          .map((n) => n[0])
+                          .join('')
+                      }}
+                    </div>
                   </div>
-                </div>
-                <span class="tw-font-bold tw-capitalize">
-                  {{ user.fullName }}
-                </span>
-              </Button>
-            </NuxtLink>
-          </li>
-          <li>
-            <Button variant="ghost" class="tw-text-secondary">
-              <BriefcaseIcon class="tw-text-primary tw-mr-3" />
-              <span class="tw-font-bold tw-capitalize">
-                {{ $t('appbar.nav.briefcase') }}
-              </span>
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" class="tw-text-secondary">
-              <CompassIcon class="tw-text-primary tw-mr-3" />
-              <span class="tw-font-bold tw-capitalize">
-                {{ $t('appbar.nav.explore') }}
-              </span>
-            </Button>
-          </li>
-          <li v-if="!user">
-            <NuxtLink to="/auth/login">
+                  <span class="tw-font-bold tw-capitalize">
+                    {{ user.fullName }}
+                  </span>
+                </Button>
+              </NuxtLink>
+            </li>
+            <li>
               <Button variant="ghost" class="tw-text-secondary">
-                <LogInIcon
-                  class="tw-text-primary tw-mr-3"
-                  style="transform: rotate(180deg)"
-                />
+                <BriefcaseIcon class="tw-text-primary tw-mr-3" />
                 <span class="tw-font-bold tw-capitalize">
-                  {{ $t('appbar.nav.login') }}
+                  {{ $t('appbar.nav.briefcase') }}
                 </span>
               </Button>
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/projects/create">
-              <Button class="tw-ml-5">
-                <span class="tw-font-bold">
-                  {{ $t('appbar.publish_project') }}
+            </li>
+            <li>
+              <Button variant="ghost" class="tw-text-secondary">
+                <CompassIcon class="tw-text-primary tw-mr-3" />
+                <span class="tw-font-bold tw-capitalize">
+                  {{ $t('appbar.nav.explore') }}
                 </span>
               </Button>
-            </NuxtLink>
-          </li>
-          <li v-if="user">
-            <Button variant="ghost">
-              <MessageSquareIcon :size="20" />
-            </Button>
-          </li>
-
-          <li v-if="user">
-            <Button variant="ghost">
-              <BellIcon :size="20" />
-            </Button>
-          </li>
-        </ul>
+            </li>
+            <li v-if="!user">
+              <NuxtLink to="/auth/login">
+                <Button variant="ghost" class="tw-text-secondary">
+                  <LogInIcon
+                    class="tw-text-primary tw-mr-3"
+                    style="transform: rotate(180deg)"
+                  />
+                  <span class="tw-font-bold tw-capitalize">
+                    {{ $t('appbar.nav.login') }}
+                  </span>
+                </Button>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/projects/create">
+                <Button class="tw-ml-5">
+                  <span class="tw-font-bold">
+                    {{ $t('appbar.publish_project') }}
+                  </span>
+                </Button>
+              </NuxtLink>
+            </li>
+            <li v-if="user">
+              <Button variant="ghost">
+                <MessageSquareIcon :size="20" />
+              </Button>
+            </li>
+  
+            <li v-if="user">
+              <Button variant="ghost">
+                <BellIcon :size="20" />
+              </Button>
+            </li>
+          </ul>
+        </client-only>
       </nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
         <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
