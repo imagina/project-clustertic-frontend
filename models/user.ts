@@ -6,25 +6,26 @@ export interface UserData {
   isActivated: string
   email: string
   permissions: any[]
-  createdAt: Date
-  updatedAt: Date
-  lastLoginDate: Date
+  createdAt: string
+  updatedAt: string
+  lastLoginstring: string
   smallImage: string
   mediumImage: string
   mainImage: string
   contacts: Contacts
-  socialNetworks: Contacts
+  socialNetworks: UserFields
   departments: Department[]
   organizations: any[]
   settings: any[]
-  fields: any[]
+  fields: UserFields[]
   addresses: any[]
   roles: Role[]
   allPermissions: Permissions
   allSettings: AllSettings
   files: any[]
-  skills?: UserSkill[]
   mediaFiles: MediaFiles
+  skills?: UserSkill[]
+  information?: BaseUserInformation[]
 }
 
 export interface Permissions {
@@ -41,21 +42,21 @@ export interface Contacts {
 }
 
 export interface Department {
-  createdAt: Date
+  createdAt: string
   createdBy: null
-  deletedAt: null
-  deletedBy: null
+  deletedAt?: null
+  deletedBy?: null
   depth: null
   id: number
   isInternal: number
   lft: null
   options: null
-  organizationId: null
+  organizationId?: number
   parentId: number
   pivot: DepartmentPivot
   rgt: null
   title: string
-  updatedAt: Date
+  updatedAt: string
   updatedBy: null
 }
 
@@ -110,41 +111,81 @@ export interface Thumbnail {
 }
 
 export interface Role {
-  createdAt: Date
+  createdAt: string
   createdBy: null
-  deletedAt: null
-  deletedBy: null
+  deletedAt?: null
+  deletedBy?: null
   formId: null
   id: number
   name: string
-  organizationId: null
+  organizationId?: number
   permissions: Permissions
   pivot: RolePivot
   slug: string
   title: string
-  updatedAt: Date
+  updatedAt: string
   updatedBy: null
 }
 
 export interface RolePivot {
-  createdAt: Date
+  createdAt: string
   roleId: number
-  updatedAt: Date
+  updatedAt: string
+  userId: number
+}
+export interface UserSkill {
+  createdAt: string
+  createdBy: number
+  deletedAt?: string
+  deletedBy?: number
+  entityId: string
+  entityType: string
+  id: number
+  organizationId?: number
+  title: string
+  updatedAt: string
+  updatedBy: number
+  userId: number
+}
+export interface UserFields {
+  createdAt: string
+  createdBy: number
+  deletedAt?: string
+  deletedBy?: number
+  id: number
+  name: string
+  organizationId?: number
+  type: null
+  updatedAt: string
+  updatedBy: number
+  userId: number
+  value: string
+}
+
+export interface BaseUserInformation {
+  createdAt: string
+  createdBy: number
+  deletedAt?: string
+  deletedBy?: number
+  description: string
+  id: number
+  options: {
+    [key: string]: any
+  }
+  organizationId?: number
+  title: string
+  type: string
+  updatedAt: string
+  updatedBy: number
   userId: number
 }
 
-
-export interface UserSkill {
-  createdAt:      Date;
-  createdBy:      number;
-  deletedAt:      null;
-  deletedBy:      null;
-  entityId:       string;
-  entityType:     string;
-  id:             number;
-  organizationId: null;
-  title:          string;
-  updatedAt:      Date;
-  updatedBy:      number;
-  userId:         number;
+export interface ExperienceUserInformation extends BaseUserInformation {
+  type: 'experience'
+  options: {
+    dateInit: string
+    dateEnd?: string
+    skill?: string
+    place: string
+  }
 }

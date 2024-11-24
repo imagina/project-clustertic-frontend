@@ -39,6 +39,7 @@
         "lastName": "Last name",
         "email": "Email",
         "password": "Password",
+        "passwordAgain": "Repeat Password",
         "termsAndCond": {
           "content": "I accept {highlight1} and {highlight2}.",
           "highlight1": "User agreement",

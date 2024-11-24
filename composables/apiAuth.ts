@@ -49,6 +49,13 @@ export const apiCluster = {
       params: params,
     })
   },
+  fileUpload: (img: File) => {
+    const formData = new FormData()
+    formData.append('disk', 's3')
+    formData.append('parent_id', '0')
+    formData.append('file', img)
+    return apiCluster.post('/api/imedia/v1/files', formData)
+  },
 
   patch: (
     url: string,

@@ -1,3 +1,3 @@
 export const EntityTypes = {
-    Categories:"Modules\\Iad\\Entities\\Categories"
+  Categories: 'Modules\\Iad\\Entities\\Categories',
 }

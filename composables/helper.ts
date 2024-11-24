@@ -27,22 +27,22 @@ export const Helper = {
     formato.split(/[^A-Za-z]/).forEach((parte, index) => {
       switch (parte) {
         case 'YYYY':
-          anio = Number(partesFechaHora[index])
+          anio = Number(partesFechaHora[index] ?? 0)
           break
         case 'MM':
-          mes = Number(partesFechaHora[index]) - 1
+          mes = Number(partesFechaHora[index] ?? 0) - 1
           break
         case 'DD':
-          dia = Number(partesFechaHora[index])
+          dia = Number(partesFechaHora[index] ?? 0)
           break
         case 'HH':
-          horas = Number(partesFechaHora[index])
+          horas = Number(partesFechaHora[index] ?? 0)
           break
         case 'mm':
-          minutos = Number(partesFechaHora[index])
+          minutos = Number(partesFechaHora[index] ?? 0)
           break
         case 'ss':
-          segundos = Number(partesFechaHora[index])
+          segundos = Number(partesFechaHora[index] ?? 0)
           break
         default:
           throw new Error(`Formato desconocido: ${parte}`)
@@ -50,6 +50,62 @@ export const Helper = {
     })
 
     return new Date(anio, mes, dia, horas, minutos, segundos)
+  },
+
+  parseDateToString: (date: Date, format: string = 'YYYY-MM-DD HH:mm:ss') => {
+    const meses = [
+      'Ene',
+      'Feb',
+      'Mar',
+      'Abr',
+      'May',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dic',
+    ]
+    const diasSemana = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb']
+    const map: { [key: string]: string } = {
+      DD: ('0' + date.getDate()).slice(-2),
+      D: `${date.getDate()}`,
+      MMMM: date.toLocaleString('es-ES', { month: 'long' }),
+      MMM: meses[date.getMonth()],
+      MM: ('0' + (date.getMonth() + 1)).slice(-2),
+      M: `${date.getMonth() + 1}`,
+      YYYY: `${date.getFullYear()}`,
+      YY: String(date.getFullYear()).slice(-2),
+      dddd: diasSemana[date.getDay()],
+      ddd: date.toLocaleString('es-ES', { weekday: 'short' }),
+    }
+    return format.replace(
+      /DD|D|MMMM|MMM|MM|M|YYYY|YY|dddd|ddd/g,
+      (matched) => <string>map[matched],
+    )
+  },
+  calculateDifferencesBetweenDays(date1?: Date, date2?: Date) {
+    if (!date1) date1 = new Date()
+    if (!date2) date2 = new Date()
+    // Calcular la diferencia en miliSeconds
+    let diffMiliSeconds = Math.abs(date2.getTime() - date1.getTime())
+    let diffSeconds = Math.floor(diffMiliSeconds / 1000)
+    let diffMinutes = Math.floor(diffSeconds / 60)
+    let diffHours = Math.floor(diffMinutes / 60)
+    let diffDays = Math.floor(diffHours / 24)
+    let diffMonth = Math.floor(diffDays / 30)
+    let diffYear = Math.floor(diffMonth / 12)
+    const diff = {
+      miliSeconds: diffMiliSeconds % 1000,
+      seconds: diffSeconds % 60,
+      minutes: diffMinutes % 60,
+      hours: diffHours % 24,
+      days: diffDays % 30,
+      month: diffMonth % 12,
+      years: diffYear,
+    }
+    return diff
   },
 
   //Convert object keys to snake_case

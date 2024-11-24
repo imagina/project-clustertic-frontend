@@ -2,6 +2,7 @@
 import { useVModel } from '@vueuse/core'
 import type { QDialogProps } from 'quasar'
 import type { ProjectTag } from '~/models/projects'
+import { Paperclip } from 'lucide-vue-next'
 
 const props = defineProps<QDialogProps>()
 const authStore = useAuthStore()
@@ -23,7 +24,7 @@ const dataToSave = reactive<{
   files: undefined,
 })
 
-async function sendProposal() {
+async function sendImg() {
   try {
     const is_valid = await refForm.value.validate()
     if (!is_valid) return
@@ -40,11 +41,7 @@ async function sendProposal() {
 </script>
 
 <template>
-  <q-dialog
-    v-model="modelValue"
-    transition-show="rotate"
-    transition-hide="rotate"
-  >
+  <q-dialog v-model="modelValue" transition-show="fade" transition-hide="fade">
     <q-card class="card-edit !tw-rounded-lg" style="max-width: 80vw">
       <q-card-section>
         <div class="tw-text-lg tw-font-semibold tw-text-white">
@@ -55,7 +52,7 @@ async function sendProposal() {
       <q-card-section class="q-pt-none">
         <q-form
           class="tw-text-white lg:tw-min-w-[36rem]"
-          @submit.prevent.stop="sendProposal"
+          @submit.prevent.stop="sendImg"
           ref="refForm"
         >
           <label
@@ -97,9 +94,15 @@ async function sendProposal() {
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Decline" color="primary" v-close-popup />
-        <Button @click="sendProposal" class="tw-ml-5 tw-font-semibold">
-          Enviar propuesta
+        <q-btn
+          flat
+          label="Decline"
+          color="primary"
+          class="!tw-text-primary"
+          v-close-popup
+        />
+        <Button @click="sendImg" class="tw-ml-5 tw-font-semibold">
+          Guardar foto
         </Button>
       </q-card-actions>
     </q-card>

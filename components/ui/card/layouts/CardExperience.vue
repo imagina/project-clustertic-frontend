@@ -7,7 +7,20 @@ const props = defineProps<{
   rating?: number
   init?: Date
   end?: Date
+  place: string
 }>()
+
+const dateInit = computed(() => {
+  if (!props.init) return 'Actualidad'
+  return Helper.parseDateToString(props.init, 'MMM, YYYY')
+})
+const dateEnd = computed(() => {
+  if (!props.init) return 'Actualidad'
+  return Helper.parseDateToString(props.init, 'MMM, YYYY')
+})
+const dateDiff = computed(() =>
+  Helper.calculateDifferencesBetweenDays(props.init, props.end),
+)
 </script>
 
 <template>
@@ -19,15 +32,15 @@ const props = defineProps<{
     </div>
     <div class="tw-flex-grow">
       <p class="tw-text-lg tw-text-muted-custom tw-font-light">
-        <slot name="skills">Desarrollo y diseño / página web</slot>
+        <slot name="skills"></slot>
       </p>
       <div class="tw-flex tw-justify-between tw-mb-2">
         <p class="tw-text-lg tw-text-black tw-font-semibold">
-          <slot name="title">Cocacola</slot>
+          <slot name="title"></slot>
         </p>
         <p class="tw-text-md tw-text-black tw-font-semibold">
           <!-- TODO: colocar rango de inicio -->
-          <slot name="range">Jul, 2023 - Present</slot>
+          {{ dateInit }} - {{ dateEnd }}
         </p>
       </div>
       <div class="tw-flex tw-justify-between tw-gap-40 tw-mb-3">
@@ -35,27 +48,20 @@ const props = defineProps<{
           class="tw-text-base tw-font-light tw-line-clamp-3"
           style="color: hsla(213, 11%, 29%, 1)"
         >
-          <slot name="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-            quos necessitatibus cupiditate fuga, repudiandae neque alias
-            eveniet, officiis nostrum labore possimus corporis consectetur
-            eaque. Dolor, aliquid eos! Ipsum, facere odio.
-          </slot>
+          <slot name="description"></slot>
         </p>
         <p
           class="tw-text-md tw-text-black tw-font-semibold tw-whitespace-nowrap"
         >
-          <!-- TODO: colocar duracion -->
-
-          1 año, 1 mes
+          {{ dateDiff.years }} año, {{ dateDiff.month }} mes
         </p>
       </div>
 
       <div class="tw-flex tw-gap-10 tw-mb-2">
-        <p class="tw-text-base tw-text-black tw-font-normal">New York, USA</p>
+        <p class="tw-text-base tw-text-black tw-font-normal">{{ place }}</p>
         <p class="tw-text-base tw-text-black tw-font-normal">
           <!-- TODO: colocar fecha de inicio -->
-          Jul, 2023
+          {{ dateInit }}
         </p>
       </div>
     </div>

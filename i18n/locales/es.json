@@ -40,6 +40,7 @@
         "lastName": "Apellido",
         "email": "Email",
         "password": "Contraseña",
+        "passwordAgain": "Repetir contraseña",
         "termsAndCond": {
           "content": "Acepto el {highlight1} y la {highlight2}.",
           "highlight1": "Acuerdo de usuario",

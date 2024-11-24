@@ -4,7 +4,7 @@ import ChangePassword from '~/pages/admin/changePassword.vue'
 import type { LoginResponse } from '~/models/auth'
 import type { AuthState } from '~/models/stores'
 import { boolean } from 'zod'
-import type { UserData } from '~/models/user'
+import type { UserData, UserSkill } from '~/models/user'
 import type { ProjectTag } from '~/models/projects'
 
 const apiRoutes = {
@@ -19,9 +19,10 @@ const apiRoutes = {
   changePassword: `/api/profile/v1/users/change-password`,
   /* settings */
   settings: '/api/isite/v1/site/settings',
-  
+
   profileUsers: '/api/profile/v1/users',
   profileSkills: '/api/profile/v1/skills',
+  profileInformation: '/api/profile/v1/information',
 }
 
 const routes = {
@@ -41,6 +42,18 @@ export const useAuthStore = defineStore('auth', {
     googleClientId: null,
   }),
   getters: {
+    userDescription(state) {
+      if (!state.user) return ''
+      const description = state.user.fields.find(
+        (value) => value.name === 'description',
+      )
+      return description?.value ?? ''
+    },
+    userSocialMedia(state) {
+      if (!state.user || !state.user.socialNetworks.id) return {}
+      const socialMedia = JSON.parse(state.user.socialNetworks.value)
+      return socialMedia
+    },
     getToken(state) {
       if (process.client) {
         return state.token ? state.token : localStorage.getItem('userToken')
@@ -178,7 +191,7 @@ export const useAuthStore = defineStore('auth', {
           ...dataForm,
           password_confirmation: dataForm.password,
           timezone: currentDate.getTimezoneOffset() / 60,
-          language: navigator.language || navigator.userLanguage,
+          language: navigator.language || (<any>navigator).userLanguage,
         },
       }
       try {
@@ -254,11 +267,14 @@ export const useAuthStore = defineStore('auth', {
     async requestFullUser() {
       try {
         if (!this.getToken) return
-        debugger
-        const response: any = await apiCluster.get(apiRoutes.profileUsers + `/${this.user?.id}`, {
-            include:'information,skills'
-          })
-        this.user = {...this.user, ...response.data}
+
+        const response: any = await apiCluster.get(
+          apiRoutes.profileUsers + `/${this.user?.id}`,
+          {
+            include: 'information,skills',
+          },
+        )
+        this.user = { ...this.user, ...response.data }
       } catch (error) {
         console.error(error)
         throw error
@@ -357,20 +373,35 @@ export const useAuthStore = defineStore('auth', {
     },
 
     //user edit
-    async changeProfileImage(img: File) {
+
+    async editProfileInfo(data: {
+      'attributes[medias_single][profile]'?: number
+      'attributes[fields]'?: {
+        name: string
+        value: string | number
+      }[]
+    }) {
       if (!this.user) throw Error('you must be logged')
-      const formData = new FormData()
-      formData.append('disk', 's3')
-      formData.append('parent_id', '0')
-      formData.append('file', img)
-      const { data: dataMedia }: any = await apiCluster.post(
-        '/api/imedia/v1/files',
-        formData,
-      )
-      const body = {
+      const body: { [key: string]: any } = {
         'attributes[id]': this.user?.id,
         'attributes[is_activated]': 1,
-        'attributes[medias_single][profile]': dataMedia.id,
+        ...data,
+      }
+      if (body['attributes[fields]']) {
+        const fields = body['attributes[fields]']
+        delete body['attributes[fields]']
+        fields.forEach(
+          (
+            item: {
+              name: string
+              value: string | number
+            },
+            i: number,
+          ) => {
+            body[`attributes[fields][${i}][name]`] = item.name
+            body[`attributes[fields][${i}][value]`] = item.value
+          },
+        )
       }
 
       apiCluster
@@ -380,23 +411,148 @@ export const useAuthStore = defineStore('auth', {
         })
     },
 
+    async changeProfileImage(img: File) {
+      if (!this.user) throw Error('you must be logged')
+      const { data: dataMedia }: any = await apiCluster.fileUpload(img)
+      this.editProfileInfo({
+        'attributes[medias_single][profile]': dataMedia.id,
+      })
+    },
+
+    async changeSocialMedia(socialMedia: {
+      google?: string
+      facebook?: string
+      twitter?: string
+      linkedin?: string
+      web?: string
+    }) {
+      this.editProfileInfo({
+        'attributes[fields]': [
+          {
+            name: 'socialNetworks',
+            value: JSON.stringify(socialMedia),
+          },
+        ],
+      })
+    },
+
     async addSkill(tagToAttach: ProjectTag) {
-      debugger
       if (!this.user) throw Error('you must be logged')
       const body = {
-        'attributes[title]': tagToAttach.title,
-        'attributes[user_id]': this.user.id,
-        'attributes[entity_type]': EntityTypes.Categories,
-        'attributes[entity_id]': tagToAttach.id,
+        attributes: {
+          title: tagToAttach.title,
+          user_id: this.user.id,
+          entity_type: EntityTypes.Categories,
+          entity_id: tagToAttach.id,
+        },
       }
 
       apiCluster
         .post(apiRoutes.profileSkills, body)
         .then((response) => {
-          debugger
           this.requestFullUser()
-        }).catch((e)=>{
-          debugger
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    },
+
+    async removeSkill(skillToRemove: UserSkill) {
+      if (!this.user) throw Error('you must be logged')
+      apiCluster
+        .delete(apiRoutes.profileSkills + `/${skillToRemove.id}`)
+        .then((response) => {
+          this.requestFullUser()
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    },
+
+    async addExperience(experience: {
+      img?: File
+      title: string
+      description: string
+      dateInit: Date
+      dateEnd?: Date
+      skill?: string
+      place: string
+    }) {
+      if (!this.user) throw Error('you must be logged')
+      const body: { [key: string]: any } = {
+        attributes: {
+          es: {
+            title: experience.title,
+            description: experience.description,
+          },
+          user_id: this.user.id,
+          type: 'experience',
+          options: {
+            dateInit: experience.dateInit,
+            dateEnd: experience.dateEnd,
+            place: experience.place,
+            skill: experience.skill,
+          },
+        },
+      }
+      if (experience.img) {
+        const { data: dataMedia }: any = await apiCluster.fileUpload(
+          experience.img,
+        )
+        body.attributes['medias_single'] = {
+          mainimage: dataMedia.id,
+        }
+      }
+      apiCluster
+        .post(apiRoutes.profileInformation, body)
+        .then((response) => {
+          this.requestFullUser()
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    },
+
+    async addPortfolio(experience: {
+      img?: File
+      title: string
+      description: string
+      dateInit: Date
+      dateEnd?: Date
+      skill?: string
+      place: string
+    }) {
+      if (!this.user) throw Error('you must be logged')
+      const body: { [key: string]: any } = {
+        attributes: {
+          es: {
+            title: experience.title,
+            description: experience.description,
+          },
+          user_id: this.user.id,
+          type: 'experience',
+          options: {
+            dateInit: experience.dateInit,
+            dateEnd: experience.dateEnd,
+            place: experience.place,
+            skill: experience.skill,
+          },
+        },
+      }
+      if (experience.img) {
+        const { data: dataMedia }: any = await apiCluster.fileUpload(
+          experience.img,
+        )
+        body.attributes['medias_single'] = {
+          mainimage: dataMedia.id,
+        }
+      }
+      apiCluster
+        .post(apiRoutes.profileInformation, body)
+        .then((response) => {
+          this.requestFullUser()
+        })
+        .catch((e) => {
           console.error(e)
         })
     },

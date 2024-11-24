@@ -17,12 +17,14 @@ const auth = reactive<{
   lastName: string
   email: string
   password: string
+  passwordAgain: string
   agreement: boolean
 }>({
   firstName: '',
   lastName: '',
   email: '',
   password: '',
+  passwordAgain: '',
   agreement: false,
 })
 const loading = computed(() => store.loading)
@@ -126,6 +128,28 @@ async function register() {
                 />
               </template>
             </InputCPA>
+            <InputCPA
+              filled
+              dark
+              rounded
+              class="tw-mb-2"
+              v-model="auth.passwordAgain"
+              :label="$t('auth.register.inputs.passwordAgain')"
+              lazy-rules
+              :rules="PasswordValidator.rules"
+              :type="isPwd ? 'password' : 'text'"
+            >
+              <template v-slot:prepend>
+                <KeySquareIcon class="!tw-text-primary" />
+              </template>
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </InputCPA>
             <div class="tw-mb-6">
               <label class="tw-flex tw-items-center">
                 <Checkbox
@@ -150,7 +174,11 @@ async function register() {
             </div>
             <transition name="hero">
               <Button
-                :disabled="loading || !auth.agreement"
+                :disabled="
+                  loading ||
+                  !auth.agreement ||
+                  auth.password !== auth.passwordAgain
+                "
                 type="submit"
                 class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
               >

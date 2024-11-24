@@ -30,7 +30,7 @@ const filters = reactive<{
 
 onMounted(() => {
   handleRefreshPage()
-  categoryStore.get(1,5)
+  categoryStore.get(1, 5)
 })
 watch(
   () => router.query,
@@ -78,7 +78,7 @@ function handleEndWrite() {
 }
 function searchCategories(query?: string) {
   categoryStore.setFilters({ search: query })
-  categoryStore.get(1,5)
+  categoryStore.get(1, 5)
 }
 </script>
 <template>

@@ -5,25 +5,34 @@ import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
+import type { ExperienceUserInformation } from '~/models/user'
 definePageMeta({
   middleware: 'auth',
 })
 
 const auth = useAuthStore()
 
-
 const user = computed(() => auth.user)
+const description = computed(() => auth.userDescription)
+const socialMedia = computed(() => auth.userSocialMedia)
+const experiences = computed(
+  () =>
+    <ExperienceUserInformation[]>(
+      auth.user?.information?.filter((item) => item.type === 'experience')
+    ) ?? [],
+)
 
 const show_modal_editSkills = ref(false)
 const show_modal_editPhoto = ref(false)
-onMounted(()=>{
+const show_modal_addExperience = ref(false)
+onMounted(() => {
   auth.requestFullUser()
 })
 </script>
 
 <template>
   <div class="tw-mt-20">
-    <div class="tw-bg-gray-100 tw-h-64"></div>
+    <div class="tw-bg-gray-100 tw-h-64 img-profile"></div>
     <div class="tw-container">
       <div class="tw-flex tw-mt-5">
         <div class="tw-basis-64 tw-relative">
@@ -91,14 +100,7 @@ onMounted(()=>{
         <div class="tw-basis-full lg:tw-flex-1 tw-overflow-hidden tw-pr-4">
           <h4 class="tw-text-xl tw-text-muted-custom tw-mb-5">Descripción</h4>
           <p class="tw-text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste odit
-            laboriosam minus distinctio voluptates non similique dignissimos
-            doloribus maiores necessitatibus delectus sunt commodi et est
-            repellendus iure, esse temporibus fugiat! Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Asperiores totam laboriosam
-            exercitationem quae ad aperiam eveniet eum officiis veniam, vel ipsa
-            nesciunt! Maxime laudantium excepturi earum totam provident? Dolor,
-            consequuntur.
+            {{ description }}
           </p>
           <div class="tw-flex tw-justify-between tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Portafolio</h4>
@@ -185,18 +187,34 @@ onMounted(()=>{
             <div class="tw-grow"></div>
 
             <Button
+              @click="show_modal_addExperience = true"
               type="button"
               variant="outline"
               class="tw-border-none profile-btn"
             >
               <SquarePenIcon :size="15" class="tw-mr-2" />
-              Modificar portafolio
+              Agregar experiencia
             </Button>
           </div>
           <div>
-            <CardExperience class="tw-mb-3" id="1" />
-            <CardExperience class="tw-mb-3" id="1" />
-            <CardExperience class="tw-mb-3" id="1" />
+            <CardExperience
+              v-for="experience in experiences"
+              class="tw-mb-3"
+              :id="`${experience.id}`"
+              :init="Helper.parseStringToDate(experience.options.dateInit)"
+              :end="
+                experience.options.dateEnd
+                  ? Helper.parseStringToDate(experience.options.dateEnd)
+                  : undefined
+              "
+              :place="experience.options.place"
+            >
+              <template v-slot:skill>{{ experience.options.skill }}</template>
+              <template v-slot:title>{{ experience.title }}</template>
+              <template v-slot:description>
+                {{ experience.description }}
+              </template>
+            </CardExperience>
           </div>
         </div>
 
@@ -250,22 +268,30 @@ onMounted(()=>{
               </div>
             </CardContent>
             <CardFooter class="tw-flex tw-justify-center !tw-p-0 !tw-pt-3">
-              <div class="facebook-icon">
+              <a
+                v-if="socialMedia.facebook"
+                :href="socialMedia.facebook"
+                class="facebook-icon"
+              >
                 <FacebookSVG class="tw-text-white tw-text-3xl" />
-              </div>
+              </a>
             </CardFooter>
           </Card>
         </aside>
       </div>
     </div>
   </div>
-  <ProfileEdit v-model="show_modal_editSkills"></ProfileEdit>
-  <ProfileChangeProfileImage
-    v-model="show_modal_editPhoto"
-  ></ProfileChangeProfileImage>
+  <ProfileEdit v-model="show_modal_editSkills" />
+  <ProfileChangeProfileImage v-model="show_modal_editPhoto" />
+  <ModalsAddExperience v-model="show_modal_addExperience" />
 </template>
 
 <style lang="css" scoped>
+.img-profile {
+  background-size: 100% auto;
+  background-image: url('@/assets/images/bg-profile.png');
+}
+
 .img-container {
   @apply tw-rounded-md tw-absolute tw-bottom-0 tw-h-60 tw-w-60 tw-p-2;
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);

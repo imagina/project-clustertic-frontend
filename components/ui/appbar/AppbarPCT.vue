@@ -31,11 +31,14 @@ const user = computed<UserData | null>(() => authStore.user)
       </div>
 
       <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2">
-        
-        <client-only> 
+        <client-only>
           <ul
             class="tw-hidden md:tw-flex tw-flex-wrap"
-            :class="!authStore.getToken ? ' tw-justify-end' : 'tw-flex-row-reverse tw-justify-start'"
+            :class="
+              !authStore.getToken
+                ? ' tw-justify-end'
+                : 'tw-flex-row-reverse tw-justify-start'
+            "
           >
             <li v-if="user">
               <NuxtLink to="/profile">
@@ -100,7 +103,7 @@ const user = computed<UserData | null>(() => authStore.user)
                 <MessageSquareIcon :size="20" />
               </Button>
             </li>
-  
+
             <li v-if="user">
               <Button variant="ghost">
                 <BellIcon :size="20" />

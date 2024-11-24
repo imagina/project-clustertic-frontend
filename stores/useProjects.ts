@@ -37,12 +37,15 @@ export const useProjectsStore = defineStore('projects', {
     }) {
       if (typeof filters.search === 'string')
         this.filters['search'] = filters.search ?? undefined
-      if (typeof filters.minPrice === 'number' && typeof filters.maxPrice === 'number')
+      if (
+        typeof filters.minPrice === 'number' &&
+        typeof filters.maxPrice === 'number'
+      )
         this.filters['priceRange'] = {
-            from: filters.minPrice > 0 ? filters.minPrice : 0,
-            to : filters.maxPrice > 0 ? filters.maxPrice : 1000000000000
+          from: filters.minPrice > 0 ? filters.minPrice : 0,
+          to: filters.maxPrice > 0 ? filters.maxPrice : 1000000000000,
         }
-          
+
       if (Array.isArray(filters.categories))
         this.filters['categories'] =
           filters.categories.length > 0 ? filters.categories : undefined
@@ -177,13 +180,8 @@ export const useProjectsStore = defineStore('projects', {
             },
           }
           for (let i = 0; i < files.length; i++) {
-            const formData = new FormData()
-            formData.append('disk', 's3')
-            formData.append('parent_id', '0')
-            formData.append('file', files[i])
-            const { data: dataMedia }: any = await apiCluster.post(
-              '/api/imedia/v1/files',
-              formData,
+            const { data: dataMedia }: any = await apiCluster.fileUpload(
+              files[i],
             )
             attributes.medias_multi.documents?.files.push(dataMedia.id)
           }
