@@ -200,7 +200,7 @@ onMounted(() => {
             <CardExperience
               v-for="experience in experiences"
               class="tw-mb-3"
-              :id="`${experience.id}`"
+              :id="experience.id"
               :init="Helper.parseStringToDate(experience.options.dateInit)"
               :end="
                 experience.options.dateEnd
@@ -263,7 +263,7 @@ onMounted(() => {
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">Location</p>
-                  <p class="tw-mb-0 tw-text-xs">+57 310 5885854</p>
+                  <p class="tw-mb-0 tw-text-xs">-----</p>
                 </div>
               </div>
             </CardContent>

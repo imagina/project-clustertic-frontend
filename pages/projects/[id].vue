@@ -16,6 +16,7 @@ import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 import type { Project, Proposal } from '~/models/projects'
 import type { NewProposalFormValue } from '~/models/stores'
 import { projectExample1 } from '~/utils/examples/project'
+import Swal from 'sweetalert2'
 
 // const project = ref<Project>(projectExample1)
 const tab = ref('details')
@@ -81,6 +82,31 @@ async function sendProposal() {
     projectsStore.addProposal(data)
   } catch (erro) {
     console.log(erro)
+  }
+}
+
+function handleSelectProposal(proposal: Proposal) {
+  if (!project.value.bids) return
+  if (project.value.bids.find((value) => value.selected === 1)) {
+    Swal.fire({
+      title: 'El proyecto ya cuenta con un proyecto seleccionado',
+      icon: 'error',
+      showCloseButton: true,
+    })
+  } else {
+    Swal.fire({
+      title: 'Desea seleccionar esta propuesta',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Seleccionar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        projectsStore.selectProposal(proposal)
+      }
+    })
   }
 }
 </script>
@@ -253,7 +279,7 @@ async function sendProposal() {
                   <label
                     class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-mt-10"
                   >
-                    Describe tu propuesta (mínimo 100 caracteres)*
+                    Adjunta los archivos que desee
                   </label>
                   <Dropzone v-model="proposalData.files">
                     <template v-slot:title>
@@ -305,8 +331,10 @@ async function sendProposal() {
             <div class="tw-mb-10">
               <CardProposal
                 v-for="proposal in project.bids"
+                v-on:on-select-proposal="handleSelectProposal(proposal)"
+                :selected="proposal.selected === 1"
                 :key="`proposal_${proposal.id}`"
-                id="1"
+                :id="proposal.id"
                 :rating="0"
                 :delivery-days="proposal.deliveryDays"
                 :amount="proposal.amount"

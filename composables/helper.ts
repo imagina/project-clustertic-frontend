@@ -109,7 +109,7 @@ export const Helper = {
   },
 
   //Convert object keys to snake_case
-  toSnakeCase: (object, params = {}) => {
+  toSnakeCase: (object: any, params: { [key: string]: any } = {}) => {
     //Items to ignore when try to convert to snakeCase
     const notToSnakeCase = [
       ...(params.notToSnakeCase || []),
@@ -117,8 +117,8 @@ export const Helper = {
     ]
     const keysNotToSnakeCase = params.keysNotToSnakeCase || []
     //function recursive to loop all items from object
-    let convertObject = (dataObject) => {
-      let response = {} //Object to save fields vonverted
+    let convertObject = (dataObject: any) => {
+      let response: { [key: string]: any } = {} //Object to save fields vonverted
       //Loop all items for convert
 
       for (var item in dataObject) {
@@ -194,7 +194,7 @@ export const Helper = {
   },
 
   /* redirect with router instance*/
-  redirectTo(route) {
+  redirectTo(route: string) {
     const router = useRouter()
     router.push(route)
   },

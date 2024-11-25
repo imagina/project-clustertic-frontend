@@ -233,7 +233,7 @@ export const useAuthStore = defineStore('auth', {
         },
       }
       apiCluster
-        .post(apiRoutes.changePassword, requestData, false)
+        .post(apiRoutes.changePassword, requestData, {}, false)
         .then((response) => {
           Helper.redirectTo(routes.login)
           Notify.create({
@@ -405,7 +405,7 @@ export const useAuthStore = defineStore('auth', {
       }
 
       apiCluster
-        .put(apiRoutes.profileUsers + `/${this.user?.id}`, {}, false, body)
+        .put(apiRoutes.profileUsers + `/${this.user?.id}`, body)
         .then((response) => {
           this.requestFullUser()
         })
@@ -530,7 +530,7 @@ export const useAuthStore = defineStore('auth', {
             description: experience.description,
           },
           user_id: this.user.id,
-          type: 'experience',
+          type: 'portfolio',
           options: {
             dateInit: experience.dateInit,
             dateEnd: experience.dateEnd,

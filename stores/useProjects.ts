@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Project } from '~/models/projects'
+import type { Project, Proposal } from '~/models/projects'
 import type { ProjectsState } from '~/models/stores'
 import type { NewProjectFormValue, NewProposalFormValue } from '~/models/stores'
 import type { PaginationInfo } from '~/models/utils'
@@ -141,6 +141,7 @@ export const useProjectsStore = defineStore('projects', {
           `${apiRoutes.proposals}`,
           {
             filter: JSON.stringify(filtros),
+            include: 'creator',
           },
         )
         const project: Project = projectResponse.data
@@ -160,7 +161,6 @@ export const useProjectsStore = defineStore('projects', {
     },
 
     async addProposal(attributes: NewProposalFormValue) {
-      const config = useRuntimeConfig()
       const auth = useAuthStore()
 
       if (!auth.user) {
@@ -200,6 +200,38 @@ export const useProjectsStore = defineStore('projects', {
           type: 'positive',
         })
         console.log(response)
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+    },
+
+    async selectProposal(proposal: Proposal) {
+      const auth = useAuthStore()
+
+      if (!auth.user) {
+        Notify.create({
+          message: 'Debes Ingresar para poder crear una propuesta',
+          type: 'negative',
+        })
+        throw new Error('you need be logged')
+      }
+      if (!this.selected || this.selected.createdBy !== auth.user.id) {
+        throw new Error('you need to select a project that you create')
+      }
+      try {
+        const response: any = await apiCluster.put(
+          apiRoutes.proposals + `/${proposal.id}`,
+          {
+            'attributes[selected]': 1,
+          },
+        )
+
+        Notify.create({
+          message: 'Se ha seleccionado la propuesta exitosamente',
+          type: 'positive',
+        })
+        this.viewDetails(this.selected.id)
       } catch (error) {
         console.error(error)
         throw error

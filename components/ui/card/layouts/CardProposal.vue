@@ -7,20 +7,38 @@ import {
 } from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
 
+const emits = defineEmits<{
+  (event: 'onSelectProposal', value: number): void
+}>()
+
 const props = defineProps<{
   class?: HTMLAttributes['class']
-  id: string
+  id: number
   rating?: number
   amount?: number
   deliveryDays?: number
+  selected?: boolean
 }>()
+
+function handleSelectProposal() {
+  emits('onSelectProposal', props.id)
+}
 </script>
 
 <!-- <template v-slot:before v-if="$slots.before">
   <slot name="before"></slot>
 </template> -->
 <template>
-  <Card :class="cn(props.class, 'tw-mb-2')">
+  <Card
+    :class="
+      cn(
+        props.class,
+        'tw-mb-2 tw-cursor-pointer proposal-card',
+        props.selected ? 'proposal-selected' : '',
+      )
+    "
+    @click="handleSelectProposal"
+  >
     <div class="tw-p-5">
       <div class="tw-flex tw-mb-10">
         <div class="user-img tw-rounded tw-w-20 tw-h-20 tw-bg-secondary">
@@ -82,11 +100,7 @@ const props = defineProps<{
         </div>
       </div>
       <p class="lg:tw-w-2/3">
-        <slot name="description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed soluta ex
-          sapiente hic qui suscipit cumque, culpa rerum? Quod, sint ea ex vitae
-          sed recusandae laborum neque exercitationem soluta odio.
-        </slot>
+        <slot name="description"></slot>
       </p>
     </div>
     <CardFooter>
@@ -98,6 +112,13 @@ const props = defineProps<{
 </template>
 
 <style lang="css" scoped>
+.proposal-card:hover,
+.proposal-selected {
+  @apply tw-border-primary;
+  & h3 {
+    @apply tw-text-primary-dark;
+  }
+}
 .more-info {
   transform: translateX(-50%);
 }

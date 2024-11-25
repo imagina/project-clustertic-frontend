@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'vue'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']
-  id: string
+  id: number
   rating?: number
   init?: Date
   end?: Date

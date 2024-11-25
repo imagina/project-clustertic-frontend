@@ -30,8 +30,8 @@ export const apiCluster = {
   post: (
     url: string,
     data?: {} | FormData,
-    toSnakeCase = true,
     params = {},
+    toSnakeCase = true,
   ) => {
     const config = apiCluster.config()
     let body: {} | FormData | undefined = {}
@@ -59,9 +59,9 @@ export const apiCluster = {
 
   patch: (
     url: string,
+    params = {},
     data?: {} | FormData,
     toSnakeCase = true,
-    params = {},
   ) => {
     const config = apiCluster.config()
     let body: {} | FormData | undefined = {}
@@ -79,7 +79,7 @@ export const apiCluster = {
       params: params,
     })
   },
-  put: (url: string, data?: {} | FormData, toSnakeCase = true, params = {}) => {
+  put: (url: string, params?: {} | FormData, data = {}, toSnakeCase = true) => {
     const config = apiCluster.config()
     let body: {} | FormData | undefined = {}
     let headers = { ...config.headers }
@@ -96,7 +96,7 @@ export const apiCluster = {
       params: params,
     })
   },
-  delete: (url: string, data?: {}, toSnakeCase = true, params = {}) => {
+  delete: (url: string, params = {}, data?: {}, toSnakeCase = true) => {
     const config = apiCluster.config()
     const body = toSnakeCase ? Helper.toSnakeCase(data) : data
     return $fetch(`${config.url}${url}`, {

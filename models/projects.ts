@@ -1,7 +1,7 @@
 import type { City, Country, Province } from './locations'
 
 export interface ProjectTag {
-  createdAt: Date
+  createdAt: string | Date
   createdBy: number
   deletedAt: null
   deletedBy: null
@@ -17,7 +17,7 @@ export interface ProjectTag {
   sortOrder: number
   status: number
   title: string
-  updatedAt: Date
+  updatedAt: string | Date
   updatedBy: number
   url: string
   pivot?: {
@@ -34,7 +34,7 @@ export interface Project {
   city?: City
   countryId: number
   country?: Country
-  createdAt: Date
+  createdAt: string | Date
   createdBy: number
   defaultPrice: number
   deletedAt: null
@@ -62,9 +62,9 @@ export interface Project {
   status: number
   statusName: string
   title: string
-  updatedAt: Date
+  updatedAt: string | Date
   updatedBy: number
-  uploadedAt: Date
+  uploadedAt: string
   url: string
   userId: number
 
@@ -74,7 +74,7 @@ export interface Project {
 export interface Proposal {
   adId: number //id del proyecto
   amount: number
-  createdAt: Date
+  createdAt: string | Date
   createdBy: number
   currency: string
   deletedAt: null
@@ -87,8 +87,28 @@ export interface Proposal {
   selected: number
   statusId: number
   statusLabel: StatusLabel
-  updatedAt: Date
+  updatedAt: string | Date
   updatedBy: number
+  creator?: {
+    createdAt: string | Date
+    createdBy: number
+    deletedAt: null
+    deletedBy: null
+    email: string
+    firstName: string
+    id: number
+    isGuest: number
+    language: string
+    lastLogin: string
+    lastName: string
+    organizationId: null
+    permissions: any
+    phone: string
+    timezone: string
+    updatedAt: string | Date
+    updatedBy: number
+    userName: null
+  }
 }
 
 export interface StatusLabel {
@@ -111,8 +131,8 @@ export interface File {
   alt: null
   keywords: null
   createdBy: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  createdAt: string | Date | null
+  updatedAt: string | Date | null
   faIcon: string
   disk: null | string
   extension: null | string
@@ -188,8 +208,8 @@ export interface MediaData {
   alt: null
   keywords: null
   createdBy: number
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string | Date
+  updatedAt: string | Date
   faIcon: string
   disk: string
   extension: string

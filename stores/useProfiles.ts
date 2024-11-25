@@ -72,7 +72,7 @@ export const useProfilesStore = defineStore('profile', {
       }
 
       apiCluster
-        .put(apiRoutes.profileUsers + `/${this.user?.id}`, {}, false, body)
+        .put(apiRoutes.profileUsers + `/${this.user?.id}`, body)
         .then((response) => {
           this.requestFullUser(<number>this.user?.id)
         })
