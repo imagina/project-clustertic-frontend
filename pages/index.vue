@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import CharacterLandingSVG from '~/assets/svg/character-landing.svg'
-import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
+import {
+  ArrowRightIcon,
+  BriefcaseBusinessIcon,
+  CheckCheckIcon,
+  HourglassIcon,
+  PlayIcon,
+  SparkleIcon,
+} from 'lucide-vue-next'
 import ProjectsCarousel from '~/components/sections/projectsCarousel.vue'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 definePageMeta({
@@ -122,14 +129,16 @@ const slide = ref(1)
       </CardProject>
     </div>
     <div class="tw-flex tw-justify-center tw-pb-20">
-      <Button
-        variant="ghost"
-        type="button"
-        class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
-      >
-        Ver más
-        <ArrowRightIcon class="tw-ml-3" />
-      </Button>
+      <NuxtLink to="/projects">
+        <Button
+          variant="ghost"
+          type="button"
+          class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
+        >
+          Ver más
+          <ArrowRightIcon class="tw-ml-3" />
+        </Button>
+      </NuxtLink>
     </div>
   </div>
 
@@ -146,7 +155,7 @@ const slide = ref(1)
         <div class="tw-px-20 line-variant">
           <div class="tw-grid tw-grid-cols-2 tw-gap-x-20 tw-gap-y-5 tw-mb-20">
             <div class="">
-              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <SparkleIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
                 El mejor talento
               </h4>
@@ -156,33 +165,38 @@ const slide = ref(1)
               </p>
             </div>
             <div class="">
-              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <HourglassIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                El mejor talento
+                Trabajo de calidad
               </h4>
               <p class="tw-text-white">
-                Descubre profesionales confiables al explorar sus portafolios y
-                sumergirte en los comentarios compartidos en sus perfiles.
+                Con la reserva de talentos de Freelancer de más de 60 millones
+                de profesionales a tu alcance, encontrarás el talento de calidad
+                para lograr lo que necesitas.
               </p>
             </div>
             <div class="">
-              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <CheckCheckIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                El mejor talento
+                Propuestas rápidas
               </h4>
               <p class="tw-text-white">
-                Descubre profesionales confiables al explorar sus portafolios y
-                sumergirte en los comentarios compartidos en sus perfiles.
+                Recibe presupuestos rápidos y sin compromiso de parte de
+                talentosos freelancers. El 80 % de los trabajos reciben ofertas
+                en cuestión de 60 segundos. Tu idea está a solo momentos de la
+                realidad.
               </p>
             </div>
             <div class="">
-              <ArrowRightIcon :size="35" class="tw-text-white" />
+              <BriefcaseBusinessIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                El mejor talento
+                Ten el control
               </h4>
               <p class="tw-text-white">
-                Descubre profesionales confiables al explorar sus portafolios y
-                sumergirte en los comentarios compartidos en sus perfiles.
+                Mantente informado mientras vas de un lado al otro. Conversa con
+                tus freelancers y recibe actualizaciones en tiempo real con
+                nuestra aplicación móvil. En cualquier lugar y en cualquier
+                momento.
               </p>
             </div>
           </div>
@@ -190,14 +204,16 @@ const slide = ref(1)
             <p class="tw-text-white tw-text-2xl tw-font-semibold tw-mb-3">
               Haz realidad tus sueños
             </p>
-            <Button
-              variant="ghost"
-              type="button"
-              class="!tw-text-2xl !tw-font-semibold tw-text-primary hover:tw-text-primary hover:tw-underline !tw-p-0"
-            >
-              Comienza Ya
-              <ArrowRightIcon :size="35" class="tw-text-primary tw-ms-2" />
-            </Button>
+            <NuxtLink to="/auth/register">
+              <Button
+                variant="ghost"
+                type="button"
+                class="!tw-text-2xl !tw-font-semibold tw-text-primary hover:tw-text-primary hover:tw-underline !tw-p-0"
+              >
+                Comienza Ya
+                <ArrowRightIcon :size="35" class="tw-text-primary tw-ms-2" />
+              </Button>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -208,7 +224,6 @@ const slide = ref(1)
           filled
           class="tw-text-9xl lg:tw-text-[36rem] !tw-m-0"
         />
-        c
       </div>
     </div>
   </div>

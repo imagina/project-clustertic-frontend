@@ -50,7 +50,7 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
 
           <div class="tw-flex tw-items-center tw-mb-4">
             <div
-              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full"
+              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full tw-pt-0"
             >
               <PencilIcon class="tw-text-primary" />
             </div>
@@ -72,7 +72,7 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">
             <div
-              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full"
+              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full tw-pt-0"
             >
               <CategoriesSVG class="tw-text-primary tw-text-3xl" filled />
             </div>
@@ -106,18 +106,19 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">
             <div
-              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full"
+              class="tw-border-r-2 tw-border-input tw-px-3 tw-py-5 tw-h-full tw-pt-0"
             >
               <InfoIcon class="tw-text-primary" />
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Acerca del Cluster</p>
-              <a
-                href="#"
+
+              <NuxtLink
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
+                to="/info"
               >
                 Sobre el cluster
-              </a>
+              </NuxtLink>
               <a
                 href="#"
                 class="tw-mb-7 tw-text-xs tw-font-extralight tw-block"

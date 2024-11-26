@@ -1,4 +1,4 @@
-import type { Project } from '~/models/projects'
+import type { Project } from '~/models/interfaces/projects'
 
 export const projectExample1: Project = {
   bids: [

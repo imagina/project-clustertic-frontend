@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
-import type { CategoriesState } from '~/models/stores'
-import type { NewProjectFormValue, NewProposalFormValue } from '~/models/stores'
-import type { PaginationInfo } from '~/models/utils'
+import type { CategoriesState } from '~/models/interfaces/stores'
+import type {
+  NewProjectFormValue,
+  NewProposalFormValue,
+} from '~/models/interfaces/stores'
+import type { PaginationInfo } from '~/models/interfaces/utils'
 
 const apiRoutes = {
   /* auth */

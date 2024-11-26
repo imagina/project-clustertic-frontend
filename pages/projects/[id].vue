@@ -13,8 +13,8 @@ import {
   PhoneIcon,
 } from 'lucide-vue-next'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
-import type { Project, Proposal } from '~/models/projects'
-import type { NewProposalFormValue } from '~/models/stores'
+import type { Project, Proposal } from '~/models/interfaces/projects'
+import type { NewProposalFormValue } from '~/models/interfaces/stores'
 import { projectExample1 } from '~/utils/examples/project'
 import Swal from 'sweetalert2'
 

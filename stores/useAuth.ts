@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
 import ChangePassword from '~/pages/admin/changePassword.vue'
-import type { LoginResponse } from '~/models/auth'
-import type { AuthState } from '~/models/stores'
+import type { LoginResponse } from '~/models/interfaces/auth'
+import type { AuthState } from '~/models/interfaces/stores'
 import { boolean } from 'zod'
-import type { UserData, UserSkill } from '~/models/user'
-import type { ProjectTag } from '~/models/projects'
+import type { UserData, UserSkill } from '~/models/interfaces/user'
+import type { ProjectTag } from '~/models/interfaces/projects'
+import { User } from '~/models/UserData'
 
 const apiRoutes = {
   /* auth */
@@ -42,6 +43,9 @@ export const useAuthStore = defineStore('auth', {
     googleClientId: null,
   }),
   getters: {
+    fullUser(state) {
+      return state.user ? new User(state.user) : undefined
+    },
     userDescription(state) {
       if (!state.user) return ''
       const description = state.user.fields.find(
@@ -271,7 +275,7 @@ export const useAuthStore = defineStore('auth', {
         const response: any = await apiCluster.get(
           apiRoutes.profileUsers + `/${this.user?.id}`,
           {
-            include: 'information,skills',
+            include: 'information.files,skills',
           },
         )
         this.user = { ...this.user, ...response.data }
@@ -375,6 +379,9 @@ export const useAuthStore = defineStore('auth', {
     //user edit
 
     async editProfileInfo(data: {
+      'attributes[first_name]'?: string
+      'attributes[last_name]'?: string
+      'attributes[email]'?: string
       'attributes[medias_single][profile]'?: number
       'attributes[fields]'?: {
         name: string
@@ -382,12 +389,15 @@ export const useAuthStore = defineStore('auth', {
       }[]
     }) {
       if (!this.user) throw Error('you must be logged')
+      const user = new User(this.user)
       const body: { [key: string]: any } = {
-        'attributes[id]': this.user?.id,
+        'attributes[id]': user.id,
         'attributes[is_activated]': 1,
         ...data,
       }
       if (body['attributes[fields]']) {
+        debugger
+        const currentFields = Object.keys(user.extraFields)
         const fields = body['attributes[fields]']
         delete body['attributes[fields]']
         fields.forEach(
@@ -400,6 +410,12 @@ export const useAuthStore = defineStore('auth', {
           ) => {
             body[`attributes[fields][${i}][name]`] = item.name
             body[`attributes[fields][${i}][value]`] = item.value
+            if (currentFields.includes(item.name)) {
+              const oldField = user.fields.find((field) => {
+                return field.name === item.name
+              })
+              if (oldField) body[`attributes[fields][${i}][id]`] = oldField.id
+            }
           },
         )
       }
@@ -473,8 +489,8 @@ export const useAuthStore = defineStore('auth', {
       img?: File
       title: string
       description: string
-      dateInit: Date
-      dateEnd?: Date
+      dateInit: string
+      dateEnd?: string
       skill?: string
       place: string
     }) {
@@ -503,13 +519,23 @@ export const useAuthStore = defineStore('auth', {
           mainimage: dataMedia.id,
         }
       }
-      apiCluster
+      return apiCluster
         .post(apiRoutes.profileInformation, body)
         .then((response) => {
           this.requestFullUser()
+          Notify.create({
+            message: 'Experiencia agregada!',
+            type: 'positive',
+          })
+          return true
         })
         .catch((e) => {
           console.error(e)
+          Notify.create({
+            message: 'No se pudo crear',
+            type: 'negative',
+          })
+          throw e
         })
     },
 

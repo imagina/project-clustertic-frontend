@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
 import type { QDialogProps } from 'quasar'
-import type { ProjectTag } from '~/models/projects'
+import type { ProjectTag } from '~/models/interfaces/projects'
 import { Paperclip } from 'lucide-vue-next'
 
 const props = defineProps<QDialogProps>()

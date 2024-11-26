@@ -8,6 +8,7 @@ const props = defineProps<{
   init?: Date
   end?: Date
   place: string
+  img?: string
 }>()
 
 const dateInit = computed(() => {
@@ -26,9 +27,17 @@ const dateDiff = computed(() =>
 <template>
   <div class="tw-flex tw-gap-8 tw-p-4" :class="props.class">
     <div
-      class="tw-h-24 tw-w-24 tw-rounded-3xl tw-bg-secondary tw-text-primary tw-flex-none"
+      class="tw-h-24 tw-w-24 tw-rounded-3xl tw-bg-secondary tw-text-primary tw-flex-none img-container"
     >
-      icon
+      <div
+        :style="
+          img
+            ? {
+                backgroundImage: `url(${img})`,
+              }
+            : {}
+        "
+      ></div>
     </div>
     <div class="tw-flex-grow">
       <p class="tw-text-lg tw-text-muted-custom tw-font-light">
@@ -67,3 +76,16 @@ const dateDiff = computed(() =>
     </div>
   </div>
 </template>
+
+<style lang="css" scoped>
+.img-container {
+  @apply tw-rounded-md tw-bottom-0  tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-p-1;
+  box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
+
+  & > div {
+    @apply tw-h-full tw-w-full tw-bg-white tw-rounded-md;
+    background-size: 100% 100%;
+    background-image: url('@/assets/images/login-bg.png');
+  }
+}
+</style>

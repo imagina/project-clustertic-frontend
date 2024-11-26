@@ -2,8 +2,8 @@
 import { useVModel } from '@vueuse/core'
 import { XIcon } from 'lucide-vue-next'
 import type { QDialogProps } from 'quasar'
-import type { ProjectTag } from '~/models/projects'
-import type { UserSkill } from '~/models/user'
+import type { ProjectTag } from '~/models/interfaces/projects'
+import type { UserSkill } from '~/models/interfaces/user'
 
 let debounceTimeout: any = null
 const props = defineProps<QDialogProps>()
@@ -20,6 +20,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 })
 
 const newData = reactive<{
+  companyName: string
+  firstName: string
+  lastName: string
   description: string
   skills: UserSkill[]
   searchSkills: string
@@ -27,7 +30,13 @@ const newData = reactive<{
   web: string
   twitter: string
   linkedin: string
+  place: string
+  phone: string
+  email: string
 }>({
+  companyName: '',
+  firstName: '',
+  lastName: '',
   description: '',
   skills: [],
   searchSkills: '',
@@ -35,6 +44,9 @@ const newData = reactive<{
   web: '',
   twitter: '',
   linkedin: '',
+  place: '',
+  phone: '',
+  email: '',
 })
 
 const categories = computed<ProjectTag[]>(() => {
@@ -44,12 +56,20 @@ const categories = computed<ProjectTag[]>(() => {
 watch(
   () => authStore.user,
   (newQuery, oldQuery) => {
-    newData.description = authStore.userDescription
-    newData.facebook = authStore.userSocialMedia.facebook ?? ''
-    newData.twitter = authStore.userSocialMedia.twitter ?? ''
-    newData.linkedin = authStore.userSocialMedia.linkedin ?? ''
-    newData.web = authStore.userSocialMedia.web ?? ''
-    newData.skills = authStore.user?.skills ?? []
+    const fullUser = authStore.fullUser
+    if (!fullUser) return
+    newData.firstName = fullUser.firstName
+    newData.lastName = fullUser.lastName
+    newData.companyName = fullUser.extraFields.companyName?.value ?? ''
+    newData.place = fullUser.extraFields.place?.value ?? ''
+    newData.phone = fullUser.extraFields.phone?.value ?? ''
+    newData.description = fullUser.extraFields.description?.value ?? ''
+    newData.skills = fullUser?.skills ?? []
+    newData.facebook = fullUser.socialMedia.facebook ?? ''
+    newData.web = fullUser.socialMedia.web ?? ''
+    newData.twitter = fullUser.socialMedia.twitter ?? ''
+    newData.linkedin = fullUser.socialMedia.linkedin ?? ''
+    newData.email = fullUser.email ?? ''
   },
 )
 
@@ -92,6 +112,9 @@ function handleSaveInfo() {
   }
 
   authStore.editProfileInfo({
+    'attributes[first_name]': newData.firstName,
+    'attributes[last_name]': newData.lastName,
+    'attributes[email]': newData.email,
     'attributes[fields]': [
       {
         name: 'description',
@@ -101,92 +124,225 @@ function handleSaveInfo() {
         name: 'socialNetworks',
         value: JSON.stringify(socialMedia),
       },
+      {
+        name: 'place',
+        value: newData.place,
+      },
+      {
+        name: 'phone',
+        value: newData.phone,
+      },
+      {
+        name: 'companyName',
+        value: newData.companyName,
+      },
     ],
   })
 }
 </script>
 
 <template>
-  <q-dialog v-model="modelValue" transition-show="fade" transition-hide="fade">
-    <q-card class="card-edit !tw-rounded-lg" style="max-width: 80vw">
-      <q-card-section>
+  <q-dialog v-model="modelValue">
+    <q-card
+      class="card-edit tw-relative !tw-rounded-lg"
+      style="max-width: 80vw"
+    >
+      <q-card-section class="tw-sticky tw-z-40 tw-top-0">
         <div class="tw-text-lg tw-font-semibold tw-text-white">
           Editar Perfil
         </div>
-      </q-card-section>
-
-      <q-card-section class="q-pt-none">
         <p class="tw-text-sm tw-font-normal tw-text-white">
-          You will have the ability to choose wich profile to display in your
-          bids.
+          Información básica
         </p>
-        <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-          Top skills
-        </p>
-        <div
-          class="tw-relative tw-border tw-border-muted-custom lg:tw-w-[34rem] tw-p-3 tw-rounded-md"
-        >
-          <ul class="tw-flex tw-flex-wrap">
-            <li
-              v-for="(item, index) in newData.skills"
-              :key="`skill_${index}`"
-              class="tw-border tw-border-primary tw-rounded-md tw-flex tw-px-5 tw-py-1 tw-h-min tw-mr-2 tw-mb-1"
+        <q-separator />
+      </q-card-section>
+      <q-card-section class="q-pt-2">
+        <div class="tw-grid tw-grid-cols-2 tw-gap-2">
+          <div class="input-container">
+            <label
+              class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
             >
-              <p class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose">
-                {{ item.title }}
-              </p>
-              <Button
-                size="xs"
-                type="button"
-                variant="ghost"
-                class="hover:tw-bg-transparent !tw-pr-0"
+              Nombre
+            </label>
+            <InputCPA
+              outlined
+              dark
+              size="sm"
+              class="input-custom-outline search-input-border"
+              v-model="newData.firstName"
+            ></InputCPA>
+          </div>
+
+          <div class="input-container">
+            <label
+              class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+            >
+              Apellido
+            </label>
+            <InputCPA
+              outlined
+              dark
+              size="sm"
+              class="input-custom-outline search-input-border"
+              v-model="newData.lastName"
+            ></InputCPA>
+          </div>
+        </div>
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Nombre de la empresa
+          </label>
+          <InputCPA
+            outlined
+            dark
+            size="sm"
+            class="input-custom-outline search-input-border"
+            v-model="newData.companyName"
+          ></InputCPA>
+        </div>
+
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Description
+          </label>
+          <Textarea
+            v-model="newData.description"
+            class="!tw-border-muted-custom tw-text-white tw-mb-4"
+          ></Textarea>
+        </div>
+
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Pagina Web
+          </label>
+          <InputCPA
+            outlined
+            dark
+            size="sm"
+            type="url"
+            class="input-custom-outline search-input-border"
+            v-model="newData.web"
+          ></InputCPA>
+        </div>
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Ubicación
+          </label>
+          <InputCPA
+            outlined
+            dark
+            size="sm"
+            class="input-custom-outline search-input-border"
+            v-model="newData.place"
+          ></InputCPA>
+        </div>
+
+        <div class="tw-mb-4">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Habilidades principales
+          </label>
+          <div
+            class="tw-relative tw-border tw-border-muted-custom lg:tw-w-[34rem] tw-p-3 tw-rounded-md"
+          >
+            <ul class="tw-flex tw-flex-wrap">
+              <li
+                v-for="(item, index) in newData.skills"
+                :key="`skill_${index}`"
+                class="tw-border tw-border-primary tw-rounded-md tw-flex tw-px-5 tw-py-1 tw-h-min tw-mr-2 tw-mb-1"
               >
-                <XIcon
-                  @click="handleRemoveSkill(index)"
-                  class="tw-text-primary tw-text-xs"
-                  :size="20"
-                />
-              </Button>
-            </li>
-          </ul>
-
-          <input
-            @input="handleEndWrite"
-            class="skills-input"
-            :placeholder="$t('projects.create.form.skills.placeholder')"
-            v-model="newData.searchSkills"
-          />
-
-          <div class="option-skill-list">
-            <ul class="">
-              <li v-for="item in categories" :key="`category_${item.id}`">
-                <Button
-                  @click="handleAddSkill(item)"
-                  variant="ghost"
-                  type="button"
-                  class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
-                >
+                <p class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose">
                   {{ item.title }}
+                </p>
+                <Button
+                  size="xs"
+                  type="button"
+                  variant="ghost"
+                  class="hover:tw-bg-transparent !tw-pr-0"
+                >
+                  <XIcon
+                    @click="handleRemoveSkill(index)"
+                    class="tw-text-primary tw-text-xs"
+                    :size="20"
+                  />
                 </Button>
               </li>
             </ul>
+
+            <input
+              @input="handleEndWrite"
+              class="skills-input"
+              :placeholder="$t('projects.create.form.skills.placeholder')"
+              v-model="newData.searchSkills"
+            />
+
+            <div class="option-skill-list">
+              <ul class="">
+                <li v-for="item in categories" :key="`category_${item.id}`">
+                  <Button
+                    @click="handleAddSkill(item)"
+                    variant="ghost"
+                    type="button"
+                    class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
+                  >
+                    {{ item.title }}
+                  </Button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-          Description
-        </p>
-        <Textarea
-          v-model="newData.description"
-          class="!tw-border-muted-custom tw-text-white"
-        ></Textarea>
-        <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-          Redes sociales
-        </p>
+
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Email
+          </label>
+          <InputCPA
+            outlined
+            dark
+            size="sm"
+            type="url"
+            class="input-custom-outline search-input-border"
+            v-model="newData.email"
+            disable
+          ></InputCPA>
+        </div>
+        <div class="input-container">
+          <label
+            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+          >
+            Numero de teléfono
+          </label>
+          <InputCPA
+            outlined
+            dark
+            size="sm"
+            class="input-custom-outline search-input-border"
+            v-model="newData.phone"
+            type="tel"
+          ></InputCPA>
+        </div>
+
+        <label
+          class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
+        >
+          Conexiones
+        </label>
         <div class="tw-grid tw-grid-cols-2 tw-gap-4">
           <InputCPA
             outlined
             dark
-            rounded
             class="input-custom-outline tw-mb-3 search-input-border"
             v-model="newData.facebook"
             label="Facebook"
@@ -196,7 +352,6 @@ function handleSaveInfo() {
           <InputCPA
             outlined
             dark
-            rounded
             class="input-custom-outline tw-mb-3 search-input-border"
             v-model="newData.twitter"
             label="Twitter"
@@ -206,28 +361,16 @@ function handleSaveInfo() {
           <InputCPA
             outlined
             dark
-            rounded
             class="input-custom-outline tw-mb-3 search-input-border"
             v-model="newData.linkedin"
             label="Linkedin"
           >
             <template v-slot:prepend>L</template>
           </InputCPA>
-          <InputCPA
-            outlined
-            dark
-            rounded
-            class="input-custom-outline tw-mb-3 search-input-border"
-            v-model="newData.web"
-            label="Web"
-            type="url"
-          >
-            <template v-slot:prepend>W</template>
-          </InputCPA>
         </div>
       </q-card-section>
-
-      <q-card-actions align="right">
+      <q-separator />
+      <q-card-actions class="tw-sticky tw-z-40 tw-bottom-0" align="right">
         <q-btn
           flat
           label="Decline"
@@ -244,7 +387,8 @@ function handleSaveInfo() {
 </template>
 
 <style lang="css" scoped>
-.card-edit {
+.card-edit,
+.card-edit > div {
   background-color: hsla(240, 23%, 17%, 1);
 }
 

@@ -59,7 +59,7 @@ export interface NewProposalFormValue {
   description: string
   amount: number
   delivery_days: number
-  currency: 'USD' | 'COL'
+  currency: 'USD' | 'COP'
 
   medias_multi?: {
     documents?: {

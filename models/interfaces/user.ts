@@ -66,10 +66,10 @@ export interface DepartmentPivot {
 }
 
 export interface MediaFiles {
-  profile: Profile
+  profile: MediaInfo
 }
 
-export interface Profile {
+export interface MediaInfo {
   id: null
   filename: null
   mimeType: null
@@ -147,6 +147,25 @@ export interface UserSkill {
   updatedBy: number
   userId: number
 }
+
+export interface InformationMediaFiles {
+  mainimage: MediaInfo
+  gallery: any[]
+  documents: any[]
+}
+
+export interface MediasMulti {
+  gallery: Documents
+  documents: Documents
+}
+
+export interface Documents {
+  files: any[]
+}
+
+export interface MediasSingleClass {
+  mainimage: number
+}
 export interface UserFields {
   createdAt: string
   createdBy: number
@@ -178,6 +197,9 @@ export interface BaseUserInformation {
   updatedAt: string
   updatedBy: number
   userId: number
+  mediaFiles?: InformationMediaFiles
+  mediasMulti?: MediasMulti
+  mediasSingle?: any[] | MediasSingleClass
 }
 
 export interface ExperienceUserInformation extends BaseUserInformation {

@@ -7,7 +7,7 @@ import {
   LogInIcon,
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
-import type { UserData } from '~/models/user'
+import type { UserData } from '~/models/interfaces/user'
 const { locale } = useI18n()
 
 const authStore = useAuthStore()
@@ -41,8 +41,8 @@ const user = computed<UserData | null>(() => authStore.user)
             "
           >
             <li v-if="user">
-              <NuxtLink to="/profile">
-                <Button variant="ghost" class="tw-text-secondary">
+              <NuxtLink to="/profiles/me">
+                <Button variant="ghost" type="button" class="tw-text-secondary">
                   <div class="user-img tw-inline-block">
                     <div>
                       {{
@@ -61,24 +61,28 @@ const user = computed<UserData | null>(() => authStore.user)
               </NuxtLink>
             </li>
             <li>
-              <Button variant="ghost" class="tw-text-secondary">
-                <BriefcaseIcon class="tw-text-primary tw-mr-3" />
-                <span class="tw-font-bold tw-capitalize">
-                  {{ $t('appbar.nav.briefcase') }}
-                </span>
-              </Button>
+              <NuxtLink to="/profiles/me">
+                <Button variant="ghost" type="button" class="tw-text-secondary">
+                  <BriefcaseIcon class="tw-text-primary tw-mr-3" />
+                  <span class="tw-font-bold tw-capitalize">
+                    {{ $t('appbar.nav.briefcase') }}
+                  </span>
+                </Button>
+              </NuxtLink>
             </li>
             <li>
-              <Button variant="ghost" class="tw-text-secondary">
-                <CompassIcon class="tw-text-primary tw-mr-3" />
-                <span class="tw-font-bold tw-capitalize">
-                  {{ $t('appbar.nav.explore') }}
-                </span>
-              </Button>
+              <NuxtLink to="/projects">
+                <Button variant="ghost" type="button" class="tw-text-secondary">
+                  <CompassIcon class="tw-text-primary tw-mr-3" />
+                  <span class="tw-font-bold tw-capitalize">
+                    {{ $t('appbar.nav.explore') }}
+                  </span>
+                </Button>
+              </NuxtLink>
             </li>
             <li v-if="!user">
               <NuxtLink to="/auth/login">
-                <Button variant="ghost" class="tw-text-secondary">
+                <Button variant="ghost" type="button" class="tw-text-secondary">
                   <LogInIcon
                     class="tw-text-primary tw-mr-3"
                     style="transform: rotate(180deg)"

@@ -7,7 +7,7 @@ const props = defineProps<QDialogProps>()
 const authStore = useAuthStore()
 
 const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string | number): void
+  (e: 'update:modelValue', payload: boolean): void
 }>()
 
 const modelValue = useVModel(props, 'modelValue', emits, {
@@ -31,27 +31,29 @@ const newData = reactive<{
   place: '',
 })
 
-function handleSaveInfo() {
+async function handleSaveInfo() {
   const toSend: {
     img?: File
     title: string
     description: string
-    dateInit: Date
-    dateEnd?: Date
+    dateInit: string
+    dateEnd?: string
     place: string
   } = {
     title: newData.title,
     description: newData.description,
     place: newData.place,
-    dateInit: Helper.parseStringToDate(newData.dateInit, 'YYYY-MM-DD'),
-    dateEnd: newData.dateEnd
-      ? Helper.parseStringToDate(newData.dateEnd, 'YYYY-MM-DD')
-      : undefined,
+    dateInit: newData.dateInit,
+    dateEnd: newData.dateEnd ?? undefined,
   }
   if (newData.files && newData.files.length > 0) {
     toSend.img = newData.files[0]
   }
-  authStore.addExperience(toSend)
+  try {
+    await authStore.addExperience(toSend)
+  } finally {
+    emits('update:modelValue', false)
+  }
 }
 </script>
 
@@ -72,7 +74,7 @@ function handleSaveInfo() {
           You will have the ability to choose wich profile to display in your
           bids.
         </p>
-        <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">Titulo</p>
+        <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">Titulo*</p>
         <InputCPA
           outlined
           dark
@@ -80,19 +82,20 @@ function handleSaveInfo() {
           class="input-custom-outline tw-mb-3 search-input-border"
           v-model="newData.title"
           label="Titulo"
+          required
         >
           <template v-slot:prepend>F</template>
         </InputCPA>
 
         <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-          Descripción
+          Descripción*
         </p>
         <Textarea
           v-model="newData.description"
           class="!tw-border-muted-custom tw-text-white"
         ></Textarea>
         <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-          Locación
+          Locación*
         </p>
         <InputCPA
           outlined
@@ -100,14 +103,13 @@ function handleSaveInfo() {
           rounded
           class="input-custom-outline tw-mb-3 search-input-border"
           v-model="newData.place"
-          label="Facebook"
-        >
-          <template v-slot:prepend>F</template>
-        </InputCPA>
+          label="Lugar"
+          required
+        ></InputCPA>
         <div class="tw-grid tw-grid-cols-2 tw-gap-4">
           <div>
             <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
-              Fecha de inicio
+              Fecha de inicio*
             </p>
             <InputCPA
               outlined
@@ -116,9 +118,8 @@ function handleSaveInfo() {
               class="input-custom-outline tw-mb-3 search-input-border"
               v-model="newData.dateInit"
               type="date"
+              required
             ></InputCPA>
-          </div>
-          <div>
             <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
               Fecha de fin
             </p>
@@ -131,8 +132,8 @@ function handleSaveInfo() {
               type="date"
             ></InputCPA>
           </div>
-          <div>
-            <Dropzone v-model="newData.files">
+          <div class="tw-flex tw-justify-center tw-items-center">
+            <Dropzone class="tw-text-white" v-model="newData.files">
               <template v-slot:title>
                 <div
                   class="tw-flex tw-flex-col tw-items-center tw-justify-center"
@@ -165,7 +166,7 @@ function handleSaveInfo() {
           </div>
         </div>
       </q-card-section>
-
+      <q-separator />
       <q-card-actions align="right">
         <q-btn
           flat

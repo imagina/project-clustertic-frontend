@@ -3,8 +3,8 @@ import { XIcon, DollarSignIcon } from 'lucide-vue-next'
 import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import ShieldDollarSVG from '@/assets/svg/shield-dollar.svg'
 import FileShredderSVG from '@/assets/svg/file-shredder.svg'
-import type { ProjectTag } from '~/models/projects'
-import type { NewProjectFormValue } from '~/models/stores'
+import type { ProjectTag } from '~/models/interfaces/projects'
+import type { NewProjectFormValue } from '~/models/interfaces/stores'
 import { useCategoryStore } from '~/stores/useCategories'
 
 interface rangePriceOptionsInterface {
@@ -60,7 +60,7 @@ const stepsTitles: any = ref([
     description: '',
   },
 ])
-const currencyOptions = ref<string[]>(['USD', 'COL'])
+const currencyOptions = ref<string[]>(['USD', 'COP'])
 const rangePriceOptions = ref<rangePriceOptionsInterface[]>([
   {
     label: 'Proyecto muy pequeño ($250 - 750 USD)',

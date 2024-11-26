@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
-import type { Project, Proposal } from '~/models/projects'
-import type { ProjectsState } from '~/models/stores'
-import type { NewProjectFormValue, NewProposalFormValue } from '~/models/stores'
-import type { PaginationInfo } from '~/models/utils'
+import type { Project, Proposal } from '~/models/interfaces/projects'
+import type { ProjectsState } from '~/models/interfaces/stores'
+import type {
+  NewProjectFormValue,
+  NewProposalFormValue,
+} from '~/models/interfaces/stores'
+import type { PaginationInfo } from '~/models/interfaces/utils'
 
 const apiRoutes = {
   /* auth */
@@ -49,6 +52,28 @@ export const useProjectsStore = defineStore('projects', {
       if (Array.isArray(filters.categories))
         this.filters['categories'] =
           filters.categories.length > 0 ? filters.categories : undefined
+    },
+    async get(page: number, take: number = 10) {
+      // if (this.pagination.currentPage === page && !force) return
+      try {
+        this.loading = true
+        const response: any = await apiCluster.get(apiRoutes.projects, {
+          page,
+          take,
+          include: 'categories',
+          filter: JSON.stringify(this.filters),
+        })
+        const metadata: {
+          page: PaginationInfo
+        } = response.meta
+        this.projects = response.data
+        this.pagination = metadata.page
+      } catch (error) {
+        console.error(error)
+        throw error
+      } finally {
+        this.loading = false
+      }
     },
     async create(attributes: NewProjectFormValue) {
       const auth = useAuthStore()
@@ -97,28 +122,6 @@ export const useProjectsStore = defineStore('projects', {
       this.get(1)
       Helper.redirectTo(`/projects`)
       return response
-    },
-    async get(page: number, take: number = 10) {
-      // if (this.pagination.currentPage === page && !force) return
-      try {
-        this.loading = true
-        const response: any = await apiCluster.get(apiRoutes.projects, {
-          page,
-          take,
-          include: 'categories',
-          filter: JSON.stringify(this.filters),
-        })
-        const metadata: {
-          page: PaginationInfo
-        } = response.meta
-        this.projects = response.data
-        this.pagination = metadata.page
-      } catch (error) {
-        console.error(error)
-        throw error
-      } finally {
-        this.loading = false
-      }
     },
 
     async viewDetails(id: number) {

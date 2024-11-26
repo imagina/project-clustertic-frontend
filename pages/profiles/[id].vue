@@ -3,30 +3,34 @@ import { MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
-import ProfileEdit from '~/components/modals/ProfileEdit.vue'
-import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
-import type { ExperienceUserInformation } from '~/models/user'
-definePageMeta({
-  middleware: 'auth',
-})
+import type { ExperienceUserInformation } from '~/models/interfaces/user'
 
-const auth = useAuthStore()
+const profilesStore = useProfilesStore()
+const route = useRoute()
 
-const user = computed(() => auth.user)
-const description = computed(() => auth.userDescription)
-const socialMedia = computed(() => auth.userSocialMedia)
+const user = computed(() => profilesStore.user)
+const extraFields = computed(() => profilesStore.fullUser?.extraFields)
+const description = computed(() => profilesStore.userDescription)
+const socialMedia = computed(() => profilesStore.userSocialMedia)
 const experiences = computed(
   () =>
     <ExperienceUserInformation[]>(
-      auth.user?.information?.filter((item) => item.type === 'experience')
+      profilesStore.user?.information?.filter(
+        (item) => item.type === 'experience',
+      )
     ) ?? [],
 )
 
-const show_modal_editSkills = ref(false)
-const show_modal_editPhoto = ref(false)
-const show_modal_addExperience = ref(false)
 onMounted(() => {
-  auth.requestFullUser()
+  if (
+    !profilesStore.user ||
+    `${profilesStore.user.id}` !== `${route.params.id}`
+  ) {
+    profilesStore.viewDetails(parseInt(`${route.params.id}`))
+  }
+})
+onBeforeUnmount(() => {
+  profilesStore.removeSelected()
 })
 </script>
 
@@ -45,14 +49,6 @@ onMounted(() => {
                 }"
               ></div>
             </client-only>
-            <Button
-              @click="show_modal_editPhoto = true"
-              type="button"
-              variant="outline"
-              class="tw-border-none profile-btn !tw-p-3"
-            >
-              <SquarePenIcon :size="20" />
-            </Button>
           </div>
         </div>
         <div class="tw-grow tw-border-b tw-border-[hsla(0, 0%, 90%, 1)]">
@@ -74,26 +70,9 @@ onMounted(() => {
         <Button
           type="button"
           variant="outline"
-          @click="auth.logout"
-          class="tw-border-none profile-btn"
-        >
-          Log Out
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
           class="tw-border-none profile-btn"
         >
           <ShareSVG filled class="tw-text-xl" />
-        </Button>
-        <Button
-          @click="show_modal_editSkills = true"
-          type="button"
-          variant="outline"
-          class="tw-border-none profile-btn"
-        >
-          <SquarePenIcon :size="15" class="tw-mr-2" />
-          Editar
         </Button>
       </div>
       <div class="tw-flex tw-gap-8 tw-mt-10">
@@ -104,15 +83,6 @@ onMounted(() => {
           </p>
           <div class="tw-flex tw-justify-between tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Portafolio</h4>
-
-            <Button
-              type="button"
-              variant="outline"
-              class="tw-border-none profile-btn"
-            >
-              <SquarePenIcon :size="15" class="tw-mr-2" />
-              Administrar portafolio
-            </Button>
           </div>
           <div class="portfolio-slider tw-mb-20">
             <CardPortfolio id="1"></CardPortfolio>
@@ -185,16 +155,6 @@ onMounted(() => {
           <div class="tw-flex tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Experiencia</h4>
             <div class="tw-grow"></div>
-
-            <Button
-              @click="show_modal_addExperience = true"
-              type="button"
-              variant="outline"
-              class="tw-border-none profile-btn"
-            >
-              <SquarePenIcon :size="15" class="tw-mr-2" />
-              Agregar experiencia
-            </Button>
           </div>
           <div>
             <CardExperience
@@ -237,11 +197,28 @@ onMounted(() => {
                 <div
                   class="tw-border-r-2 tw-border-muted-light tw-px-3 tw-py-5"
                 >
+                  <FactoryIcon class="tw-text-black" :size="20" />
+                </div>
+                <div class="tw-text-black tw-ml-3">
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">
+                    Nombre de la empresa
+                  </p>
+                  <p class="tw-mb-0 tw-text-xs">
+                    {{ extraFields?.companyName?.value }}
+                  </p>
+                </div>
+              </div>
+              <div class="tw-flex tw-items-center tw-mb-4">
+                <div
+                  class="tw-border-r-2 tw-border-muted-light tw-px-3 tw-py-5"
+                >
                   <PhoneIcon class="tw-text-black" :size="20" />
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">Teléfono</p>
-                  <p class="tw-mb-0 tw-text-xs">+57 310 5885854</p>
+                  <p class="tw-mb-0 tw-text-xs">
+                    {{ extraFields?.phone?.value }}
+                  </p>
                 </div>
               </div>
               <div class="tw-flex tw-items-center tw-mb-4">
@@ -263,7 +240,9 @@ onMounted(() => {
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">Location</p>
-                  <p class="tw-mb-0 tw-text-xs">-----</p>
+                  <p class="tw-mb-0 tw-text-xs">
+                    {{ extraFields?.place?.value }}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -281,9 +260,6 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <ProfileEdit v-model="show_modal_editSkills" />
-  <ProfileChangeProfileImage v-model="show_modal_editPhoto" />
-  <ModalsAddExperience v-model="show_modal_addExperience" />
 </template>
 
 <style lang="css" scoped>

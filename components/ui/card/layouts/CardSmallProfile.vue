@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import {
-  MessageSquareTextIcon,
-  CircleDollarSignIcon,
-  FlagIcon,
-} from 'lucide-vue-next'
+import StarSVG from '@/assets/svg/star.svg'
 import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']
-  id: string
+  id: number | string
   name?: string
+  img?: string
   username?: string
   rating?: number
   numberJobs?: number | string
@@ -24,37 +21,37 @@ const props = defineProps<{
 </template> -->
 <template>
   <Card :class="cn(props.class, 'tw-bg-white')">
-    <div class="tw-p-5">
-      <div class="tw-flex tw-mb-1">
+    <div class="tw-p-5 tw-h-full">
+      <div class="tw-flex tw-justify-center tw-items-center tw-mb-1">
         <div class="img-container">
-          <div class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"></div>
-          <Button
-            type="button"
-            variant="outline"
-            class="tw-border-none profile-btn !tw-p-3"
-          ></Button>
+          <div
+            :style="
+              img
+                ? {
+                    backgroundImage: `url(${img})`,
+                  }
+                : {}
+            "
+          ></div>
         </div>
         <div class="tw-pl-7 tw-py-5 tw-grow">
           <CardTitle class="tw-font-bold tw-text-lg tw-mb-4">
             {{ props.name }}
-            <span class="tw-ml-2 tw-font-light tw-text-blue-500">
+            <span
+              v-if="props.username"
+              class="tw-ml-2 tw-font-light tw-text-blue-500"
+            >
               @{{ props.username }}
             </span>
           </CardTitle>
 
-          <div class="tw-flex tw-mb-3">
-            <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-            <p>{{ props.location }}</p>
-          </div>
+          <slot name="tag"></slot>
           <p class="tw-text-base tw-font-semibold tw-mb-3">
             ${{ props.price }} por hora
           </p>
           <div class="tw-flex tw-gap-3 tw-mb-1">
             <div class="tw-flex">
-              <RatingIndicator
-                starClass="tw-text-base tw-mr-1"
-                :rating="props.rating"
-              />
+              <StarSVG class="star filled !tw-h-full" />
               <p class="tw-mb-0 tw-ml-4 tw-text-sm">
                 {{ props.rating?.toFixed(1) }} ({{ props.numberJobs }} trabajos)
               </p>
@@ -74,9 +71,13 @@ const props = defineProps<{
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 
   & > div {
+    @apply tw-h-full tw-w-full tw-bg-white tw-rounded-md;
     background-size: 100% 100%;
     background-image: url('@/assets/images/login-bg.png');
   }
+}
+.star.filled {
+  color: hsla(40, 95%, 52%, 1);
 }
 .more-info {
   transform: translateX(-50%);

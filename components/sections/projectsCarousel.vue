@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { FlagIcon } from 'lucide-vue-next'
+</script>
 <template>
   <div class="tw-bg-gray-200">
     <h3
@@ -34,7 +36,14 @@
               location="Ibagué, Colombia"
               number-jobs="175"
               price="47"
-            />
+            >
+              <template v-slot:tag>
+                <div class="tw-flex tw-mb-3">
+                  <FlagIcon class="flag-icon tw-mr-2" :size="20" />
+                  <p>Ibagué, Colombia</p>
+                </div>
+              </template>
+            </CardSmallProfile>
           </CarouselItem>
           <CarouselItem class="lg:!tw-basis-1/3">
             <CardSmallProfile
