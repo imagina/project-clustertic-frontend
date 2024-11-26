@@ -39,6 +39,8 @@ export class User implements UserData {
   mediaFiles: MediaFiles
   skills?: UserSkill[]
   information?: BaseUserInformation[]
+  ratings?: any[]
+  averageRating?: number
 
   constructor(data: UserData) {
     this.id = data.id
@@ -68,6 +70,8 @@ export class User implements UserData {
     this.mediaFiles = data.mediaFiles
     this.skills = data.skills
     this.information = data.information
+    this.ratings = data.ratings
+    this.averageRating = data.averageRating
   }
 
   get extraFields(): {

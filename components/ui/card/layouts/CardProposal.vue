@@ -18,6 +18,7 @@ const props = defineProps<{
   amount?: number
   deliveryDays?: number
   selected?: boolean
+  img?: string
 }>()
 
 function handleSelectProposal() {
@@ -42,7 +43,16 @@ function handleSelectProposal() {
     <div class="tw-p-5">
       <div class="tw-flex tw-mb-10">
         <div class="user-img tw-rounded tw-w-20 tw-h-20 tw-bg-secondary">
-          img
+          
+          <div
+            :style="
+              img
+                ? {
+                    backgroundImage: `url(${img})`,
+                  }
+                : {}
+            "
+          ></div>
         </div>
         <div class="tw-pl-7 tw-grow">
           <div class="tw-flex tw-mb-1">
@@ -123,7 +133,13 @@ function handleSelectProposal() {
   transform: translateX(-50%);
 }
 .user-img {
+
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
+  & > div {
+    @apply tw-h-full tw-w-full tw-bg-white;
+    background-size: 100% 100%;
+    background-image: url('@/assets/images/login-bg.png');
+  }
 }
 .comment-icon {
   color: hsla(40, 95%, 52%, 1);

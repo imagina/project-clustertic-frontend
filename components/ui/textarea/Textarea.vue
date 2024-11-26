@@ -9,6 +9,7 @@ const props = defineProps<{
   resize?: boolean
   defaultValue?: string | number
   modelValue?: string | number
+  disable?:boolean
 }>()
 
 const emits = defineEmits<{
@@ -24,6 +25,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 <template>
   <textarea
     v-model="modelValue"
+    :disabled="props.disable"
     :class="
       cn(
         'tw-flex tw-min-h-20 tw-w-full tw-rounded-2xl tw-border tw-border-black tw-border-opacity-25 tw-bg-background tw-px-3 tw-py-2 tw-text-sm tw-ring-offset-background placeholder:tw-text-muted-foreground focus-visible:tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-ring focus-visible:tw-ring-offset-2 disabled:tw-cursor-not-allowed disabled:tw-opacity-50',

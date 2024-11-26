@@ -17,16 +17,21 @@ import type { Project, Proposal } from '~/models/interfaces/projects'
 import type { NewProposalFormValue } from '~/models/interfaces/stores'
 import { projectExample1 } from '~/utils/examples/project'
 import Swal from 'sweetalert2'
+import type { User } from '~/models/UserData'
 
 // const project = ref<Project>(projectExample1)
 const tab = ref('details')
 const refForm: any = ref()
 
 const projectsStore = useProjectsStore()
+const authStore  = useAuthStore()
 const route = useRoute()
 
 const project = computed<Project>(
   () => projectsStore.selected ?? projectExample1,
+)
+const isMyProject = computed<boolean>(
+  ()=>projectsStore.selected?.createdBy === authStore.user?.id
 )
 
 const memberSince = computed<Date>(() => {
@@ -86,7 +91,8 @@ async function sendProposal() {
 }
 
 function handleSelectProposal(proposal: Proposal) {
-  if (!project.value.bids) return
+  if (!project.value.bids || !isMyProject.value) return
+  
   if (project.value.bids.find((value) => value.selected === 1)) {
     Swal.fire({
       title: 'El proyecto ya cuenta con un proyecto seleccionado',
@@ -221,6 +227,7 @@ function handleSelectProposal(proposal: Proposal) {
                         fill-mask
                         reverse-fill-mask
                         :rules="[(val) => !!val || 'El valor es requerido']"
+                        :disable="!isMyProject"
                       >
                         <template v-slot:prepend>$</template>
                         <template v-slot:append>
@@ -258,6 +265,7 @@ function handleSelectProposal(proposal: Proposal) {
                         type="number"
                         class="tw-mb-3 tw-mt-2"
                         v-model="proposalData.days"
+                        :disable="!isMyProject"
                       >
                         <template v-slot:append>
                           <span class="tw-text-sm">Dias</span>
@@ -274,6 +282,7 @@ function handleSelectProposal(proposal: Proposal) {
                     placeholder="¿Qué le convierte en el mejor candidato para este proyecto?"
                     v-model="proposalData.description"
                     class="tw-h-28"
+                        :disable="!isMyProject"
                   ></Textarea>
 
                   <label
@@ -281,7 +290,8 @@ function handleSelectProposal(proposal: Proposal) {
                   >
                     Adjunta los archivos que desee
                   </label>
-                  <Dropzone v-model="proposalData.files">
+                  <Dropzone 
+                  :disable="!isMyProject" v-model="proposalData.files">
                     <template v-slot:title>
                       <div
                         class="tw-flex tw-flex-col tw-items-center tw-justify-center"
@@ -316,6 +326,7 @@ function handleSelectProposal(proposal: Proposal) {
                   </Dropzone>
                   <div class="tw-flex tw-mt-10 tw-justify-end">
                     <Button
+                    :disabled="!isMyProject" 
                       type="submit"
                       class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
                     >
@@ -338,9 +349,19 @@ function handleSelectProposal(proposal: Proposal) {
                 :rating="0"
                 :delivery-days="proposal.deliveryDays"
                 :amount="proposal.amount"
+                :img="proposal.creator?.mediaFiles.profile.path"
               >
+                <template v-slot:name>
+                  {{ (<User>proposal.creator).extraFields.companyName?.value ?? proposal.creator?.fullName }}
+                </template>
+                <template v-slot:username>
+                  {{ proposal.creator?.fullName }}
+                </template>
                 <template v-slot:description>
                   {{ proposal.description }}
+                </template>
+                <template v-slot:subtitle>
+                  {{ `${(<User>proposal.creator).extraFields.description?.value ?? ''}`.slice(0,50) }}
                 </template>
               </CardProposal>
             </div>

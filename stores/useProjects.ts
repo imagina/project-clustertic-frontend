@@ -6,6 +6,7 @@ import type {
   NewProposalFormValue,
 } from '~/models/interfaces/stores'
 import type { PaginationInfo } from '~/models/interfaces/utils'
+import { User } from '~/models/UserData'
 
 const apiRoutes = {
   /* auth */
@@ -144,11 +145,14 @@ export const useProjectsStore = defineStore('projects', {
           `${apiRoutes.proposals}`,
           {
             filter: JSON.stringify(filtros),
-            include: 'creator',
+            include: 'creator.ratings',
           },
         )
         const project: Project = projectResponse.data
-        project.bids = proposalResponse.data
+        project.bids = (<Proposal[]>proposalResponse.data).map(pro=>{
+          if(pro.creator) pro.creator = new User(pro.creator)
+          return pro
+        })
         this.selected = project
         Helper.redirectTo(`/projects/${id}`)
       } catch (error) {

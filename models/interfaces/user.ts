@@ -26,6 +26,8 @@ export interface UserData {
   mediaFiles: MediaFiles
   skills?: UserSkill[]
   information?: BaseUserInformation[]
+  ratings?: any[],
+  averageRating?: number
 }
 
 export interface Permissions {

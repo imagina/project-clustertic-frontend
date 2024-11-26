@@ -1,4 +1,5 @@
 import type { City, Country, Province } from './locations'
+import type { UserData } from './user'
 
 export interface ProjectTag {
   createdAt: string | Date
@@ -89,26 +90,7 @@ export interface Proposal {
   statusLabel: StatusLabel
   updatedAt: string | Date
   updatedBy: number
-  creator?: {
-    createdAt: string | Date
-    createdBy: number
-    deletedAt: null
-    deletedBy: null
-    email: string
-    firstName: string
-    id: number
-    isGuest: number
-    language: string
-    lastLogin: string
-    lastName: string
-    organizationId: null
-    permissions: any
-    phone: string
-    timezone: string
-    updatedAt: string | Date
-    updatedBy: number
-    userName: null
-  }
+  creator?: UserData
 }
 
 export interface StatusLabel {

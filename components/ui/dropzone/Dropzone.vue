@@ -7,6 +7,7 @@ const props = defineProps<{
   class?: string
   dark?: boolean
   modelValue: any
+  disable?: boolean
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -36,6 +37,7 @@ const handleFileSelect = (event: Event) => {
 }
 
 const handleFiles = (files: FileList) => {
+  if(props.disable) return
   emit('update:modelValue', files)
 }
 

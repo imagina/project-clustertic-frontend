@@ -36,24 +36,24 @@ const props = defineProps<{
         </div>
         <div class="tw-pl-7 tw-py-5 tw-grow">
           <CardTitle class="tw-font-bold tw-text-lg tw-mb-4">
-            {{ props.name }}
+            {{ name }}
             <span
-              v-if="props.username"
+              v-if="username"
               class="tw-ml-2 tw-font-light tw-text-blue-500"
             >
-              @{{ props.username }}
+              @{{ username }}
             </span>
           </CardTitle>
 
           <slot name="tag"></slot>
           <p class="tw-text-base tw-font-semibold tw-mb-3">
-            ${{ props.price }} por hora
+            ${{ price }} por hora
           </p>
           <div class="tw-flex tw-gap-3 tw-mb-1">
             <div class="tw-flex">
               <StarSVG class="star filled !tw-h-full" />
               <p class="tw-mb-0 tw-ml-4 tw-text-sm">
-                {{ props.rating?.toFixed(1) }} ({{ props.numberJobs }} trabajos)
+                {{ rating?.toFixed(1) }} ({{ numberJobs }} trabajos)
               </p>
             </div>
           </div>
