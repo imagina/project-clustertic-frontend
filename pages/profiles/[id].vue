@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
+import { FactoryIcon, MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'
@@ -159,7 +159,9 @@ onBeforeUnmount(() => {
           <div>
             <CardExperience
               v-for="experience in experiences"
+              :key="`experience_user${experience.id}`"
               class="tw-mb-3"
+              :img="experience.mediaFiles?.mainimage?.path"
               :id="experience.id"
               :init="Helper.parseStringToDate(experience.options.dateInit)"
               :end="

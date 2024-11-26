@@ -208,6 +208,7 @@ onMounted(() => {
             <CardExperience
               v-for="experience in experiences"
               class="tw-mb-3"
+              :key="`experience_user${experience.id}`"
               :img="experience.mediaFiles?.mainimage?.path"
               :id="experience.id"
               :init="Helper.parseStringToDate(experience.options.dateInit)"
