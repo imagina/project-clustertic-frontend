@@ -26,6 +26,9 @@ const props = defineProps<{
         <p class="tw-text-sm tw-line-clamp-3">
           <slot name="description" />
         </p>
+        <p class="tw-text-sm tw-line-clamp-3 tw-mt-2">
+          <slot name="user" />
+        </p>
 
         <span
           class="more-info tw-text-blue-500 tw-absolute tw-right-0 tw-bg-white"

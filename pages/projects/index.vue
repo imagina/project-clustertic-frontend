@@ -196,6 +196,9 @@ function searchCategories(query?: string) {
             <template v-slot:description>
               {{ project.description }}
             </template>
+            <template v-slot:user>
+              Publicado por : {{ project.creator.fullName }}
+            </template>
           </CardProject>
         </li>
       </ul>
