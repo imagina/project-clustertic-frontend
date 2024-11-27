@@ -37,7 +37,7 @@ const handleFileSelect = (event: Event) => {
 }
 
 const handleFiles = (files: FileList) => {
-  if(props.disable) return
+  if (props.disable) return
   emit('update:modelValue', files)
 }
 

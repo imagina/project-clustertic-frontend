@@ -10,8 +10,8 @@
   },
   "landing": {
     "title": {
-      "content": "Conecta con manos expertas {highlight} para convertir {br} tus ideas en proyectos",
-      "highlight": "tolimenses"
+      "content": "Conecta ahora tus ideas con {highlight} {br} en tecnología para hacerlas realidad",
+      "highlight": "manos expertas"
     },
     "publishProject": "Publicar proyectos",
     "findProject": "Buscar Proyectos"

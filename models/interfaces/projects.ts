@@ -25,6 +25,7 @@ export interface ProjectTag {
     adId: number
     categoryId: number
   }
+  children?: ProjectTag[]
 }
 
 export interface Project {

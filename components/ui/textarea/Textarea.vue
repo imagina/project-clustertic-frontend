@@ -9,7 +9,7 @@ const props = defineProps<{
   resize?: boolean
   defaultValue?: string | number
   modelValue?: string | number
-  disable?:boolean
+  disable?: boolean
 }>()
 
 const emits = defineEmits<{

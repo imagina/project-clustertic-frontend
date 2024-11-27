@@ -26,6 +26,7 @@ export const useCategoryStore = defineStore('categories', {
       },
     },
     loading: false,
+    parentCategories: [],
   }),
   getters: {},
   actions: {
@@ -47,6 +48,55 @@ export const useCategoryStore = defineStore('categories', {
         } = response.meta
         this.categories = response.data
         this.pagination = metadata.page
+      } catch (error) {
+        console.error(error)
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+    async requestParentsCategories() {
+      // if (this.pagination.currentPage === page && !force) return
+      try {
+        this.loading = true
+        const response: any = await apiCluster.get(apiRoutes.categories, {
+          include: 'children',
+          filter: JSON.stringify({
+            order: {
+              field: 'id',
+              way: 'asc',
+            },
+            parentId: null,
+          }),
+        })
+        const metadata: {
+          page: PaginationInfo
+        } = response.meta
+        this.parentCategories = response.data
+      } catch (error) {
+        console.error(error)
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async viewDetails(id: number) {
+      try {
+        this.loading = true
+        debugger
+        const response: any = await apiCluster.get(apiRoutes.categories, {
+          include: 'children',
+          filter: JSON.stringify({
+            order: {
+              field: 'id',
+              way: 'asc',
+            },
+            id: id,
+          }),
+        })
+        this.selected = response.data[0]
+        Helper.redirectTo(`/categories/${id}`)
       } catch (error) {
         console.error(error)
         throw error

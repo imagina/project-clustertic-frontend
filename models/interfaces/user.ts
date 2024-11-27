@@ -26,7 +26,7 @@ export interface UserData {
   mediaFiles: MediaFiles
   skills?: UserSkill[]
   information?: BaseUserInformation[]
-  ratings?: any[],
+  ratings?: any[]
   averageRating?: number
 }
 

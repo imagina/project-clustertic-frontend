@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FactoryIcon, MailIcon, MapPinIcon, PhoneIcon, SquarePenIcon } from 'lucide-vue-next'
+import { FactoryIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
 import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
 import ShareSVG from '~/assets/svg/share.svg'

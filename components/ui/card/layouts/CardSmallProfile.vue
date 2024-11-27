@@ -21,7 +21,7 @@ const props = defineProps<{
 </template> -->
 <template>
   <Card :class="cn(props.class, 'tw-bg-white')">
-    <div class="tw-p-5 tw-h-full">
+    <div class="tw-p-5 tw-h-full tw-flex tw-justify-between tw-flex-col">
       <div class="tw-flex tw-justify-center tw-items-center tw-mb-1">
         <div class="img-container">
           <div
@@ -41,26 +41,26 @@ const props = defineProps<{
               v-if="username"
               class="tw-ml-2 tw-font-light tw-text-blue-500"
             >
-              @{{ username }}
+              {{ username }}
             </span>
           </CardTitle>
 
           <slot name="tag"></slot>
-          <p class="tw-text-base tw-font-semibold tw-mb-3">
+          <p v-if="price" class="tw-text-base tw-font-semibold tw-mb-3">
             ${{ price }} por hora
           </p>
           <div class="tw-flex tw-gap-3 tw-mb-1">
             <div class="tw-flex">
               <StarSVG class="star filled !tw-h-full" />
               <p class="tw-mb-0 tw-ml-4 tw-text-sm">
-                {{ rating?.toFixed(1) }} ({{ numberJobs }} trabajos)
+                {{ rating?.toFixed(1) }}
+                <span v-if="numberJobs">({{ numberJobs }} trabajos)</span>
               </p>
             </div>
           </div>
         </div>
       </div>
       <Button type="button" class="tw-w-full">Ver perfil</Button>
-      <div></div>
     </div>
   </Card>
 </template>

@@ -111,8 +111,7 @@ const rangePriceOptions = ref<rangePriceOptionsInterface[]>([
 ])
 
 // TODO: Reemplazar estos datos de ejemplo por datos que devuelva un endpoint de sugeridos
-const suggestedSkills = ref<ProjectTag[]>([
-])
+const suggestedSkills = ref<ProjectTag[]>([])
 
 const projectData = reactive<createDataInterface>({
   name: '',

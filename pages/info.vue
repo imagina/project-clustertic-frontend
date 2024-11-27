@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
+import SolarPanelSVG from '@/assets/svg/solar-panel.svg'
+import DevicesPcSVG from '@/assets/svg/devices-pc.svg'
+import BrushSVG from '@/assets/svg/brush.svg'
+import PacManSVG from '@/assets/svg/pacman.svg'
 import {
   ArrowRightIcon,
   PlayIcon,
@@ -15,6 +19,10 @@ definePageMeta({
   layout: 'default',
 })
 
+const categoriesStore = useCategoryStore()
+onMounted(() => {
+  categoriesStore.requestParentsCategories()
+})
 const contactData = ref({
   firstName: '',
   lastName: '',
@@ -122,48 +130,44 @@ const refForm = ref(null)
       <div
         class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 what-its-cluster-details"
       >
-        <div class="tw-flex tw-items-center tw-mb-4">
+        <div
+          v-for="category in categoriesStore.parentCategories"
+          :key="`sub-category-${category.id}`"
+          class="tw-flex tw-items-center tw-mb-4"
+        >
           <div class="tw-h-full tw-w-full">
-            <Button size="lg" variant="outline">Categorías</Button>
-            <p>Política de Tratamiento de Datos</p>
-            <p>Términos del Servicio</p>
-          </div>
-        </div>
-
-        <div class="tw-flex tw-items-center tw-mb-4">
-          <div
-            class="tw-border-r-2 tw-border-input tw-mx-6 tw-py-5 tw-h-full"
-          ></div>
-          <div class="tw-h-full tw-w-full">
-            <Button size="lg" variant="outline">Categorías</Button>
-            <p>Política de Tratamiento de Datos</p>
-            <p>Términos del Servicio</p>
-          </div>
-        </div>
-        <div class="tw-flex tw-items-center tw-mb-4">
-          <div
-            class="tw-border-r-2 tw-border-input tw-mx-6 tw-py-5 tw-h-full"
-          ></div>
-          <div class="tw-h-full tw-w-full">
-            <Button size="lg" variant="outline">Categorías</Button>
-            <p>Infraestructura TI y Conectividad</p>
-            <p>Transformación Digital y Desarrollo de Software</p>
-            <p>Producción de Contenidos y Marketing Digital</p>
-            <p>Videojuegos, Realidad Aumentada y Virtual</p>
-          </div>
-        </div>
-        <div class="tw-flex tw-items-center tw-mb-4">
-          <div
-            class="tw-border-r-2 tw-border-input tw-mx-6 tw-py-5 tw-h-full"
-          ></div>
-          <div class="tw-h-full tw-w-full">
-            <Button size="lg" variant="outline">Categorías</Button>
-            <p class="tw-mb-6 tw-text-xs tw-font-extralight tw-block">
-              Sobre el cluster
-            </p>
-            <p class="tw-mb-7 tw-text-xs tw-font-extralight tw-block">
-              Recursos de ayuda
-            </p>
+            <div class="category-header">
+              <span>
+                <SolarPanelSVG
+                  v-if="category.id === 1"
+                  class="tw-text-4xl"
+                  filled
+                />
+                <DevicesPcSVG
+                  v-if="category.id === 2"
+                  class="tw-text-4xl"
+                  filled
+                />
+                <BrushSVG v-if="category.id === 3" class="tw-text-4xl" filled />
+                <PacManSVG
+                  v-if="category.id === 4"
+                  class="tw-text-4xl"
+                  filled
+                />
+              </span>
+              <h4>
+                {{ category.title }}
+              </h4>
+            </div>
+            <template v-if="category.children">
+              <NuxtLink
+                :to="`/categories/${subCategory.id}`"
+                v-for="subCategory in category.children"
+                :key="`sub-category-${subCategory.id}`"
+              >
+                {{ subCategory.title }}
+              </NuxtLink>
+            </template>
           </div>
         </div>
       </div>
@@ -362,11 +366,24 @@ const refForm = ref(null)
 }
 
 .what-its-cluster-details {
-  & p {
-    @apply tw-text-white tw-mb-6 tw-text-xs tw-font-extralight tw-block tw-w-full;
+  @apply tw-text-white;
+  & > * {
+    @apply md:tw-border-r-2 tw-border-muted-light tw-px-6;
   }
-  & button {
-    @apply tw-text-white tw-mb-10 tw-text-sm tw-font-bold tw-block tw-w-full tw-rounded-3xl;
+  & > *:nth-child(4n) {
+    @apply tw-border-none;
+  }
+  & a {
+    @apply tw-mb-6 tw-text-xs tw-font-normal tw-block tw-w-full;
+  }
+  & .category-header {
+    @apply tw-text-white tw-mb-10 tw-flex tw-justify-start tw-items-center tw-w-full tw-rounded-[10rem] tw-border tw-border-primary tw-py-4 tw-px-2;
+    & > span {
+      @apply tw-px-3 tw-py-2 tw-border-r-2 tw-border-muted-foreground;
+    }
+    & > h4 {
+      @apply tw-text-white tw-font-medium tw-text-base  tw-text-start tw-whitespace-normal tw-pl-3;
+    }
   }
 }
 .grid-container {

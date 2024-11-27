@@ -43,7 +43,6 @@ function handleSelectProposal() {
     <div class="tw-p-5">
       <div class="tw-flex tw-mb-10">
         <div class="user-img tw-rounded tw-w-20 tw-h-20 tw-bg-secondary">
-          
           <div
             :style="
               img
@@ -133,7 +132,6 @@ function handleSelectProposal() {
   transform: translateX(-50%);
 }
 .user-img {
-
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
   & > div {
     @apply tw-h-full tw-w-full tw-bg-white;

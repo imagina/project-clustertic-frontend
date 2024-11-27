@@ -50,63 +50,59 @@ function handleSelectUsers(user_id: number) {
 <template>
   <SearchProject class="tw-mt-20" />
   <LoadingScreen :loading="profilesStore.loading" />
-  <div class="tw-container tw-mt-5 tw-mb-16 tw-relative">
-    <section class="">
-      <Card class="tw-mb-3 tw-h-full">
-        <CardHeader>
-          <CardTitle class="tw-font-extrabold">
-            Resultados
-            {{
-              router.query['search']
-                ? `que contengan "${router.query['search']}"`
-                : ``
-            }}
-            <span class="tw-font-normal tw-text-base tw-ml-5">
-              Página {{ page }} de {{ totalPages }}
-            </span>
-          </CardTitle>
-        </CardHeader>
-      </Card>
-      <ul class="profile-list">
-        <li
-          v-for="user in profilesStore.users"
-          :key="`user-card=${user.id}`"
-          @click="handleSelectUsers(user.id)"
+  <section class="tw-container tw-mt-5 tw-mb-16 tw-relative">
+    <Card class="tw-mb-3 tw-h-full">
+      <CardHeader>
+        <CardTitle class="tw-font-extrabold">
+          Resultados
+          {{
+            router.query['search']
+              ? `que contengan "${router.query['search']}"`
+              : ``
+          }}
+          <span class="tw-font-normal tw-text-base tw-ml-5">
+            Página {{ page }} de {{ totalPages }}
+          </span>
+        </CardTitle>
+      </CardHeader>
+    </Card>
+    <ul class="profile-list">
+      <li
+        v-for="user in profilesStore.users"
+        :key="`user-card=${user.id}`"
+        @click="handleSelectUsers(user.id)"
+      >
+        <CardSmallProfile
+          class="tw-h-full"
+          :id="user.id"
+          :name="user.fullName"
+          :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
+          :rating="4.5"
+          location="xx, zz"
+          number-jobs="x"
+          price="0"
         >
-          <CardSmallProfile
-            class="tw-h-full"
-            :id="user.id"
-            :name="user.fullName"
-            :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
-            :rating="4.5"
-            location="xx, zz"
-            number-jobs="x"
-            price="0"
-          >
-            <template v-slot:tag>
-              <div v-if="user.skills" class="tw-flex tw-mb-3">
-                <p>
-                  {{
-                    user.skills?.length > 0
-                      ? user.skills[0].title
-                      : 'Sin definir'
-                  }}
-                </p>
-              </div>
-            </template>
-          </CardSmallProfile>
-        </li>
-      </ul>
-      <div class="tw-flex tw-justify-center tw-mt-10">
-        <Paginator
-          @on-page-selected="handleRefreshPage"
-          :pages="totalPages"
-          :btn-per-side="3"
-          :current="page"
-        />
-      </div>
-    </section>
-  </div>
+          <template v-slot:tag>
+            <div v-if="user.skills" class="tw-flex tw-mb-3">
+              <p>
+                {{
+                  user.skills?.length > 0 ? user.skills[0].title : 'Sin definir'
+                }}
+              </p>
+            </div>
+          </template>
+        </CardSmallProfile>
+      </li>
+    </ul>
+    <div class="tw-flex tw-justify-center tw-mt-10">
+      <Paginator
+        @on-page-selected="handleRefreshPage"
+        :pages="totalPages"
+        :btn-per-side="3"
+        :current="page"
+      />
+    </div>
+  </section>
 </template>
 
 <style scoped>

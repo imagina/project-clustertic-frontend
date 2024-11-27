@@ -56,18 +56,18 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Términos</p>
-              <a
-                href="#"
+              <NuxtLink
+                to="/DataProcessingPolicy"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Política de Tratamiento de Datos
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="/TermsAndConditions"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Términos del Servicio
-              </a>
+              </NuxtLink>
             </div>
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">
@@ -78,30 +78,30 @@ import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Categorías</p>
-              <a
-                href="#"
+              <NuxtLink
+                to="/categories"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Infraestructura TI y Conectividad
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="/categories"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Transformación Digital y Desarrollo de Software
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="/categories"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Producción de Contenidos y Marketing Digital
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="/categories"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Videojuegos, Realidad Aumentada y Virtual
-              </a>
+              </NuxtLink>
             </div>
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">

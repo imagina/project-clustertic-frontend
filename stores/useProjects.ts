@@ -149,8 +149,8 @@ export const useProjectsStore = defineStore('projects', {
           },
         )
         const project: Project = projectResponse.data
-        project.bids = (<Proposal[]>proposalResponse.data).map(pro=>{
-          if(pro.creator) pro.creator = new User(pro.creator)
+        project.bids = (<Proposal[]>proposalResponse.data).map((pro) => {
+          if (pro.creator) pro.creator = new User(pro.creator)
           return pro
         })
         this.selected = project

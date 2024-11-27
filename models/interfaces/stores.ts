@@ -21,9 +21,11 @@ export interface ProjectsState {
 }
 export interface CategoriesState {
   categories: ProjectTag[]
+  selected?: ProjectTag
   pagination: PaginationInfo
   filters: any
   loading: boolean
+  parentCategories: ProjectTag[]
 }
 
 export interface NewProjectFormValue {

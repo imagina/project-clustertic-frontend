@@ -1,5 +1,19 @@
 <script setup lang="ts">
 import { FlagIcon } from 'lucide-vue-next'
+import { User } from '~/models/UserData'
+import type { UserData } from '~/models/interfaces/user'
+
+const experts = ref<User[]>([])
+onMounted(() => {
+  apiCluster
+    .get('/api/profile/v1/users', {
+      take: 6,
+      include: 'information.files,skills',
+    })
+    .then((response: any) => {
+      experts.value = (<UserData[]>response.data).map((user) => new User(user))
+    })
+})
 </script>
 <template>
   <div class="tw-bg-gray-200">
@@ -16,56 +30,29 @@ import { FlagIcon } from 'lucide-vue-next'
       <Carousel>
         <CarouselPrevious class="lg:tw-left-[-5%]" />
         <CarouselContent>
-          <CarouselItem class="lg:!tw-basis-1/3">
+          <CarouselItem
+            class="lg:!tw-basis-1/3"
+            v-for="user in experts"
+            :key="`user-card=${user.id}`"
+          >
             <CardSmallProfile
-              id="project.id"
-              name="CompanyName"
-              username="CompanyName"
+              class="tw-h-full"
+              :id="user.id"
+              :name="user.extraFields.companyName?.value ?? user.fullName"
+              :username="user.socialMedia['web'] ?? user.fullName"
+              :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
               :rating="4.5"
-              location="Ibagué, Colombia"
-              number-jobs="175"
-              price="47"
-            />
-          </CarouselItem>
-          <CarouselItem class="lg:!tw-basis-1/3">
-            <CardSmallProfile
-              id="project.id"
-              name="CompanyName"
-              username="CompanyName"
-              :rating="4.5"
-              location="Ibagué, Colombia"
-              number-jobs="175"
-              price="47"
+              location="xx, zz"
             >
               <template v-slot:tag>
                 <div class="tw-flex tw-mb-3">
                   <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-                  <p>Ibagué, Colombia</p>
+                  <p>
+                    {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
+                  </p>
                 </div>
               </template>
             </CardSmallProfile>
-          </CarouselItem>
-          <CarouselItem class="lg:!tw-basis-1/3">
-            <CardSmallProfile
-              id="project.id"
-              name="CompanyName"
-              username="CompanyName"
-              :rating="4.5"
-              location="Ibagué, Colombia"
-              number-jobs="175"
-              price="47"
-            />
-          </CarouselItem>
-          <CarouselItem class="lg:!tw-basis-1/3">
-            <CardSmallProfile
-              id="project.id"
-              name="CompanyName"
-              username="CompanyName"
-              :rating="4.5"
-              location="Ibagué, Colombia"
-              number-jobs="175"
-              price="47"
-            />
           </CarouselItem>
         </CarouselContent>
         <CarouselNext class="lg:tw-right-[-5%]" />

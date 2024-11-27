@@ -124,7 +124,7 @@ async function login() {
             </div>
             <div class="tw-flex tw-justify-center tw-mb-6">
               <SocialAuthGoogle />
-              <SocialAuthFacebook />
+              <!-- <SocialAuthFacebook /> -->
             </div>
             <transition name="hero">
               <Button
