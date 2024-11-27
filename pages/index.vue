@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Project } from './projects'
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import CharacterLandingSVG from '~/assets/svg/character-landing.svg'
 import {
@@ -19,6 +20,19 @@ const handleAnimationStart = (self: AnimationEvent) => {
   ;(<HTMLElement>self.currentTarget)?.classList.add('tw-opacity-80') // Añade la clase de Tailwind al finalizar
 }
 const slide = ref(1)
+const project = ref<Project | null>(null)
+
+onMounted(() => {
+  apiCluster
+    .get('/api/ipin/v1/pins', {
+      take: 1,
+      include: 'categories',
+      filter: '{"order":{"field":"created_at","way":"desc"}}',
+    })
+    .then((response: any) => {
+      project.value = (<Project[]>response.data)[0]
+    })
+})
 </script>
 
 <template>
@@ -113,21 +127,18 @@ const slide = ref(1)
     </div>
     <div class="tw-container tw-py-10 lg:tw-px-40 tw-mb-10">
       <CardProject
-        id="project.id"
         class="card-shadow"
+      v-if="project"
+        :id="project.id"
         :rating="4.5"
-        :skills="[]"
+        :skills="project.categories?.map((cat) => cat.title) ?? []"
       >
-        <template v-slot:title>project.title</template>
-        <template v-slot:subtitle>Presupuesto 0 - 5555$</template>
+        <template v-slot:title>{{ project.title }}</template>
+        <template v-slot:subtitle>
+          Presupuesto {{ project.minPrice }} - {{ project.maxPrice }}$
+        </template>
         <template v-slot:description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quasi
-          modi fugiat officiis harum minus voluptas accusantium, reprehenderit
-          molestias quas unde aut officia laboriosam? Distinctio sint
-          consequuntur maxime nisi explicabo? Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Id explicabo dolor, laboriosam tenetur
-          sunt possimus a! Eos, ratione saepe! Unde eius itaque fuga nesciunt
-          doloremque laborum enim maxime nam laboriosam.
+          {{ project.description }}
         </template>
       </CardProject>
     </div>
