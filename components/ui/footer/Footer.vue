@@ -7,26 +7,26 @@ import TwitterSVG from '@/assets/svg/brand-twitter.svg'
 import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
 import type { PaginationInfo } from '~/models/interfaces/utils'
 
-// Primera solicitud de datos 
+// Primera solicitud de datos
 const countUsers = ref(0)
 const countProjects = ref(0)
-onMounted(()=>{
+onMounted(() => {
   Promise.all([
-    apiCluster.get('/api/profile/v1/users',{
-      take:1,
-      page:1
+    apiCluster.get('/api/profile/v1/users', {
+      take: 1,
+      page: 1,
     }),
-    apiCluster.get('/api/ipin/v1/pins',{
-      take:1,
-      page:1
-    })
-  ]).then(([usersRspn, projectRspn]: [any,any])=>{
+    apiCluster.get('/api/ipin/v1/pins', {
+      take: 1,
+      page: 1,
+    }),
+  ]).then(([usersRspn, projectRspn]: [any, any]) => {
     let metadata: {
-          page: PaginationInfo
-        } = usersRspn.meta
-        countUsers.value = metadata.page.total
-        metadata = projectRspn.meta
-        countProjects.value = metadata.page.total
+      page: PaginationInfo
+    } = usersRspn.meta
+    countUsers.value = metadata.page.total
+    metadata = projectRspn.meta
+    countProjects.value = metadata.page.total
   })
 })
 </script>
@@ -168,11 +168,15 @@ onMounted(()=>{
     <div class="tw-container tw-pb-5 tw-pt-7 footer">
       <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-max-w-6xl">
         <div class="">
-          <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">{{countUsers.toLocaleString('en-US')}}</p>
+          <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">
+            {{ countUsers.toLocaleString('en-US') }}
+          </p>
           <p class="tw-mb-1 tw-text-sm tw-text-primary">Usuarios registrados</p>
         </div>
         <div class="">
-          <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">{{countProjects.toLocaleString('en-US')}}</p>
+          <p class="tw-mb-0 tw-text-lg tw-font-bold tw-text-white">
+            {{ countProjects.toLocaleString('en-US') }}
+          </p>
           <p class="tw-mb-1 tw-text-sm tw-text-primary">Proyectos totales</p>
         </div>
         <div class="">

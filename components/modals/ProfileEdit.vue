@@ -373,7 +373,7 @@ function handleSaveInfo() {
       <q-card-actions class="tw-sticky tw-z-40 tw-bottom-0" align="right">
         <q-btn
           flat
-          label="Decline"
+          label="Cancelar"
           color="primary"
           class="!tw-text-primary"
           v-close-popup

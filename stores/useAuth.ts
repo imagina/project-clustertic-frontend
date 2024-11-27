@@ -396,7 +396,6 @@ export const useAuthStore = defineStore('auth', {
         ...data,
       }
       if (body['attributes[fields]']) {
-        debugger
         const currentFields = Object.keys(user.extraFields)
         const fields = body['attributes[fields]']
         delete body['attributes[fields]']
@@ -428,8 +427,8 @@ export const useAuthStore = defineStore('auth', {
             type: 'positive',
           })
           this.requestFullUser()
-        }).catch((e)=>{
-          
+        })
+        .catch((e) => {
           Notify.create({
             message: 'No se pudo actualizar el usuario.',
             type: 'positive',

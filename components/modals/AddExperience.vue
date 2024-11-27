@@ -170,7 +170,7 @@ async function handleSaveInfo() {
       <q-card-actions align="right">
         <q-btn
           flat
-          label="Decline"
+          label="Cancelar"
           color="primary"
           class="!tw-text-primary"
           v-close-popup

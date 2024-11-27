@@ -84,7 +84,7 @@ export const useCategoryStore = defineStore('categories', {
     async viewDetails(id: number) {
       try {
         this.loading = true
-        debugger
+
         const response: any = await apiCluster.get(apiRoutes.categories, {
           include: 'children',
           filter: JSON.stringify({
