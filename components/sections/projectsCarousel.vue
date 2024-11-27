@@ -3,6 +3,7 @@ import { FlagIcon } from 'lucide-vue-next'
 import { User } from '~/models/UserData'
 import type { UserData } from '~/models/interfaces/user'
 
+const profilesStore = useProfilesStore()
 const experts = ref<User[]>([])
 onMounted(() => {
   apiCluster
@@ -14,6 +15,9 @@ onMounted(() => {
       experts.value = (<UserData[]>response.data).map((user) => new User(user))
     })
 })
+function handleSelectUsers(user_id: number) {
+  profilesStore.viewDetails(user_id)
+}
 </script>
 <template>
   <div class="tw-bg-gray-200">
@@ -34,24 +38,26 @@ onMounted(() => {
             v-for="user in experts"
             :key="`user-card=${user.id}`"
           >
-            <CardSmallProfile
-              class="tw-h-full"
-              :id="user.id"
-              :name="user.extraFields.companyName?.value ?? user.fullName"
-              :username="user.socialMedia['web'] ?? user.fullName"
-              :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
-              :rating="4.5"
-              location="xx, zz"
-            >
-              <template v-slot:tag>
-                <div class="tw-flex tw-mb-3">
-                  <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-                  <p>
-                    {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
-                  </p>
-                </div>
-              </template>
-            </CardSmallProfile>
+            <div @click="handleSelectUsers(user.id)">
+              <CardSmallProfile
+                class="tw-h-full"
+                :id="user.id"
+                :name="user.extraFields.companyName?.value ?? user.fullName"
+                :username="user.socialMedia['web'] ?? user.fullName"
+                :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
+                :rating="4.5"
+                location="xx, zz"
+              >
+                <template v-slot:tag>
+                  <div class="tw-flex tw-mb-3">
+                    <FlagIcon class="flag-icon tw-mr-2" :size="20" />
+                    <p>
+                      {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
+                    </p>
+                  </div>
+                </template>
+              </CardSmallProfile>
+            </div>
           </CarouselItem>
         </CarouselContent>
         <CarouselNext class="lg:tw-right-[-5%]" />

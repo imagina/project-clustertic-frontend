@@ -110,6 +110,7 @@ onMounted(() => {
           <p class="tw-text-xl">
             {{ description }}
           </p>
+<!--           
           <div class="tw-flex tw-justify-between tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Portafolio</h4>
 
@@ -129,7 +130,8 @@ onMounted(() => {
             <CardPortfolio id="2"></CardPortfolio>
             <CardPortfolio id="2"></CardPortfolio>
             <CardPortfolio id="2"></CardPortfolio>
-          </div>
+          </div> -->
+
           <h4 class="tw-text-xl tw-text-black tw-font-bold tw-mb-10">
             <StarSVG class="tw-inline-block tw-text-black tw-mr-5" />
             0.0 - 0 Reviews
