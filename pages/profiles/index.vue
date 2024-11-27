@@ -45,6 +45,11 @@ function handleRefreshPage(page = 1) {
 function handleSelectUsers(user_id: number) {
   profilesStore.viewDetails(user_id)
 }
+
+function getCompanyName(user){
+  const company = user.fields.find(x => x.name == 'companyName') || {}
+  return company?.value ? company.value : ''
+}
 </script>
 
 <template>
@@ -78,6 +83,7 @@ function handleSelectUsers(user_id: number) {
             :id="user.id"
             :name="user.fullName"
             :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
+            :companyName="getCompanyName(user)"
             :rating="4.5"
             location="xx, zz"
             number-jobs="x"

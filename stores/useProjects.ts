@@ -61,7 +61,7 @@ export const useProjectsStore = defineStore('projects', {
         const response: any = await apiCluster.get(apiRoutes.projects, {
           page,
           take,
-          include: 'categories',
+          include: 'categories,creator',
           filter: JSON.stringify(this.filters),
         })
         const metadata: {
@@ -138,7 +138,7 @@ export const useProjectsStore = defineStore('projects', {
         const projectResponse: any = await apiCluster.get(
           `${apiRoutes.projects}/${id}`,
           {
-            include: 'categories,user,province,country,city',
+            include: 'categories,user,province,country,city,creator',
           },
         )
         const proposalResponse: any = await apiCluster.get(

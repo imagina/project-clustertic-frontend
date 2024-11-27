@@ -12,8 +12,12 @@ const props = defineProps<{
   rating?: number
   numberJobs?: number | string
   location?: string
-  price?: number | string
+  price?: number | string, 
+  companyName?: string 
 }>()
+
+//const companyName = computed(() =>  props.fields?.find(x => x.name == 'companyNam')    )
+
 </script>
 
 <!-- <template v-slot:before v-if="$slots.before">
@@ -43,8 +47,7 @@ const props = defineProps<{
             >
               @{{ username }}
             </span>
-          </CardTitle>
-
+          </CardTitle>          
           <slot name="tag"></slot>
           <p class="tw-text-base tw-font-semibold tw-mb-3">
             ${{ price }} por hora
@@ -56,6 +59,9 @@ const props = defineProps<{
                 {{ rating?.toFixed(1) }} ({{ numberJobs }} trabajos)
               </p>
             </div>
+          </div>
+          <div v-if="props.companyName">
+            Empresa : {{ props.companyName }}
           </div>
         </div>
       </div>

@@ -196,6 +196,9 @@ function handleSelectProposal(proposal: Proposal) {
                 <p class="tw-mb-0 tw-text-xs tw-mt-5">
                   ID del proyecto: {{ project.id }}
                 </p>
+                <p class="tw-mb-0 tw-text-md tw-mt-5">
+                  Publicado por : {{ project.creator.fullName }}
+                </p>
               </CardContent>
             </Card>
             <Card class="tw-mt-10">
