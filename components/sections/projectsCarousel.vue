@@ -23,8 +23,7 @@ onMounted(() => {
       De la mano de
       <b class="tw-font-bold">expertos</b>
       en múltiples campos
-      <b class="tw-font-bold">creativos</b>
-      .
+      <b class="tw-font-bold">creativos.</b>
     </h3>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>

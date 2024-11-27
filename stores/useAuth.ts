@@ -423,7 +423,18 @@ export const useAuthStore = defineStore('auth', {
       apiCluster
         .put(apiRoutes.profileUsers + `/${this.user?.id}`, body)
         .then((response) => {
+          Notify.create({
+            message: 'Usuario actualizado exitosamente.',
+            type: 'positive',
+          })
           this.requestFullUser()
+        }).catch((e)=>{
+          
+          Notify.create({
+            message: 'No se pudo actualizar el usuario.',
+            type: 'positive',
+          })
+          throw e
         })
     },
 
