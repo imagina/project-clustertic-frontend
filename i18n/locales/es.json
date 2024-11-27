@@ -10,7 +10,7 @@
   },
   "landing": {
     "title": {
-      "content": "Conecta ahora tus ideas con {highlight} {br} en tecnología para hacerlas realidad",
+      "content": "Conecta ahora tus ideas {br} con {highlight} en {br2} tecnología para hacerlas realidad",
       "highlight": "manos expertas"
     },
     "publishProject": "Publicar proyectos",

@@ -42,6 +42,9 @@ const slide = ref(1)
               <template #br>
                 <br />
               </template>
+              <template #br2>
+                <br />
+              </template>
             </i18n-t>
           </h1>
           <div class="tw-flex tw-mb-10 lg:tw-mb-0">
