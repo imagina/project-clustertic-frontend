@@ -61,7 +61,7 @@ const user = computed<UserData | null>(() => authStore.user)
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/profiles/me">
+              <NuxtLink to="/categories">
                 <Button variant="ghost" type="button" class="tw-text-secondary">
                   <BriefcaseIcon class="tw-text-primary tw-mr-3" />
                   <span class="tw-font-bold tw-capitalize">
