@@ -225,7 +225,7 @@ const refForm = ref(null)
     </div>
   </div>
 
-  <div class="tw-container tw-max-w-[1000px]">
+  <div class="tw-container tw-max-w-[1000px] tw-mb-5">
     <q-form class="tw-pt-40" @submit.prevent.stop="() => {}" ref="refForm">
       <h2
         class="tw-text-black tw-font-light tw-text-center tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
