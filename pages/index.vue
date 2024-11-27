@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Project } from './projects'
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import CharacterLandingSVG from '~/assets/svg/character-landing.svg'
 import {
@@ -12,6 +11,7 @@ import {
 } from 'lucide-vue-next'
 import ProjectsCarousel from '~/components/sections/projectsCarousel.vue'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
+import type { Project } from '~/models/interfaces/projects'
 definePageMeta({
   layout: 'default',
 })
