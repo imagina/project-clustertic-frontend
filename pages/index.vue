@@ -104,7 +104,7 @@ onMounted(() => {
               Producción de Contenidos y Marketing Digital
             </div>
             <div
-              class="float-label tw-opacity-0 third tw-top-[56%] tw-left-[-30%]"
+              class="float-label tw-opacity-0 third tw-top-[56%] tw-left-[-25%]"
               @animationstart="handleAnimationStart"
             >
               Transformación Digital y Desarrollo de Software

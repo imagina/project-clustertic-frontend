@@ -120,8 +120,8 @@ function handleSelectProposal(proposal: Proposal) {
 <template>
   <LoadingScreen :loading="projectsStore.loading" />
   <SearchProject class="tw-mt-20" />
-  <div class="tw-container tw-px-20 tw-mt-10">
-    <div class="tw-flex tw-mb-5">
+  <div class="tw-container lg:tw-px-20 tw-mt-10">
+    <div class="tw-flex tw-flex-wrap tw-mb-5">
       <Card class="tw-basis-full lg:tw-flex-1">
         <CardHeader class="tw-h-full tw-justify-center">
           <CardTitle class="!tw-leading-normal tw-font-bold">
@@ -135,7 +135,7 @@ function handleSelectProposal(proposal: Proposal) {
         </CardHeader>
       </Card>
       <div class="tw-basis-full lg:tw-basis-80">
-        <Card class="tw-flex-1 tw-ml-5">
+        <Card class="tw-flex-1 lg:tw-ml-5">
           <div class="tw-flex tw-justify-between tw-py-4 tw-px-12">
             <div class="">
               <p class="tw-font-normal tw-text-sm tw-mb-2 tw-text-center">
@@ -170,7 +170,7 @@ function handleSelectProposal(proposal: Proposal) {
     </q-tabs>
 
     <q-separator />
-    <div class="tw-flex tw-mb-5 tw-mt-10">
+    <div class="tw-flex tw-flex-wrap tw-mb-5 tw-mt-10">
       <div class="tw-basis-full lg:tw-flex-1 tw-w-full">
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel class="tw-p-0" name="details">
@@ -372,7 +372,7 @@ function handleSelectProposal(proposal: Proposal) {
           </q-tab-panel>
         </q-tab-panels>
       </div>
-      <aside class="tw-basis-full lg:tw-basis-80">
+      <aside class="tw-mt-5 md:tw-mt-0 tw-basis-full md:tw-basis-80">
         <div
           class="tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6 tw-ml-5"
         >
