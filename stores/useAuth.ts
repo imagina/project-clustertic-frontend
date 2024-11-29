@@ -265,7 +265,8 @@ export const useAuthStore = defineStore('auth', {
         this.token = localStorage.getItem('userToken') ?? ''
       } catch (error) {
         console.error(error)
-        throw error
+        this.clearToken()
+        return false
       }
     },
     async requestFullUser() {
