@@ -1,1 +1,0 @@
-import{aN as u,u as r,aO as i}from"./B10uIJow.js";const h=u((a,n)=>{const e=r(),t="/auth/login",o="/admin/home";if(e.user&&e.validateToken()){if(a.path===t&&n.path!==o)return i(o)}else if(a.path!==t)return i(t)});export{h as default};

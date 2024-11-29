@@ -9,7 +9,11 @@ import {
   PlayIcon,
   SparkleIcon,
 } from 'lucide-vue-next'
-import ProjectsCarousel from '~/components/sections/projectsCarousel.vue'
+import profesionalsCarousel from '~/components/sections/profesionalsCarousel.vue'
+import RocketSVG from '@/assets/svg/rocket.svg'
+import BulbSVG from '@/assets/svg/bulb.svg'
+import BrainSVG from '@/assets/svg/brain.svg'
+import AffiliateSVG from '@/assets/svg/affiliate.svg'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 import type { Project } from '~/models/interfaces/projects'
 definePageMeta({
@@ -171,7 +175,7 @@ onMounted(() => {
         <div class="tw-px-20 line-variant">
           <div class="tw-grid tw-grid-cols-2 tw-gap-x-20 tw-gap-y-5 tw-mb-20">
             <div class="">
-              <SparkleIcon :size="35" class="tw-text-white" />
+              <AffiliateSVG filled class="tw-text-5xl tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
                 Conexiones estratégicas
               </h4>
@@ -183,7 +187,7 @@ onMounted(() => {
               </p>
             </div>
             <div class="">
-              <HourglassIcon :size="35" class="tw-text-white" />
+              <BulbSVG filled class="tw-text-5xl tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
                 Soluciones de calidad
               </h4>
@@ -195,7 +199,7 @@ onMounted(() => {
               </p>
             </div>
             <div class="">
-              <CheckCheckIcon :size="35" class="tw-text-white" />
+              <RocketSVG filled class="tw-text-5xl tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
                 Propuestas ágiles
               </h4>
@@ -207,7 +211,7 @@ onMounted(() => {
               </p>
             </div>
             <div class="">
-              <BriefcaseBusinessIcon :size="35" class="tw-text-white" />
+              <BrainSVG filled class="tw-text-5xl tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
                 Gestión inteligente
               </h4>
@@ -230,14 +234,14 @@ onMounted(() => {
                 class="!tw-text-2xl !tw-font-semibold tw-text-primary hover:tw-text-primary hover:tw-underline !tw-p-0"
               >
                 Comienza Ya
-                <ArrowRightIcon :size="35" class="tw-text-primary tw-ms-2" />
+                <ArrowRightIcon class="tw-text-primary tw-ms-2" />
               </Button>
             </NuxtLink>
           </div>
         </div>
       </div>
       <div
-        class="tw-hidden lg:tw-basis-1/2 lg:tw-flex tw-items-end tw-justify-center cluster-details-img tw-pb-20"
+        class="tw-hidden lg:tw-basis-1/2 xl:tw-flex tw-items-end tw-justify-center cluster-details-img tw-pb-20"
       >
         <CharacterLandingSVG
           filled
@@ -247,7 +251,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <ProjectsCarousel />
+  <profesionalsCarousel />
 </template>
 
 <style scoped>

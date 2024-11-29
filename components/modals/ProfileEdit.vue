@@ -315,7 +315,6 @@ function handleSaveInfo() {
             type="url"
             class="input-custom-outline search-input-border"
             v-model="newData.email"
-            disable
           ></InputCPA>
         </div>
         <div class="input-container">
