@@ -1,1 +1,0 @@
-import{m as t,u as n,z as s,o as a,c as u,a as r}from"./CGfBZQGx.js";const m=t({__name:"logout",setup(l){const e=n();return s(()=>{e.logout()}),(p,o)=>(a(),u("div",null,o[0]||(o[0]=[r("h1",null,"logout page",-1)])))}});export{m as default};

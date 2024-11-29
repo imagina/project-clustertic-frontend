@@ -67,7 +67,7 @@ onMounted(() => {
               </div>
               <div class="tw-text-white tw-ml-3">
                 <p class="tw-mb-1 tw-text-sm tw-font-bold">Teléfono</p>
-                <p class="tw-mb-0 tw-text-xs">+57 310 5885854</p>
+                <a href="tel:+573173848266" class="tw-mb-0 tw-text-xs">+57 317 3848266</a>
               </div>
             </div>
           </div>

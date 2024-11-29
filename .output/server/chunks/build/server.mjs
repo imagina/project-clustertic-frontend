@@ -1797,23 +1797,23 @@ const _routes = [
   {
     name: "categories-id",
     path: "/categories/:id()",
-    component: () => import('./_id_-wl4u05m3.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-BK8O46NK.mjs').then((m) => m.default || m)
   },
   {
     name: "categories",
     path: "/categories",
-    component: () => import('./index-CYQJY5mr.mjs').then((m) => m.default || m)
+    component: () => import('./index-DFg-boD9.mjs').then((m) => m.default || m)
   },
   {
     name: "dataProcessingPolicy",
     path: "/dataProcessingPolicy",
-    component: () => import('./dataProcessingPolicy-Bc9UpCsN.mjs').then((m) => m.default || m)
+    component: () => import('./dataProcessingPolicy-CklDbaR6.mjs').then((m) => m.default || m)
   },
   {
     name: "index",
     path: "/",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./index-DyImpg76.mjs').then((m) => m.default || m)
+    component: () => import('./index-Cz4TxGzF.mjs').then((m) => m.default || m)
   },
   {
     name: "info",
@@ -1824,7 +1824,7 @@ const _routes = [
   {
     name: "privacyPolicy",
     path: "/privacyPolicy",
-    component: () => import('./privacyPolicy-BhBBGwmN.mjs').then((m) => m.default || m)
+    component: () => import('./privacyPolicy-CWU5eADS.mjs').then((m) => m.default || m)
   },
   {
     name: "profiles-id",
@@ -1835,7 +1835,7 @@ const _routes = [
     name: "profiles",
     path: "/profiles",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-BpRbGVri.mjs').then((m) => m.default || m)
+    component: () => import('./index-CxfdlQmD.mjs').then((m) => m.default || m)
   },
   {
     name: "profiles-me",
@@ -1846,7 +1846,7 @@ const _routes = [
   {
     name: "projects-id",
     path: "/projects/:id()",
-    component: () => import('./_id_-Ce5VTUyS.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-CFTbupHj.mjs').then((m) => m.default || m)
   },
   {
     name: "projects-create",
@@ -1858,12 +1858,12 @@ const _routes = [
     name: "projects",
     path: "/projects",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-D5C9x5e6.mjs').then((m) => m.default || m)
+    component: () => import('./index-B39cKQaZ.mjs').then((m) => m.default || m)
   },
   {
     name: "termsAndConditions",
     path: "/termsAndConditions",
-    component: () => import('./termsAndConditions-D80dEowE.mjs').then((m) => m.default || m)
+    component: () => import('./termsAndConditions-BTu_gKbz.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {

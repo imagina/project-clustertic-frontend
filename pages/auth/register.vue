@@ -185,7 +185,7 @@ async function register() {
                   </NuxtLink>
                   y la
                   <NuxtLink
-                    to="/privacyPolicy"
+                    to="/dataProcessingPolicy"
                     class="tw-text-primary tw-font-bold"
                   >
                     Política de privacidad
