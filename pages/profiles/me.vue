@@ -8,10 +8,10 @@ import {
   GlobeIcon,
 } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
-// import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
-// import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
-// import TwitterSVG from '@/assets/svg/brand-twitter.svg'
-// import ShareSVG from '~/assets/svg/share.svg'
+import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
+import TwitterSVG from '@/assets/svg/brand-twitter.svg'
+import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
@@ -303,7 +303,7 @@ onMounted(() => {
             <CardFooter
               class="tw-flex tw-gap-4 tw-justify-center !tw-p-0 !tw-pt-3"
             >
-              <!-- <a
+              <a
                 v-if="socialMedia.facebook"
                 :href="socialMedia.facebook"
                 class="social-icon facebook"
@@ -330,7 +330,7 @@ onMounted(() => {
                 class="social-icon !tw-bg-primary"
               >
                 <GlobeIcon :size="30" class="" />
-              </a> -->
+              </a>
             </CardFooter>
           </Card>
         </aside>
