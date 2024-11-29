@@ -26,7 +26,9 @@ export const useProfilesStore = defineStore('profiles', {
       currentPage: 0,
     },
     loading: false,
-    filters: {},
+    filters: {
+      "roleId": 2
+    },
   }),
   getters: {
     fullUser(state) {

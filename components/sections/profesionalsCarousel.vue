@@ -10,7 +10,7 @@ onMounted(() => {
     .get('/api/profile/v1/users', {
       take: 6,
       include: 'information.files,skills',
-      filter: '{"order":{"field":"created_at","way":"desc"}}',
+      filter: '{"order":{"field":"created_at","way":"desc"},"roleId": 2}',
     })
     .then((response: any) => {
       experts.value = (<UserData[]>response.data).map((user) => new User(user))
