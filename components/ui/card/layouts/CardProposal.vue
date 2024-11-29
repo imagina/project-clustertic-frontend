@@ -73,7 +73,7 @@ function handleSelectProposal() {
                 :rating="props.rating"
               />
               <p class="tw-mb-0 tw-ml-3 tw-text-sm">
-                {{ props.rating?.toFixed(1) }}
+                {{ props.rating?.toFixed(1) ?? '' }}
               </p>
             </div>
             <div class="tw-flex">

@@ -86,7 +86,9 @@ async function sendImg() {
                 </span>
               </p>
               <p v-else class="tw-text-xs tw-text-center">
-                {{ Helper.tLang('projects.create.form.files.empty.description') }}
+                {{
+                  Helper.tLang('projects.create.form.files.empty.description')
+                }}
               </p>
             </template>
           </Dropzone>

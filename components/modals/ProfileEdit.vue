@@ -281,7 +281,9 @@ function handleSaveInfo() {
             <input
               @input="handleEndWrite"
               class="skills-input"
-              :placeholder="Helper.tLang('projects.create.form.skills.placeholder')"
+              :placeholder="
+                Helper.tLang('projects.create.form.skills.placeholder')
+              "
               v-model="newData.searchSkills"
             />
 

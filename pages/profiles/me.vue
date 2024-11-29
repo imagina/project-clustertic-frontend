@@ -134,7 +134,7 @@ onMounted(() => {
             <CardPortfolio id="2"></CardPortfolio>
           </div> -->
 
-          <h4 class="tw-text-xl tw-text-black tw-font-bold tw-mb-10">
+          <!-- <h4 class="tw-text-xl tw-text-black tw-font-bold tw-mb-10">
             <StarSVG class="tw-inline-block tw-text-black tw-mr-5" />
             0.0 - 0 Reviews
           </h4>
@@ -192,7 +192,7 @@ onMounted(() => {
             >
               Sin reviews
             </p>
-          </div>
+          </div> -->
 
           <div class="tw-flex tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Experiencia</h4>

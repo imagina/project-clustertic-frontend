@@ -77,11 +77,10 @@ function handleSelectUsers(user_id: number) {
           :id="user.id"
           :name="user.fullName"
           :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
-          :rating="4.5"
           location="xx, zz"
-          number-jobs="x"
-          price="0"
         >
+          <!-- number-jobs="x"
+          price="0" -->
           <template v-slot:tag>
             <div v-if="user.skills" class="tw-flex tw-mb-3">
               <p>

@@ -64,7 +64,13 @@ onMounted(() => {
                 <br />
               </template>
             </i18n-t> -->
-          Conecta ahora tus ideas <br/> con <b class="tw-font-bold">manos expertas</b> en <br/> tecnología para hacerlas realidad
+            Conecta ahora tus ideas
+            <br />
+            con
+            <b class="tw-font-bold">manos expertas</b>
+            en
+            <br />
+            tecnología para hacerlas realidad
           </h1>
           <div class="tw-flex tw-mb-10 lg:tw-mb-0">
             <NuxtLink to="/projects/create">
@@ -135,7 +141,6 @@ onMounted(() => {
         class="card-shadow"
         v-if="project"
         :id="project.id"
-        :rating="4.5"
         :skills="project.categories?.map((cat) => cat.title) ?? []"
         :created-at="createdAt"
       >

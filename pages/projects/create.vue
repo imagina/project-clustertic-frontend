@@ -254,7 +254,9 @@ function searchCategories(query?: string) {
                   variant="ghost"
                   class="tw-text-white tw-underline"
                 >
-                  {{ Helper.tLang('projects.create.form.description.clearBtn') }}
+                  {{
+                    Helper.tLang('projects.create.form.description.clearBtn')
+                  }}
                 </Button>
               </div>
               <Dropzone v-model="projectData.files" dark>
@@ -281,7 +283,11 @@ function searchCategories(query?: string) {
                     </span>
                   </p>
                   <p v-else class="tw-text-white tw-text-xs tw-text-center">
-                    {{ Helper.tLang('projects.create.form.files.empty.description') }}
+                    {{
+                      Helper.tLang(
+                        'projects.create.form.files.empty.description',
+                      )
+                    }}
                   </p>
                 </template>
               </Dropzone>
@@ -322,7 +328,9 @@ function searchCategories(query?: string) {
                 <input
                   @input="handleEndWrite"
                   class="skills-input"
-                  :placeholder="Helper.tLang('projects.create.form.skills.placeholder')"
+                  :placeholder="
+                    Helper.tLang('projects.create.form.skills.placeholder')
+                  "
                   v-model="projectData.searchSkills"
                 />
 
@@ -363,10 +371,16 @@ function searchCategories(query?: string) {
                 </div>
                 <div class="tw-text-white tw-ml-8 lg:tw-w-2/5">
                   <h3 class="tw-mb-2 tw-text-lg tw-font-extrabold">
-                    {{ Helper.tLang('projects.create.form.prices.details.title') }}
+                    {{
+                      Helper.tLang('projects.create.form.prices.details.title')
+                    }}
                   </h3>
                   <p class="tw-font-extralight tw-text-xs">
-                    {{ Helper.tLang('projects.create.form.prices.details.description') }}
+                    {{
+                      Helper.tLang(
+                        'projects.create.form.prices.details.description',
+                      )
+                    }}
                   </p>
                 </div>
               </div>

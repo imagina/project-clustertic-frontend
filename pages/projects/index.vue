@@ -197,7 +197,6 @@ function searchCategories(query?: string) {
         >
           <CardProject
             :id="project.id"
-            :rating="4.5"
             :skills="project.categories?.map((cat) => cat.title) ?? []"
             :created-at="`${project.createdAt}`"
           >

@@ -3,7 +3,7 @@
     "nav": {
       "briefcase": "portafolio",
       "explore": "explorar proyectos",
-      "login": "iniciar sesión", 
+      "login": "iniciar sesión",
       "register": "registrarse"
     },
     "publish_project": "Publicar un proyecto"

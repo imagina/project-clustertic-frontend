@@ -157,7 +157,6 @@ async function register() {
                   v-model:checked="auth.agreement"
                 ></Checkbox>
                 <span class="tw-text-white tw-ml-2">
-                  
                   <!-- <i18n-t keypath="auth.register.inputs.termsAndCond.content">
                     <template #highlight1>
                       <NuxtLink

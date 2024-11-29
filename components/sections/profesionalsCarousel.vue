@@ -46,7 +46,6 @@ function handleSelectUsers(user_id: number) {
                 :name="user.extraFields.companyName?.value ?? user.fullName"
                 :username="user.socialMedia['web'] ?? user.fullName"
                 :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
-                :rating="4.5"
                 location="xx, zz"
               >
                 <template v-slot:tag>
@@ -68,8 +67,8 @@ function handleSelectUsers(user_id: number) {
 </template>
 
 <style lang="css" scoped>
-.carousel-users-container{
+.carousel-users-container {
   background-position: center;
-  background-image: url("@/assets/images/nevado-tolima.jpg");
+  background-image: url('@/assets/images/nevado-tolima.jpg');
 }
 </style>

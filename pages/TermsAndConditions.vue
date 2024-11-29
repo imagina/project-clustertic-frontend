@@ -10,18 +10,21 @@
       <CardContent>
         <h3>1. Aceptación de los Términos</h3>
         <p>
-          Al acceder o utilizar la plataforma <NuxtLink to='/' >clustertolimatic.co</NuxtLink> (en adelante,
-          "la Plataforma"), el usuario (en adelante, "Usuario") acepta los
-          presentes Términos y Condiciones. Si no está de acuerdo con estos
-          términos, debe abstenerse de utilizar la Plataforma.
+          Al acceder o utilizar la plataforma
+          <NuxtLink to="/">clustertolimatic.co</NuxtLink>
+          (en adelante, "la Plataforma"), el usuario (en adelante, "Usuario")
+          acepta los presentes Términos y Condiciones. Si no está de acuerdo con
+          estos términos, debe abstenerse de utilizar la Plataforma.
         </p>
 
         <h3>2. Definiciones</h3>
         <p>
-          Plataforma: Se refiere a <NuxtLink to='/' >clustertolimatic.co</NuxtLink> y todos los servicios
-          asociados. Usuario: Cualquier persona que accede y utiliza la
-          Plataforma. Contenido: Información, datos, textos, imágenes, videos y
-          cualquier otro material disponible en la Plataforma.
+          Plataforma: Se refiere a
+          <NuxtLink to="/">clustertolimatic.co</NuxtLink>
+          y todos los servicios asociados. Usuario: Cualquier persona que accede
+          y utiliza la Plataforma. Contenido: Información, datos, textos,
+          imágenes, videos y cualquier otro material disponible en la
+          Plataforma.
         </p>
 
         <h3>3. Uso de la Plataforma</h3>
@@ -65,7 +68,8 @@
         <ul>
           <li>
             5.1. Todo el contenido de la Plataforma, incluidos textos, imágenes,
-            gráficos, logotipos y software, es propiedad de <NuxtLink to='/' >clustertolimatic.co</NuxtLink>
+            gráficos, logotipos y software, es propiedad de
+            <NuxtLink to="/">clustertolimatic.co</NuxtLink>
             o sus licenciantes, y está protegido por leyes de propiedad
             intelectual.
           </li>
@@ -82,8 +86,10 @@
             de ningún tipo, expresas o implícitas.
           </li>
           <li>
-            6.2. <NuxtLink to='/' >clustertolimatic.co</NuxtLink> no se hace responsable de los daños o
-            perjuicios que puedan derivarse del uso de la Plataforma.
+            6.2.
+            <NuxtLink to="/">clustertolimatic.co</NuxtLink>
+            no se hace responsable de los daños o perjuicios que puedan
+            derivarse del uso de la Plataforma.
           </li>
           <li>
             6.3. La Plataforma no garantiza que el servicio sea ininterrumpido o
@@ -117,7 +123,8 @@
         <p>
           Para cualquier duda o consulta relacionada con estos Términos, el
           Usuario puede comunicarse con nosotros a través del correo
-          electrónico: <a href="mailto:hola@clustertolimatic.co" >hola@clustertolimatic.co</a>
+          electrónico:
+          <a href="mailto:hola@clustertolimatic.co">hola@clustertolimatic.co</a>
         </p>
         <h3>Última actualización: 20 de Noviembre de 2024</h3>
       </CardContent>
@@ -126,13 +133,14 @@
 </template>
 
 <style scoped>
-h3{
+h3 {
   @apply tw-font-semibold;
 }
 a {
-  @apply tw-text-link
+  @apply tw-text-link;
 }
-p,ul{
-  @apply tw-pl-3
+p,
+ul {
+  @apply tw-pl-3;
 }
 </style>

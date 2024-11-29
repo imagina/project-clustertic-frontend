@@ -8,13 +8,13 @@ const props = withDefaults(
     starClass?: string
   }>(),
   {
-    rating: 0,
+    rating: undefined,
     max: 5,
   },
 )
 </script>
 <template>
-  <div class="tw-flex">
+  <div v-if="rating" class="tw-flex">
     <StarSVG
       v-for="n in props.max"
       class="star !tw-h-full"

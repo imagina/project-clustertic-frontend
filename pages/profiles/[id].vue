@@ -100,6 +100,8 @@ onBeforeUnmount(() => {
             <CardPortfolio id="2"></CardPortfolio>
             <CardPortfolio id="2"></CardPortfolio>
           </div> -->
+          <!-- 
+          rating
           <h4 class="tw-text-xl tw-text-black tw-font-bold tw-mb-10">
             <StarSVG class="tw-inline-block tw-text-black tw-mr-5" />
             0.0 - 0 Reviews
@@ -158,7 +160,7 @@ onBeforeUnmount(() => {
             >
               Sin reviews
             </p>
-          </div>
+          </div> -->
 
           <div class="tw-flex tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Experiencia</h4>
@@ -321,9 +323,11 @@ onBeforeUnmount(() => {
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
   @apply tw-text-muted-custom;
 }
-.facebook-icon {
-  @apply tw-rounded-full tw-p-1 tw-h-10 tw-w-10 tw-grid tw-place-items-center;
-  background-color: hsla(216, 96%, 47%, 1);
+.social-icon {
+  @apply tw-rounded-full tw-p-1 tw-h-10 tw-w-10 tw-grid tw-place-items-center tw-bg-secondary;
+  &.facebook {
+    background-color: hsla(216, 96%, 47%, 1);
+  }
 }
 .portfolio-slider {
   @apply tw-flex tw-gap-4 tw-flex-nowrap tw-overflow-x-scroll;

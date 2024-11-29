@@ -63,7 +63,7 @@ const daysSince = computed(() => {
           :rating="props.rating"
         />
         <p class="tw-mb-0 tw-ml-3 tw-text-base tw-text-link">
-          {{ props.rating }}
+          {{ props.rating ?? '' }}
         </p>
       </div>
       <div class="tw-flex-grow"></div>

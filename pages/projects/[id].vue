@@ -346,7 +346,6 @@ function handleSelectProposal(proposal: Proposal) {
                 :selected="proposal.selected === 1"
                 :key="`proposal_${proposal.id}`"
                 :id="proposal.id"
-                :rating="0"
                 :delivery-days="proposal.deliveryDays"
                 :amount="proposal.amount"
                 :img="proposal.creator?.mediaFiles.profile.path"

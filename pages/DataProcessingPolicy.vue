@@ -91,7 +91,8 @@
           <h3>5. Procedimiento para el Ejercicio de Derechos</h3>
           <p>
             Para ejercer sus derechos, el Titular podrá enviar una solicitud al
-            correo electrónico: <a href="mailto:hola@clustertolimatic.co">
+            correo electrónico:
+            <a href="mailto:hola@clustertolimatic.co">
               hola@clustertolimatic.co
             </a>
             , indicando:
@@ -127,7 +128,8 @@
             <NuxtLink to="/">clustertolimatic.co</NuxtLink>
             se reserva el derecho de modificar esta Política en cualquier
             momento. Cualquier cambio será informado a los Titulares a través
-            del correo electrónico <a href="mailto:hola@clustertolimatic.co">
+            del correo electrónico
+            <a href="mailto:hola@clustertolimatic.co">
               hola@clustertolimatic.co
             </a>
             , antes de su implementación.
