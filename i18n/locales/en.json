@@ -14,7 +14,8 @@
       "highlight": "tolimenses"
     },
     "publishProject": "Publish Projects",
-    "findProject": "Find Projects"
+    "findProject": "Find Projects",
+    "recentProjects": "Lo más reciente"
   },
   "auth": {
     "login": {
