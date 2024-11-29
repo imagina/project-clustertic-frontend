@@ -14,7 +14,7 @@ function handleSearch() {
         <h3
           class="tw-font-light tw-text-white tw-text-center tw-text-[32px] tw-mb-14"
         >
-          ¿Que estás buscando?
+          ¿Qué estás buscando?
         </h3>
         <q-form @submit.prevent.stop="handleSearch">
           <InputCPA
