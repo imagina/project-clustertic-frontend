@@ -49,7 +49,7 @@ onMounted(() => {
           <h1
             class="tw-text-black tw-font-light tw-text-[30px] sm:tw-text-[45px] md:tw-text-[55px] tw-leading-tight tw-mb-10"
           >
-            <i18n-t keypath="landing.title.content">
+            <!-- <i18n-t keypath="landing.title.content">
               <template #highlight>
                 <b class="tw-font-bold">{{ $t('landing.title.highlight') }}</b>
               </template>
@@ -59,7 +59,8 @@ onMounted(() => {
               <template #br2>
                 <br />
               </template>
-            </i18n-t>
+            </i18n-t> -->
+          Conecta ahora tus ideas <br/> con <b class="tw-font-bold">manos expertas</b> en <br/> tecnología para hacerlas realidad
           </h1>
           <div class="tw-flex tw-mb-10 lg:tw-mb-0">
             <NuxtLink to="/projects/create">
@@ -67,7 +68,7 @@ onMounted(() => {
                 size="lg"
                 class="tw-border tw-border-black tw-border-solid md:tw-text-[20px]"
               >
-                {{ $t('landing.publishProject') }}
+                {{ Helper.tLang('landing.publishProject') }}
               </Button>
             </NuxtLink>
 
@@ -76,7 +77,7 @@ onMounted(() => {
                 variant="ghost"
                 class="tw-ml-5 md:tw-text-[20px] hover:tw-bg-transparent hover:tw-underline"
               >
-                {{ $t('landing.findProject') }}
+                {{ Helper.tLang('landing.findProject') }}
                 <ArrowRightIcon class="tw-ml-3" />
               </Button>
             </NuxtLink>
@@ -120,7 +121,7 @@ onMounted(() => {
     <h3
       class="tw-font-light tw-text-black tw-text-center lg:tw-text-[30px] tw-py-10"
     >
-      {{ $t('landing.recentProjects') }}
+      {{ Helper.tLang('landing.recentProjects') }}
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />

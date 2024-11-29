@@ -1,3 +1,126 @@
+const lang : {[key:string]:any} = {
+  "appbar": {
+    "nav": {
+      "briefcase": "portafolio",
+      "explore": "explorar proyectos",
+      "login": "iniciar sesión", 
+      "register": "registrarse"
+    },
+    "publish_project": "Publicar un proyecto"
+  },
+  "landing": {
+    "title": {
+      "content": "Conecta ahora tus ideas {br} con {highlight} en {br2} tecnología para hacerlas realidad",
+      "highlight": "manos expertas"
+    },
+    "publishProject": "Publicar proyectos",
+    "findProject": "Buscar Proyectos",
+    "recentProjects": "Lo más reciente"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Bienvenido nuevamente",
+      "inputs": {
+        "email": "Email",
+        "password": "Contraseña",
+        "rememberMe": "Recordar usuario"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submitBtn": "Ingresar",
+      "withoutAccount": {
+        "content": "¿No tienes una cuenta?",
+        "link": "Regístrate"
+      }
+    },
+    "register": {
+      "title": "Registro",
+      "inputs": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Email",
+        "password": "Contraseña",
+        "passwordAgain": "Repetir contraseña",
+        "termsAndCond": {
+          "content": "Acepto el {highlight1} y la {highlight2}.",
+          "highlight1": "Acuerdo de usuario",
+          "highlight2": "Política de privacidad"
+        }
+      },
+      "submitBtn": "Registrarme",
+      "existAccount": {
+        "content": "¿Ya tienes una cuenta?",
+        "link": "Ingresar"
+      }
+    },
+    "reset": {
+      "title": "Recuperar Contraseña",
+      "submitBtn": "Recuperar Contraseña",
+      "confirmPassword": "Confirmar Contraseña"
+    }
+  },
+  "projects": {
+    "singular": "Proyecto ",
+    "create": {
+      "pages": {
+        "one": {
+          "title": "Cuéntanos qué necesitas",
+          "description": "Recibe ofertas de los principales expertos de la industria TIC y escoge la propuesta que mejor se adapte a tu necesidad."
+        },
+        "two": {
+          "title": "¿Qué habilidades se necesitan?",
+          "description": "Ingresa hasta 5 habilidades que describen mejor tu proyecto. Los freelancers utilizarán estas habilidades para encontrar proyectos en los que están más interesados y experimentados."
+        },
+        "three": {
+          "title": "¿Como quieres pagar?"
+        },
+        "four": {
+          "title": "¿Son correctos tus datos?"
+        }
+      },
+      "form": {
+        "name": {
+          "label": "Elige un nombre para tu proyecto",
+          "placeholder": "p. ej., Necesito un sitio web"
+        },
+        "description": {
+          "label": "Explica tu proyecto",
+          "placeholder": "Describe tu proyecto aquí...",
+          "clearBtn": "Borrar descripción"
+        },
+        "files": {
+          "empty": {
+            "title": "Adjuntar Documentos",
+            "description": "Arrastra y suelta cualquier imagen o documento que podría resultar útil para explicar aquí tu proyecto (tamaño de archivo máx 25 MB)"
+          },
+          "loadedMsg": "Documentos adjuntados"
+        },
+        "skills": {
+          "label": "Elige las habilidades necesarias para tu proyecto",
+          "placeholder": "Ingresa habilidades aquí...",
+          "suggested": "Habilidades sugeridas:"
+        },
+        "prices": {
+          "details": {
+            "title": "Precio fijo",
+            "description": "Acepta un precio fijo y libera el pago cuando se realice el trabajo. Es mejor para tareas esporádicas."
+          },
+          "label": "Elige un el rango de precios para tu proyecto"
+        },
+        "final": {
+          "label": "Detalles del proyecto"
+        },
+        "buttons": {
+          "back": "Volver",
+          "next": "Siguiente",
+          "submit": "Crear"
+        }
+      }
+    }
+  }
+}
+
 export const Helper = {
   //convert a date string with the format "YYYY-MM-DD HH:mm:ss" to a date
   parseStringToDate: (
@@ -216,4 +339,12 @@ export const Helper = {
     }
     return list
   },
+  tLang(key:string):string {
+    let word:any = lang 
+    key.split('.').forEach((subKey:string)=>{
+      word = word[subKey]
+      debugger
+    })
+    return (<string> word)
+  }
 }

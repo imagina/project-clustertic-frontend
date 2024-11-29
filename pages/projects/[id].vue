@@ -300,8 +300,8 @@ function handleSelectProposal(proposal: Proposal) {
                         <p class="tw-text-base tw-mb-3">
                           {{
                             proposalData.files
-                              ? $t('projects.create.form.files.empty.title')
-                              : $t('projects.create.form.files.loadedMsg')
+                              ? Helper.tLang('projects.create.form.files.empty.title')
+                              : Helper.tLang('projects.create.form.files.loadedMsg')
                           }}
                         </p>
                       </div>
@@ -320,7 +320,7 @@ function handleSelectProposal(proposal: Proposal) {
                         </span>
                       </p>
                       <p v-else class="tw-text-xs tw-text-center">
-                        {{ $t('projects.create.form.files.empty.description') }}
+                        {{ Helper.tLang('projects.create.form.files.empty.description') }}
                       </p>
                     </template>
                   </Dropzone>

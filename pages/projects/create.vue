@@ -212,20 +212,20 @@ function searchCategories(query?: string) {
         v-if="stepsTitles[step].title"
         class="tw-text-3xl lg:tw-text-[35px] xl:tw-text-5xl tw-font-extralight tw-text-white tw-mb-6 lg:tw-mb-8"
       >
-        {{ $t(stepsTitles[step].title) }}
+        {{ Helper.tLang(stepsTitles[step].title) }}
       </h1>
       <p
         v-if="stepsTitles[step].description"
         class="h2 tw-text-white tw-w-4/6 tw-text-center tw-mb-10 tw-text-[14px] tw-font-extralight"
       >
-        {{ $t(stepsTitles[step].description) }}
+        {{ Helper.tLang(stepsTitles[step].description) }}
       </p>
       <div class="tw-w-full tw-flex-1">
         <div class="tw-relative">
           <q-form @submit.prevent="create" ref="refForm">
             <div class="step-container step-0" :class="`show-${step}`">
               <p class="input-details">
-                {{ $t('projects.create.form.name.label') }}
+                {{ Helper.tLang('projects.create.form.name.label') }}
               </p>
               <InputCPA
                 id="input_uno"
@@ -234,14 +234,14 @@ function searchCategories(query?: string) {
                 rounded
                 class="tw-mb-3"
                 v-model="projectData.name"
-                :label="$t('projects.create.form.name.placeholder')"
+                :label="Helper.tLang('projects.create.form.name.placeholder')"
               ></InputCPA>
               <p class="input-details">
-                {{ $t('projects.create.form.description.label') }}
+                {{ Helper.tLang('projects.create.form.description.label') }}
               </p>
               <Textarea
                 :placeholder="
-                  $t('projects.create.form.description.placeholder')
+                  Helper.tLang('projects.create.form.description.placeholder')
                 "
                 v-model="projectData.description"
                 dark
@@ -254,7 +254,7 @@ function searchCategories(query?: string) {
                   variant="ghost"
                   class="tw-text-white tw-underline"
                 >
-                  {{ $t('projects.create.form.description.clearBtn') }}
+                  {{ Helper.tLang('projects.create.form.description.clearBtn') }}
                 </Button>
               </div>
               <Dropzone v-model="projectData.files" dark>
@@ -262,8 +262,8 @@ function searchCategories(query?: string) {
                   <p class="tw-text-base tw-mb-5">
                     {{
                       projectData.files
-                        ? $t('projects.create.form.files.empty.title')
-                        : $t('projects.create.form.files.loadedMsg')
+                        ? Helper.tLang('projects.create.form.files.empty.title')
+                        : Helper.tLang('projects.create.form.files.loadedMsg')
                     }}
                   </p>
                 </template>
@@ -281,7 +281,7 @@ function searchCategories(query?: string) {
                     </span>
                   </p>
                   <p v-else class="tw-text-white tw-text-xs tw-text-center">
-                    {{ $t('projects.create.form.files.empty.description') }}
+                    {{ Helper.tLang('projects.create.form.files.empty.description') }}
                   </p>
                 </template>
               </Dropzone>
@@ -289,7 +289,7 @@ function searchCategories(query?: string) {
 
             <div class="step-container step-1" :class="`show-${step}`">
               <p class="input-details">
-                {{ $t('projects.create.form.skills.label') }}
+                {{ Helper.tLang('projects.create.form.skills.label') }}
               </p>
               <div
                 class="tw-bg-input tw-rounded-2xl tw-px-4 tw-pt-3 tw-relative"
@@ -322,7 +322,7 @@ function searchCategories(query?: string) {
                 <input
                   @input="handleEndWrite"
                   class="skills-input"
-                  :placeholder="$t('projects.create.form.skills.placeholder')"
+                  :placeholder="Helper.tLang('projects.create.form.skills.placeholder')"
                   v-model="projectData.searchSkills"
                 />
 
@@ -342,7 +342,7 @@ function searchCategories(query?: string) {
                 </div>
               </div>
               <p class="tw-mt-4 tw-text-white tw-w-10/12 tw-m-auto tw-text-xs">
-                {{ $t('projects.create.form.skills.suggested') }}
+                {{ Helper.tLang('projects.create.form.skills.suggested') }}
 
                 <span
                   v-for="(item, index) in suggestedSkills"
@@ -363,15 +363,15 @@ function searchCategories(query?: string) {
                 </div>
                 <div class="tw-text-white tw-ml-8 lg:tw-w-2/5">
                   <h3 class="tw-mb-2 tw-text-lg tw-font-extrabold">
-                    {{ $t('projects.create.form.prices.details.title') }}
+                    {{ Helper.tLang('projects.create.form.prices.details.title') }}
                   </h3>
                   <p class="tw-font-extralight tw-text-xs">
-                    {{ $t('projects.create.form.prices.details.description') }}
+                    {{ Helper.tLang('projects.create.form.prices.details.description') }}
                   </p>
                 </div>
               </div>
               <p class="input-details">
-                {{ $t('projects.create.form.prices.label') }}
+                {{ Helper.tLang('projects.create.form.prices.label') }}
               </p>
               <div class="tw-flex">
                 <div
@@ -418,7 +418,7 @@ function searchCategories(query?: string) {
                 </div>
                 <div class="tw-text-white tw-ml-8">
                   <p class="tw-text-sm">
-                    {{ $t('projects.singular') }}
+                    {{ Helper.tLang('projects.singular') }}
                     <span class="tw-text-primary">
                       "{{ projectData.name }}"
                     </span>
@@ -431,7 +431,7 @@ function searchCategories(query?: string) {
                 </div>
               </div>
               <p class="input-details">
-                {{ $t('projects.create.form.final.label') }}
+                {{ Helper.tLang('projects.create.form.final.label') }}
               </p>
               <div
                 class="tw-bg-input tw-rounded-2xl tw-p-6 tw-relative tw-min-h-44"
@@ -464,7 +464,7 @@ function searchCategories(query?: string) {
                 class="hero tw-mt-8 tw-tracking-wide tw-w-full tw-font-semibold tw-py-4 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-mx-1 !tw-text-primary"
               >
                 <span class="tw-ml-3">
-                  {{ $t('projects.create.form.buttons.back') }}
+                  {{ Helper.tLang('projects.create.form.buttons.back') }}
                 </span>
               </Button>
               <Button
@@ -474,7 +474,7 @@ function searchCategories(query?: string) {
               >
                 <span class="tw-ml-3">
                   {{
-                    $t(
+                    Helper.tLang(
                       step < 3
                         ? 'projects.create.form.buttons.next'
                         : 'projects.create.form.buttons.submit',

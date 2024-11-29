@@ -69,8 +69,8 @@ async function sendImg() {
                 <p class="tw-text-base tw-mb-3">
                   {{
                     dataToSave.files
-                      ? $t('projects.create.form.files.empty.title')
-                      : $t('projects.create.form.files.loadedMsg')
+                      ? Helper.tLang('projects.create.form.files.empty.title')
+                      : Helper.tLang('projects.create.form.files.loadedMsg')
                   }}
                 </p>
               </div>
@@ -86,7 +86,7 @@ async function sendImg() {
                 </span>
               </p>
               <p v-else class="tw-text-xs tw-text-center">
-                {{ $t('projects.create.form.files.empty.description') }}
+                {{ Helper.tLang('projects.create.form.files.empty.description') }}
               </p>
             </template>
           </Dropzone>

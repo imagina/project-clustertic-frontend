@@ -57,7 +57,7 @@ async function reset() {
           <h1
             class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
           >
-            {{ $t('auth.reset.title') }}
+            {{ Helper.tLang('auth.reset.title') }}
           </h1>
           <div class="tw-w-full tw-flex-1">
             <div class="">
@@ -67,7 +67,7 @@ async function reset() {
                   dark
                   class="tw-mb-2"
                   v-model="auth.password"
-                  :label="$t('auth.login.inputs.password')"
+                  :label="Helper.tLang('auth.login.inputs.password')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'Password is required',
@@ -104,7 +104,7 @@ async function reset() {
                   dark
                   class="tw-mb-2"
                   v-model="auth.confirmPassword"
-                  :label="$t('auth.reset.confirmPassword')"
+                  :label="Helper.tLang('auth.reset.confirmPassword')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'Password is required',
@@ -144,7 +144,7 @@ async function reset() {
                     class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
                   >
                     <span class="tw-ml-3">
-                      {{ $t('auth.reset.submitBtn') }}
+                      {{ Helper.tLang('auth.reset.submitBtn') }}
                     </span>
                   </Button>
                 </transition>
@@ -152,9 +152,9 @@ async function reset() {
               <p
                 class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
               >
-                {{ $t('auth.register.existAccount.content') }}
+                {{ Helper.tLang('auth.register.existAccount.content') }}
                 <NuxtLink to="/auth/login" class="tw-text-primary tw-ml-1">
-                  {{ $t('auth.register.existAccount.link') }}
+                  {{ Helper.tLang('auth.register.existAccount.link') }}
                 </NuxtLink>
               </p>
             </div>

@@ -48,7 +48,7 @@ async function register() {
       <h1
         class="tw-text-[35px] xl:tw-text-[50px] tw-font-extralight tw-text-white tw-mb-4"
       >
-        {{ $t('auth.register.title') }}
+        {{ Helper.tLang('auth.register.title') }}
       </h1>
       <div class="tw-w-full tw-flex-1">
         <div class="">
@@ -61,7 +61,7 @@ async function register() {
                   rounded
                   class="tw-mb-3"
                   v-model="auth.firstName"
-                  :label="$t('auth.register.inputs.firstName')"
+                  :label="Helper.tLang('auth.register.inputs.firstName')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'Name is required.',
@@ -78,7 +78,7 @@ async function register() {
                   rounded
                   class="tw-mb-3"
                   v-model="auth.lastName"
-                  :label="$t('auth.register.inputs.lastName')"
+                  :label="Helper.tLang('auth.register.inputs.lastName')"
                   lazy-rules
                   :rules="[
                     (val) => !!val || 'last name is required.',
@@ -95,7 +95,7 @@ async function register() {
               rounded
               class="tw-mb-3"
               v-model="auth.email"
-              :label="$t('auth.register.inputs.email')"
+              :label="Helper.tLang('auth.register.inputs.email')"
               lazy-rules
               :rules="[
                 (val) => !!val || 'Email is required.',
@@ -112,7 +112,7 @@ async function register() {
               rounded
               class="tw-mb-2"
               v-model="auth.password"
-              :label="$t('auth.register.inputs.password')"
+              :label="Helper.tLang('auth.register.inputs.password')"
               lazy-rules
               :rules="PasswordValidator.rules"
               :type="isPwd ? 'password' : 'text'"
@@ -134,7 +134,7 @@ async function register() {
               rounded
               class="tw-mb-2"
               v-model="auth.passwordAgain"
-              :label="$t('auth.register.inputs.passwordAgain')"
+              :label="Helper.tLang('auth.register.inputs.passwordAgain')"
               lazy-rules
               :rules="PasswordValidator.rules"
               :type="isPwd ? 'password' : 'text'"
@@ -157,7 +157,8 @@ async function register() {
                   v-model:checked="auth.agreement"
                 ></Checkbox>
                 <span class="tw-text-white tw-ml-2">
-                  <i18n-t keypath="auth.register.inputs.termsAndCond.content">
+                  
+                  <!-- <i18n-t keypath="auth.register.inputs.termsAndCond.content">
                     <template #highlight1>
                       <NuxtLink
                         to="/termsAndConditions"
@@ -174,7 +175,22 @@ async function register() {
                         {{ $t('auth.register.inputs.termsAndCond.highlight2') }}
                       </NuxtLink>
                     </template>
-                  </i18n-t>
+                  </i18n-t> -->
+                  Acepto el
+                  <NuxtLink
+                    to="/termsAndConditions"
+                    class="tw-text-primary tw-font-bold"
+                  >
+                    Acuerdo de usuario
+                  </NuxtLink>
+                  y la
+                  <NuxtLink
+                    to="/privacyPolicy"
+                    class="tw-text-primary tw-font-bold"
+                  >
+                    Política de privacidad
+                  </NuxtLink>
+                  .
                 </span>
               </label>
             </div>
@@ -189,7 +205,7 @@ async function register() {
                 class="hero tw-mt-5 tw-tracking-wide tw-font-semibold tw-bg-indigo-500 tw-text-gray-100 tw-w-full tw-py-4 tw-rounded-lg tw-hover:bg-indigo-700 tw-transition-all tw-duration-300 tw-ease-in-out tw-flex tw-items-center tw-justify-center"
               >
                 <span class="tw-ml-3">
-                  {{ $t('auth.register.submitBtn') }}
+                  {{ Helper.tLang('auth.register.submitBtn') }}
                 </span>
               </Button>
             </transition>
@@ -197,9 +213,9 @@ async function register() {
           <p
             class="tw-mt-8 tw-text-sm tw-font-extralight tw-text-white tw-text-center"
           >
-            {{ $t('auth.register.existAccount.content') }}
+            {{ Helper.tLang('auth.register.existAccount.content') }}
             <NuxtLink to="/auth/login" class="tw-text-primary tw-ml-1">
-              {{ $t('auth.register.existAccount.link') }}
+              {{ Helper.tLang('auth.register.existAccount.link') }}
             </NuxtLink>
           </p>
         </div>

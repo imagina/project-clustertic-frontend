@@ -8,7 +8,7 @@ import {
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
 import type { UserData } from '~/models/interfaces/user'
-const { locale } = useI18n()
+// const { locale } = useI18n()
 
 const authStore = useAuthStore()
 const user = computed<UserData | null>(() => authStore.user)
@@ -65,7 +65,7 @@ const user = computed<UserData | null>(() => authStore.user)
                 <Button variant="ghost" type="button" class="tw-text-secondary">
                   <BriefcaseIcon class="tw-text-primary tw-mr-3" />
                   <span class="tw-font-bold tw-capitalize">
-                    {{ $t('appbar.nav.briefcase') }}
+                    {{ Helper.tLang('appbar.nav.briefcase') }}
                   </span>
                 </Button>
               </NuxtLink>
@@ -75,7 +75,7 @@ const user = computed<UserData | null>(() => authStore.user)
                 <Button variant="ghost" type="button" class="tw-text-secondary">
                   <CompassIcon class="tw-text-primary tw-mr-3" />
                   <span class="tw-font-bold tw-capitalize">
-                    {{ $t('appbar.nav.explore') }}
+                    {{ Helper.tLang('appbar.nav.explore') }}
                   </span>
                 </Button>
               </NuxtLink>
@@ -88,7 +88,7 @@ const user = computed<UserData | null>(() => authStore.user)
                     style="transform: rotate(180deg)"
                   />
                   <span class="tw-font-bold tw-capitalize">
-                    {{ $t('appbar.nav.login') }}
+                    {{ Helper.tLang('appbar.nav.login') }}
                   </span>
                 </Button>
               </NuxtLink>
@@ -97,7 +97,7 @@ const user = computed<UserData | null>(() => authStore.user)
               <NuxtLink to="/projects/create">
                 <Button class="tw-ml-5">
                   <span class="tw-font-bold">
-                    {{ $t('appbar.publish_project') }}
+                    {{ Helper.tLang('appbar.publish_project') }}
                   </span>
                 </Button>
               </NuxtLink>
@@ -117,10 +117,10 @@ const user = computed<UserData | null>(() => authStore.user)
         </client-only>
       </nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
-        <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
+        <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>
-        </select>
+        </select> -->
       </div>
     </div>
   </div>
