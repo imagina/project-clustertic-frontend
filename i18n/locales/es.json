@@ -14,7 +14,8 @@
       "highlight": "manos expertas"
     },
     "publishProject": "Publicar proyectos",
-    "findProject": "Buscar Proyectos"
+    "findProject": "Buscar Proyectos",
+    "recentProjects": "Lo más reciente"
   },
 
   "auth": {

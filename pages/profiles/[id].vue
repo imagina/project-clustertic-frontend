@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { FactoryIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-vue-next'
+import {
+  FactoryIcon,
+  GlobeIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
+import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
+import TwitterSVG from '@/assets/svg/brand-twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
 
@@ -241,7 +249,7 @@ onBeforeUnmount(() => {
                   <MapPinIcon class="tw-text-black" :size="20" />
                 </div>
                 <div class="tw-text-black tw-ml-3">
-                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Location</p>
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Ubicación</p>
                   <p class="tw-mb-0 tw-text-xs">
                     {{ extraFields?.place?.value }}
                   </p>
@@ -252,9 +260,30 @@ onBeforeUnmount(() => {
               <a
                 v-if="socialMedia.facebook"
                 :href="socialMedia.facebook"
-                class="facebook-icon"
+                class="social-icon facebook"
               >
                 <FacebookSVG class="tw-text-white tw-text-3xl" />
+              </a>
+              <a
+                v-if="socialMedia.twitter"
+                :href="socialMedia.twitter"
+                class="social-icon !tw-bg-primary"
+              >
+                <TwitterSVG filled class="tw-text-white tw-text-3xl" />
+              </a>
+              <a
+                v-if="socialMedia.linkedin"
+                :href="socialMedia.linkedin"
+                class="social-icon !tw-bg-primary"
+              >
+                <LinkedinSVG filled class="tw-text-white tw-text-2xl" />
+              </a>
+              <a
+                v-if="socialMedia.web"
+                :href="socialMedia.web"
+                class="social-icon !tw-bg-primary"
+              >
+                <GlobeIcon :size="30" class="" />
               </a>
             </CardFooter>
           </Card>

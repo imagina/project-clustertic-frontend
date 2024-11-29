@@ -12,9 +12,9 @@ function handleSearch() {
     <div class="tw-container tw-flex tw-justify-center tw-py-16">
       <div class="tw-basis-2/3 lg:tw-basis-3/6">
         <h3
-          class="tw-font-extralight tw-text-white tw-text-center tw-text-[30px] tw-mb-14"
+          class="tw-font-light tw-text-white tw-text-center tw-text-[32px] tw-mb-14"
         >
-          ¿Que estas buscando?
+          ¿Que estás buscando?
         </h3>
         <q-form @submit.prevent.stop="handleSearch">
           <InputCPA
@@ -38,7 +38,7 @@ function handleSearch() {
 <style scoped>
 .search-project-bg {
   background-image: url('@/assets/images/search-project-bg.png');
-  background-size: 100% 100%;
+  background-size: 110% 100%;
   background-position: center center;
 }
 :deep(.q-field__control) {

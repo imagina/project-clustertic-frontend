@@ -84,6 +84,10 @@ async function login(response) {
     class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
     :loading="state.loading"
   >
-    <FacebookSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
+    <FacebookSVG
+      style="color: #232323"
+      filled
+      class="tw-text-2xl !tw-h-auto !tw-m-0"
+    />
   </Button>
 </template>

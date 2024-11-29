@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import LogoGreenTextSVG from '@/assets/svg/logo-green-text.svg'
 import CategoriesSVG from '@/assets/svg/categories.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook-green.svg'
+import FacebookSVG from '@/assets/svg/brand-facebook.svg'
 import InstagramSVG from '@/assets/svg/brand-instagram.svg'
-import TwitterSVG from '@/assets/svg/brand-twitter.svg'
+import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
 import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
 import type { PaginationInfo } from '~/models/interfaces/utils'
 
@@ -43,7 +43,7 @@ onMounted(() => {
                 <MailIcon class="tw-text-primary" />
               </div>
               <div class="tw-text-white tw-ml-3">
-                <p class="tw-mb-1 tw-text-sm tw-font-bold">Location</p>
+                <p class="tw-mb-1 tw-text-sm tw-font-bold">Ubicación</p>
                 <p class="tw-mb-0 tw-text-xs">Colombia, Tolima</p>
               </div>
             </div>
@@ -143,21 +143,33 @@ onMounted(() => {
               >
                 Sobre el cluster
               </NuxtLink>
-              <a
+              <!-- <a
                 href="#"
                 class="tw-mb-7 tw-text-xs tw-font-extralight tw-block"
               >
                 Recursos de ayuda
-              </a>
+              </a> -->
               <div class="tw-flex tw-justify-between">
-                <a href="#" class="tw-inline-block">
+                <a
+                  href=" https://www.instagram.com/clustertolimatic/"
+                  target="_blank"
+                  class="tw-inline-block"
+                >
                   <InstagramSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
-                <a href="#" class="tw-inline-block">
+                <a
+                  href="https://www.facebook.com/TolimaTIC"
+                  target="_blank"
+                  class="tw-inline-block"
+                >
                   <FacebookSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
-                <a href="#" class="tw-inline-block">
-                  <TwitterSVG class="tw-text-primary tw-text-4xl" filled />
+                <a
+                  href="https://www.linkedin.com/in/cluster-tolima-tic-03081433a/"
+                  target="_blank"
+                  class="tw-inline-block"
+                >
+                  <LinkedinSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
               </div>
             </div>

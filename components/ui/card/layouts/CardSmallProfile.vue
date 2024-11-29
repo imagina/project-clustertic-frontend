@@ -23,7 +23,7 @@ const props = defineProps<{
   <Card :class="cn(props.class, 'tw-bg-white')">
     <div class="tw-p-5 tw-h-full tw-flex tw-justify-between tw-flex-col">
       <div class="tw-flex tw-justify-center tw-items-center tw-mb-1">
-        <div class="img-container">
+        <div class="img-container tw-flex-auto tw-flex-shrink-0 tw-flex-grow-0">
           <div
             :style="
               img

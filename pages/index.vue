@@ -21,7 +21,7 @@ const handleAnimationStart = (self: AnimationEvent) => {
 }
 const slide = ref(1)
 const project = ref<Project | null>(null)
-
+const createdAt = computed(() => <string>project.value?.createdAt)
 onMounted(() => {
   apiCluster
     .get('/api/ipin/v1/pins', {
@@ -118,9 +118,9 @@ onMounted(() => {
 
   <div class="tw-bg-gray-200">
     <h3
-      class="tw-font-extralight tw-text-black tw-text-center lg:tw-text-[30px] tw-py-10"
+      class="tw-font-light tw-text-black tw-text-center lg:tw-text-[30px] tw-py-10"
     >
-      ¿Que estas buscando?
+      {{ $t('landing.recentProjects') }}
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
       <PlayIcon style="transform: rotate(90deg)" />
@@ -128,10 +128,11 @@ onMounted(() => {
     <div class="tw-container tw-py-10 lg:tw-px-40 tw-mb-10">
       <CardProject
         class="card-shadow"
-      v-if="project"
+        v-if="project"
         :id="project.id"
         :rating="4.5"
         :skills="project.categories?.map((cat) => cat.title) ?? []"
+        :created-at="createdAt"
       >
         <template v-slot:title>{{ project.title }}</template>
         <template v-slot:subtitle>
@@ -144,14 +145,14 @@ onMounted(() => {
     </div>
     <div class="tw-flex tw-justify-center tw-pb-20">
       <NuxtLink to="/projects">
-        <Button
+        <button
           variant="ghost"
           type="button"
-          class="tw-bg-white !tw-px-14 !tw-py-7 tw-text-lg"
+          class="tw-bg-white !tw-px-10 !tw-py-4 tw-text-lg tw-rounded-xl tw-flex tw-justify-center tw-items-center"
         >
           Ver más
           <ArrowRightIcon class="tw-ml-3" />
-        </Button>
+        </button>
       </NuxtLink>
     </div>
   </div>
@@ -171,46 +172,49 @@ onMounted(() => {
             <div class="">
               <SparkleIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                El mejor talento
+                Conexiones estratégicas
               </h4>
               <p class="tw-text-white">
-                Descubre profesionales confiables al explorar sus portafolios y
-                sumergirte en los comentarios compartidos en sus perfiles.
+                Encuentra a los socios tecnológicos adecuados con rapidez. Esta
+                plataforma conecta a ofertantes del sector TIC con demandantes
+                de soluciones en diversos sectores, facilitando colaboraciones
+                clave para el desarrollo regional.
               </p>
             </div>
             <div class="">
               <HourglassIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                Trabajo de calidad
+                Soluciones de calidad
               </h4>
               <p class="tw-text-white">
-                Con la reserva de talentos de Freelancer de más de 60 millones
-                de profesionales a tu alcance, encontrarás el talento de calidad
-                para lograr lo que necesitas.
+                Accede a una red de empresas y profesionales del Tolima
+                reconocidos por su experiencia. Los proyectos publicados se
+                desarrollan bajo altos estándares de calidad, garantizando
+                resultados sobresalientes para cada necesidad tecnológica.
               </p>
             </div>
             <div class="">
               <CheckCheckIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                Propuestas rápidas
+                Propuestas ágiles
               </h4>
               <p class="tw-text-white">
-                Recibe presupuestos rápidos y sin compromiso de parte de
-                talentosos freelancers. El 80 % de los trabajos reciben ofertas
-                en cuestión de 60 segundos. Tu idea está a solo momentos de la
-                realidad.
+                Publica demandas y recibe respuestas rápidas y personalizadas.
+                La plataforma permite gestionar ofertas y demandas de manera
+                eficiente, asegurando que las oportunidades se concreten en
+                tiempo récord.
               </p>
             </div>
             <div class="">
               <BriefcaseBusinessIcon :size="35" class="tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
-                Ten el control
+                Gestión inteligente
               </h4>
               <p class="tw-text-white">
-                Mantente informado mientras vas de un lado al otro. Conversa con
-                tus freelancers y recibe actualizaciones en tiempo real con
-                nuestra aplicación móvil. En cualquier lugar y en cualquier
-                momento.
+                Disfruta de herramientas avanzadas que simplifican la gestión de
+                proyectos. Desde perfiles detallados hasta valoraciones y
+                reseñas, todo está diseñado para fomentar relaciones confiables
+                y exitosas entre las partes.
               </p>
             </div>
           </div>

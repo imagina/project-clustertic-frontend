@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DollarSignIcon, CompassIcon, Search } from 'lucide-vue-next'
+import { DollarSignIcon, CompassIcon, XIcon } from 'lucide-vue-next'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 import { useCategoryStore } from '~/stores/useCategories'
 
@@ -95,9 +95,9 @@ function searchCategories(query?: string) {
           <div class="tw-flex tw-justify-between">
             <h2 class="tw-text-xl tw-font-bold tw-mb-8">Filtros</h2>
 
-            <Button size="xs" type="submit">Go</Button>
+            <Button size="xs" type="submit">Buscar</Button>
           </div>
-          <div class="tw-mb-5 tw-flex">
+          <div class="tw-mb-5 tw-flex tw-items-center">
             <label
               class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
             >
@@ -107,8 +107,14 @@ function searchCategories(query?: string) {
               variant="ghost"
               type="button"
               class="hover:tw-bg-transparent hover:tw-underline hover:tw-text-primary tw-text-primary !tw-p-1 tw-leading-none tw-h-min"
+              @click="
+                () => {
+                  filters.minPrice = '0'
+                  filters.maxPrice = '100000000'
+                }
+              "
             >
-              clear
+              <XIcon :size="20" />
             </Button>
           </div>
           <label class="tw-text-xs tw-font-extralight">min</label>
@@ -125,7 +131,7 @@ function searchCategories(query?: string) {
           </div>
         </q-form>
 
-        <div class="tw-mb-5 tw-flex">
+        <div class="tw-mb-5 tw-flex tw-items-center">
           <label
             class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
           >
@@ -135,8 +141,13 @@ function searchCategories(query?: string) {
             variant="ghost"
             type="button"
             class="hover:tw-bg-transparent hover:tw-underline hover:tw-text-primary tw-text-primary !tw-p-1 tw-leading-none tw-h-min"
+            @click="
+              () => {
+                filters.skills = []
+              }
+            "
           >
-            clear
+            <XIcon :size="20" />
           </Button>
         </div>
 
@@ -188,6 +199,7 @@ function searchCategories(query?: string) {
             :id="project.id"
             :rating="4.5"
             :skills="project.categories?.map((cat) => cat.title) ?? []"
+            :created-at="`${project.createdAt}`"
           >
             <template v-slot:title>{{ project.title }}</template>
             <template v-slot:subtitle>

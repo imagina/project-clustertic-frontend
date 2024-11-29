@@ -10,7 +10,7 @@ onMounted(() => {
     .get('/api/profile/v1/users', {
       take: 6,
       include: 'information.files,skills',
-      filter : '{"order":{"field":"created_at","way":"desc"}}'
+      filter: '{"order":{"field":"created_at","way":"desc"}}',
     })
     .then((response: any) => {
       experts.value = (<UserData[]>response.data).map((user) => new User(user))
@@ -23,7 +23,7 @@ function handleSelectUsers(user_id: number) {
 <template>
   <div class="tw-bg-gray-200">
     <h3
-      class="tw-font-extralight tw-text-black tw-text-center tw-text-[30px] tw-py-10"
+      class="tw-font-light tw-text-black tw-text-center tw-text-[30px] tw-py-10"
     >
       De la mano de
       <b class="tw-font-bold">expertos</b>

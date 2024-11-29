@@ -8,7 +8,9 @@ import {
   GlobeIcon,
 } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook-white.svg'
+import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
+import TwitterSVG from '@/assets/svg/brand-twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
@@ -110,7 +112,7 @@ onMounted(() => {
           <p class="tw-text-xl">
             {{ description }}
           </p>
-<!--           
+          <!--           
           <div class="tw-flex tw-justify-between tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Portafolio</h4>
 
@@ -291,7 +293,7 @@ onMounted(() => {
                   <MapPinIcon class="tw-text-black" :size="20" />
                 </div>
                 <div class="tw-text-black tw-ml-3">
-                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Location</p>
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Ubicación</p>
                   <p class="tw-mb-0 tw-text-xs">
                     {{ extraFields?.place?.value }}
                   </p>
@@ -311,16 +313,16 @@ onMounted(() => {
               <a
                 v-if="socialMedia.twitter"
                 :href="socialMedia.twitter"
-                class="social-icon"
+                class="social-icon !tw-bg-primary"
               >
-                T
+                <TwitterSVG filled class="tw-text-white tw-text-3xl" />
               </a>
               <a
                 v-if="socialMedia.linkedin"
                 :href="socialMedia.linkedin"
-                class="social-icon"
+                class="social-icon !tw-bg-primary"
               >
-                L
+                <LinkedinSVG filled class="tw-text-white tw-text-2xl" />
               </a>
               <a
                 v-if="socialMedia.web"

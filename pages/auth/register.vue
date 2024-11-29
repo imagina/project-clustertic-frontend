@@ -159,12 +159,18 @@ async function register() {
                 <span class="tw-text-white tw-ml-2">
                   <i18n-t keypath="auth.register.inputs.termsAndCond.content">
                     <template #highlight1>
-                      <NuxtLink to="/termsAndConditions" class="tw-text-primary tw-font-bold">
+                      <NuxtLink
+                        to="/termsAndConditions"
+                        class="tw-text-primary tw-font-bold"
+                      >
                         {{ $t('auth.register.inputs.termsAndCond.highlight1') }}
                       </NuxtLink>
                     </template>
                     <template #highlight2>
-                      <NuxtLink to="/privacyPolicy" class="tw-text-primary tw-font-bold">
+                      <NuxtLink
+                        to="/privacyPolicy"
+                        class="tw-text-primary tw-font-bold"
+                      >
                         {{ $t('auth.register.inputs.termsAndCond.highlight2') }}
                       </NuxtLink>
                     </template>
