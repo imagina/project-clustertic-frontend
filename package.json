@@ -47,5 +47,10 @@
     "@nuxtjs/tailwindcss": "6.12.1",
     "prettier": "3.3.3",
     "typescript": "5.6.2"
+  },
+  "overrides": {
+    "@intlify/core-base": "^10.0.1",
+    "@intlify/shared": "^9.7.1",
+    "vue-i18n": "^10.0.1"
   }
 }
