@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
               <div
                 class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
                 :style="{
-                  backgroundImage: `url(${user?.mediaFiles.profile.path ?? user?.mediumImage})`,
+                  backgroundImage: user?.mediaFiles.profile.path? `url(${user?.mediaFiles.profile.path})` : undefined,
                 }"
               ></div>
             </client-only>
@@ -63,13 +63,13 @@ onBeforeUnmount(() => {
           <h2
             class="tw-mb-0 tw-w-max tw-px-4 tw-py-3 tw-border-b-4 tw-text-xl tw-font-normal profile-title"
           >
-            Perfil del usuario
+            Perfil del empresa
           </h2>
         </div>
       </div>
       <div class="tw-mt-10 tw-flex tw-items-center tw-gap-4">
         <h3 class="tw-font-bold tw-text-4xl">
-          {{ user?.firstName }} {{ user?.lastName }}
+          {{ extraFields?.companyName?.value }}
         </h3>
         <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
           {{ user?.email }}
@@ -213,10 +213,10 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">
-                    Nombre de la empresa
+                    Usuario
                   </p>
                   <p class="tw-mb-0 tw-text-xs">
-                    {{ extraFields?.companyName?.value }}
+                    {{ user?.firstName }} {{ user?.lastName }} 
                   </p>
                 </div>
               </div>

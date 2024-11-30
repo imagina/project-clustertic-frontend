@@ -75,7 +75,7 @@ function handleSelectUsers(user_id: number) {
         <CardSmallProfile
           class="tw-h-full"
           :id="user.id"
-          :name="user.fullName"
+          :name="user?.extraFields?.companyName?.value ?? user.fullName"
           :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
           location="xx, zz"
         >

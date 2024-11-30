@@ -12,7 +12,7 @@ const apiRoutes = {
 export const useProfilesStore = defineStore('profiles', {
   state: (): {
     user: UserData | null
-    users: UserData[]
+    users: User[]
     pagination: PaginationInfo
     loading: boolean
     filters: { [key: string]: any }
@@ -57,13 +57,13 @@ export const useProfilesStore = defineStore('profiles', {
         const response: any = await apiCluster.get(apiRoutes.profileUsers, {
           page,
           take,
-          include: 'information.files,skills',
+          include: 'information.files,skills,fields',
           filter: JSON.stringify(this.filters),
         })
         const metadata: {
           page: PaginationInfo
         } = response.meta
-        this.users = response.data
+        this.users = response.data.map((user:any)=> new User(user))
         this.pagination = metadata.page
       } catch (error) {
         console.error(error)
@@ -96,7 +96,7 @@ export const useProfilesStore = defineStore('profiles', {
     async viewDetails(id: number) {
       try {
         await this.requestFullUser(id)
-        Helper.redirectTo(`/profiles/${id}`)
+        Helper.redirectTo(`/companies/${id}`)
       } catch (error) {
         console.error(error)
         throw error
