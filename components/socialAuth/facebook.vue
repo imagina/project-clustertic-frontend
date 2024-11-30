@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FacebookSVG from '@/assets/svg/brand-facebook.svg'
+import FacebookSVG from '@/assets/svg/brand/facebook.svg'
 
 const proxy = getCurrentInstance()!.appContext.config.globalProperties
 

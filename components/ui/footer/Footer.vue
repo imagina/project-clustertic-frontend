@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import LogoGreenTextSVG from '@/assets/svg/logo-green-text.svg'
 import CategoriesSVG from '@/assets/svg/categories.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook.svg'
-import InstagramSVG from '@/assets/svg/brand-instagram.svg'
-import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
+import FacebookSVG from '@/assets/svg/brand/facebook.svg'
+import InstagramSVG from '@/assets/svg/brand/instagram.svg'
+import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
 import { MailIcon, InfoIcon, PhoneIcon, PencilIcon } from 'lucide-vue-next'
 import type { PaginationInfo } from '~/models/interfaces/utils'
 

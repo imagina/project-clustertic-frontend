@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GoogleSVG from '@/assets/svg/brand-google.svg'
+import GoogleSVG from '@/assets/svg/brand/google.svg'
 
 const proxy = getCurrentInstance()!.appContext.config.globalProperties
 const store = useAuthStore()

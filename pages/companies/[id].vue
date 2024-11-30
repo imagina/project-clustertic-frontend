@@ -6,10 +6,10 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from 'lucide-vue-next'
-import StarSVG from '@/assets/svg/star.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
-import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
-import TwitterSVG from '@/assets/svg/brand-twitter.svg'
+// import StarSVG from '@/assets/svg/star.svg'
+import FacebookSVG from '@/assets/svg/brand/facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
+import TwitterSVG from '@/assets/svg/brand/twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
 
@@ -71,9 +71,9 @@ onBeforeUnmount(() => {
         <h3 class="tw-font-bold tw-text-4xl">
           {{ extraFields?.companyName?.value }}
         </h3>
-        <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
+        <!-- <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
           {{ user?.email }}
-        </p>
+        </p> -->
         <div class="tw-grow"></div>
         <Button
           type="button"

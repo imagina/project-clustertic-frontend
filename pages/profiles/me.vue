@@ -8,9 +8,9 @@ import {
   GlobeIcon,
 } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
-import FacebookSVG from '@/assets/svg/brand-facebook-filled.svg'
-import LinkedinSVG from '@/assets/svg/brand-linkedin.svg'
-import TwitterSVG from '@/assets/svg/brand-twitter.svg'
+import FacebookSVG from '@/assets/svg/brand/facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
+import TwitterSVG from '@/assets/svg/brand/twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
@@ -87,7 +87,7 @@ onMounted(() => {
           @click="auth.logout"
           class="tw-border-none profile-btn"
         >
-          Log Out
+          Cerrar sesión
         </Button>
         <Button
           type="button"
