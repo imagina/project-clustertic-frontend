@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
           <h2
             class="tw-mb-0 tw-w-max tw-px-4 tw-py-3 tw-border-b-4 tw-text-xl tw-font-normal profile-title"
           >
-            Perfil del empresa
+            Perfil de la empresa
           </h2>
         </div>
       </div>

@@ -69,17 +69,17 @@ onMounted(() => {
           <h2
             class="tw-mb-0 tw-w-max tw-px-4 tw-py-3 tw-border-b-4 tw-text-xl tw-font-normal profile-title"
           >
-            Perfil del usuario
+            Perfil de la empresa
           </h2>
         </div>
       </div>
       <div class="tw-mt-10 tw-flex tw-items-center tw-gap-4">
         <h3 class="tw-font-bold tw-text-4xl">
-          {{ user?.firstName }} {{ user?.lastName }}
+          {{extraFields?.companyName?.value}}
         </h3>
-        <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
+        <!-- <p class="tw-text-muted-custom tw-text-3xl tw-font-light">
           {{ user?.email }}
-        </p>
+        </p> -->
         <div class="tw-grow"></div>
         <Button
           type="button"
@@ -247,6 +247,7 @@ onMounted(() => {
             <CardContent
               class="!tw-py-5 !tw-px-0 tw-border-b-2 tw-border-muted-light"
             >
+            
               <div class="tw-flex tw-items-center tw-mb-4">
                 <div
                   class="tw-border-r-2 tw-border-muted-light tw-px-3 tw-py-5"
@@ -255,10 +256,10 @@ onMounted(() => {
                 </div>
                 <div class="tw-text-black tw-ml-3">
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">
-                    Nombre de la empresa
+                    usuario
                   </p>
                   <p class="tw-mb-0 tw-text-xs">
-                    {{ extraFields?.companyName?.value }}
+                    {{ user?.firstName }} {{ user?.lastName }}
                   </p>
                 </div>
               </div>
