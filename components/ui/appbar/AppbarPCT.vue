@@ -116,7 +116,15 @@ const user = computed<UserData | null>(() => authStore.user)
           </ul>
         </client-only>
       </nav>
-      <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
+      <div
+        @click="
+          () => {
+            debugger
+          }
+        "
+        class="tw-flex tw-grow-0 tw-basis-auto tw-items-center"
+      >
+        <TraductionSelector />
         <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>

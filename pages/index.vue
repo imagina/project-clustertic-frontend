@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import CharacterLandingSVG from '~/assets/svg/character-landing.svg'
-import {
-  ArrowRightIcon,
-  PlayIcon,
-} from 'lucide-vue-next'
+import { ArrowRightIcon, PlayIcon } from 'lucide-vue-next'
 import profesionalsCarousel from '~/components/sections/profesionalsCarousel.vue'
 import RocketSVG from '@/assets/svg/rocket.svg'
 import BulbSVG from '@/assets/svg/bulb.svg'
@@ -100,37 +97,28 @@ onMounted(() => {
               class="float-label tw-flex tw-items-center tw-opacity-0 first add-shadow tw-top-[5px]"
               @animationstart="handleAnimationStart"
             >
-                <SolarPanelSVG
-                  class="tw-text-2xl tw-mr-2"
-                  filled
-                />
+              <SolarPanelSVG class="tw-text-2xl tw-mr-2" filled />
               Infraestructura TI y Conectividad
             </div>
             <div
               class="float-label tw-flex tw-items-center tw-opacity-0 second tw-top-[15%] md:tw-right-[8%] xl:tw-right-[-4%]"
               @animationstart="handleAnimationStart"
             >
-                <PacManSVG
-                  class="tw-text-2xl tw-mr-2"
-                  filled
-                />
+              <PacManSVG class="tw-text-2xl tw-mr-2" filled />
               Videojuegos, Realidad Aumentada y Virtual
             </div>
             <div
               class="float-label tw-flex tw-items-center tw-opacity-0 second tw-top-[35%] md:tw-left-[-8%] xl:tw-left-[15%]"
               @animationstart="handleAnimationStart"
             >
-                <BrushSVG class="tw-text-2xl tw-mr-2" filled />
+              <BrushSVG class="tw-text-2xl tw-mr-2" filled />
               Producción de Contenidos y Marketing Digital
             </div>
             <div
               class="float-label tw-flex tw-items-center tw-opacity-0 third tw-top-[50%] tw-left-[-25%]"
               @animationstart="handleAnimationStart"
             >
-                <DevicesPcSVG
-                  class="tw-text-2xl tw-mr-2"
-                  filled
-                />
+              <DevicesPcSVG class="tw-text-2xl tw-mr-2" filled />
               Transformación Digital y Desarrollo de Software
             </div>
           </div>

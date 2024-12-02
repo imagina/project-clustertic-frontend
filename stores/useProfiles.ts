@@ -27,7 +27,7 @@ export const useProfilesStore = defineStore('profiles', {
     },
     loading: false,
     filters: {
-      "roleId": 2
+      roleId: 2,
     },
   }),
   getters: {
@@ -63,7 +63,7 @@ export const useProfilesStore = defineStore('profiles', {
         const metadata: {
           page: PaginationInfo
         } = response.meta
-        this.users = response.data.map((user:any)=> new User(user))
+        this.users = response.data.map((user: any) => new User(user))
         this.pagination = metadata.page
       } catch (error) {
         console.error(error)

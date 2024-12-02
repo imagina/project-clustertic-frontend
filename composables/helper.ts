@@ -348,7 +348,6 @@ export const Helper = {
     let word: any = lang
     key.split('.').forEach((subKey: string) => {
       word = word[subKey]
-      debugger
     })
     return <string>word
   },

@@ -53,7 +53,9 @@ onBeforeUnmount(() => {
               <div
                 class="tw-h-full tw-w-full tw-bg-white tw-rounded-md"
                 :style="{
-                  backgroundImage: user?.mediaFiles.profile.path? `url(${user?.mediaFiles.profile.path})` : undefined,
+                  backgroundImage: user?.mediaFiles.profile.path
+                    ? `url(${user?.mediaFiles.profile.path})`
+                    : undefined,
                 }"
               ></div>
             </client-only>
@@ -212,11 +214,9 @@ onBeforeUnmount(() => {
                   <FactoryIcon class="tw-text-black" :size="20" />
                 </div>
                 <div class="tw-text-black tw-ml-3">
-                  <p class="tw-mb-1 tw-text-sm tw-font-bold">
-                    Usuario
-                  </p>
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Usuario</p>
                   <p class="tw-mb-0 tw-text-xs">
-                    {{ user?.firstName }} {{ user?.lastName }} 
+                    {{ user?.firstName }} {{ user?.lastName }}
                   </p>
                 </div>
               </div>

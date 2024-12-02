@@ -81,36 +81,35 @@ onMounted(() => {
 })
 
 function loadUser() {
-    const fullUser = authStore.fullUser
-    if (!fullUser) return
-    newData.firstName = fullUser.firstName
-    newData.lastName = fullUser.lastName
-    newData.companyName = fullUser.extraFields.companyName?.value ?? ''
-    newData.place = fullUser.extraFields.place?.value ?? ''
-    newData.phone = fullUser.extraFields.phone?.value ?? ''
-    newData.description = fullUser.extraFields.description?.value ?? ''
-    newData.skills = fullUser?.skills ?? []
-    newData.web = fullUser.socialMedia.web ?? ''
-    newData.facebook = fullUser.socialMedia.facebook
-      ? fullUser.socialMedia.facebook
-      : 'https://www.facebook.com/'
-    newData.twitter = fullUser.socialMedia.twitter
-      ? fullUser.socialMedia.twitter
-      : 'https://x.com/'
-    newData.linkedin = fullUser.socialMedia.linkedin
-      ? fullUser.socialMedia.linkedin
-      : 'https://www.linkedin.com/'
-    newData.instagram = fullUser.socialMedia.instagram
-      ? fullUser.socialMedia.instagram
-      : 'https://www.instagram.com/'
-    newData.tikTok = fullUser.socialMedia.tikTok
-      ? fullUser.socialMedia.tikTok
-      : 'https://www.tiktok.com/'
-    newData.youTube = fullUser.socialMedia.youTube
-      ? fullUser.socialMedia.youTube
-      : 'https://www.youtube.com/'
-    newData.email = fullUser.email ?? ''
-
+  const fullUser = authStore.fullUser
+  if (!fullUser) return
+  newData.firstName = fullUser.firstName
+  newData.lastName = fullUser.lastName
+  newData.companyName = fullUser.extraFields.companyName?.value ?? ''
+  newData.place = fullUser.extraFields.place?.value ?? ''
+  newData.phone = fullUser.extraFields.phone?.value ?? ''
+  newData.description = fullUser.extraFields.description?.value ?? ''
+  newData.skills = fullUser?.skills ?? []
+  newData.web = fullUser.socialMedia.web ?? ''
+  newData.facebook = fullUser.socialMedia.facebook
+    ? fullUser.socialMedia.facebook
+    : 'https://www.facebook.com/'
+  newData.twitter = fullUser.socialMedia.twitter
+    ? fullUser.socialMedia.twitter
+    : 'https://x.com/'
+  newData.linkedin = fullUser.socialMedia.linkedin
+    ? fullUser.socialMedia.linkedin
+    : 'https://www.linkedin.com/'
+  newData.instagram = fullUser.socialMedia.instagram
+    ? fullUser.socialMedia.instagram
+    : 'https://www.instagram.com/'
+  newData.tikTok = fullUser.socialMedia.tikTok
+    ? fullUser.socialMedia.tikTok
+    : 'https://www.tiktok.com/'
+  newData.youTube = fullUser.socialMedia.youTube
+    ? fullUser.socialMedia.youTube
+    : 'https://www.youtube.com/'
+  newData.email = fullUser.email ?? ''
 }
 
 function handleEndWrite() {
@@ -175,7 +174,7 @@ function handleSaveInfo() {
   })
 }
 function handleClose() {
-  emits("update:modelValue",false)
+  emits('update:modelValue', false)
   loadUser()
 }
 </script>
@@ -464,8 +463,8 @@ function handleClose() {
           color="primary"
           class="!tw-text-primary"
           @click="handleClose"
-          />
-          <!-- v-close-popup -->
+        />
+        <!-- v-close-popup -->
         <Button @click="handleSaveInfo" class="tw-ml-5 tw-font-semibold">
           Guardar
         </Button>
