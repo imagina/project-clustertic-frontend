@@ -4,16 +4,15 @@ export default class PasswordValidator {
   //     this.greeting = t("greeting");
   //   }
   static rules = [
-    (val: string) => !!val || 'Password is required',
+    (val: string) => !!val || 'Contraseña es requerida',
+    (val: string) => val.length >= 8 || 'Debe de tener al menos 8 caracteres',
     (val: string) =>
-      val.length >= 8 || 'Password must be at least 8 characters long',
+      /[A-Z]/.test(val) || 'Debe de contener al menos una letra mayúscula',
     (val: string) =>
-      /[A-Z]/.test(val) || 'Must contain at least one uppercase letter',
+      /[a-z]/.test(val) || 'Debe de contener al menos una letra minúscula',
+    (val: string) => /\d/.test(val) || 'Debe contener al menos un número',
     (val: string) =>
-      /[a-z]/.test(val) || 'Must contain at least one lowercase letter',
-    (val: string) => /\d/.test(val) || 'Must contain at least one number',
-    (val: string) =>
-      /[\W_]/.test(val) || 'Must contain at least one special character',
+      /[\W_]/.test(val) || 'Debe contener al menos un carácter especial',
   ]
 
   static is_password_valid(password: string) {

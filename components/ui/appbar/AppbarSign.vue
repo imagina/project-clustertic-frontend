@@ -18,6 +18,7 @@ import { ChevronsLeftIcon } from 'lucide-vue-next'
         class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2"
       ></nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
+        <TraductionSelector :dark="true" />
         <!-- <select
           class="tw-bg-transparent tw-text-primary tw-border-0 tw-p-2"
           v-model="locale"

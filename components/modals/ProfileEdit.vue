@@ -13,7 +13,6 @@ import TikTokSVG from '@/assets/svg/brand/tikTok.svg'
 
 let debounceTimeout: any = null
 const props = defineProps<QDialogProps>()
-const categoryStore = useCategoryStore()
 const authStore = useAuthStore()
 
 const emits = defineEmits<{
@@ -30,8 +29,6 @@ const newData = reactive<{
   firstName: string
   lastName: string
   description: string
-  skills: UserSkill[]
-  searchSkills: string
   facebook: string
   web: string
   twitter: string
@@ -47,8 +44,6 @@ const newData = reactive<{
   firstName: '',
   lastName: '',
   description: '',
-  skills: [],
-  searchSkills: '',
   web: '',
   facebook: 'https://www.facebook.com/',
   twitter: 'https://x.com/',
@@ -61,24 +56,12 @@ const newData = reactive<{
   email: '',
 })
 
-const categories = computed<ProjectTag[]>(() => {
-  return categoryStore.categories
-})
-
 watch(
   () => authStore.user,
   (newQuery, oldQuery) => {
     loadUser()
   },
 )
-
-onMounted(() => {
-  try {
-    categoryStore.get(1, 10)
-  } catch (error) {
-    console.log(error)
-  }
-})
 
 function loadUser() {
   const fullUser = authStore.fullUser
@@ -89,7 +72,6 @@ function loadUser() {
   newData.place = fullUser.extraFields.place?.value ?? ''
   newData.phone = fullUser.extraFields.phone?.value ?? ''
   newData.description = fullUser.extraFields.description?.value ?? ''
-  newData.skills = fullUser?.skills ?? []
   newData.web = fullUser.socialMedia.web ?? ''
   newData.facebook = fullUser.socialMedia.facebook
     ? fullUser.socialMedia.facebook
@@ -110,28 +92,6 @@ function loadUser() {
     ? fullUser.socialMedia.youTube
     : 'https://www.youtube.com/'
   newData.email = fullUser.email ?? ''
-}
-
-function handleEndWrite() {
-  clearTimeout(debounceTimeout)
-  debounceTimeout = setTimeout(() => {
-    searchCategories(newData.searchSkills)
-  }, 500) // 500 ms de espera
-}
-function searchCategories(query?: string) {
-  categoryStore.setFilters({ search: query })
-  categoryStore.get(1)
-}
-
-function handleRemoveSkill(index: number) {
-  const [skillRemoved] = newData.skills.splice(index, 1)
-  authStore.removeSkill(skillRemoved)
-}
-function handleAddSkill(skill: ProjectTag) {
-  if (!authStore.user?.skills) return
-  if (authStore.user.skills.findIndex((s) => s.entityId === `${skill.id}`) >= 0)
-    return
-  authStore.addSkill(skill)
 }
 
 function handleSaveInfo() {
@@ -280,65 +240,6 @@ function handleClose() {
             class="input-custom-outline search-input-border"
             v-model="newData.place"
           ></InputCPA>
-        </div>
-
-        <div class="tw-mb-4">
-          <label
-            class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
-          >
-            Habilidades principales
-          </label>
-          <div
-            class="tw-relative tw-border tw-border-muted-custom lg:tw-w-[34rem] tw-p-3 tw-rounded-md"
-          >
-            <ul class="tw-flex tw-flex-wrap">
-              <li
-                v-for="(item, index) in newData.skills"
-                :key="`skill_${index}`"
-                class="tw-border tw-border-primary tw-rounded-md tw-flex tw-px-5 tw-py-1 tw-h-min tw-mr-2 tw-mb-1"
-              >
-                <p class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose">
-                  {{ item.title }}
-                </p>
-                <Button
-                  size="xs"
-                  type="button"
-                  variant="ghost"
-                  class="hover:tw-bg-transparent !tw-pr-0"
-                >
-                  <XIcon
-                    @click="handleRemoveSkill(index)"
-                    class="tw-text-primary tw-text-xs"
-                    :size="20"
-                  />
-                </Button>
-              </li>
-            </ul>
-
-            <input
-              @input="handleEndWrite"
-              class="skills-input"
-              :placeholder="
-                Helper.tLang('projects.create.form.skills.placeholder')
-              "
-              v-model="newData.searchSkills"
-            />
-
-            <div class="option-skill-list">
-              <ul class="">
-                <li v-for="item in categories" :key="`category_${item.id}`">
-                  <Button
-                    @click="handleAddSkill(item)"
-                    variant="ghost"
-                    type="button"
-                    class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
-                  >
-                    {{ item.title }}
-                  </Button>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
 
         <div class="input-container">

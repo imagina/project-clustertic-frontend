@@ -9,7 +9,7 @@
           Política de tratamiento de datos personales
         </CardTitle>
         <CardContent>
-          <h3>1. Introducción</h3>
+          <h4>1. Introducción</h4>
           <p>
             En cumplimiento de la Ley 1581 de 2012 y demás normas relacionadas,
             <NuxtLink to="/">clustertolimatic.co</NuxtLink>
@@ -19,7 +19,7 @@
             aliados.
           </p>
 
-          <h3>2. Definiciones</h3>
+          <h4>2. Definiciones</h4>
           <ul>
             <li>
               Dato Personal: Cualquier información vinculada o que pueda
@@ -40,7 +40,7 @@
             </li>
           </ul>
 
-          <h3>3. Finalidades del Tratamiento</h3>
+          <h4>3. Finalidades del Tratamiento</h4>
           <p>
             Los datos personales recolectados serán utilizados para las
             siguientes finalidades:
@@ -61,7 +61,7 @@
             </li>
           </ul>
 
-          <h3>4. Derechos del Titular</h3>
+          <h4>4. Derechos del Titular</h4>
           <p>
             Los Titulares de los datos personales tienen los siguientes
             derechos:
@@ -88,7 +88,7 @@
             </li>
           </ul>
 
-          <h3>5. Procedimiento para el Ejercicio de Derechos</h3>
+          <h4>5. Procedimiento para el Ejercicio de Derechos</h4>
           <p>
             Para ejercer sus derechos, el Titular podrá enviar una solicitud al
             correo electrónico:
@@ -107,7 +107,7 @@
             </li>
           </ul>
 
-          <h3>6. Transferencia y Transmisión de Datos</h3>
+          <h4>6. Transferencia y Transmisión de Datos</h4>
           <p>
             <NuxtLink to="/">clustertolimatic.co</NuxtLink>
             no transferirá ni transmitirá datos personales a terceros sin el
@@ -115,7 +115,7 @@
             por la ley.
           </p>
 
-          <h3>7. Medidas de Seguridad</h3>
+          <h4>7. Medidas de Seguridad</h4>
           <p>
             La Plataforma implementa medidas técnicas, administrativas y
             organizativas para garantizar la seguridad de los datos personales,
@@ -123,7 +123,7 @@
             alteración.
           </p>
 
-          <h3>8. Modificaciones a la Política de Tratamiento de Datos</h3>
+          <h4>8. Modificaciones a la Política de Tratamiento de Datos</h4>
           <p>
             <NuxtLink to="/">clustertolimatic.co</NuxtLink>
             se reserva el derecho de modificar esta Política en cualquier
@@ -135,7 +135,7 @@
             , antes de su implementación.
           </p>
 
-          <h3>9. Contacto</h3>
+          <h4>9. Contacto</h4>
           <p>
             Para consultas relacionadas con esta Política, el Titular puede
             comunicarse a través del correo electrónico:
@@ -144,15 +144,15 @@
             </a>
             .
           </p>
-          <h3>Última actualización: 20 de Noviembre de 2024</h3>
+          <h4>Última actualización: 20 de Noviembre de 2024</h4>
         </CardContent>
       </CardHeader>
     </Card>
   </section>
 </template>
 <style scoped>
-h3 {
-  @apply tw-font-semibold;
+h4 {
+  @apply tw-font-semibold tw-text-base tw-mt-4;
 }
 a {
   @apply tw-text-link;

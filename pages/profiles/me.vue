@@ -14,6 +14,7 @@ import TwitterSVG from '@/assets/svg/brand/twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
+import ModalsProfileSkillsEdit from '~/components/modals/ProfileSkillsEdit.vue'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
 definePageMeta({
   middleware: 'auth',
@@ -35,6 +36,7 @@ const experiences = computed(
 const show_modal_editSkills = ref(false)
 const show_modal_editPhoto = ref(false)
 const show_modal_addExperience = ref(false)
+const show_modal_addSkill = ref(false)
 onMounted(() => {
   auth.requestFullUser()
 })
@@ -109,9 +111,32 @@ onMounted(() => {
       <div class="tw-flex tw-gap-8 tw-mt-10">
         <div class="tw-basis-full lg:tw-flex-1 tw-overflow-hidden tw-pr-4">
           <h4 class="tw-text-xl tw-text-muted-custom tw-mb-5">Descripción</h4>
-          <p class="tw-text-xl">
+          <p class="tw-text-xl tw-mb-10">
             {{ description }}
           </p>
+
+          <div class="tw-flex tw-justify-between">
+            <h4 class="tw-font-bold tw-text-4xl tw-mb-8">Habilidades</h4>
+
+            <Button
+              @click="show_modal_addSkill = true"
+              type="button"
+              variant="outline"
+              class="tw-border-none profile-btn"
+            >
+              <SquarePenIcon :size="15" class="tw-mr-2" />
+              Modificar habilidades
+            </Button>
+          </div>
+          <ul class="tw-flex tw-flex-wrap">
+            <li
+              v-for="(item, index) in user?.skills"
+              :key="`skill_${index}`"
+              class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min tw-mr-3 tw-mb-1"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
           <!--           
           <div class="tw-flex tw-justify-between tw-mt-32 tw-mb-10">
             <h4 class="tw-font-bold tw-text-4xl">Portafolio</h4>
@@ -338,6 +363,7 @@ onMounted(() => {
   <ProfileEdit v-model="show_modal_editSkills" />
   <ProfileChangeProfileImage v-model="show_modal_editPhoto" />
   <ModalsAddExperience v-model="show_modal_addExperience" />
+  <ModalsProfileSkillsEdit v-model="show_modal_addSkill" />
 </template>
 
 <style lang="css" scoped>

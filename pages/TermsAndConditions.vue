@@ -8,7 +8,7 @@
         <CardTitle class="!tw-font-medium">Términos del Servicio</CardTitle>
       </CardHeader>
       <CardContent>
-        <h3>1. Aceptación de los Términos</h3>
+        <h4>1. Aceptación de los Términos</h4>
         <p>
           Al acceder o utilizar la plataforma
           <NuxtLink to="/">clustertolimatic.co</NuxtLink>
@@ -17,7 +17,7 @@
           estos términos, debe abstenerse de utilizar la Plataforma.
         </p>
 
-        <h3>2. Definiciones</h3>
+        <h4>2. Definiciones</h4>
         <p>
           Plataforma: Se refiere a
           <NuxtLink to="/">clustertolimatic.co</NuxtLink>
@@ -27,7 +27,7 @@
           Plataforma.
         </p>
 
-        <h3>3. Uso de la Plataforma</h3>
+        <h4>3. Uso de la Plataforma</h4>
         <p>
           El Usuario se compromete a utilizar la Plataforma de manera
           responsable y a no realizar ninguna de las siguientes acciones:
@@ -47,7 +47,7 @@
           </li>
         </ul>
 
-        <h3>4. Registro y Seguridad</h3>
+        <h4>4. Registro y Seguridad</h4>
         <ul>
           <li>
             4.1. El Usuario puede necesitar registrarse para acceder a ciertas
@@ -64,7 +64,7 @@
           </li>
         </ul>
 
-        <h3>5. Propiedad Intelectual</h3>
+        <h4>5. Propiedad Intelectual</h4>
         <ul>
           <li>
             5.1. Todo el contenido de la Plataforma, incluidos textos, imágenes,
@@ -79,7 +79,7 @@
           </li>
         </ul>
 
-        <h3>6. Responsabilidad y Garantías</h3>
+        <h4>6. Responsabilidad y Garantías</h4>
         <ul>
           <li>
             6.1. La Plataforma se proporciona "tal cual" y no ofrece garantías
@@ -97,7 +97,7 @@
           </li>
         </ul>
 
-        <h3>7. Modificaciones a los Términos y Condiciones</h3>
+        <h4>7. Modificaciones a los Términos y Condiciones</h4>
         <p>
           La Plataforma se reserva el derecho de modificar estos Términos en
           cualquier momento. Las modificaciones entrarán en vigor una vez
@@ -105,36 +105,36 @@
           la aceptación de los Términos actualizados.
         </p>
 
-        <h3>8. Política de Privacidad</h3>
+        <h4>8. Política de Privacidad</h4>
         <p>
           El uso de la Plataforma está sujeto a nuestra Política de Privacidad,
           donde se detalla cómo recopilamos, utilizamos y protegemos la
           información del Usuario.
         </p>
 
-        <h3>9. Jurisdicción y Ley Aplicable</h3>
+        <h4>9. Jurisdicción y Ley Aplicable</h4>
         <p>
           Estos Términos se rigen por las leyes de Colombia y cualquier disputa
           será resuelta ante los tribunales competentes de la Cámara de Comercio
           de Ibagué.
         </p>
 
-        <h3>10. Contacto</h3>
+        <h4>10. Contacto</h4>
         <p>
           Para cualquier duda o consulta relacionada con estos Términos, el
           Usuario puede comunicarse con nosotros a través del correo
           electrónico:
           <a href="mailto:hola@clustertolimatic.co">hola@clustertolimatic.co</a>
         </p>
-        <h3>Última actualización: 20 de Noviembre de 2024</h3>
+        <h4>Última actualización: 20 de Noviembre de 2024</h4>
       </CardContent>
     </Card>
   </section>
 </template>
 
 <style scoped>
-h3 {
-  @apply tw-font-semibold;
+h4 {
+  @apply tw-font-semibold tw-text-base tw-mt-4;
 }
 a {
   @apply tw-text-link;

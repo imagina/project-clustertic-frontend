@@ -82,18 +82,20 @@ onMounted(() => {
             </div>
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Términos</p>
-              <NuxtLink
-                to="/DataProcessingPolicy"
+              <a
+                href="/DataProcessingPolicy"
+                target="_blank"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Política de Tratamiento de Datos
-              </NuxtLink>
-              <NuxtLink
-                to="/TermsAndConditions"
+              </a>
+              <a
+                href="/TermsAndConditions"
+                target="_blank"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
               >
                 Términos del Servicio
-              </NuxtLink>
+              </a>
             </div>
           </div>
           <div class="tw-flex tw-items-center tw-mb-4">

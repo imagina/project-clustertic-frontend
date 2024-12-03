@@ -2,10 +2,14 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
+body {
+  top: 0 !important;
+}
 .dark-layout-bg {
   background-image: url('../images/login-bg.png');
   background-size: cover;
 }
 iframe[id=':2.container'] {
   display: none !important;
+  z-index: -1 !important;
 }

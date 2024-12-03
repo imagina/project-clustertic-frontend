@@ -64,10 +64,10 @@ async function register() {
                   :label="Helper.tLang('auth.register.inputs.firstName')"
                   lazy-rules
                   :rules="[
-                    (val) => !!val || 'Name is required.',
+                    (val) => !!val || 'Nombre es requerido.',
                     (val) =>
                       val.length >= 3 ||
-                      'Password must be at least 8 characters long',
+                      'El nombre debe de tener 3 o más caracteres',
                   ]"
                 />
               </div>
@@ -81,10 +81,10 @@ async function register() {
                   :label="Helper.tLang('auth.register.inputs.lastName')"
                   lazy-rules
                   :rules="[
-                    (val) => !!val || 'last name is required.',
+                    (val) => !!val || 'Apellido es requerido.',
                     (val) =>
                       val.length >= 3 ||
-                      'Password must be at least 8 characters long',
+                      'El apellido debe de tener 3 o más caracteres.',
                   ]"
                 />
               </div>
@@ -98,8 +98,10 @@ async function register() {
               :label="Helper.tLang('auth.register.inputs.email')"
               lazy-rules
               :rules="[
-                (val) => !!val || 'Email is required.',
-                (val) => /.+@.+\..+/.test(val) || 'Please enter a valid email',
+                (val) => !!val || 'Correo es requerido.',
+                (val) =>
+                  /.+@.+\..+/.test(val) ||
+                  'Por favor introduzca un correo valido',
               ]"
             >
               <template v-slot:prepend>
@@ -176,19 +178,21 @@ async function register() {
                     </template>
                   </i18n-t> -->
                   Acepto el
-                  <NuxtLink
-                    to="/termsAndConditions"
+                  <a
+                    href="/termsAndConditions"
+                    target="_blank"
                     class="tw-text-primary tw-font-bold"
                   >
                     Acuerdo de usuario
-                  </NuxtLink>
+                  </a>
                   y la
-                  <NuxtLink
-                    to="/dataProcessingPolicy"
+                  <a
+                    href="/dataProcessingPolicy"
+                    target="_blank"
                     class="tw-text-primary tw-font-bold"
                   >
                     Política de privacidad
-                  </NuxtLink>
+                  </a>
                   .
                 </span>
               </label>

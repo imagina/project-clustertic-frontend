@@ -2,6 +2,7 @@
 import LogoGreenSVG from '@/assets/svg/logo-green-text.svg'
 import { reactive, ref } from 'vue'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
+import PasswordValidator from '@/utils/validators/passwordValidator'
 
 const refLogin: any = ref(null)
 const isPwd = ref(true)
@@ -63,8 +64,9 @@ async function login() {
               :label="Helper.tLang('auth.login.inputs.email')"
               lazy-rules
               :rules="[
-                (val) => !!val || 'Email is required.',
-                (val) => /.+@.+\..+/.test(val) || 'Please enter a valid email',
+                (val) => !!val || 'Correo es requerido.',
+                (val) =>
+                  /.+@.+\..+/.test(val) || 'Por favor ingrese un correo válido',
               ]"
             >
               <template v-slot:prepend>
@@ -79,22 +81,7 @@ async function login() {
               v-model="auth.password"
               :label="Helper.tLang('auth.login.inputs.password')"
               lazy-rules
-              :rules="[
-                (val) => !!val || 'Password is required',
-                (val) =>
-                  val.length >= 8 ||
-                  'Password must be at least 8 characters long',
-                (val) =>
-                  /[A-Z]/.test(val) ||
-                  'Must contain at least one uppercase letter',
-                (val) =>
-                  /[a-z]/.test(val) ||
-                  'Must contain at least one lowercase letter',
-                (val) => /\d/.test(val) || 'Must contain at least one number',
-                (val) =>
-                  /[\W_]/.test(val) ||
-                  'Must contain at least one special character',
-              ]"
+              :rules="PasswordValidator.rules"
               :type="isPwd ? 'password' : 'text'"
             >
               <template v-slot:prepend>
