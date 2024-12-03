@@ -117,11 +117,6 @@ const user = computed<UserData | null>(() => authStore.user)
         </client-only>
       </nav>
       <div
-        @click="
-          () => {
-            debugger
-          }
-        "
         class="tw-flex tw-grow-0 tw-basis-auto tw-items-center"
       >
         <TraductionSelector />
