@@ -96,7 +96,9 @@ async function sendImg() {
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Cancelar" class="!tw-text-primary" v-close-popup />
+        <Button v-close-popup class="close-modal">
+          Cerrar
+        </Button>
         <Button @click="sendImg" class="tw-ml-5 tw-font-semibold">
           Guardar foto
         </Button>
@@ -108,6 +110,11 @@ async function sendImg() {
 <style lang="css" scoped>
 .card-edit {
   background-color: hsla(240, 23%, 17%, 1);
+}
+
+.close-modal{
+  @apply tw-font-semibold tw-text-primary;
+  background-color: hsla(240, 27%, 55%, 0.56);
 }
 
 .option-skill-list {

@@ -27,14 +27,19 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 const newData = reactive<{
   skills: UserSkill[]
+  temporalSkills: ProjectTag[]
   searchSkills: string
 }>({
   skills: [],
+  temporalSkills: [],
   searchSkills: '',
 })
 
 const categories = computed<ProjectTag[]>(() => {
   return categoryStore.categories
+})
+const count = computed<number>(() => {
+  return categoryStore.pagination.total
 })
 
 watch(
@@ -77,7 +82,11 @@ function handleAddSkill(skill: ProjectTag) {
   if (!authStore.user?.skills) return
   if (authStore.user.skills.findIndex((s) => s.entityId === `${skill.id}`) >= 0)
     return
-  authStore.addSkill(skill)
+
+  newData.temporalSkills.push(skill)
+  authStore.addSkill(skill).then(()=>{
+    newData.temporalSkills.shift()
+  })
 }
 
 function handleClose() {
@@ -100,7 +109,7 @@ function handleClose() {
         </p>
         <q-separator />
       </q-card-section>
-      <q-card-section class="q-pt-2 tw-min-h-[30rem]">
+      <q-card-section class="q-pt-2 tw-min-h-64">
         <div class="tw-mb-4">
           <label
             class="tw-text-sm tw-font-extralight tw-text-primary tw-block tw-mb-4"
@@ -108,8 +117,32 @@ function handleClose() {
             Habilidades principales
           </label>
           <div
-            class="tw-relative tw-border tw-border-muted-custom lg:tw-min-w-[34rem] tw-p-3 tw-rounded-md"
+            class="tw-border tw-border-muted-custom lg:tw-min-w-[34rem] tw-p-3 tw-rounded-md"
           >
+            <div class="tw-relative">
+              <input
+                @input="handleEndWrite"
+                class="skills-input"
+                :placeholder="
+                  Helper.tLang('projects.create.form.skills.placeholder')
+                "
+                v-model="newData.searchSkills"
+              />
+              <div class="option-skill-list">
+                <ul class="">
+                  <li v-for="item in categories" :key="`category_${item.id}`">
+                    <Button
+                      @click="handleAddSkill(item)"
+                      variant="ghost"
+                      type="button"
+                      class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
+                    >
+                      {{ item.title }}
+                    </Button>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <ul class="tw-flex tw-flex-wrap">
               <li
                 v-for="(item, index) in newData.skills"
@@ -124,51 +157,45 @@ function handleClose() {
                   type="button"
                   variant="ghost"
                   class="hover:tw-bg-transparent !tw-pr-0"
+                  @click="handleRemoveSkill(index)"
                 >
                   <XIcon
-                    @click="handleRemoveSkill(index)"
+                    class="tw-text-primary tw-text-xs"
+                    :size="20"
+                  />
+                </Button>
+              </li>
+              <li
+                v-for="(item, index) in newData.temporalSkills"
+                :key="`skill_temporal_${index}`"
+                class="tw-border tw-border-primary tw-rounded-md tw-flex tw-px-5 tw-py-1 tw-h-min tw-mr-2 tw-mb-1"
+              >
+                <p class="tw-mb-0 tw-text-sm tw-text-white tw-leading-loose">
+                  {{ item.title }}
+                </p>
+                <Button
+                  size="xs"
+                  type="button"
+                  variant="ghost"
+                  class="hover:tw-bg-transparent !tw-pr-0"
+                >
+                  <XIcon
                     class="tw-text-primary tw-text-xs"
                     :size="20"
                   />
                 </Button>
               </li>
             </ul>
-
-            <input
-              @input="handleEndWrite"
-              class="skills-input"
-              :placeholder="
-                Helper.tLang('projects.create.form.skills.placeholder')
-              "
-              v-model="newData.searchSkills"
-            />
-
-            <div class="option-skill-list">
-              <ul class="">
-                <li v-for="item in categories" :key="`category_${item.id}`">
-                  <Button
-                    @click="handleAddSkill(item)"
-                    variant="ghost"
-                    type="button"
-                    class="hover:tw-bg-transparent tw-w-full !tw-justify-start"
-                  >
-                    {{ item.title }}
-                  </Button>
-                </li>
-              </ul>
-            </div>
           </div>
+          <!-- <p  class="tw-text-sm tw-font-normal tw-text-white tw-mt-3">{{ count }} empleos que coinciden con tus habilidades</p> -->
         </div>
       </q-card-section>
       <q-separator />
       <q-card-actions class="tw-sticky tw-z-40 tw-bottom-0" align="right">
-        <q-btn
-          flat
-          label="Cerrar"
-          color="primary"
-          class="!tw-text-primary"
-          @click="handleClose"
-        />
+        <Button @click="handleClose" class="close-modal">Cerrar</Button>
+        <Button @click="handleClose" class="tw-ml-5 tw-font-semibold">
+          Guardar
+        </Button>
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -179,7 +206,10 @@ function handleClose() {
 .card-edit > div {
   background-color: hsla(240, 23%, 17%, 1);
 }
-
+.close-modal {
+  @apply tw-font-semibold tw-text-primary;
+  background-color: hsla(240, 27%, 55%, 0.56);
+}
 :deep(.q-field__control) {
   @apply !tw-border-muted-custom !tw-border;
 }

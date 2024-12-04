@@ -276,94 +276,106 @@ function handleClose() {
         >
           Conexiones
         </label>
-        <div class="tw-grid tw-grid-cols-2 tw-gap-4">
+        <div class="connections-form-container tw-grid tw-grid-cols-2 tw-gap-4">
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.facebook"
             label="Facebook"
           >
             <template v-slot:prepend>
-              <FacebookSVG filled class="tw-text-2xl tw-text-primary !tw-m-0" />
+              <div class="tw-p-3">
+                <FacebookSVG
+                  filled
+                  class="tw-text-4xl tw-text-primary !tw-m-0"
+                />
+              </div>
             </template>
           </InputCPA>
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.twitter"
             label="X"
           >
             <template v-slot:prepend>
-              <TwitterSVG filled class="tw-text-2xl tw-text-primary !tw-m-0" />
+              <div class="tw-p-3">
+                <TwitterSVG
+                  filled
+                  class="tw-text-3xl tw-text-primary !tw-m-0"
+                />
+              </div>
             </template>
           </InputCPA>
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.linkedin"
             label="Linkedin"
           >
             <template v-slot:prepend>
-              <LinkedinSVG filled class="tw-text-2xl tw-text-primary !tw-m-0" />
+              <div class="tw-p-3">
+                <LinkedinSVG
+                  filled
+                  class="tw-text-4xl tw-text-primary !tw-m-0"
+                />
+              </div>
             </template>
           </InputCPA>
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.instagram"
             label="Instagram"
           >
             <template v-slot:prepend>
-              <InstagramSVG
-                filled
-                class="tw-text-2xl tw-text-primary !tw-m-0"
-              />
+              <div class="tw-p-3">
+                <InstagramSVG
+                  filled
+                  class="tw-text-4xl tw-text-primary !tw-m-0"
+                />
+              </div>
             </template>
           </InputCPA>
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.tikTok"
             label="TikTok"
           >
             <template v-slot:prepend>
-              <TikTokSVG filled class="tw-text-2xl tw-text-primary !tw-m-0" />
+              <div class="tw-p-3">
+                <TikTokSVG filled class="tw-text-4xl tw-text-primary !tw-m-0" />
+              </div>
             </template>
           </InputCPA>
           <InputCPA
             outlined
-            dark
             class="input-custom-outline tw-mb-3 search-input-border"
             type="url"
             v-model="newData.youTube"
             label="YouTube"
           >
             <template v-slot:prepend>
-              <YouTubeSVG filled class="tw-text-2xl tw-text-primary !tw-m-0" />
+              <div class="tw-p-3">
+                <YouTubeSVG
+                  filled
+                  class="tw-text-4xl tw-text-primary !tw-m-0"
+                />
+              </div>
             </template>
           </InputCPA>
         </div>
       </q-card-section>
       <q-separator />
       <q-card-actions class="tw-sticky tw-z-40 tw-bottom-0" align="right">
-        <q-btn
-          flat
-          label="Cancelar"
-          color="primary"
-          class="!tw-text-primary"
-          @click="handleClose"
-        />
         <!-- v-close-popup -->
+        <Button @click="handleClose" class="close-modal">Cerrar</Button>
         <Button @click="handleSaveInfo" class="tw-ml-5 tw-font-semibold">
           Guardar
         </Button>
@@ -376,6 +388,11 @@ function handleClose() {
 .card-edit,
 .card-edit > div {
   background-color: hsla(240, 23%, 17%, 1);
+}
+
+.close-modal {
+  @apply tw-font-semibold tw-text-primary;
+  background-color: hsla(240, 27%, 55%, 0.56);
 }
 
 :deep(.q-field__control) {
@@ -408,5 +425,29 @@ function handleClose() {
 }
 .skills-input:focus ~ .option-skill-list ul {
   @apply tw-max-h-40;
+}
+
+.connections-form-container {
+  & :deep(.q-field__inner) {
+    background-color: hsla(240, 24%, 12%, 1);
+  }
+  & :deep(.q-field__control ) {
+    height: 100%!important;
+    @apply tw-p-2 tw-border-none
+  }
+  & :deep(.q-field__prepend) {
+    @apply tw-border-2 tw-border-input tw-rounded-lg; 
+    height: auto;
+    padding: 0;
+  }
+  :deep(.q-field__control-container) {
+    @apply tw-pl-2;
+  }
+  :deep(.q-field__label) {
+    @apply tw-text-primary;
+  }
+  :deep(.q-field__native) {
+    @apply tw-text-white;
+  }
 }
 </style>

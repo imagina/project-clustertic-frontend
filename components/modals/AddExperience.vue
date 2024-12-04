@@ -170,13 +170,9 @@ async function handleSaveInfo() {
       </q-card-section>
       <q-separator />
       <q-card-actions align="right">
-        <q-btn
-          flat
-          label="Cancelar"
-          color="primary"
-          class="!tw-text-primary"
-          v-close-popup
-        />
+        <Button v-close-popup class="close-modal">
+          Cerrar
+        </Button>
         <Button @click="handleSaveInfo" class="tw-ml-5 tw-font-semibold">
           Guardar
         </Button>
@@ -188,6 +184,11 @@ async function handleSaveInfo() {
 <style lang="css" scoped>
 .card-edit {
   background-color: hsla(240, 23%, 17%, 1);
+}
+
+.close-modal{
+  @apply tw-font-semibold tw-text-primary;
+  background-color: hsla(240, 27%, 55%, 0.56);
 }
 
 :deep(.q-field__control) {

@@ -473,15 +473,13 @@ export const useAuthStore = defineStore('auth', {
           entity_id: tagToAttach.id,
         },
       }
+      try {
+        await apiCluster.post(apiRoutes.profileSkills, body)
 
-      apiCluster
-        .post(apiRoutes.profileSkills, body)
-        .then((response) => {
-          this.requestFullUser()
-        })
-        .catch((e) => {
-          console.error(e)
-        })
+        return await this.requestFullUser()
+      } catch (error) {
+        console.error(error)
+      }
     },
 
     async removeSkill(skillToRemove: UserSkill) {
