@@ -8,14 +8,19 @@ import {
   GlobeIcon,
 } from 'lucide-vue-next'
 import StarSVG from '@/assets/svg/star.svg'
-import FacebookSVG from '@/assets/svg/brand/facebook-filled.svg'
-import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
-import TwitterSVG from '@/assets/svg/brand/twitter.svg'
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
 import ModalsProfileSkillsEdit from '~/components/modals/ProfileSkillsEdit.vue'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
+
+import FacebookSVG from '@/assets/svg/brand/facebook-filled.svg'
+import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
+import InstagramSVG from '@/assets/svg/brand/instagram.svg'
+import YouTubeSVG from '@/assets/svg/brand/youTube.svg'
+import TwitterSVG from '@/assets/svg/brand/twitter.svg'
+import TikTokSVG from '@/assets/svg/brand/tikTok.svg'
+
 definePageMeta({
   middleware: 'auth',
 })
@@ -116,7 +121,7 @@ onMounted(() => {
           </p>
 
           <div class="tw-flex tw-justify-between">
-            <h4 class="tw-font-bold tw-text-4xl tw-mb-8">Habilidades</h4>
+            <h4 class="tw-text-xl tw-text-muted-custom tw-mb-8">Habilidades</h4>
 
             <Button
               @click="show_modal_addSkill = true"
@@ -128,11 +133,11 @@ onMounted(() => {
               Modificar habilidades
             </Button>
           </div>
-          <ul class="tw-flex tw-flex-wrap">
+          <ul class="tw-flex tw-gap-4 tw-flex-wrap">
             <li
               v-for="(item, index) in user?.skills"
               :key="`skill_${index}`"
-              class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min tw-mr-3 tw-mb-1"
+              class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min"
             >
               {{ item.title }}
             </li>
@@ -279,7 +284,7 @@ onMounted(() => {
                   <FactoryIcon class="tw-text-black" :size="20" />
                 </div>
                 <div class="tw-text-black tw-ml-3">
-                  <p class="tw-mb-1 tw-text-sm tw-font-bold">usuario</p>
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Usuario</p>
                   <p class="tw-mb-0 tw-text-xs">
                     {{ user?.firstName }} {{ user?.lastName }}
                   </p>
@@ -295,6 +300,19 @@ onMounted(() => {
                   <p class="tw-mb-1 tw-text-sm tw-font-bold">Teléfono</p>
                   <p class="tw-mb-0 tw-text-xs">
                     {{ extraFields?.phone?.value }}
+                  </p>
+                </div>
+              </div>
+              <div class="tw-flex tw-items-center tw-mb-4">
+                <div
+                  class="tw-border-r-2 tw-border-muted-light tw-px-3 tw-py-5"
+                >
+                  <GlobeIcon class="tw-text-black" :size="20" />
+                </div>
+                <div class="tw-text-black tw-ml-3">
+                  <p class="tw-mb-1 tw-text-sm tw-font-bold">Sitio web</p>
+                  <p class="tw-mb-0 tw-text-xs">
+                    {{ socialMedia.web }}
                   </p>
                 </div>
               </div>
@@ -336,23 +354,37 @@ onMounted(() => {
               <a
                 v-if="socialMedia.twitter"
                 :href="socialMedia.twitter"
-                class="social-icon !tw-bg-primary"
+                class="social-icon twitter"
               >
-                <TwitterSVG filled class="tw-text-white tw-text-3xl" />
+                <TwitterSVG filled class="tw-text-white tw-text-2xl" />
               </a>
               <a
                 v-if="socialMedia.linkedin"
                 :href="socialMedia.linkedin"
-                class="social-icon !tw-bg-primary"
+                class="social-icon linkedin"
               >
-                <LinkedinSVG filled class="tw-text-white tw-text-2xl" />
+                <LinkedinSVG filled class="tw-text-white tw-text-3xl" />
               </a>
               <a
-                v-if="socialMedia.web"
-                :href="socialMedia.web"
-                class="social-icon !tw-bg-primary"
+                v-if="socialMedia.instagram"
+                :href="socialMedia.instagram"
+                class="social-icon instagram"
               >
-                <GlobeIcon :size="30" class="" />
+                <InstagramSVG filled class="tw-text-white tw-text-3xl" />
+              </a>
+              <a
+                v-if="socialMedia.tikTok"
+                :href="socialMedia.tikTok"
+                class="social-icon tikTok"
+              >
+                <TikTokSVG filled class="tw-text-white tw-text-3xl" />
+              </a>
+              <a
+                v-if="socialMedia.youTube"
+                :href="socialMedia.youTube"
+                class="social-icon youTube"
+              >
+                <YouTubeSVG filled class="tw-text-white tw-text-3xl" />
               </a>
             </CardFooter>
           </Card>
@@ -398,6 +430,21 @@ onMounted(() => {
   @apply tw-rounded-full tw-p-1 tw-h-10 tw-w-10 tw-grid tw-place-items-center tw-bg-secondary;
   &.facebook {
     background-color: hsla(216, 96%, 47%, 1);
+  }
+  &.twitter {
+    background-color: #000000;
+  }
+  &.linkedin {
+    background-color: #0592EA;
+  }
+  &.instagram {
+    background-color: #EA0583;
+  }
+  &.tikTok {
+    background-color: #000000;
+  }
+  &.youTube {
+    background-color: #F61717;
   }
 }
 .portfolio-slider {

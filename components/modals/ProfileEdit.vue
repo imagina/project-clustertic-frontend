@@ -2,8 +2,6 @@
 import { useVModel } from '@vueuse/core'
 import { XIcon } from 'lucide-vue-next'
 import type { QDialogProps } from 'quasar'
-import type { ProjectTag } from '~/models/interfaces/projects'
-import type { UserSkill } from '~/models/interfaces/user'
 import FacebookSVG from '@/assets/svg/brand/facebook.svg'
 import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'
 import InstagramSVG from '@/assets/svg/brand/instagram.svg'

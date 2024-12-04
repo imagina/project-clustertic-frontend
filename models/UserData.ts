@@ -90,7 +90,16 @@ export class User implements UserData {
       {},
     )
   }
-  get socialMedia() {
+  get socialMedia(): {
+    facebook?: string
+    twitter?: string
+    linkedin?: string
+    instagram?: string
+    tikTok?: string
+    youTube?: string
+    web?: string
+    [key: string]: string | undefined
+  }{
     if (!this.socialNetworks.id) return {}
     const socialMedia = JSON.parse(this.socialNetworks.value)
     return socialMedia
