@@ -131,7 +131,7 @@ const user = computed<UserData | null>(() => authStore.user)
 
 <style scoped>
 .user-img {
-  @apply tw-inline-block tw-p-1 tw-border tw-border-muted-custom tw-rounded-full tw-h-8 tw-w-8 tw-mr-2;
+  @apply tw-inline-block tw-p-1 tw-border tw-border-muted-custom tw-rounded-full tw-h-8 tw-w-8 tw-mr-2 tw-uppercase;
   & > div {
     @apply tw-rounded-full;
     width: 100%;

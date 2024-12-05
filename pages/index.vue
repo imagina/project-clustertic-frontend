@@ -43,7 +43,7 @@ onMounted(() => {
       class="tw-absolute tw-inset-0 tw-z-[-1] tw-bg-primary tw-opacity-10"
     ></div>
     <div
-      class="tw-container tw-flex tw-justify-center tw-items-center tw-h-[100%] tw-pt-24"
+      class="tw-container tw-flex tw-justify-center tw-items-center tw-h-[100%] tw-mt-20 lg:tw-mt-0 md:tw-pt-24 "
     >
       <div class="tw-flex tw-flex-col lg:tw-flex-row">
         <div class="tw-basis-7/12">
@@ -69,7 +69,7 @@ onMounted(() => {
             <br />
             tecnología para hacerlas realidad
           </h1>
-          <div class="tw-flex tw-mb-10 lg:tw-mb-0">
+          <div class="tw-flex tw-flex-wrap tw-mb-10 lg:tw-mb-0">
             <NuxtLink to="/projects/create">
               <Button
                 size="lg"
@@ -92,30 +92,30 @@ onMounted(() => {
         </div>
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
           <div class="tw-relative">
-            <DeskLandingSVG filled class="tw-text-9xl lg:tw-text-[36rem]" />
+            <DeskLandingSVG filled class="tw-text-[20rem] md:tw-text-[30rem] tw-mx-auto lg:tw-text-[36rem]" />
             <div
-              class="float-label tw-flex tw-items-center tw-opacity-0 first add-shadow tw-top-[5px]"
+              class="float-label tw-items-center tw-opacity-0 first add-shadow tw-top-[5px]"
               @animationstart="handleAnimationStart"
             >
               <SolarPanelSVG class="tw-text-2xl tw-mr-2" filled />
               Infraestructura TI y Conectividad
             </div>
             <div
-              class="float-label tw-flex tw-items-center tw-opacity-0 second tw-top-[15%] md:tw-right-[8%] xl:tw-right-[-4%]"
+              class="float-label tw-items-center tw-opacity-0 second tw-top-[15%] md:tw-right-[8%] xl:tw-right-[-4%]"
               @animationstart="handleAnimationStart"
             >
               <PacManSVG class="tw-text-2xl tw-mr-2" filled />
               Videojuegos, Realidad Aumentada y Virtual
             </div>
             <div
-              class="float-label tw-flex tw-items-center tw-opacity-0 second tw-top-[35%] md:tw-left-[-8%] xl:tw-left-[15%]"
+              class="float-label tw-items-center tw-opacity-0 second tw-top-[35%] md:tw-left-[35%] xl:tw-left-[15%]"
               @animationstart="handleAnimationStart"
             >
               <BrushSVG class="tw-text-2xl tw-mr-2" filled />
               Producción de Contenidos y Marketing Digital
             </div>
             <div
-              class="float-label tw-flex tw-items-center tw-opacity-0 third tw-top-[50%] tw-left-[-25%]"
+              class="float-label tw-items-center tw-opacity-0 third tw-top-[50%] lg:tw-left-[-25%]"
               @animationstart="handleAnimationStart"
             >
               <DevicesPcSVG class="tw-text-2xl tw-mr-2" filled />
@@ -179,7 +179,7 @@ onMounted(() => {
           con Clúster
         </h3>
         <div class="tw-px-20 line-variant">
-          <div class="tw-grid tw-grid-cols-2 tw-gap-x-20 tw-gap-y-5 tw-mb-20">
+          <div class="tw-grid md:tw-grid-cols-2 tw-gap-x-20 tw-gap-y-5 tw-mb-20">
             <div class="">
               <AffiliateSVG filled class="tw-text-5xl tw-text-white" />
               <h4 class="tw-text-primary tw-font-semibold tw-text-xl tw-my-5">
@@ -269,7 +269,7 @@ onMounted(() => {
 }
 
 .float-label {
-  @apply tw-absolute tw-px-10  tw-py-2 tw-text-lg tw-rounded-lg tw-bg-white tw-animate-slide-down tw-text-muted-custom;
+  @apply tw-hidden md:tw-flex tw-absolute tw-px-10  tw-py-2 tw-text-lg tw-rounded-lg tw-bg-white tw-animate-slide-down tw-text-muted-custom;
   animation-duration: 1s;
   &.add-shadow {
     box-shadow: 30px 45px 50px 0px hsla(157, 47%, 67%, 0.57);
