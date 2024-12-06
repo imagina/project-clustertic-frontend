@@ -105,9 +105,9 @@ async function login() {
                   {{ Helper.tLang('auth.login.inputs.rememberMe') }}
                 </span>
               </label>
-              <a class="tw-text-primary">
+              <NuxtLink to="/auth/resetPassword"class="tw-text-primary">
                 {{ Helper.tLang('auth.login.forgotPassword') }}
-              </a>
+              </NuxtLink>
             </div>
             <div class="tw-flex tw-justify-center tw-mb-6">
               <SocialAuthGoogle />

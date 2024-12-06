@@ -42,7 +42,7 @@ const newData = reactive<{
   firstName: '',
   lastName: '',
   description: '',
-  web: '',
+  web: 'https://www.my_web_site.com/',
   facebook: 'https://www.facebook.com/',
   twitter: 'https://x.com/',
   linkedin: 'https://www.linkedin.com/',
@@ -70,7 +70,7 @@ function loadUser() {
   newData.place = fullUser.extraFields.place?.value ?? ''
   newData.phone = fullUser.extraFields.phone?.value ?? ''
   newData.description = fullUser.extraFields.description?.value ?? ''
-  newData.web = fullUser.socialMedia.web ?? ''
+  newData.web = fullUser.socialMedia.web ?? 'https://www.my_web_site.com/'
   newData.facebook = fullUser.socialMedia.facebook
     ? fullUser.socialMedia.facebook
     : 'https://www.facebook.com/'
@@ -223,6 +223,7 @@ function handleClose() {
             type="url"
             class="input-custom-outline search-input-border"
             v-model="newData.web"
+            label="https://www.my_web_site.com/"
           ></InputCPA>
         </div>
         <div class="input-container">

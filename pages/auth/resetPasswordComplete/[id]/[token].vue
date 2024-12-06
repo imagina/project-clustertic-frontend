@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
+import PasswordValidator from '@/utils/validators/passwordValidator'
 
+definePageMeta({
+  layout: 'dark-bg',
+})
 const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
@@ -43,9 +47,8 @@ async function reset() {
 
 <template>
   <div
-    class="sign-bg tw-min-h-screen tw-bg-secondary tw-text-gray-900 tw-flex tw-justify-center"
+    class="sign-bg tw-min-h-screen  tw-text-gray-900 tw-flex tw-justify-center"
   >
-    <AppbarSign />
     <div
       class="tw-max-w-screen-xl tw-m-0 sm:tw-m-10 sm:tw-rounded-lg tw-flex tw-justify-center tw-flex-1"
     >
@@ -69,23 +72,7 @@ async function reset() {
                   v-model="auth.password"
                   :label="Helper.tLang('auth.login.inputs.password')"
                   lazy-rules
-                  :rules="[
-                    (val) => !!val || 'Password is required',
-                    (val) =>
-                      val.length >= 8 ||
-                      'Password must be at least 8 characters long',
-                    (val) =>
-                      /[A-Z]/.test(val) ||
-                      'Must contain at least one uppercase letter',
-                    (val) =>
-                      /[a-z]/.test(val) ||
-                      'Must contain at least one lowercase letter',
-                    (val) =>
-                      /\d/.test(val) || 'Must contain at least one number',
-                    (val) =>
-                      /[\W_]/.test(val) ||
-                      'Must contain at least one special character',
-                  ]"
+                  :rules="PasswordValidator.rules"
                   :type="isPwd ? 'password' : 'text'"
                 >
                   <template v-slot:prepend>
@@ -107,21 +94,7 @@ async function reset() {
                   :label="Helper.tLang('auth.reset.confirmPassword')"
                   lazy-rules
                   :rules="[
-                    (val) => !!val || 'Password is required',
-                    (val) =>
-                      val.length >= 8 ||
-                      'Password must be at least 8 characters long',
-                    (val) =>
-                      /[A-Z]/.test(val) ||
-                      'Must contain at least one uppercase letter',
-                    (val) =>
-                      /[a-z]/.test(val) ||
-                      'Must contain at least one lowercase letter',
-                    (val) =>
-                      /\d/.test(val) || 'Must contain at least one number',
-                    (val) =>
-                      /[\W_]/.test(val) ||
-                      'Must contain at least one special character',
+                    ...PasswordValidator.rules,
                     (val) => val == auth.password || 'Password does not match',
                   ]"
                   :type="isPwd ? 'password' : 'text'"

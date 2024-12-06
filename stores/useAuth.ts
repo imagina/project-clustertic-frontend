@@ -293,7 +293,7 @@ export const useAuthStore = defineStore('auth', {
         .then((response) => {
           Helper.redirectTo(routes.login)
           Notify.create({
-            message: 'Revisa tu email para reiniciar tu contraseña.',
+            message: 'Revisa tu email para restablecer tu contraseña.',
             type: 'positive',
           })
         })

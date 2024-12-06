@@ -3,6 +3,10 @@ import { reactive, ref } from 'vue'
 import PasswordValidator from '@/utils/validators/passwordValidator'
 import { MailIcon, KeySquareIcon } from 'lucide-vue-next'
 
+definePageMeta({
+  // middleware: 'auth',
+  layout: 'dark-bg',
+})
 const refReset: any = ref(null)
 const isPwd = ref(true)
 const store = useAuthStore()
@@ -26,13 +30,12 @@ async function reset() {
 
 <template>
   <div
-    class="sign-bg tw-min-h-screen tw-bg-secondary tw-text-gray-900 tw-flex tw-justify-center"
+    class="sign-bg tw-min-h-screen  tw-text-gray-900 tw-flex tw-justify-center"
   >
-    <AppbarSign />
     <div
       class="tw-max-w-screen-xl tw-m-0 sm:tw-m-10 sm:tw-rounded-lg tw-flex tw-justify-center tw-flex-1"
     >
-      <div class="lg:tw-w-1/2 xl:tw-w-5/12 tw-p-6 sm:tw-p-12">
+      <div class="tw-p-6 sm:tw-p-12">
         <div class="tw-mt-12 tw-flex tw-flex-col tw-items-center">
           <div class="tw-mb-8">
             <img src="@/assets/svg/logo-green-text.svg" alt="" />
@@ -53,9 +56,9 @@ async function reset() {
                   :label="Helper.tLang('auth.register.inputs.email')"
                   lazy-rules
                   :rules="[
-                    (val) => !!val || 'Email is required.',
+                    (val) => !!val || 'Correo es requerido.',
                     (val) =>
-                      /.+@.+\..+/.test(val) || 'Please enter a valid email',
+                      /.+@.+\..+/.test(val) || 'Ingrese un correo válido',
                   ]"
                 >
                   <template v-slot:prepend>

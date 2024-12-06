@@ -55,7 +55,7 @@ onMounted(() => {
                 <p class="tw-mb-1 tw-text-sm tw-font-bold">Info</p>
                 <a
                   href="#"
-                  class="tw-mb-2 tw-text-xs tw-font-extralight tw-inline-block"
+                  class="tw-mb-2 tw-text-xs tw-font-extralight tw-block"
                 >
                   Ayuda y soporte
                 </a>
@@ -85,14 +85,14 @@ onMounted(() => {
               <a
                 href="/DataProcessingPolicy"
                 target="_blank"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Política de Tratamiento de Datos
               </a>
               <a
                 href="/TermsAndConditions"
                 target="_blank"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Términos del Servicio
               </a>
@@ -108,25 +108,25 @@ onMounted(() => {
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Categorías</p>
               <NuxtLink
                 to="/categories"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Infraestructura TI y Conectividad
               </NuxtLink>
               <NuxtLink
                 to="/categories"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Transformación Digital y Desarrollo de Software
               </NuxtLink>
               <NuxtLink
                 to="/categories"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Producción de Contenidos y Marketing Digital
               </NuxtLink>
               <NuxtLink
                 to="/categories"
-                class="tw-mb-3 tw-text-xs tw-font-extralight tw-inline-block"
+                class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Videojuegos, Realidad Aumentada y Virtual
               </NuxtLink>
@@ -157,21 +157,21 @@ onMounted(() => {
                 <a
                   href=" https://www.instagram.com/clustertolimatic/"
                   target="_blank"
-                  class="tw-inline-block"
+                  class="tw-block"
                 >
                   <InstagramSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
                 <a
                   href="https://www.facebook.com/TolimaTIC"
                   target="_blank"
-                  class="tw-inline-block"
+                  class="tw-block"
                 >
                   <FacebookSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/cluster-tolima-tic-03081433a/"
                   target="_blank"
-                  class="tw-inline-block"
+                  class="tw-block"
                 >
                   <LinkedinSVG class="tw-text-primary tw-text-4xl" filled />
                 </a>
