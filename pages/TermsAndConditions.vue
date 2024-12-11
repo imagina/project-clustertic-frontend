@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <SearchProject class="tw-mt-20" />
+  <SearchProject />
   <section class="tw-container">
     <Card class="tw-py-2 tw-my-5">
       <CardHeader>

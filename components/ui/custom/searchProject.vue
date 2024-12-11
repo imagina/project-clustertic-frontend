@@ -10,9 +10,9 @@ function handleSearch() {
 <template>
   <div class="search-project-bg tw-bg-black">
     <div class="tw-container tw-flex tw-justify-center tw-py-16">
-      <div class="tw-basis-2/3 lg:tw-basis-3/6">
+      <div class="lg:tw-basis-3/6">
         <h3
-          class="tw-font-light tw-text-white tw-text-center tw-text-[32px] tw-mb-14"
+          class="tw-font-light tw-text-white tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-mb-14"
         >
           ¿Qué estás buscando?
         </h3>
@@ -21,7 +21,7 @@ function handleSearch() {
             outlined
             dark
             rounded
-            class="input-custom-outline tw-mb-3 search-input-border"
+            class="input-custom-outline tw-text-xs md:tw-text-base tw-mb-3 search-input-border"
             v-model="search"
             label="Explorar proyectos de..."
           >

@@ -16,7 +16,7 @@ const user = computed<UserData | null>(() => authStore.user)
 
 <template>
   <div
-    class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50 tw-min-h-20"
+    class="tw-p-4 tw-sticky tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50 tw-min-h-20"
   >
     <div class="tw-container tw-flex">
       <div class="tw-grow-0 tw-basis-auto">
@@ -116,9 +116,7 @@ const user = computed<UserData | null>(() => authStore.user)
           </ul>
         </client-only>
       </nav>
-      <div
-        class="tw-flex tw-grow-0 tw-basis-auto tw-items-center"
-      >
+      <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
         <TraductionSelector />
         <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>

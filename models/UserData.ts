@@ -99,7 +99,7 @@ export class User implements UserData {
     youTube?: string
     web?: string
     [key: string]: string | undefined
-  }{
+  } {
     if (!this.socialNetworks.id) return {}
     const socialMedia = JSON.parse(this.socialNetworks.value)
     return socialMedia

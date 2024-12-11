@@ -119,7 +119,7 @@ function handleSelectProposal(proposal: Proposal) {
 
 <template>
   <LoadingScreen :loading="projectsStore.loading" />
-  <SearchProject class="tw-mt-20" />
+  <SearchProject />
   <div class="tw-container lg:tw-px-20 tw-mt-10">
     <div class="tw-flex tw-flex-wrap tw-mb-5">
       <Card class="tw-basis-full lg:tw-flex-1">
@@ -179,7 +179,7 @@ function handleSelectProposal(proposal: Proposal) {
                 <CardTitle>Detalles de proyecto</CardTitle>
               </CardHeader>
               <CardContent class="tw-px-6 tw-pb-10">
-                <p class="text-h6 tw-text-base">{{ project.description }}</p>
+                <p class="text-h6 tw-text-base tw-font-light">{{ project.description }}</p>
 
                 <CardTitle class="tw-mt-10 tw-mb-7">
                   Habilidades necesarias
@@ -204,7 +204,7 @@ function handleSelectProposal(proposal: Proposal) {
               </CardHeader>
               <CardContent class="tw-px-6 tw-pb-10">
                 <q-form @submit.prevent.stop="sendProposal" ref="refForm">
-                  <p class="text-h6 tw-text-base tw-mb-10">
+                  <p class="text-h6 tw-text-base tw-font-light tw-mb-10">
                     Podrás editar tu oferta hasta que el proyecto sea adjudicado
                     a alguien.
                   </p>

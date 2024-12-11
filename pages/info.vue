@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import TestimonialsCarousel from '~/components/sections/TestimonialsCarousel.vue'
+import ProfesionalCarousel from '~/components/sections/ProfesionalCarousel.vue'
+import StaffCarousel from '~/components/sections/StaffCarousel.vue'
 import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
+import DecorationContactSVG from '~/assets/svg/decoration-contact.svg'
+import DeskContactSVG from '~/assets/svg/desk-contact.svg'
+import CharacterSVG from '~/assets/svg/character-info.svg'
 import SolarPanelSVG from '@/assets/svg/solar-panel.svg'
 import DevicesPcSVG from '@/assets/svg/devices-pc.svg'
 import BrushSVG from '@/assets/svg/brush.svg'
@@ -15,6 +21,7 @@ import {
   FlagIcon,
   BriefcaseBusinessIcon,
 } from 'lucide-vue-next'
+import CardGrandStaff from '~/components/ui/card/layouts/CardGrandStaff.vue'
 definePageMeta({
   layout: 'default',
 })
@@ -37,12 +44,12 @@ const refForm = ref(null)
 </script>
 
 <template>
-  <div class="tw-h-svh tw-relative">
+  <div class="tw-relative">
     <div
       class="tw-absolute tw-inset-0 tw-z-[-1] tw-bg-primary tw-opacity-10"
     ></div>
     <div
-      class="tw-container tw-flex tw-justify-center tw-items-center tw-h-[100%] tw-pt-24"
+      class="tw-container tw-flex tw-justify-center tw-items-center tw-h-[100%]"
     >
       <div class="tw-flex tw-justify-between tw-flex-col lg:tw-flex-row">
         <div class="tw-basis-5/12 tw-flex tw-flex-col tw-justify-center">
@@ -72,7 +79,7 @@ const refForm = ref(null)
         </div>
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
           <div class="tw-relative">
-            <DeskLandingSVG
+            <CharacterSVG
               filled
               class="tw-text-9xl lg:tw-text-[40rem] !tw-mb-0"
             />
@@ -81,7 +88,7 @@ const refForm = ref(null)
       </div>
     </div>
   </div>
-  <div class="tw-container tw-py-24">
+  <div class="tw-container tw-py-24 play-container">
     <div class="tw-flex tw-flex-col tw-gap-20 lg:tw-flex-row">
       <div class="tw-basis-5/12 tw-pl-24">
         <h2
@@ -121,7 +128,7 @@ const refForm = ref(null)
       <h2
         class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-24"
       >
-        ¿Que es el cluster de Tolima?
+        Lineas de servicio
         <PlayIcon
           :size="30"
           class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3"
@@ -174,12 +181,49 @@ const refForm = ref(null)
     </div>
   </div>
 
+  <TestimonialsCarousel />
+  <ProfesionalCarousel />
+  <StaffCarousel />
+  <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
+    <div class="tw-basis-1/2">
+      <CardGrandStaff
+        class="tw-h-full"
+        :id="1"
+        :name="'example'"
+        :username="'test'"
+        location="xx, zz"
+      >
+        <template v-slot:tag>
+          <div class="tw-flex tw-justify-center tw-mb-3">
+            <FlagIcon class="flag-icon tw-mr-2" :size="20" />
+            <p>Tolima, Colombia</p>
+          </div>
+        </template>
+      </CardGrandStaff>
+    </div>
+    <div class="tw-basis-1/2">
+      <CardGrandStaff
+        class="tw-h-full"
+        :id="1"
+        :name="'example'"
+        :username="'test'"
+        location="xx, zz"
+      >
+        <template v-slot:tag>
+          <div class="tw-flex tw-justify-center tw-mb-3">
+            <FlagIcon class="flag-icon tw-mr-2" :size="20" />
+            <p>Tolima, Colombia</p>
+          </div>
+        </template>
+      </CardGrandStaff>
+    </div>
+  </div>
   <div class="tw-bg-white tw-pt-20">
     <div class="tw-container">
       <h2
         class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-24"
       >
-        ¿Que es el cluster de Tolima?
+        Beneficios de Ser Parte del Clúster
         <PlayIcon
           :size="30"
           class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3"
@@ -224,140 +268,173 @@ const refForm = ref(null)
       </div>
     </div>
   </div>
+  <div class="tw-relative">
+    <div class="tw-absolute tw-top-0 tw-bottom-0 tw-left-0">
+      <DecorationContactSVG filled class="tw-text-8xl !tw-h-full !tw-w-full" />
+    </div>
+    <div class="tw-absolute tw-top-0 tw-bottom-0 tw-right-0">
+      <DecorationContactSVG
+        filled
+        class="tw-text-8xl !tw-h-full !tw-w-full tw-rotate-180"
+      />
+    </div>
+    <div class="tw-absolute tw-bottom-0 tw-right-0">
+      <DeskContactSVG
+        filled
+        class="tw-opacity-0 lg:tw-opacity-100 lg:tw-text-[35rem] !tw-h-auto !tw-mb-0"
+      />
+    </div>
 
-  <div class="tw-container tw-max-w-[1000px] tw-mb-5">
-    <q-form class="tw-pt-40" @submit.prevent.stop="() => {}" ref="refForm">
-      <h2
-        class="tw-text-black tw-font-light tw-text-center tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
+    <div class="tw-container tw-max-w-[1000px]">
+      <q-form
+        class="tw-pt-40 tw-bg-white tw-bg-opacity-80"
+        @submit.prevent.stop="() => {}"
+        ref="refForm"
       >
-        Formemos juntos el
-        <span class="tw-text-primary">futuro tecnológico</span>
-        de nuestra región.
-      </h2>
-      <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-10">
-        <div>
-          <label class="tw-font-normal tw-mb-3 tw-block tw-text-base">
-            Nombre
-          </label>
-          <InputCPA
-            outlined
-            rounded
-            label="Nombre"
-            class="tw-mb-3 tw-mt-2"
-            v-model="contactData.firstName"
-            fill-mask
-            reverse-fill-mask
-            :rules="[(val) => !!val || 'El valor es requerido']"
-          ></InputCPA>
+        <h2
+          class="tw-text-black tw-font-light tw-text-center tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
+        >
+          Formemos juntos el
+          <span class="tw-text-primary">futuro tecnológico</span>
+          de nuestra región.
+        </h2>
+        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-10">
+          <div>
+            <label class="tw-font-normal tw-mb-3 tw-block tw-text-base">
+              Nombre
+            </label>
+            <InputCPA
+              outlined
+              rounded
+              label="Nombre"
+              class="tw-mb-3 tw-mt-2"
+              v-model="contactData.firstName"
+              fill-mask
+              reverse-fill-mask
+              :rules="[(val) => !!val || 'El valor es requerido']"
+            ></InputCPA>
+          </div>
+          <div>
+            <label
+              class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
+            >
+              Apellido
+            </label>
+            <InputCPA
+              outlined
+              rounded
+              label="Apellido"
+              class="tw-mb-3 tw-mt-2"
+              v-model="contactData.lastName"
+            ></InputCPA>
+          </div>
+          <div>
+            <label
+              class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
+            >
+              Empresa
+            </label>
+            <InputCPA
+              outlined
+              rounded
+              label="Empresa"
+              class="tw-mb-3 tw-mt-2"
+              v-model="contactData.company"
+            ></InputCPA>
+          </div>
+          <div>
+            <label
+              class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
+            >
+              Teléfono
+            </label>
+            <InputCPA
+              outlined
+              rounded
+              label="Teléfono"
+              class="tw-mb-3 tw-mt-2"
+              mask="phone"
+              v-model="contactData.phone"
+            ></InputCPA>
+          </div>
         </div>
-        <div>
-          <label
-            class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
-          >
-            Apellido
-          </label>
-          <InputCPA
-            outlined
-            rounded
-            label="Apellido"
-            class="tw-mb-3 tw-mt-2"
-            v-model="contactData.lastName"
-          ></InputCPA>
-        </div>
-        <div>
-          <label
-            class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
-          >
-            Empresa
-          </label>
-          <InputCPA
-            outlined
-            rounded
-            label="Empresa"
-            class="tw-mb-3 tw-mt-2"
-            v-model="contactData.company"
-          ></InputCPA>
-        </div>
-        <div>
-          <label
-            class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
-          >
-            Teléfono
-          </label>
-          <InputCPA
-            outlined
-            rounded
-            label="Teléfono"
-            class="tw-mb-3 tw-mt-2"
-            mask="phone"
-            v-model="contactData.phone"
-          ></InputCPA>
-        </div>
-      </div>
 
-      <div>
-        <label
-          class="tw-font-normal tw-my-3 tw-block tw-text-base tw-whitespace-nowrap"
-        >
-          Correo electrónico
+        <div>
+          <label
+            class="tw-font-normal tw-my-3 tw-block tw-text-base tw-whitespace-nowrap"
+          >
+            Correo electrónico
+          </label>
+          <InputCPA
+            outlined
+            rounded
+            label="Correo electrónico"
+            class="tw-mb-3 tw-mt-2"
+            type="email"
+            v-model="contactData.email"
+          ></InputCPA>
+        </div>
+        <div>
+          <label
+            class="tw-font-normal tw-my-3 tw-block tw-text-base tw-whitespace-nowrap"
+          >
+            Linea de servicio
+          </label>
+          <Select
+            class="tw-w-full"
+            outlined
+            rounded
+            v-model="contactData.lineService"
+            :options="[]"
+          />
+        </div>
+        <label class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-mt-3">
+          Mensaje
         </label>
-        <InputCPA
-          outlined
-          rounded
-          label="Correo electrónico"
-          class="tw-mb-3 tw-mt-2"
-          type="email"
-          v-model="contactData.email"
-        ></InputCPA>
-      </div>
-      <div>
-        <label
-          class="tw-font-normal tw-my-3 tw-block tw-text-base tw-whitespace-nowrap"
-        >
-          Linea de servicio
-        </label>
-        <Select
-          class="tw-w-full"
-          outlined
-          rounded
-          v-model="contactData.lineService"
-          :options="[]"
-        />
-      </div>
-      <label class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-mt-3">
-        Mensaje
-      </label>
-      <Textarea
-        placeholder="Mensaje"
-        v-model="contactData.message"
-        class="tw-h-52"
-      ></Textarea>
+        <Textarea
+          placeholder="Mensaje"
+          v-model="contactData.message"
+          class="tw-h-52"
+        ></Textarea>
 
-      <div class="tw-flex tw-justify-between tw-mt-10 tw-px-10">
-        <label class="tw-flex tw-items-center">
-          <Checkbox
-            class="tw-bg-white !tw-border-input"
-            v-model:checked="contactData.agreement"
-          ></Checkbox>
-          <span class="tw-text-black tw-ml-2">
-            Acepto los
-            <a href="#" class="tw-text-primary tw-underline">
-              términos y condiciones.
-            </a>
-          </span>
-        </label>
-        <Button
-          type="submit"
-          class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
-        >
-          Enviar propuesta
-        </Button>
-      </div>
-    </q-form>
+        <div class="lg:tw-flex tw-justify-between tw-mt-10 tw-px-10">
+          <label class="tw-flex tw-items-center">
+            <Checkbox
+              class="tw-bg-white !tw-border-input"
+              v-model:checked="contactData.agreement"
+            ></Checkbox>
+            <span class="tw-text-black tw-ml-2">
+              Acepto los
+              <a href="#" class="tw-text-primary tw-underline">
+                términos y condiciones.
+              </a>
+            </span>
+          </label>
+          <Button
+            type="submit"
+            class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
+          >
+            Enviar propuesta
+          </Button>
+        </div>
+      </q-form>
+
+      <DeskContactSVG
+        filled
+        class="tw-opacity-0 tw-text-9xl lg:tw-text-[40rem] !tw-h-auto !tw-mb-0"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
+.play-container {
+  background-image: url('@/assets/images/fondo-video.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 .cluster-details-img {
   background-image: url('@/assets/images/cluster-details-bg.png');
   background-size: 100% 100%;

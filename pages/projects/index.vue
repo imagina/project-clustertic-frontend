@@ -82,7 +82,7 @@ function searchCategories(query?: string) {
 }
 </script>
 <template>
-  <SearchProject class="tw-mt-20" />
+  <SearchProject class="" />
   <LoadingScreen :loading="projectsStore.loading" />
   <div
     class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16 tw-relative"

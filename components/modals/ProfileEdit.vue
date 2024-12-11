@@ -432,12 +432,12 @@ function handleClose() {
   & :deep(.q-field__inner) {
     background-color: hsla(240, 24%, 12%, 1);
   }
-  & :deep(.q-field__control ) {
-    height: 100%!important;
-    @apply tw-p-2 tw-border-none
+  & :deep(.q-field__control) {
+    height: 100% !important;
+    @apply tw-p-2 tw-border-none;
   }
   & :deep(.q-field__prepend) {
-    @apply tw-border-2 tw-border-input tw-rounded-lg; 
+    @apply tw-border-2 tw-border-input tw-rounded-lg;
     height: auto;
     padding: 0;
   }

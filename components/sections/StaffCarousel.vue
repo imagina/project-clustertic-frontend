@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FlagIcon } from 'lucide-vue-next'
+import { FlagIcon, PlayIcon } from 'lucide-vue-next'
 import { User } from '~/models/UserData'
 import type { UserData } from '~/models/interfaces/user'
 
@@ -23,24 +23,24 @@ function handleSelectUsers(user_id: number) {
 <template>
   <div class="carousel-users-container">
     <h3
-      class="tw-font-light tw-text-black tw-text-center tw-text-[30px] tw-py-10"
+      class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-5 md:tw-py-10"
     >
-      De la mano de
-      <b class="tw-font-bold">expertos</b>
-      en múltiples campos
-      <b class="tw-font-bold">creativos.</b>
+      <b class="tw-font-bold">Nuestro equipo</b>
     </h3>
-    <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
-      <Carousel>
+    <div class="tw-flex tw-justify-center tw-w-full">
+      <PlayIcon style="transform: rotate(90deg)" />
+    </div>
+    <div class="tw-py-10 lg:tw-px-40 tw-pb-20">
+      <Carousel class="lg:!tw-px-14">
         <CarouselPrevious class="lg:tw-left-[-5%]" />
-        <CarouselContent>
+        <CarouselContent class="md:tw-gap-6 lg:!tw-mr-16">
           <CarouselItem
-            class="xl:!tw-basis-1/3"
+            class="!tw-basis-full md:!tw-basis-1/2 xl:!tw-basis-1/4"
             v-for="user in experts"
             :key="`user-card=${user.id}`"
           >
             <div @click="handleSelectUsers(user.id)">
-              <CardSmallProfile
+              <CardStaff
                 class="tw-h-full"
                 :id="user.id"
                 :name="user.extraFields.companyName?.value ?? user.fullName"
@@ -49,14 +49,14 @@ function handleSelectUsers(user_id: number) {
                 location="xx, zz"
               >
                 <template v-slot:tag>
-                  <div class="tw-flex tw-mb-3">
+                  <div class="tw-flex tw-justify-center tw-mb-3">
                     <FlagIcon class="flag-icon tw-mr-2" :size="20" />
                     <p>
                       {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
                     </p>
                   </div>
                 </template>
-              </CardSmallProfile>
+              </CardStaff>
             </div>
           </CarouselItem>
         </CarouselContent>
@@ -68,7 +68,6 @@ function handleSelectUsers(user_id: number) {
 
 <style lang="css" scoped>
 .carousel-users-container {
-  background-position: center;
-  background-image: url('@/assets/images/nevado-tolima.jpg');
+  background-color: white;
 }
 </style>

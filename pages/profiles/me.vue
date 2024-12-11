@@ -435,16 +435,16 @@ onMounted(() => {
     background-color: #000000;
   }
   &.linkedin {
-    background-color: #0592EA;
+    background-color: #0592ea;
   }
   &.instagram {
-    background-color: #EA0583;
+    background-color: #ea0583;
   }
   &.tikTok {
     background-color: #000000;
   }
   &.youTube {
-    background-color: #F61717;
+    background-color: #f61717;
   }
 }
 .portfolio-slider {

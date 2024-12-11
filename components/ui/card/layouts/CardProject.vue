@@ -36,7 +36,7 @@ const daysSince = computed(() => {
     </CardHeader>
     <CardContent>
       <div v-if="$slots.description" class="tw-relative">
-        <p class="tw-text-sm tw-line-clamp-3">
+        <p class="tw-text-xs md:tw-text-sm tw-line-clamp-3">
           <slot name="description" />
         </p>
 
@@ -46,7 +46,7 @@ const daysSince = computed(() => {
           Más
         </span> -->
       </div>
-      <p v-if="props.skills" class="tw-mt-5 tw-text-link">
+      <p v-if="props.skills" class="tw-text-xs tw-mt-5 tw-text-link">
         <!-- {{ props.skills?.join(' • ') }} -->
         <span
           v-for="(skill, index) in props.skills.join(' • ..').split('..')"
@@ -67,7 +67,7 @@ const daysSince = computed(() => {
         </p>
       </div>
       <div class="tw-flex-grow"></div>
-      <p>
+      <p class="tw-text-xs md:tw-text-sm">
         hace {{ daysSince }} días
         <BookmarkIcon color="#4848A9" :size="15" class="tw-inline tw-text-sm" />
       </p>

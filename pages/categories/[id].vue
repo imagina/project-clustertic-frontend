@@ -22,7 +22,7 @@ const category = computed(() => categoriesStore.selected)
 
 <template>
   <LoadingScreen :loading="categoriesStore.loading" />
-  <SearchProject class="tw-mt-20" />
+  <SearchProject />
   <section class="tw-container tw-mt-5 tw-mb-16 tw-relative">
     <Card class="tw-py-2 tw-mb-5">
       <CardHeader class="!tw-flex-row !tw-items-center">

@@ -47,7 +47,7 @@ async function reset() {
 
 <template>
   <div
-    class="sign-bg tw-min-h-screen  tw-text-gray-900 tw-flex tw-justify-center"
+    class="sign-bg tw-min-h-screen tw-text-gray-900 tw-flex tw-justify-center"
   >
     <div
       class="tw-max-w-screen-xl tw-m-0 sm:tw-m-10 sm:tw-rounded-lg tw-flex tw-justify-center tw-flex-1"

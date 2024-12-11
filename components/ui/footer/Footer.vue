@@ -199,8 +199,8 @@ onMounted(() => {
           <p
             class="tw-mb-1 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight tw-text-nowrap"
           >
-            Cluster ® is a registered Trademark of Cluster TIC (ABC 123 456
-            789)
+            Cluster ® is a registered Trademark of Cluster TIC
+            <span class="tw-block md:tw-inline-block">(ABC 123 456 789)</span>
           </p>
           <p
             class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-extralight"
@@ -215,10 +215,16 @@ onMounted(() => {
 
 <style scoped>
 .footer-container {
-  background-image: url('@/assets/images/footer-lines.png');
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: right;
+  @apply tw-bg-secondary;
+}
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .footer-container {
+    background-image: url('@/assets/images/footer-lines.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
 }
 .text-muted {
   color: hsla(240, 6%, 51%, 0.56);

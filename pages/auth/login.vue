@@ -105,7 +105,7 @@ async function login() {
                   {{ Helper.tLang('auth.login.inputs.rememberMe') }}
                 </span>
               </label>
-              <NuxtLink to="/auth/resetPassword"class="tw-text-primary">
+              <NuxtLink to="/auth/resetPassword" class="tw-text-primary">
                 {{ Helper.tLang('auth.login.forgotPassword') }}
               </NuxtLink>
             </div>

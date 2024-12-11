@@ -48,7 +48,7 @@ function handleSelectUsers(user_id: number) {
 </script>
 
 <template>
-  <SearchProject class="tw-mt-20" />
+  <SearchProject />
   <LoadingScreen :loading="profilesStore.loading" />
   <section class="tw-container tw-mt-5 tw-mb-16 tw-relative">
     <Card class="tw-mb-3 tw-h-full">

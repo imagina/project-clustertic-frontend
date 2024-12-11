@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <SearchProject class="tw-mt-20" />
+  <SearchProject />
   <section class="tw-container tw-mt-5 tw-mb-16 tw-relative">
     <Card>
       <CardHeader>

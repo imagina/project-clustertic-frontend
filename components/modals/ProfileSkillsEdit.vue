@@ -84,7 +84,7 @@ function handleAddSkill(skill: ProjectTag) {
     return
 
   newData.temporalSkills.push(skill)
-  authStore.addSkill(skill).then(()=>{
+  authStore.addSkill(skill).then(() => {
     newData.temporalSkills.shift()
   })
 }
@@ -159,10 +159,7 @@ function handleClose() {
                   class="hover:tw-bg-transparent !tw-pr-0"
                   @click="handleRemoveSkill(index)"
                 >
-                  <XIcon
-                    class="tw-text-primary tw-text-xs"
-                    :size="20"
-                  />
+                  <XIcon class="tw-text-primary tw-text-xs" :size="20" />
                 </Button>
               </li>
               <li
@@ -179,10 +176,7 @@ function handleClose() {
                   variant="ghost"
                   class="hover:tw-bg-transparent !tw-pr-0"
                 >
-                  <XIcon
-                    class="tw-text-primary tw-text-xs"
-                    :size="20"
-                  />
+                  <XIcon class="tw-text-primary tw-text-xs" :size="20" />
                 </Button>
               </li>
             </ul>
