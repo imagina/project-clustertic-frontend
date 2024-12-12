@@ -40,7 +40,7 @@ const handleSelectPage = (page: number) => {
     >
       <ChevronLeftIcon />
     </Button>
-    <div></div>
+    <div class="tw-hidden lg:tw-block"></div>
     <template v-for="n in range" :key="`paginator-btn-${n}`">
       <Button
         v-if="0 < n && n <= props.pages"
@@ -55,7 +55,7 @@ const handleSelectPage = (page: number) => {
       </Button>
     </template>
 
-    <div></div>
+    <div class="tw-hidden lg:tw-block"></div>
     <Button
       @click="
         handleSelectPage(

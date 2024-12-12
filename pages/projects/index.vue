@@ -87,7 +87,7 @@ function searchCategories(query?: string) {
   <div
     class="tw-container tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-mb-16 tw-relative"
   >
-    <aside class="lg:tw-basis-80 tw-px-5">
+    <aside class="lg:tw-basis-80 lg:tw-px-5">
       <div
         class="filters-form tw-sticky tw-top-28 tw-mb-2 tw-bg-secondary tw-rounded-md !tw-text-white tw-p-6"
       >

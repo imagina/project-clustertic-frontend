@@ -78,10 +78,10 @@ const refForm = ref(null)
           </div>
         </div>
         <div class="tw-basis-3/12 lg:tw-basis-6/12">
-          <div class="tw-relative">
+          <div class="tw-relative tw-flex tw-justify-center">
             <CharacterSVG
               filled
-              class="tw-text-9xl lg:tw-text-[40rem] !tw-mb-0"
+              class="tw-text-9xl sm:tw-text-[20rem] lg:tw-text-[40rem] !tw-mb-0"
             />
           </div>
         </div>
@@ -90,7 +90,7 @@ const refForm = ref(null)
   </div>
   <div class="tw-container tw-py-24 play-container">
     <div class="tw-flex tw-flex-col tw-gap-20 lg:tw-flex-row">
-      <div class="tw-basis-5/12 tw-pl-24">
+      <div class="tw-basis-5/12 lg:tw-pl-24">
         <h2
           class="tw-text-black tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
         >
@@ -116,7 +116,7 @@ const refForm = ref(null)
         >
           <PlayIcon
             :size="120"
-            class="!lg:tw-text-9xl tw-text-primary tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
+            class="!tw-text-xl !lg:tw-text-9xl tw-text-primary tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
           />
         </div>
       </div>
@@ -126,12 +126,12 @@ const refForm = ref(null)
   <div class="tw-bg-black tw-py-20">
     <div class="tw-container">
       <h2
-        class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-24"
+        class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Lineas de servicio
         <PlayIcon
           :size="30"
-          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3"
+          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3 tw-hidden lg:tw-block"
         />
       </h2>
       <div
@@ -185,7 +185,7 @@ const refForm = ref(null)
   <ProfesionalCarousel />
   <StaffCarousel />
   <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
-    <div class="tw-basis-1/2">
+    <div class="tw-basis-1/2 tw-mb-4">
       <CardGrandStaff
         class="tw-h-full"
         :id="1"
@@ -201,7 +201,7 @@ const refForm = ref(null)
         </template>
       </CardGrandStaff>
     </div>
-    <div class="tw-basis-1/2">
+    <div class="tw-basis-1/2 tw-mb-4">
       <CardGrandStaff
         class="tw-h-full"
         :id="1"
@@ -221,12 +221,12 @@ const refForm = ref(null)
   <div class="tw-bg-white tw-pt-20">
     <div class="tw-container">
       <h2
-        class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-24"
+        class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Beneficios de Ser Parte del Clúster
         <PlayIcon
           :size="30"
-          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3"
+          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3 tw-hidden lg:tw-block"
         />
       </h2>
       <div
@@ -477,7 +477,7 @@ const refForm = ref(null)
 }
 .benefits-cluster-details {
   & > div {
-    @apply md:tw-border-r-2 tw-border-muted-light tw-px-20 tw-pb-10;
+    @apply md:tw-border-r-2 tw-border-muted-light tw-px-10 lg:tw-px-20 tw-pb-10;
   }
   & > div:nth-child(4n) {
     @apply tw-border-none;

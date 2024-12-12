@@ -210,7 +210,7 @@ function handleSelectProposal(proposal: Proposal) {
                   </p>
                   <div class="tw-flex tw-flex-wrap">
                     <div
-                      class="tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 tw-mr-5"
+                      class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 md:tw-mr-5  !tw-mb-10 md:!tw-mb-0 "
                     >
                       <label
                         class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base"
@@ -239,9 +239,9 @@ function handleSelectProposal(proposal: Proposal) {
                         </template>
                         <template v-slot:hint>
                           <p
-                            class="tw-text-sm tw-text-black tw-whitespace-nowrap"
+                            class="tw-text-xs lg:tw-text-sm tw-text-black tw-whitespace-nowrap"
                           >
-                            Pagado a usted: ${{ proposalData.amount }} - ${{
+                            Pagado a usted:<br class="md:tw-hidden"/> ${{ proposalData.amount }} - ${{
                               ((proposalData.amount ?? 0) * 0.05).toFixed(2)
                             }}
                             tarifa = ${{
@@ -252,7 +252,7 @@ function handleSelectProposal(proposal: Proposal) {
                       </InputCPA>
                     </div>
                     <div
-                      class="tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 tw-mr-5"
+                      class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 tw-mr-5"
                     >
                       <label
                         class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"

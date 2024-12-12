@@ -25,7 +25,7 @@ const props = defineProps<{
     >
       <div class="lg:tw-flex tw-justify-center tw-items-center tw-mb-1">
         <div
-          class="tw-basis-auto tw-flex-shrink-0 tw-flex-grow-0 tw-flex tw-justify-center"
+          class="tw-basis-auto tw-flex-shrink-0 tw-flex-grow-0 tw-flex tw-justify-center tw-mb-8"
         >
           <div class="img-container">
             <div
