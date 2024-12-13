@@ -5,7 +5,7 @@ import { ChevronsLeftIcon } from 'lucide-vue-next'
 
 <template>
   <div class="tw-p-4 tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-z-50">
-    <div class="tw-px-10 tw-flex">
+    <div class="md:tw-px-10 tw-flex">
       <div class="tw-flex tw-grow-0 tw-items-center tw-basis-auto">
         <NuxtLink to="/">
           <Button variant="outline">

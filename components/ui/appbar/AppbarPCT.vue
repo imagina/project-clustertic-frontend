@@ -5,20 +5,30 @@ import {
   MessageSquareIcon,
   BellIcon,
   LogInIcon,
+  MenuIcon
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
 import type { UserData } from '~/models/interfaces/user'
 // const { locale } = useI18n()
 
 const authStore = useAuthStore()
+const menu= ref<HTMLInputElement| null >(null)
 const user = computed<UserData | null>(() => authStore.user)
+
+function handleToggleMenu(){
+  console.log(menu)
+  debugger
+  const target = menu.value as HTMLInputElement
+  target.classList.toggle('!tw-max-h-96')
+}
 </script>
 
 <template>
   <div
-    class="tw-p-4 tw-sticky tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50 tw-min-h-20"
+    ref="menu"
+    class="tw-p-4 tw-sticky tw-top-0 tw-right-0 tw-left-0 tw-bg-white tw-z-50 tw-max-h-20 md:tw-max-h-max tw-overflow-hidden tw-transition-all"
   >
-    <div class="tw-container tw-flex">
+    <div class="md:tw-container md:tw-flex">
       <div class="tw-grow-0 tw-basis-auto">
         <NuxtLink class="tw-flex tw-items-center" to="/">
           <LogoSVG filled class="tw-text-primary tw-text-5xl" />
@@ -27,13 +37,20 @@ const user = computed<UserData | null>(() => authStore.user)
             <p class="tw-m-0 tw-leading-3 tw-text-xs">TECNOLÓGICO</p>
             <p class="tw-m-0 tw-leading-3 tw-text-xs">DEL TOLIMA</p>
           </div>
+          <div class="tw-flex-grow"></div>
+          <div class="md:tw-hidden">
+            <button type="button" @click="handleToggleMenu">
+
+              <MenuIcon/>
+            </button>
+          </div>
         </NuxtLink>
       </div>
 
-      <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2">
+      <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2 tw-mt-4 md:tw-mt-0">
         <client-only>
           <ul
-            class="tw-hidden md:tw-flex tw-flex-wrap"
+            class="md:tw-flex tw-flex-wrap tw-w-full"
             :class="
               !authStore.getToken
                 ? ' tw-justify-end'
@@ -93,9 +110,9 @@ const user = computed<UserData | null>(() => authStore.user)
                 </Button>
               </NuxtLink>
             </li>
-            <li>
+            <li class="md:tw-ml-5">
               <NuxtLink to="/projects/create">
-                <Button class="tw-ml-5">
+                <Button>
                   <span class="tw-font-bold">
                     {{ Helper.tLang('appbar.publish_project') }}
                   </span>
@@ -113,11 +130,13 @@ const user = computed<UserData | null>(() => authStore.user)
                 <BellIcon :size="20" />
               </Button>
             </li>
+            <li class="tw-flex tw-items-center tw-justify-end tw-pl-2">
+              <TraductionSelector />
+            </li>
           </ul>
         </client-only>
       </nav>
       <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
-        <TraductionSelector />
         <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>
@@ -137,6 +156,11 @@ const user = computed<UserData | null>(() => authStore.user)
     background-size: 100% 100%;
     background-image: url('@/assets/images/login-bg.png');
     @apply tw-text-primary tw-flex tw-justify-center tw-items-center tw-text-xs;
+  }
+}
+nav {
+  & button{
+    @apply tw-w-full tw-mb-2 md:tw-mb-0;
   }
 }
 </style>
