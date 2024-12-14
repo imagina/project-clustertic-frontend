@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlayIcon } from 'lucide-vue-next'
+import ArrowSVG from '@/assets/svg/arrow.svg'
 import { useCarousel } from './useCarousel'
 import type { WithClassAsProps } from './interface'
 import { cn } from '@/lib/utils'
@@ -26,7 +26,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     @click="scrollNext"
   >
     <slot>
-      <PlayIcon class="h-4 w-4 text-current" />
+      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(180deg)" />
       <span class="sr-only">Next Slide</span>
     </slot>
   </Button>

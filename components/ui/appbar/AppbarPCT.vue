@@ -3,6 +3,7 @@ import {
   BriefcaseIcon,
   CompassIcon,
   MessageSquareIcon,
+  InfoIcon,
   BellIcon,
   LogInIcon,
   MenuIcon
@@ -83,6 +84,16 @@ function handleToggleMenu(){
                   <BriefcaseIcon class="tw-text-primary tw-mr-3" />
                   <span class="tw-font-bold tw-capitalize">
                     {{ Helper.tLang('appbar.nav.briefcase') }}
+                  </span>
+                </Button>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/info">
+                <Button variant="ghost" type="button" class="tw-text-secondary">
+                  <InfoIcon class="tw-text-primary tw-mr-3" />
+                  <span class="tw-font-bold tw-capitalize">
+                    Acerca de
                   </span>
                 </Button>
               </NuxtLink>

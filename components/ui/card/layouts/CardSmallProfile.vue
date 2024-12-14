@@ -60,14 +60,14 @@ const props = defineProps<{
           </div>
         </div>
       </div>
-      <Button type="button" class="tw-w-full tw-mt-2">Ver perfil</Button>
+      <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button>
     </div>
   </Card>
 </template>
 
 <style lang="css" scoped>
 .img-container {
-  @apply tw-rounded-md tw-bottom-0  tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-p-2;
+  @apply tw-rounded-md tw-bottom-0 tw-bg-white tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-p-2;
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 
   & > div {

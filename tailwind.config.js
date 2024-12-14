@@ -35,6 +35,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsla(var(--primary),var(--tw-bg-opacity))',
           foreground: 'hsla(var(--primary-foreground),var(--tw-bg-opacity))',
+          alt: 'hsla(var(--primary-alt),var(--tw-bg-opacity))',
           dark: 'hsla(var(--primary-dark),var(--tw-bg-opacity))',
         },
         secondary: {

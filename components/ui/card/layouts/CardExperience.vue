@@ -79,7 +79,7 @@ const dateDiff = computed(() =>
 
 <style lang="css" scoped>
 .img-container {
-  @apply tw-rounded-md tw-bottom-0  tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-p-1;
+  @apply tw-rounded-md tw-bottom-0 tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-p-1 tw-bg-white;
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 
   & > div {

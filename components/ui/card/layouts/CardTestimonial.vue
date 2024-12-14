@@ -58,13 +58,13 @@ const props = defineProps<{
           <div class="tw-flex tw-justify-between tw-gap-3 tw-mb-1">
             <div class="tw-flex tw-items-center">
               <CalendarIcon class="tw-mr-2" :size="16" />
-              <p>17/10/24</p>
+              <p class="tw-mb-0">17/10/24</p>
             </div>
             <div class="tw-flex">
-              <StarSVG class="star filled !tw-h-full" />
+              <!-- <StarSVG class="star filled !tw-h-full" />
               <p class="tw-mb-0 tw-ml-4 tw-text-sm">
-                {{ rating?.toFixed(1) ?? '0.o' }}
-              </p>
+                {{ rating?.toFixed(1) ?? '0.0' }}
+              </p> -->
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ const props = defineProps<{
 
 <style lang="css" scoped>
 .img-container {
-  @apply tw-rounded-full tw-bottom-0 tw-p-1 tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-absolute tw-top-0  -tw-translate-y-1/2;
+  @apply tw-rounded-full tw-bottom-0 tw-p-1 tw-h-14 tw-w-14 md:tw-h-28 md:tw-w-28 tw-absolute tw-top-0  -tw-translate-y-1/2 tw-bg-white;
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 
   & > div {

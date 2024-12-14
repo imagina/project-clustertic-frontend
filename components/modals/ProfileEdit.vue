@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
-import { XIcon } from 'lucide-vue-next'
 import type { QDialogProps } from 'quasar'
 import FacebookSVG from '@/assets/svg/brand/facebook.svg'
 import LinkedinSVG from '@/assets/svg/brand/linkedin.svg'

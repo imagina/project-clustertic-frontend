@@ -52,7 +52,7 @@ const props = defineProps<{
 
           <slot name="tag"></slot>
           <div class="tw-flex tw-justify-center">
-            <Button type="button" class="tw-w-1/2 tw-text-center tw-mt-4">
+            <Button type="button" class="tw-w-1/2 tw-bg-primary-alt tw-text-center tw-mt-4">
               Ver perfil
             </Button>
           </div>
@@ -64,7 +64,7 @@ const props = defineProps<{
 
 <style lang="css" scoped>
 .img-container {
-  @apply tw-rounded-full tw-bottom-0 tw-p-1 tw-h-28 tw-w-28 md:tw-h-36 md:tw-w-36;
+  @apply tw-rounded-full tw-bottom-0 tw-p-1 tw-h-28 tw-w-28 md:tw-h-36 md:tw-w-36 tw-bg-white;
   box-shadow: 0px 0px 20px 0px hsla(0, 0%, 0%, 0.15);
 
   & > div {

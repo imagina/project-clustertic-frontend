@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { FlagIcon, PlayIcon } from 'lucide-vue-next'
+import { FlagIcon } from 'lucide-vue-next'
+import ArrowSVG from '@/assets/svg/arrow.svg'
 import { User } from '~/models/UserData'
 import type { UserData } from '~/models/interfaces/user'
 
 const profilesStore = useProfilesStore()
+
+const props = defineProps<{
+  title?: string
+}>()
 const experts = ref<User[]>([])
 onMounted(() => {
   apiCluster
@@ -23,15 +28,21 @@ function handleSelectUsers(user_id: number) {
 <template>
   <div class="carousel-users-container">
     <h3
-      class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-5 md:tw-py-10"
+    v-if="!title"
+      class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-4 md:tw-py-8 !tw-pt-16"
     >
       De la mano de
       <b class="tw-font-bold">expertos</b>
       en múltiples campos
       <b class="tw-font-bold">creativos.</b>
     </h3>
+    <h3
+    v-if="props.title"
+      class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-4 md:tw-py-8 !tw-pt-16"
+    ><b class="tw-font-bold">{{props.title}}</b>
+    </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
-      <PlayIcon style="transform: rotate(90deg)" />
+      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(-90deg)" />
     </div>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>

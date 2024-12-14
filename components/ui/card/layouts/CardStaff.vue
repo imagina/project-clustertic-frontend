@@ -50,7 +50,7 @@ const props = defineProps<{
         <slot name="tag"></slot>
       </div>
     </div>
-    <Button type="button" class="tw-w-full tw-mt-2">Ver perfil</Button>
+    <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button>
   </Card>
 </template>
 

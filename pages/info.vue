@@ -2,7 +2,6 @@
 import TestimonialsCarousel from '~/components/sections/TestimonialsCarousel.vue'
 import ProfesionalCarousel from '~/components/sections/ProfesionalCarousel.vue'
 import StaffCarousel from '~/components/sections/StaffCarousel.vue'
-import DeskLandingSVG from '~/assets/svg/desk-landing.svg'
 import DecorationContactSVG from '~/assets/svg/decoration-contact.svg'
 import DeskContactSVG from '~/assets/svg/desk-contact.svg'
 import CharacterSVG from '~/assets/svg/character-info.svg'
@@ -10,16 +9,19 @@ import SolarPanelSVG from '@/assets/svg/solar-panel.svg'
 import DevicesPcSVG from '@/assets/svg/devices-pc.svg'
 import BrushSVG from '@/assets/svg/brush.svg'
 import PacManSVG from '@/assets/svg/pacman.svg'
+import ArrowSVG from '@/assets/svg/arrow.svg'
+
+import BriefcaseSVG from '~/assets/svg/briefcase.svg'
+import DeviceLaptopSVG from '~/assets/svg/device-laptop.svg'
+import FlagSVG from '~/assets/svg/flag.svg'
+import MessageChatboxSVG from '@/assets/svg/message-chatbot.svg'
+import SpeakerPhoneSVG from '@/assets/svg/speakerphone.svg'
+import Switch3SVG from '@/assets/svg/switch-3.svg'
+import WorldLatSVG from '@/assets/svg/world-longitude.svg'
 import {
   ArrowRightIcon,
-  PlayIcon,
-  GlobeIcon,
-  ShuffleIcon,
-  Laptop2Icon,
-  MegaphoneIcon,
-  MessagesSquareIcon,
   FlagIcon,
-  BriefcaseBusinessIcon,
+  PlayIcon
 } from 'lucide-vue-next'
 import CardGrandStaff from '~/components/ui/card/layouts/CardGrandStaff.vue'
 definePageMeta({
@@ -69,7 +71,7 @@ const refForm = ref(null)
             <NuxtLink to="/projects">
               <Button
                 variant="ghost"
-                class="md:tw-text-2xl hover:tw-bg-transparent hover:tw-underline !tw-pl-0 !tw-font-light h2"
+                class="md:tw-text-2xl hover:tw-bg-transparent hover:tw-underline !tw-pl-0 !tw-font-normal h2 text-league-spartan"
               >
                 Conoce nuestras soluciones
                 <ArrowRightIcon class="tw-ml-3" />
@@ -95,20 +97,16 @@ const refForm = ref(null)
           class="tw-text-black tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
         >
           ¿Que es el cluster de Tolima?
-          <PlayIcon
-            :size="30"
-            class="tw-absolute tw-text-primary -tw-left-24 tw-top-1/2 -tw-translate-y-1/3"
-          />
+          
+      <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl -tw-left-24 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
         </h2>
         <p class="tw-text-lg h3 tw-mb-5 tw-font-bold">Descripción general</p>
-        <p class="tw-text-md tw-font-light tw-leading-tight tw-mb-10">
-          El Clúster TIC del Tolima es una comunidad que une talento,empresas y
-          tecnología para transformar la región y ofrecer soluciones exportables
-          al mundo
+        <p class="tw-text-md tw-font-normal tw-leading-tight tw-mb-10">
+          Nuestro clúster es un motor de innovación que conecta empresas con soluciones tecnológicas vanguardistas. Ofrecemos un ecosistema integral que impulsa el crecimiento y redefine cómo las organizaciones prosperan. Con el respaldo de más de 79 empresas TIC del Tolima, optimizamos procesos y construimos experiencias digitales que marcan la diferencia en los mercados.
         </p>
-        <Button size="lg" class="tw-text-lg md:tw-text-xl\!tw-font-normal h2">
+        <button size="lg" class="tw-bg-primary tw-py-3 text-league-spartan tw-px-6 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl">
           Conoce nuestra estrategia
-        </Button>
+        </button>
       </div>
       <div class="tw-basis-3/12 lg:tw-basis-6/12">
         <div
@@ -129,10 +127,7 @@ const refForm = ref(null)
         class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Lineas de servicio
-        <PlayIcon
-          :size="30"
-          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3 tw-hidden lg:tw-block"
-        />
+        <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
       </h2>
       <div
         class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 what-its-cluster-details"
@@ -182,7 +177,7 @@ const refForm = ref(null)
   </div>
 
   <TestimonialsCarousel />
-  <ProfesionalCarousel />
+  <ProfesionalCarousel title="Empresas"/>
   <StaffCarousel />
   <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
     <div class="tw-basis-1/2 tw-mb-4">
@@ -224,43 +219,40 @@ const refForm = ref(null)
         class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Beneficios de Ser Parte del Clúster
-        <PlayIcon
-          :size="30"
-          class="tw-absolute tw-text-primary -tw-left-0 tw-top-1/2 -tw-translate-y-1/3 tw-hidden lg:tw-block"
-        />
+        <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
       </h2>
       <div
         class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 benefits-cluster-details"
       >
         <div>
-          <GlobeIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <WorldLatSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>Acceso a nuevos mercados internacionales.</p>
         </div>
         <div>
-          <ShuffleIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <Switch3SVG filled class="tw-mb-5 tw-text-4xl" />
           <p>
             Colaboración tecnológica y oportunidades de co-desarrollo de
             productos.
           </p>
         </div>
         <div>
-          <Laptop2Icon :size="30" class="tw-mb-5 tw-text-primary" />
+          <DeviceLaptopSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>Participación en mesas de trabajo especializadas.</p>
         </div>
         <div>
-          <MegaphoneIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <SpeakerPhoneSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>Acceso a formación y capacitaciones exclusivas.</p>
         </div>
         <div>
-          <MessagesSquareIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <MessageChatboxSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>Red de contactos y networking con otras empresas del sector.</p>
         </div>
         <div>
-          <FlagIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <FlagSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>Apoyo en la internacionalización de productos y servicios.</p>
         </div>
         <div>
-          <BriefcaseBusinessIcon :size="30" class="tw-mb-5 tw-text-primary" />
+          <BriefcaseSVG filled class="tw-mb-5 tw-text-4xl" />
           <p>
             Visibilidad en el portafolio de soluciones exportables del clúster.
           </p>
@@ -483,7 +475,7 @@ const refForm = ref(null)
     @apply tw-border-none;
   }
   & p {
-    @apply tw-mb-6 tw-text-lg tw-font-normal tw-block tw-w-full;
+    @apply tw-mb-6 tw-text-lg tw-font-medium tw-block tw-w-full;
   }
   & button {
     @apply tw-mb-10 tw-text-sm tw-font-bold tw-block tw-w-full tw-rounded-3xl;
