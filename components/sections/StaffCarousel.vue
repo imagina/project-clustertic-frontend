@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { FlagIcon } from 'lucide-vue-next'
 import ArrowSVG from '@/assets/svg/arrow.svg'
-import { User } from '~/models/UserData'
-import type { UserData } from '~/models/interfaces/user'
+import type { Testimonial } from '~/models/interfaces/testimonial';
 
 const profilesStore = useProfilesStore()
-const experts = ref<User[]>([])
+const staff = ref<Testimonial[]>([])
 onMounted(() => {
   apiCluster
-    .get('/api/profile/v1/users', {
-      take: 6,
-      include: 'information.files,skills',
-      filter: '{"order":{"field":"created_at","way":"desc"},"roleId": 2}',
+    .get('/api/iblog/v1/posts', {
+      filter: '{"categoryId":1}'
     })
     .then((response: any) => {
-      experts.value = (<UserData[]>response.data).map((user) => new User(user))
+      staff.value = <Testimonial[]>response.data
     })
 })
 function handleSelectUsers(user_id: number) {
@@ -37,25 +34,26 @@ function handleSelectUsers(user_id: number) {
         <CarouselContent class="md:tw-gap-6 lg:!tw-mr-16">
           <CarouselItem
             class="!tw-basis-full md:!tw-basis-1/2 xl:!tw-basis-1/4"
-            v-for="user in experts"
+            v-for="user in staff"
             :key="`user-card=${user.id}`"
           >
             <div @click="handleSelectUsers(user.id)">
               <CardStaff
                 class="tw-h-full"
                 :id="user.id"
-                :name="user.extraFields.companyName?.value ?? user.fullName"
-                :username="user.socialMedia['web'] ?? user.fullName"
-                :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
+                :img="user?.mainImage.path"
                 location="xx, zz"
               >
                 <template v-slot:tag>
                   <div class="tw-flex tw-justify-center tw-mb-3">
                     <FlagIcon class="flag-icon tw-mr-2" :size="20" />
                     <p>
-                      {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
+                      Tolima, Colombia
                     </p>
                   </div>
+                </template>
+                <template v-slot:name>
+                  <div v-html="user.description"></div>
                 </template>
               </CardStaff>
             </div>

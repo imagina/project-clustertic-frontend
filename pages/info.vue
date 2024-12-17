@@ -10,6 +10,7 @@ import DevicesPcSVG from '@/assets/svg/devices-pc.svg'
 import BrushSVG from '@/assets/svg/brush.svg'
 import PacManSVG from '@/assets/svg/pacman.svg'
 import ArrowSVG from '@/assets/svg/arrow.svg'
+import PlayVideoSVG from '@/assets/svg/play-video.svg'
 
 import BriefcaseSVG from '~/assets/svg/briefcase.svg'
 import DeviceLaptopSVG from '~/assets/svg/device-laptop.svg'
@@ -83,7 +84,7 @@ const refForm = ref(null)
           <div class="tw-relative tw-flex tw-justify-center">
             <CharacterSVG
               filled
-              class="tw-text-9xl sm:tw-text-[20rem] lg:tw-text-[40rem] !tw-mb-0"
+              class="tw-text-[14rem] sm:tw-text-[20rem] lg:tw-text-[40rem] !tw-mb-0"
             />
           </div>
         </div>
@@ -112,9 +113,9 @@ const refForm = ref(null)
         <div
           class="tw-w-full tw-max-w-[880px] tw-pb-[56.25%] tw-rounded-3xl tw-bg-black tw-relative"
         >
-          <PlayIcon
-            :size="120"
-            class="!tw-text-xl !lg:tw-text-9xl tw-text-primary tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
+          <PlayVideoSVG
+            Filled
+            class="tw-text-6xl md:tw-text-9xl lg:tw-text-6xl xl:tw-text-9xl tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
           />
         </div>
       </div>
@@ -130,7 +131,7 @@ const refForm = ref(null)
         <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
       </h2>
       <div
-        class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 what-its-cluster-details"
+        class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 what-its-cluster-details"
       >
         <div
           v-for="category in categoriesStore.parentCategories"
@@ -180,6 +181,7 @@ const refForm = ref(null)
   <ProfesionalCarousel title="Empresas"/>
   <StaffCarousel />
   <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
+    <!-- 
     <div class="tw-basis-1/2 tw-mb-4">
       <CardGrandStaff
         class="tw-h-full"
@@ -211,7 +213,8 @@ const refForm = ref(null)
           </div>
         </template>
       </CardGrandStaff>
-    </div>
+    </div> 
+    -->
   </div>
   <div class="tw-bg-white tw-pt-20">
     <div class="tw-container">
@@ -284,7 +287,7 @@ const refForm = ref(null)
         ref="refForm"
       >
         <h2
-          class="tw-text-black tw-font-light tw-text-center tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
+          class="tw-text-black tw-font-normal tw-text-center tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
         >
           Formemos juntos el
           <span class="tw-text-primary">futuro tecnológico</span>
@@ -384,15 +387,15 @@ const refForm = ref(null)
           Mensaje
         </label>
         <Textarea
-          placeholder="Mensaje"
+          placeholder="Escriba aquí..."
           v-model="contactData.message"
           class="tw-h-52"
         ></Textarea>
 
         <div class="lg:tw-flex tw-justify-between tw-mt-10 tw-px-10">
-          <label class="tw-flex tw-items-center">
+          <label class="tw-flex tw-font-normal tw-items-center">
             <Checkbox
-              class="tw-bg-white !tw-border-input"
+              class="tw-bg-white !tw-border-input tw-mr-3"
               v-model:checked="contactData.agreement"
             ></Checkbox>
             <span class="tw-text-black tw-ml-2">
@@ -402,12 +405,12 @@ const refForm = ref(null)
               </a>
             </span>
           </label>
-          <Button
+          <button
             type="submit"
-            class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
+            class="tw-bg-primary tw-py-3 text-league-spartan tw-px-16 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl"
           >
-            Enviar propuesta
-          </Button>
+            ¡Únete al Clúster!
+          </button>
         </div>
       </q-form>
 
@@ -420,11 +423,15 @@ const refForm = ref(null)
 </template>
 
 <style scoped>
-.play-container {
-  background-image: url('@/assets/images/fondo-video.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: right;
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) { 
+  
+  .play-container {
+    background-image: url('@/assets/images/fondo-video.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
 }
 
 .cluster-details-img {
@@ -451,7 +458,7 @@ const refForm = ref(null)
       @apply tw-px-3 tw-py-2 tw-border-r-2 tw-border-muted-foreground;
     }
     & > h4 {
-      @apply tw-text-white tw-font-medium tw-text-base  tw-text-start tw-whitespace-normal tw-pl-3;
+      @apply tw-text-white tw-font-medium tw-text-sm md:tw-text-base !tw-leading-none tw-text-start tw-whitespace-normal tw-pl-3;
     }
   }
 }

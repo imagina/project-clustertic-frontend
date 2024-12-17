@@ -22,7 +22,7 @@ onMounted(() => {
 
     <div class="tw-container tw-py-20">
       <div
-        class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 categories-container"
+        class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 categories-container"
       >
         <div
           v-for="category in categoriesStore.parentCategories"

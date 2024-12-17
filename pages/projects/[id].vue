@@ -74,7 +74,7 @@ async function sendProposal() {
     const data: NewProposalFormValue = {
       ad_id: project.value.id,
       amount: proposalData.amount,
-      currency: 'USD',
+      currency: (<'COP' | 'USD'>project.value.options?.currency ?? 'COP'),
       delivery_days: proposalData.days,
       description: proposalData.description,
     }
@@ -150,7 +150,7 @@ function handleSelectProposal(proposal: Proposal) {
                 Ofertas media
               </p>
               <p class="tw-text-2xl tw-font-semibold tw-mb-0 tw-text-center">
-                $ {{ project.defaultPrice ?? 0 }} USD
+                $ {{ project.defaultPrice ?? 0 }} {{ project.options?.currency ?? 'COP' }}
               </p>
             </div>
           </div>
@@ -233,7 +233,7 @@ function handleSelectProposal(proposal: Proposal) {
                         <template v-slot:append>
                           <span class="tw-text-sm">
                             {{
-                              'USD' /**TODO: colocar currency de cada projecto */
+                              project.options?.currency ?? 'COP'
                             }}
                           </span>
                         </template>

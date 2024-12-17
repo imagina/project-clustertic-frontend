@@ -47,15 +47,14 @@ export interface Project {
   fields: any[]
   files?: File[]
   id: number
-  lat: null
-  lng: null
+  lat?: number
+  lng?: number
   maxPrice: number
   mediaFiles: MediaFiles
   mediasMulti: MediasMulti
   mediasSingle: any[]
   minPrice: number
   neighborhoodId: null
-  options: null
   organizationId: null
   provinceId: number
   province?: Province
@@ -69,7 +68,9 @@ export interface Project {
   uploadedAt: string
   url: string
   userId: number
-
+  options?: {
+    currency:String
+  }
   user?: UserInfo
 }
 
@@ -147,8 +148,8 @@ export interface MediaFiles {
 }
 
 export interface MediasMulti {
-  gallery: Gallery
-  videos: Gallery
+  gallery?: Gallery
+  videos?: Gallery
 }
 
 export interface Gallery {

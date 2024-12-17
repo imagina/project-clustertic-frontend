@@ -1,24 +1,20 @@
 <script setup lang="ts">
 import { FlagIcon } from 'lucide-vue-next'
 import ArrowSVG from '@/assets/svg/arrow.svg'
-import { User } from '~/models/UserData'
-import type { UserData } from '~/models/interfaces/user'
+import type { Testimonial } from '~/models/interfaces/testimonial';
 
-const profilesStore = useProfilesStore()
-const experts = ref<User[]>([])
+const testimonials = ref<Testimonial[]>([])
 onMounted(() => {
   apiCluster
-    .get('/api/profile/v1/users', {
-      take: 6,
-      include: 'information.files,skills',
-      filter: '{"order":{"field":"created_at","way":"desc"},"roleId": 2}',
+    .get('/api/iblog/v1/posts', {
+      filter: '{"categoryId":2}'
     })
     .then((response: any) => {
-      experts.value = (<UserData[]>response.data).map((user) => new User(user))
+      debugger
+      testimonials.value = <Testimonial[]>response.data
     })
 })
-function handleSelectUsers(user_id: number) {
-  profilesStore.viewDetails(user_id)
+function handleSelect(user_id: number) {
 }
 </script>
 <template>
@@ -37,25 +33,28 @@ function handleSelectUsers(user_id: number) {
         <CarouselContent>
           <CarouselItem
             class="xl:!tw-basis-1/2"
-            v-for="user in experts"
-            :key="`user-card=${user.id}`"
+            v-for="testimonial in testimonials"
+            :key="`testimonial-card=${testimonial.id}`"
           >
-            <div @click="handleSelectUsers(user.id)">
+            <div @click="handleSelect(testimonial.id)">
               <CardTestimonial
                 class="tw-h-full"
-                :id="user.id"
-                :name="user.extraFields.companyName?.value ?? user.fullName"
-                :username="user.socialMedia['web'] ?? user.fullName"
-                :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
-                location="xx, zz"
+                :id="testimonial.id"
+                :name="testimonial.summary"
+                :username="''"
+                :date="Helper.parseDateToString(Helper.parseStringToDate(testimonial.createdAt),'DD/MM/YYYY')"
+                :img="testimonial?.mainImage.path"
               >
                 <template v-slot:tag>
                   <div class="tw-flex tw-justify-center tw-mb-3">
                     <FlagIcon class="flag-icon tw-mr-2" :size="20" />
                     <p>
-                      {{ user.extraFields.place?.value ?? 'Tolima, Colombia' }}
+                      Tolima, Colombia
                     </p>
                   </div>
+                </template>
+                <template v-slot:description>
+                  <div v-html="testimonial.description"></div>
                 </template>
               </CardTestimonial>
             </div>

@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 const props = defineProps<{
   class?: HTMLAttributes['class']
   id: number | string
-  name?: string
   img?: string
   username?: string
   rating?: number
@@ -38,10 +37,9 @@ const props = defineProps<{
       </div>
       <div class="tw-px-3 tw-py-5 tw-grow tw-mt-16">
         <CardTitle class="tw-font-bold tw-text-center tw-text-xl tw-mb-1">
-          {{ name }}
+          <slot name="name"></slot>
         </CardTitle>
         <p
-          v-if="username"
           class="tw-text-lg tw-font-base tw-text-center tw-text-blue-500 tw-mb-5"
         >
           {{ username }}
@@ -50,7 +48,7 @@ const props = defineProps<{
         <slot name="tag"></slot>
       </div>
     </div>
-    <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button>
+    <!-- <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button> -->
   </Card>
 </template>
 

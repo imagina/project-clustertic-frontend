@@ -139,9 +139,6 @@ async function create() {
   try {
     const validateForm = await refForm.value.validate()
     if (!validateForm) return
-
-    let mainFile
-    const multimedia = []
     const dataToSend: NewProjectFormValue = {
       es: {
         title: projectData.name,
@@ -157,6 +154,9 @@ async function create() {
           ? projectData.customPrice
           : projectData.rangePrice.max) ?? 0,
       categories: projectData.skills.map((skill) => skill.id),
+      options:{
+        currency: projectData.currency
+      }
     }
     if (projectData.files && projectData.files.length > 0) {
       dataToSend.files = projectData.files
