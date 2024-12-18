@@ -202,9 +202,7 @@ onMounted(() => {
             Cluster ® is a registered Trademark of Cluster TIC
             <span class="tw-block md:tw-inline-block">(ABC 123 456 789)</span>
           </p>
-          <p
-            class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-normal"
-          >
+          <p class="tw-mb-0 text-muted tw-text-xs lg:tw-text-sm tw-font-normal">
             Copyright © 2024 Cluster TIC (ABC 123 456 789)
           </p>
         </div>

@@ -60,7 +60,9 @@ const props = defineProps<{
           </div>
         </div>
       </div>
-      <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button>
+      <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">
+        Ver perfil
+      </Button>
     </div>
   </Card>
 </template>

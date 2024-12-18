@@ -2,7 +2,7 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
-p{
+p {
   margin-bottom: 0;
 }
 body {
@@ -16,6 +16,6 @@ iframe[id=':2.container'] {
   display: none !important;
   z-index: -1 !important;
 }
-.text-league-spartan{
-  font-family: "League Spartan", sans-serif;
+.text-league-spartan {
+  font-family: 'League Spartan', sans-serif;
 }

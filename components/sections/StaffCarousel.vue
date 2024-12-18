@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { FlagIcon } from 'lucide-vue-next'
+import CardGrandStaff from '~/components/ui/card/layouts/CardGrandStaff.vue'
 import ArrowSVG from '@/assets/svg/arrow.svg'
-import type { Testimonial } from '~/models/interfaces/testimonial';
+import type { Testimonial } from '~/models/interfaces/testimonial'
 
 const profilesStore = useProfilesStore()
 const staff = ref<Testimonial[]>([])
 onMounted(() => {
   apiCluster
     .get('/api/iblog/v1/posts', {
-      filter: '{"categoryId":1}'
+      filter: '{"categoryId":1}',
     })
     .then((response: any) => {
       staff.value = <Testimonial[]>response.data
@@ -26,7 +26,11 @@ function handleSelectUsers(user_id: number) {
       <b class="tw-font-bold">Nuestro equipo</b>
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
-      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(-90deg)" />
+      <ArrowSVG
+        filled
+        class="tw-text-3xl tw-text-black"
+        style="transform: rotate(-90deg)"
+      />
     </div>
     <div class="tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel class="lg:!tw-px-14">
@@ -42,16 +46,8 @@ function handleSelectUsers(user_id: number) {
                 class="tw-h-full"
                 :id="user.id"
                 :img="user?.mainImage.path"
-                location="xx, zz"
+                role="role"
               >
-                <template v-slot:tag>
-                  <div class="tw-flex tw-justify-center tw-mb-3">
-                    <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-                    <p>
-                      Tolima, Colombia
-                    </p>
-                  </div>
-                </template>
                 <template v-slot:name>
                   <div v-html="user.description"></div>
                 </template>
@@ -61,6 +57,25 @@ function handleSelectUsers(user_id: number) {
         </CarouselContent>
         <CarouselNext class="lg:tw-right-[-5%]" />
       </Carousel>
+    </div>
+  </div>
+
+  <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
+    <div class="tw-basis-1/2 tw-mb-4">
+      <CardGrandStaff
+        class="tw-h-full"
+        :id="1"
+        :name="'example'"
+        role="role"
+      ></CardGrandStaff>
+    </div>
+    <div class="tw-basis-1/2 tw-mb-4">
+      <CardGrandStaff
+        class="tw-h-full"
+        :id="1"
+        :name="'example'"
+        role="role"
+      ></CardGrandStaff>
     </div>
   </div>
 </template>

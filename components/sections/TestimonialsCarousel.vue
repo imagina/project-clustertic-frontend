@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { FlagIcon } from 'lucide-vue-next'
 import ArrowSVG from '@/assets/svg/arrow.svg'
-import type { Testimonial } from '~/models/interfaces/testimonial';
+import type { Testimonial } from '~/models/interfaces/testimonial'
 
 const testimonials = ref<Testimonial[]>([])
 onMounted(() => {
   apiCluster
     .get('/api/iblog/v1/posts', {
-      filter: '{"categoryId":2}'
+      filter: '{"categoryId":2}',
     })
     .then((response: any) => {
-      debugger
       testimonials.value = <Testimonial[]>response.data
     })
 })
-function handleSelect(user_id: number) {
-}
+function handleSelect(user_id: number) {}
 </script>
 <template>
   <div class="carousel-users-container">
@@ -25,7 +23,11 @@ function handleSelect(user_id: number) {
       <b class="tw-font-bold">Testimonios</b>
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
-      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(-90deg)" />
+      <ArrowSVG
+        filled
+        class="tw-text-3xl tw-text-black"
+        style="transform: rotate(-90deg)"
+      />
     </div>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>
@@ -42,15 +44,18 @@ function handleSelect(user_id: number) {
                 :id="testimonial.id"
                 :name="testimonial.summary"
                 :username="''"
-                :date="Helper.parseDateToString(Helper.parseStringToDate(testimonial.createdAt),'DD/MM/YYYY')"
+                :date="
+                  Helper.parseDateToString(
+                    Helper.parseStringToDate(testimonial.createdAt),
+                    'DD/MM/YYYY',
+                  )
+                "
                 :img="testimonial?.mainImage.path"
               >
                 <template v-slot:tag>
                   <div class="tw-flex tw-justify-center tw-mb-3">
                     <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-                    <p>
-                      Tolima, Colombia
-                    </p>
+                    <p>Tolima, Colombia</p>
                   </div>
                 </template>
                 <template v-slot:description>

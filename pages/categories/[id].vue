@@ -45,7 +45,7 @@ const category = computed(() => categoriesStore.selected)
       </CardHeader>
       <CardContent class="tw-mt-16">
         <ul
-          class="tw-grid  tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4  tw-gap-3"
+          class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 tw-gap-3"
         >
           <li class="tw-flex tw-text-sm md:tw-text-base">
             <span><ChevronRightIcon class="tw-text-sky-600" :size="25" /></span>

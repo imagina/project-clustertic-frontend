@@ -26,7 +26,6 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
     @click="scrollPrev"
   >
     <slot>
-      
       <ArrowSVG filled class="tw-text-3xl tw-text-black" />
       <span class="sr-only">Previous Slide</span>
     </slot>

@@ -19,12 +19,7 @@ import MessageChatboxSVG from '@/assets/svg/message-chatbot.svg'
 import SpeakerPhoneSVG from '@/assets/svg/speakerphone.svg'
 import Switch3SVG from '@/assets/svg/switch-3.svg'
 import WorldLatSVG from '@/assets/svg/world-longitude.svg'
-import {
-  ArrowRightIcon,
-  FlagIcon,
-  PlayIcon
-} from 'lucide-vue-next'
-import CardGrandStaff from '~/components/ui/card/layouts/CardGrandStaff.vue'
+import { ArrowRightIcon, FlagIcon, PlayIcon } from 'lucide-vue-next'
 definePageMeta({
   layout: 'default',
 })
@@ -98,14 +93,26 @@ const refForm = ref(null)
           class="tw-text-black tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
         >
           ¿Que es el cluster de Tolima?
-          
-      <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl -tw-left-24 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
+
+          <ArrowSVG
+            filled
+            class="tw-absolute tw-text-primary-alt tw-text-4xl -tw-left-24 tw-top-0 -tw-translate-y-1/2"
+            style="transform: rotate(180deg)"
+          />
         </h2>
         <p class="tw-text-lg h3 tw-mb-5 tw-font-bold">Descripción general</p>
         <p class="tw-text-md tw-font-normal tw-leading-tight tw-mb-10">
-          Nuestro clúster es un motor de innovación que conecta empresas con soluciones tecnológicas vanguardistas. Ofrecemos un ecosistema integral que impulsa el crecimiento y redefine cómo las organizaciones prosperan. Con el respaldo de más de 79 empresas TIC del Tolima, optimizamos procesos y construimos experiencias digitales que marcan la diferencia en los mercados.
+          Nuestro clúster es un motor de innovación que conecta empresas con
+          soluciones tecnológicas vanguardistas. Ofrecemos un ecosistema
+          integral que impulsa el crecimiento y redefine cómo las organizaciones
+          prosperan. Con el respaldo de más de 79 empresas TIC del Tolima,
+          optimizamos procesos y construimos experiencias digitales que marcan
+          la diferencia en los mercados.
         </p>
-        <button size="lg" class="tw-bg-primary tw-py-3 text-league-spartan tw-px-6 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl">
+        <button
+          size="lg"
+          class="tw-bg-primary tw-py-3 text-league-spartan tw-px-6 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl"
+        >
           Conoce nuestra estrategia
         </button>
       </div>
@@ -128,7 +135,11 @@ const refForm = ref(null)
         class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Lineas de servicio
-        <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
+        <ArrowSVG
+          filled
+          class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"
+          style="transform: rotate(180deg)"
+        />
       </h2>
       <div
         class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 what-its-cluster-details"
@@ -178,51 +189,19 @@ const refForm = ref(null)
   </div>
 
   <TestimonialsCarousel />
-  <ProfesionalCarousel title="Empresas"/>
+  <ProfesionalCarousel title="Empresas" />
   <StaffCarousel />
-  <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
-    <!-- 
-    <div class="tw-basis-1/2 tw-mb-4">
-      <CardGrandStaff
-        class="tw-h-full"
-        :id="1"
-        :name="'example'"
-        :username="'test'"
-        location="xx, zz"
-      >
-        <template v-slot:tag>
-          <div class="tw-flex tw-justify-center tw-mb-3">
-            <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-            <p>Tolima, Colombia</p>
-          </div>
-        </template>
-      </CardGrandStaff>
-    </div>
-    <div class="tw-basis-1/2 tw-mb-4">
-      <CardGrandStaff
-        class="tw-h-full"
-        :id="1"
-        :name="'example'"
-        :username="'test'"
-        location="xx, zz"
-      >
-        <template v-slot:tag>
-          <div class="tw-flex tw-justify-center tw-mb-3">
-            <FlagIcon class="flag-icon tw-mr-2" :size="20" />
-            <p>Tolima, Colombia</p>
-          </div>
-        </template>
-      </CardGrandStaff>
-    </div> 
-    -->
-  </div>
   <div class="tw-bg-white tw-pt-20">
     <div class="tw-container">
       <h2
         class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
       >
         Beneficios de Ser Parte del Clúster
-        <ArrowSVG filled class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"style="transform: rotate(180deg)" />
+        <ArrowSVG
+          filled
+          class="tw-absolute tw-text-primary-alt tw-text-4xl tw-left-0 tw-top-0 -tw-translate-y-1/2"
+          style="transform: rotate(180deg)"
+        />
       </h2>
       <div
         class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 benefits-cluster-details"
@@ -424,8 +403,7 @@ const refForm = ref(null)
 
 <style scoped>
 /*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) { 
-  
+@media (min-width: 768px) {
   .play-container {
     background-image: url('@/assets/images/fondo-video.png');
     background-size: 100% 100%;

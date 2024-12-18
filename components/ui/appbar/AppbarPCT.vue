@@ -6,17 +6,17 @@ import {
   InfoIcon,
   BellIcon,
   LogInIcon,
-  MenuIcon
+  MenuIcon,
 } from 'lucide-vue-next'
 import LogoSVG from '~/assets/svg/logo.svg'
 import type { UserData } from '~/models/interfaces/user'
 // const { locale } = useI18n()
 
 const authStore = useAuthStore()
-const menu= ref<HTMLInputElement| null >(null)
+const menu = ref<HTMLInputElement | null>(null)
 const user = computed<UserData | null>(() => authStore.user)
 
-function handleToggleMenu(){
+function handleToggleMenu() {
   console.log(menu)
   debugger
   const target = menu.value as HTMLInputElement
@@ -41,14 +41,15 @@ function handleToggleMenu(){
           <div class="tw-flex-grow"></div>
           <div class="md:tw-hidden">
             <button type="button" @click="handleToggleMenu">
-
-              <MenuIcon/>
+              <MenuIcon />
             </button>
           </div>
         </NuxtLink>
       </div>
 
-      <nav class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2 tw-mt-4 md:tw-mt-0">
+      <nav
+        class="tw-flex-grow tw-flex tw-items-center tw-justify-end tw-mr-2 tw-mt-4 md:tw-mt-0"
+      >
         <client-only>
           <ul
             class="md:tw-flex tw-flex-wrap tw-w-full"
@@ -92,9 +93,7 @@ function handleToggleMenu(){
               <NuxtLink to="/info">
                 <Button variant="ghost" type="button" class="tw-text-secondary">
                   <InfoIcon class="tw-text-primary tw-mr-3" />
-                  <span class="tw-font-bold tw-capitalize">
-                    Acerca de
-                  </span>
+                  <span class="tw-font-bold tw-capitalize">Acerca de</span>
                 </Button>
               </NuxtLink>
             </li>
@@ -170,7 +169,7 @@ function handleToggleMenu(){
   }
 }
 nav {
-  & button{
+  & button {
     @apply tw-w-full tw-mb-2 md:tw-mb-0;
   }
 }

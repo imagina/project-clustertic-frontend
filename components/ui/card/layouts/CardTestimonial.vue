@@ -42,24 +42,23 @@ const props = defineProps<{
 
           <div class="tw-text-sm tw-font-light tw-mb-3">
             <slot name="description">
-
-              lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Donec viverra felis elit, eget sagittis mi lobortis sed.
-              Mauris iaculis, sem ut tincidunt vulputate, dolor nulla imperdiet
-              ex, id dignissim risus nisl sed diam. Duis ac dictum leo.
-              Suspendisse luctus tortor nisl, quis imperdiet est suscipit nec. Ut
-              tincidunt et ante et vehicula. orem ipsum dolor sit amet,
-              consectetur adipiscing elit. Donec viverra felis elit, eget sagittis
-              mi lobortis sed. Mauris iaculis, sem ut tincidunt vulputate, dolor
-              nulla imperdiet ex, id dignissim risus nisl sed diam. Duis ac dictum
-              leo. Suspendisse luctus tortor nisl, quis imperdiet est suscipit
-              nec. Ut tincidunt et ante et vehicula.
+              lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              viverra felis elit, eget sagittis mi lobortis sed. Mauris iaculis,
+              sem ut tincidunt vulputate, dolor nulla imperdiet ex, id dignissim
+              risus nisl sed diam. Duis ac dictum leo. Suspendisse luctus tortor
+              nisl, quis imperdiet est suscipit nec. Ut tincidunt et ante et
+              vehicula. orem ipsum dolor sit amet, consectetur adipiscing elit.
+              Donec viverra felis elit, eget sagittis mi lobortis sed. Mauris
+              iaculis, sem ut tincidunt vulputate, dolor nulla imperdiet ex, id
+              dignissim risus nisl sed diam. Duis ac dictum leo. Suspendisse
+              luctus tortor nisl, quis imperdiet est suscipit nec. Ut tincidunt
+              et ante et vehicula.
             </slot>
           </div>
           <div class="tw-flex tw-justify-between tw-gap-3 tw-mb-1">
             <div class="tw-flex tw-items-center">
               <CalendarIcon class="tw-mr-2" :size="16" />
-              <p class="tw-mb-0">{{date}}</p>
+              <p class="tw-mb-0">{{ date }}</p>
             </div>
             <div class="tw-flex">
               <!-- <StarSVG class="star filled !tw-h-full" />

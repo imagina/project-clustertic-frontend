@@ -7,7 +7,7 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
   id: number | string
   img?: string
-  username?: string
+  role?: string
   rating?: number
   numberJobs?: number | string
   location?: string
@@ -40,12 +40,10 @@ const props = defineProps<{
           <slot name="name"></slot>
         </CardTitle>
         <p
-          class="tw-text-lg tw-font-base tw-text-center tw-text-blue-500 tw-mb-5"
+          class="tw-text-lg tw-font-base tw-text-center tw-text-[#5F5F5F] tw-mb-5"
         >
-          {{ username }}
+          {{ role }}
         </p>
-
-        <slot name="tag"></slot>
       </div>
     </div>
     <!-- <Button type="button" class="tw-w-full tw-bg-primary-alt tw-mt-2">Ver perfil</Button> -->

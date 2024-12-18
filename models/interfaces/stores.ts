@@ -38,8 +38,8 @@ export interface NewProjectFormValue {
   max_price: number
   status?: 0 | 1 | 2
   categories: number[]
-  options?:{
-    currency:string
+  options?: {
+    currency: string
   }
 
   medias_single?: {

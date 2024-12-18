@@ -28,7 +28,7 @@ function handleSelectUsers(user_id: number) {
 <template>
   <div class="carousel-users-container">
     <h3
-    v-if="!title"
+      v-if="!title"
       class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-4 md:tw-py-8 !tw-pt-16"
     >
       De la mano de
@@ -37,12 +37,17 @@ function handleSelectUsers(user_id: number) {
       <b class="tw-font-bold">creativos.</b>
     </h3>
     <h3
-    v-if="props.title"
+      v-if="props.title"
       class="tw-font-light tw-text-black tw-text-center tw-text-2xl sm:tw-text-3xl md:tw-text-[30px] tw-py-4 md:tw-py-8 !tw-pt-16"
-    ><b class="tw-font-bold">{{props.title}}</b>
+    >
+      <b class="tw-font-bold">{{ props.title }}</b>
     </h3>
     <div class="tw-flex tw-justify-center tw-w-full">
-      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(-90deg)" />
+      <ArrowSVG
+        filled
+        class="tw-text-3xl tw-text-black"
+        style="transform: rotate(-90deg)"
+      />
     </div>
     <div class="tw-gap-4 tw-py-10 lg:tw-px-40 tw-pb-20">
       <Carousel>

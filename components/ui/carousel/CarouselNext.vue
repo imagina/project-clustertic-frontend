@@ -26,7 +26,11 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     @click="scrollNext"
   >
     <slot>
-      <ArrowSVG filled class="tw-text-3xl tw-text-black" style="transform: rotate(180deg)" />
+      <ArrowSVG
+        filled
+        class="tw-text-3xl tw-text-black"
+        style="transform: rotate(180deg)"
+      />
       <span class="sr-only">Next Slide</span>
     </slot>
   </Button>

@@ -6,12 +6,8 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
   id: number | string
   name?: string
+  role?: string
   img?: string
-  username?: string
-  rating?: number
-  numberJobs?: number | string
-  location?: string
-  price?: number | string
 }>()
 </script>
 
@@ -39,23 +35,18 @@ const props = defineProps<{
             ></div>
           </div>
         </div>
-        <div class="lg:tw-pl-7 tw-py-5 tw-grow">
-          <CardTitle class="tw-font-bold tw-text-center tw-text-xl tw-mb-1">
+        <div class="lg:tw-pl-14 tw-py-5 tw-grow">
+          <CardTitle class="tw-font-bold tw-text-xl tw-mb-1">
             {{ name }}
           </CardTitle>
           <p
-            v-if="username"
-            class="tw-text-lg tw-font-base tw-text-center tw-text-blue-500 tw-mb-5"
+            v-if="role"
+            class="tw-text-lg tw-font-base tw-text-[#5F5F5F] tw-mb-5"
           >
-            {{ username }}
+            {{ role }}
           </p>
 
-          <slot name="tag"></slot>
-          <div class="tw-flex tw-justify-center">
-            <Button type="button" class="tw-w-1/2 tw-bg-primary-alt tw-text-center tw-mt-4">
-              Ver perfil
-            </Button>
-          </div>
+          <div class="tw-flex tw-justify-center"></div>
         </div>
       </div>
     </div>
