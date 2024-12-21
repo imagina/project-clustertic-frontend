@@ -5,13 +5,25 @@ import type { Testimonial } from '~/models/interfaces/testimonial'
 
 const profilesStore = useProfilesStore()
 const staff = ref<Testimonial[]>([])
+const special_staff = ref<Testimonial[]>([])
+const roles_special = ['gerente']
 onMounted(() => {
   apiCluster
     .get('/api/iblog/v1/posts', {
       filter: '{"categoryId":1}',
     })
     .then((response: any) => {
-      staff.value = <Testimonial[]>response.data
+      staff.value = <Testimonial[]>(
+        response.data.filter(
+          (user: Testimonial) =>
+            !roles_special.includes(`${user.options.profession}`.toLowerCase()),
+        )
+      )
+      special_staff.value = <Testimonial[]>(
+        response.data.filter((user: Testimonial) =>
+          roles_special.includes(`${user.options.profession}`.toLowerCase()),
+        )
+      )
     })
 })
 function handleSelectUsers(user_id: number) {
@@ -46,7 +58,7 @@ function handleSelectUsers(user_id: number) {
                 class="tw-h-full"
                 :id="user.id"
                 :img="user?.mainImage.path"
-                role="role"
+                :role="user.options.profession"
               >
                 <template v-slot:name>
                   <div v-html="user.description"></div>
@@ -60,22 +72,24 @@ function handleSelectUsers(user_id: number) {
     </div>
   </div>
 
-  <div class="tw-container lg:tw-flex tw-gap-10 !tw-px-16">
-    <div class="tw-basis-1/2 tw-mb-4">
+  <div class="tw-container lg:tw-grid tw-grid-cols-2 tw-gap-10 !tw-px-16">
+    <div
+      class="tw-mb-4"
+      v-for="user in special_staff"
+      :key="`special-staff-card=${user.id}`"
+      @click="handleSelectUsers(user.id)"
+    >
       <CardGrandStaff
         class="tw-h-full"
-        :id="1"
+        :id="user.id"
+        :img="user?.mainImage.path"
         :name="'example'"
-        role="role"
-      ></CardGrandStaff>
-    </div>
-    <div class="tw-basis-1/2 tw-mb-4">
-      <CardGrandStaff
-        class="tw-h-full"
-        :id="1"
-        :name="'example'"
-        role="role"
-      ></CardGrandStaff>
+        :role="user.options.profession"
+      >
+        <template v-slot:name>
+          <div v-html="user.description"></div>
+        </template>
+      </CardGrandStaff>
     </div>
   </div>
 </template>

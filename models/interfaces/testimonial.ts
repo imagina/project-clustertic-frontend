@@ -103,6 +103,7 @@ export interface Testimonial {
   options: {
     masterRecord: string
     urlCoder: string
+    profession?: string
   }
   organizationId: null
   slug: string

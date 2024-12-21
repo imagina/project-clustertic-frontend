@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils'
 const props = defineProps<{
   class?: HTMLAttributes['class']
   id: number | string
-  name?: string
   role?: string
   img?: string
 }>()
@@ -37,7 +36,7 @@ const props = defineProps<{
         </div>
         <div class="lg:tw-pl-14 tw-py-5 tw-grow">
           <CardTitle class="tw-font-bold tw-text-xl tw-mb-1">
-            {{ name }}
+            <slot name="name"></slot>
           </CardTitle>
           <p
             v-if="role"

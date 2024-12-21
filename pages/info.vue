@@ -24,21 +24,61 @@ definePageMeta({
   layout: 'default',
 })
 
+const contactData = ref({
+  nombre: '',
+  apellido: '',
+  empresa: '',
+  teléfono: '',
+  'correo electrónico': '',
+  asunto: '',
+  mensaje: '',
+  agreement: false,
+})
+const contactFormKeys = ref<any>({
+  nombre: '',
+  apellido: '',
+  empresa: '',
+  teléfono: '',
+  'correo electrónico': '',
+  asunto: '',
+  mensaje: '',
+})
 const categoriesStore = useCategoryStore()
 onMounted(() => {
   categoriesStore.requestParentsCategories()
-})
-const contactData = ref({
-  firstName: '',
-  lastName: '',
-  company: '',
-  phone: '',
-  email: '',
-  lineService: '',
-  message: '',
-  agreement: false,
+  apiCluster.get('/api/iform/v4/forms/2').then((response: any) => {
+    const fields = response.data.fields
+    debugger
+    fields.forEach((field: any) => {
+      contactFormKeys.value[`${field.label}`.toLowerCase()] = field.name
+    })
+  })
 })
 const refForm = ref(null)
+
+function handleSubmit() {
+  const data: { [key: string]: string | number } = {
+    'attributes[form_id]': 2,
+  }
+  data[`attributes[${contactFormKeys.value['nombre']}]`] =
+    contactData.value.nombre
+  data[`attributes[${contactFormKeys.value['apellido']}]`] =
+    contactData.value.apellido
+  data[`attributes[${contactFormKeys.value['empresa']}]`] =
+    contactData.value.empresa
+  data[`attributes[${contactFormKeys.value['teléfono']}]`] =
+    contactData.value.teléfono
+  data[`attributes[${contactFormKeys.value['correo electrónico']}]`] =
+    contactData.value['correo electrónico']
+  data[`attributes[${contactFormKeys.value['asunto']}]`] =
+    contactData.value.asunto
+  data[`attributes[${contactFormKeys.value['mensaje']}]`] =
+    contactData.value.mensaje
+  debugger
+  apiCluster.post('api/iform/v4/leads', data).then((response: any) => {
+    console.log(response)
+  })
+}
 </script>
 
 <template>
@@ -262,7 +302,7 @@ const refForm = ref(null)
     <div class="tw-container tw-max-w-[1000px]">
       <q-form
         class="tw-pt-40 tw-bg-white tw-bg-opacity-80"
-        @submit.prevent.stop="() => {}"
+        @submit.prevent.stop="handleSubmit"
         ref="refForm"
       >
         <h2
@@ -282,7 +322,7 @@ const refForm = ref(null)
               rounded
               label="Nombre"
               class="tw-mb-3 tw-mt-2"
-              v-model="contactData.firstName"
+              v-model="contactData.nombre"
               fill-mask
               reverse-fill-mask
               :rules="[(val) => !!val || 'El valor es requerido']"
@@ -299,7 +339,7 @@ const refForm = ref(null)
               rounded
               label="Apellido"
               class="tw-mb-3 tw-mt-2"
-              v-model="contactData.lastName"
+              v-model="contactData.apellido"
             ></InputCPA>
           </div>
           <div>
@@ -313,22 +353,22 @@ const refForm = ref(null)
               rounded
               label="Empresa"
               class="tw-mb-3 tw-mt-2"
-              v-model="contactData.company"
+              v-model="contactData.empresa"
             ></InputCPA>
           </div>
           <div>
             <label
               class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
             >
-              Teléfono
+              teléfono
             </label>
             <InputCPA
               outlined
               rounded
-              label="Teléfono"
+              label="teléfono"
               class="tw-mb-3 tw-mt-2"
               mask="phone"
-              v-model="contactData.phone"
+              v-model="contactData.teléfono"
             ></InputCPA>
           </div>
         </div>
@@ -345,29 +385,29 @@ const refForm = ref(null)
             label="Correo electrónico"
             class="tw-mb-3 tw-mt-2"
             type="email"
-            v-model="contactData.email"
+            v-model="contactData['correo electrónico']"
           ></InputCPA>
         </div>
         <div>
           <label
-            class="tw-font-normal tw-my-3 tw-block tw-text-base tw-whitespace-nowrap"
+            class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
           >
-            Linea de servicio
+            Asunto
           </label>
-          <Select
-            class="tw-w-full"
+          <InputCPA
             outlined
             rounded
-            v-model="contactData.lineService"
-            :options="[]"
-          />
+            label="Asunto"
+            class="tw-mb-3 tw-mt-2"
+            v-model="contactData.asunto"
+          ></InputCPA>
         </div>
         <label class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-mt-3">
           Mensaje
         </label>
         <Textarea
           placeholder="Escriba aquí..."
-          v-model="contactData.message"
+          v-model="contactData.mensaje"
           class="tw-h-52"
         ></Textarea>
 
@@ -386,6 +426,7 @@ const refForm = ref(null)
           </label>
           <button
             type="submit"
+            :disabled="!contactData.agreement"
             class="tw-bg-primary tw-py-3 text-league-spartan tw-px-16 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl"
           >
             ¡Únete al Clúster!
