@@ -227,7 +227,7 @@ function handleSelectProposal(proposal: Proposal) {
                         fill-mask
                         reverse-fill-mask
                         :rules="[(val) => !!val || 'El valor es requerido']"
-                        :disable="!!(authStore.user?.id)"
+                        :disable="!(authStore.user?.id)"
                       >
                         <template v-slot:prepend>$</template>
                         <template v-slot:append>
@@ -265,7 +265,7 @@ function handleSelectProposal(proposal: Proposal) {
                         type="number"
                         class="tw-mb-3 tw-mt-2"
                         v-model="proposalData.days"
-                        :disable="!!(authStore.user?.id)"
+                        :disable="!(authStore.user?.id)"
                       >
                         <template v-slot:append>
                           <span class="tw-text-sm">Dias</span>
@@ -282,7 +282,7 @@ function handleSelectProposal(proposal: Proposal) {
                     placeholder="¿Qué le convierte en el mejor candidato para este proyecto?"
                     v-model="proposalData.description"
                     class="tw-h-28"
-                        :disable="!!(authStore.user?.id)"
+                        :disable="!(authStore.user?.id)"
                   ></Textarea>
 
                   <label
@@ -291,7 +291,7 @@ function handleSelectProposal(proposal: Proposal) {
                     Adjunta los archivos que desee
                   </label>
                   <Dropzone 
-                  :disable="!!(authStore.user?.id)" v-model="proposalData.files">
+                  :disable="!(authStore.user?.id)" v-model="proposalData.files">
                     <template v-slot:title>
                       <div
                         class="tw-flex tw-flex-col tw-items-center tw-justify-center"
@@ -326,7 +326,7 @@ function handleSelectProposal(proposal: Proposal) {
                   </Dropzone>
                   <div class="tw-flex tw-mt-10 tw-justify-end">
                     <Button
-                    :disabled="!!(authStore.user?.id)" 
+                    :disabled="!(authStore.user?.id)" 
                       type="submit"
                       class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
                     >

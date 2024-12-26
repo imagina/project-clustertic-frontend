@@ -57,25 +57,27 @@ onMounted(() => {
 const refForm = ref(null)
 
 function handleSubmit() {
-  const data: { [key: string]: string | number } = {
-    'attributes[form_id]': 2,
+  const data: { [key: string]:any } = {
+    "attributes":{
+      "form_id": 2
+    },
   }
-  data[`attributes[${contactFormKeys.value['nombre']}]`] =
+  data.attributes[`${contactFormKeys.value['nombre']}`] =
     contactData.value.nombre
-  data[`attributes[${contactFormKeys.value['apellido']}]`] =
+  data.attributes[`${contactFormKeys.value['apellido']}`] =
     contactData.value.apellido
-  data[`attributes[${contactFormKeys.value['empresa']}]`] =
+  data.attributes[`${contactFormKeys.value['empresa']}`] =
     contactData.value.empresa
-  data[`attributes[${contactFormKeys.value['teléfono']}]`] =
+  data.attributes[`${contactFormKeys.value['teléfono']}`] =
     contactData.value.teléfono
-  data[`attributes[${contactFormKeys.value['correo electrónico']}]`] =
+  data.attributes[`${contactFormKeys.value['correo electrónico']}`] =
     contactData.value['correo electrónico']
-  data[`attributes[${contactFormKeys.value['asunto']}]`] =
+  data.attributes[`${contactFormKeys.value['asunto']}`] =
     contactData.value.asunto
-  data[`attributes[${contactFormKeys.value['mensaje']}]`] =
+  data.attributes[`${contactFormKeys.value['mensaje']}`] =
     contactData.value.mensaje
   debugger
-  apiCluster.post('api/iform/v4/leads', data).then((response: any) => {
+  apiCluster.post('/api/iform/v4/leads', data).then((response: any) => {
     console.log(response)
   })
 }
@@ -360,7 +362,7 @@ function handleSubmit() {
             <label
               class="tw-font-normal tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
             >
-              teléfono
+              Teléfono
             </label>
             <InputCPA
               outlined

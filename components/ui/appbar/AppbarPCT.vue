@@ -20,7 +20,7 @@ function handleToggleMenu() {
   console.log(menu)
   debugger
   const target = menu.value as HTMLInputElement
-  target.classList.toggle('!tw-max-h-96')
+  target.classList.toggle('!tw-max-h-[48rem]')
 }
 </script>
 
@@ -140,13 +140,14 @@ function handleToggleMenu() {
                 <BellIcon :size="20" />
               </Button>
             </li>
-            <li class="tw-flex tw-items-center tw-justify-end tw-pl-2">
-              <TraductionSelector />
-            </li>
           </ul>
         </client-only>
       </nav>
-      <div class="tw-flex tw-grow-0 tw-basis-auto tw-items-center">
+      <div class="tw-flex tw-justify-center tw-grow-0 tw-basis-auto tw-items-center">
+        
+        <li class="tw-flex tw-items-center  md:tw-justify-end tw-pl-2">
+              <TraductionSelector />
+            </li>
         <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>
