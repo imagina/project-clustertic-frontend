@@ -39,7 +39,13 @@ async function loadClientId() {
       cancel_on_tap_outside: false,
       context: 'use',
     })
-  }, 500)
+
+    google.accounts.id.renderButton(
+      document.getElementById("googleButton"),
+      {theme: "outline", size: "large"}
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+  }, 800)
 }
 
 //SignIn method
@@ -64,13 +70,9 @@ async function login(response) {
 </script>
 
 <template>
-  <Button
+  <div
     v-if="clientIdGoogle"
-    @click="signIn()"
-    type="button"
-    class="!tw-rounded-[100%] tw-w-14 tw-h-14 tw-mr-5"
-    :loading="state.loading"
+    id="googleButton"
   >
-    <GoogleSVG filled class="tw-text-2xl !tw-h-auto !tw-m-0" />
-  </Button>
+  </div>
 </template>
