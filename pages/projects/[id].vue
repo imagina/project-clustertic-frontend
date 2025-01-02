@@ -201,137 +201,139 @@ function handleSelectProposal(proposal: Proposal) {
                 <CardTitle>Haga una oferta para este proyecto</CardTitle>
               </CardHeader>
               <CardContent class="tw-px-6 tw-pb-10">
-                <q-form @submit.prevent.stop="sendProposal" ref="refForm">
-                  <p class=" tw-text-base tw-font-normal tw-mb-10">
-                    Podrás editar tu oferta hasta que el proyecto sea adjudicado
-                    a alguien.
-                  </p>
-                  <div class="tw-flex tw-flex-wrap">
-                    <div
-                      class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 md:tw-mr-5  !tw-mb-10 md:!tw-mb-0 "
+                <client-only>
+                  <q-form @submit.prevent.stop="sendProposal" ref="refForm">
+                    <p class=" tw-text-base tw-font-normal tw-mb-10">
+                      Podrás editar tu oferta hasta que el proyecto sea adjudicado
+                      a alguien.
+                    </p>
+                    <div class="tw-flex tw-flex-wrap">
+                      <div
+                        class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 md:tw-mr-5  !tw-mb-10 md:!tw-mb-0 "
+                      >
+                        <label
+                          class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base"
+                        >
+                          Monto de la oferta*
+                        </label>
+                        <InputCPA
+                          outlined
+                          type="number"
+                          size="sm"
+                          class="tw-mb-3 tw-mt-2"
+                          v-model="proposalData.amount"
+                          mask="##0.00"
+                          fill-mask
+                          reverse-fill-mask
+                          :rules="[(val) => !!val || 'El valor es requerido']"
+                          :disable="!(authStore.user?.id)"
+                        >
+                          <template v-slot:prepend>$</template>
+                          <template v-slot:append>
+                            <span class="tw-text-sm">
+                              {{
+                                project.options?.currency ?? 'COP'
+                              }}
+                            </span>
+                          </template>
+                          <template v-slot:hint>
+                            <p
+                              class="tw-text-xs lg:tw-text-sm tw-text-black tw-whitespace-nowrap"
+                            >
+                              Pagado a usted:<br class="md:tw-hidden"/> ${{ proposalData.amount }} - ${{
+                                ((proposalData.amount ?? 0) * 0.05).toFixed(2)
+                              }}
+                              tarifa = ${{
+                                ((proposalData.amount ?? 0) * 0.95).toFixed(2)
+                              }}
+                            </p>
+                          </template>
+                        </InputCPA>
+                      </div>
+                      <div
+                        class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 tw-mr-5"
+                      >
+                        <label
+                          class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
+                        >
+                          Este proyecto se entregará en*
+                        </label>
+                        <InputCPA
+                          outlined
+                          size="sm"
+                          type="number"
+                          class="tw-mb-3 tw-mt-2"
+                          v-model="proposalData.days"
+                          :disable="!(authStore.user?.id)"
+                        >
+                          <template v-slot:append>
+                            <span class="tw-text-sm">Dias</span>
+                          </template>
+                        </InputCPA>
+                      </div>
+                    </div>
+                    <label
+                      class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-mt-10"
                     >
-                      <label
-                        class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base"
-                      >
-                        Monto de la oferta*
-                      </label>
-                      <InputCPA
-                        outlined
-                        type="number"
-                        size="sm"
-                        class="tw-mb-3 tw-mt-2"
-                        v-model="proposalData.amount"
-                        mask="##0.00"
-                        fill-mask
-                        reverse-fill-mask
-                        :rules="[(val) => !!val || 'El valor es requerido']"
-                        :disable="!(authStore.user?.id)"
-                      >
-                        <template v-slot:prepend>$</template>
-                        <template v-slot:append>
-                          <span class="tw-text-sm">
+                      Describe tu propuesta (mínimo 100 caracteres)*
+                    </label>
+                    <Textarea
+                      placeholder="¿Qué le convierte en el mejor candidato para este proyecto?"
+                      v-model="proposalData.description"
+                      class="tw-h-28"
+                          :disable="!(authStore.user?.id)"
+                    ></Textarea>
+  
+                    <label
+                      class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-mt-10"
+                    >
+                      Adjunta los archivos que desee
+                    </label>
+                    <Dropzone 
+                    :disable="!(authStore.user?.id)" v-model="proposalData.files">
+                      <template v-slot:title>
+                        <div
+                          class="tw-flex tw-flex-col tw-items-center tw-justify-center"
+                        >
+                          <Paperclip :size="50" class="tw-mb-3" />
+                          <p class="tw-text-base tw-mb-3">
                             {{
-                              project.options?.currency ?? 'COP'
-                            }}
-                          </span>
-                        </template>
-                        <template v-slot:hint>
-                          <p
-                            class="tw-text-xs lg:tw-text-sm tw-text-black tw-whitespace-nowrap"
-                          >
-                            Pagado a usted:<br class="md:tw-hidden"/> ${{ proposalData.amount }} - ${{
-                              ((proposalData.amount ?? 0) * 0.05).toFixed(2)
-                            }}
-                            tarifa = ${{
-                              ((proposalData.amount ?? 0) * 0.95).toFixed(2)
+                              proposalData.files
+                                ? Helper.tLang('projects.create.form.files.empty.title')
+                                : Helper.tLang('projects.create.form.files.loadedMsg')
                             }}
                           </p>
-                        </template>
-                      </InputCPA>
-                    </div>
-                    <div
-                      class="tw-basis-full sm:tw-basis-1/2 md:tw-basis-1/3 xl:tw-basis-3/12 tw-mr-5"
-                    >
-                      <label
-                        class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-whitespace-nowrap"
-                      >
-                        Este proyecto se entregará en*
-                      </label>
-                      <InputCPA
-                        outlined
-                        size="sm"
-                        type="number"
-                        class="tw-mb-3 tw-mt-2"
-                        v-model="proposalData.days"
-                        :disable="!(authStore.user?.id)"
-                      >
-                        <template v-slot:append>
-                          <span class="tw-text-sm">Dias</span>
-                        </template>
-                      </InputCPA>
-                    </div>
-                  </div>
-                  <label
-                    class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-mt-10"
-                  >
-                    Describe tu propuesta (mínimo 100 caracteres)*
-                  </label>
-                  <Textarea
-                    placeholder="¿Qué le convierte en el mejor candidato para este proyecto?"
-                    v-model="proposalData.description"
-                    class="tw-h-28"
-                        :disable="!(authStore.user?.id)"
-                  ></Textarea>
-
-                  <label
-                    class="tw-font-semibold tw-text-[.95rem] tw-mb-3 tw-block tw-text-base tw-mt-10"
-                  >
-                    Adjunta los archivos que desee
-                  </label>
-                  <Dropzone 
-                  :disable="!(authStore.user?.id)" v-model="proposalData.files">
-                    <template v-slot:title>
-                      <div
-                        class="tw-flex tw-flex-col tw-items-center tw-justify-center"
-                      >
-                        <Paperclip :size="50" class="tw-mb-3" />
-                        <p class="tw-text-base tw-mb-3">
-                          {{
-                            proposalData.files
-                              ? Helper.tLang('projects.create.form.files.empty.title')
-                              : Helper.tLang('projects.create.form.files.loadedMsg')
-                          }}
-                        </p>
-                      </div>
-                    </template>
-                    <template v-slot:subtitle>
-                      <p
-                        v-if="proposalData.files"
-                        class="tw-text-xs tw-text-center"
-                      >
-                        <span
-                          class="tw-mr-2"
-                          v-for="(file, index) in proposalData.files"
-                          :key="index"
+                        </div>
+                      </template>
+                      <template v-slot:subtitle>
+                        <p
+                          v-if="proposalData.files"
+                          class="tw-text-xs tw-text-center"
                         >
-                          {{ file.name }}
-                        </span>
-                      </p>
-                      <p v-else class="tw-text-xs tw-text-center">
-                        {{ Helper.tLang('projects.create.form.files.empty.description') }}
-                      </p>
-                    </template>
-                  </Dropzone>
-                  <div class="tw-flex tw-mt-10 tw-justify-end">
-                    <Button
-                    :disabled="!(authStore.user?.id)" 
-                      type="submit"
-                      class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
-                    >
-                      Enviar propuesta
-                    </Button>
-                  </div>
-                </q-form>
+                          <span
+                            class="tw-mr-2"
+                            v-for="(file, index) in proposalData.files"
+                            :key="index"
+                          >
+                            {{ file.name }}
+                          </span>
+                        </p>
+                        <p v-else class="tw-text-xs tw-text-center">
+                          {{ Helper.tLang('projects.create.form.files.empty.description') }}
+                        </p>
+                      </template>
+                    </Dropzone>
+                    <div class="tw-flex tw-mt-10 tw-justify-end">
+                      <Button
+                      :disabled="!(authStore.user?.id)" 
+                        type="submit"
+                        class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
+                      >
+                        Enviar propuesta
+                      </Button>
+                    </div>
+                  </q-form>
+                </client-only>
               </CardContent>
             </Card>
           </q-tab-panel>
@@ -413,19 +415,19 @@ function handleSelectProposal(proposal: Proposal) {
             Verificación del cliente
           </h4>
 
-          <div class="tw-flex tw-mb-4">
+          <div v-if="project.user?.extraFields?.companyName?.value" class="tw-flex tw-mb-4">
             <IdCardIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>{{ project.user?.extraFields?.companyName.value }}</p>
+            <p>{{ project.user?.extraFields?.companyName?.value }}</p>
           </div>
-          <div class="tw-flex tw-mb-4">
+          <div v-if="project.user?.extraFields?.place?.value" class="tw-flex tw-mb-4">
             <ShieldCheckIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>{{ project.user?.extraFields?.place.value }}</p>
+            <p>{{ project.user?.extraFields?.place?.value }}</p>
           </div>
           <!-- <div class="tw-flex tw-mb-4">
             <WalletIcon
@@ -448,12 +450,12 @@ function handleSelectProposal(proposal: Proposal) {
             />
             <p>{{ project.user?.firstName + ' ' + project.user?.lastName }}</p>
           </div>
-          <div class="tw-flex tw-mb-4">
+          <div v-if="project.user?.extraFields?.phone?.value" class="tw-flex tw-mb-4">
             <PhoneIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>{{ project.user?.extraFields?.phone.value }}</p>
+            <p>{{ project.user?.extraFields?.phone?.value }}</p>
           </div>
         </div>
       </aside>

@@ -132,11 +132,11 @@ function searchCategories(query?: string) {
           </div>
         </q-form>
 
-        <div class="tw-mb-5 tw-flex tw-items-center">
+        <div class="tw-mb-4 tw-mt-3 tw-flex tw-items-center">
           <label
             class="tw-leading-none tw-text-lg tw-font-bold tw-h-min tw-flex-1"
           >
-            Skills
+            Habilidades
           </label>
           <Button
             variant="ghost"
@@ -152,11 +152,11 @@ function searchCategories(query?: string) {
           </Button>
         </div>
 
-        <div class="filter-skills tw-mb-2">
+        <div class="filter-skills tw-mb-4">
           <CompassIcon class="tw-w-4 tw-text-primary tw-mr-3" />
           <input
             @input="handleEndWrite"
-            placeholder="Search skills"
+            placeholder="Buscar habilidad"
             v-model="filters.searchSkills"
           />
         </div>
