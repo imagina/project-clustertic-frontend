@@ -27,7 +27,14 @@ const daysSince = computed(() => {
   <slot name="before"></slot>
 </template> -->
 <template>
-  <Card :class="cn(props.class, 'tw-pt-4 tw-pb-1 tw-px-6 !tw-rounded-xl')">
+  <Card
+    :class="
+      cn(
+        props.class,
+        'tw-pt-4 tw-pb-1 tw-px-6 !tw-rounded-xl hover:tw-bg-gray-100 tw-transition-colors',
+      )
+    "
+  >
     <CardHeader>
       <CardTitle class="tw-font-bold"><slot name="title" /></CardTitle>
       <p v-if="$slots.subtitle" class="tw-font-semibold tw-text-sm tw-mt-2">

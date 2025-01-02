@@ -45,6 +45,14 @@ const show_modal_addSkill = ref(false)
 onMounted(() => {
   auth.requestFullUser()
 })
+
+function handleCopyLink() {
+  const url = window.location.href
+  navigator.clipboard.writeText(url)
+  Notify.create({
+    message: 'Link copiado al portapapeles',
+  })
+}
 </script>
 
 <template>
@@ -100,6 +108,7 @@ onMounted(() => {
           type="button"
           variant="outline"
           class="tw-border-none profile-btn"
+          @click="handleCopyLink"
         >
           <ShareSVG filled class="tw-text-xl" />
         </Button>

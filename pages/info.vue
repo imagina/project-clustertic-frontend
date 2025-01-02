@@ -57,9 +57,9 @@ onMounted(() => {
 const refForm = ref(null)
 
 function handleSubmit() {
-  const data: { [key: string]:any } = {
-    "attributes":{
-      "form_id": 2
+  const data: { [key: string]: any } = {
+    attributes: {
+      form_id: 2,
     },
   }
   data.attributes[`${contactFormKeys.value['nombre']}`] =

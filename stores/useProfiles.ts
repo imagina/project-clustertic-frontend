@@ -49,8 +49,11 @@ export const useProfilesStore = defineStore('profiles', {
     },
   },
   actions: {
-    setFilters(filters: {}) {},
+    setFilters(filters: { skills?: string[] }) {
+      if (filters.skills) this.filters.skills = filters.skills
+    },
     async get(page: number, take: number = 10) {
+      debugger
       // if (this.pagination.currentPage === page && !force) return
       try {
         this.loading = true

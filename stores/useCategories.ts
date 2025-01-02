@@ -81,7 +81,7 @@ export const useCategoryStore = defineStore('categories', {
       }
     },
 
-    async viewDetails(id: number) {
+    async getById(id: number) {
       try {
         this.loading = true
 
@@ -96,12 +96,21 @@ export const useCategoryStore = defineStore('categories', {
           }),
         })
         this.selected = response.data[0]
-        Helper.redirectTo(`/categories/${id}`)
       } catch (error) {
         console.error(error)
         throw error
       } finally {
         this.loading = false
+      }
+    },
+
+    async viewDetails(id: number) {
+      try {
+        this.getById(id)
+        Helper.redirectTo(`/categories/${id}`)
+      } catch (error) {
+        console.error(error)
+        throw error
       }
     },
   },

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DollarSignIcon, CompassIcon, XIcon } from 'lucide-vue-next'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
+import type { ProjectTag } from '~/models/interfaces/projects'
 import { useCategoryStore } from '~/stores/useCategories'
 
 definePageMeta({
@@ -20,7 +21,7 @@ const filters = reactive<{
   minPrice: string
   maxPrice: string
   searchSkills: string
-  skills: number[]
+  skills: ProjectTag[]
 }>({
   minPrice: '0',
   maxPrice: '100000000',
@@ -55,7 +56,7 @@ async function filter() {
 
       minPrice: parseInt(filters.minPrice),
       maxPrice: parseInt(filters.maxPrice),
-      categories: filters.skills,
+      categories: filters.skills.map((skill) => skill.id),
     })
     projectsStore.get(1)
   } catch (erro) {
@@ -66,8 +67,8 @@ async function filter() {
 function handleSelectProject(id: number) {
   projectsStore.viewDetails(id)
 }
-function handleToggleSkill(idSkill: number) {
-  filters.skills = Helper.toggleItem(filters.skills, idSkill)
+function handleToggleSkill(skill: ProjectTag) {
+  filters.skills = Helper.toggleItem(filters.skills, skill, 'id')
 }
 function handleEndWrite() {
   clearTimeout(debounceTimeout)
@@ -160,14 +161,36 @@ function searchCategories(query?: string) {
           />
         </div>
         <ul>
-          <li
-            v-for="category in categoryStore.categories"
-            class="tw-flex tw-items-center tw-mb-2"
-            @click="handleToggleSkill(category.id)"
+          <template
+            v-for="category in filters.skills"
+            :key="`category-selected-${category.id}`"
           >
-            <Checkbox :checked="filters.skills.includes(category.id)" />
-            <label class="tw-ml-2">{{ category.title }}</label>
-          </li>
+            <li
+              v-if="
+                filters.skills.map((skill) => skill.id).includes(category.id)
+              "
+              class="tw-flex tw-items-center tw-mb-2"
+              @click="handleToggleSkill(category)"
+            >
+              <Checkbox :checked="true" />
+              <label class="tw-ml-2">{{ category.title }}</label>
+            </li>
+          </template>
+          <template
+            v-for="category in categoryStore.categories"
+            :key="`category-${category.id}`"
+          >
+            <li
+              v-if="
+                !filters.skills.map((skill) => skill.id).includes(category.id)
+              "
+              class="tw-flex tw-items-center tw-mb-2"
+              @click="handleToggleSkill(category)"
+            >
+              <Checkbox :checked="false" />
+              <label class="tw-ml-2">{{ category.title }}</label>
+            </li>
+          </template>
         </ul>
       </div>
     </aside>

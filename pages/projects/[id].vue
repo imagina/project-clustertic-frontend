@@ -36,10 +36,8 @@ const isMyProject = computed<boolean>(
 
 const memberSince = computed<Date>(() => {
   if (!projectsStore.selected?.user || !projectsStore.selected.user?.createdAt)
-    return new Date()
-  return typeof projectsStore.selected.user?.createdAt == typeof ''
-    ? Helper.parseStringToDate(<string>projectsStore.selected.user?.createdAt)
-    : <Date>projectsStore.selected.user?.createdAt
+  return new Date()
+  return Helper.parseStringToDate(<string>projectsStore.selected.user?.createdAt)
 })
 
 const proposalData = reactive<{
@@ -179,7 +177,7 @@ function handleSelectProposal(proposal: Proposal) {
                 <CardTitle>Detalles de proyecto</CardTitle>
               </CardHeader>
               <CardContent class="tw-px-6 tw-pb-10">
-                <p class="text-h6 tw-text-base tw-font-light">{{ project.description }}</p>
+                <p class=" tw-text-base tw-font-normal">{{ project.description }}</p>
 
                 <CardTitle class="tw-mt-10 tw-mb-7">
                   Habilidades necesarias
@@ -200,11 +198,11 @@ function handleSelectProposal(proposal: Proposal) {
             </Card>
             <Card class="tw-mt-10">
               <CardHeader>
-                <CardTitle>Detalles de proyecto</CardTitle>
+                <CardTitle>Haga una oferta para este proyecto</CardTitle>
               </CardHeader>
               <CardContent class="tw-px-6 tw-pb-10">
                 <q-form @submit.prevent.stop="sendProposal" ref="refForm">
-                  <p class="text-h6 tw-text-base tw-font-light tw-mb-10">
+                  <p class=" tw-text-base tw-font-normal tw-mb-10">
                     Podrás editar tu oferta hasta que el proyecto sea adjudicado
                     a alguien.
                   </p>
@@ -420,42 +418,42 @@ function handleSelectProposal(proposal: Proposal) {
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>xxx-xxx</p>
+            <p>{{ project.user?.extraFields?.companyName.value }}</p>
           </div>
           <div class="tw-flex tw-mb-4">
             <ShieldCheckIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>xxx-xxx</p>
+            <p>{{ project.user?.extraFields?.place.value }}</p>
           </div>
-          <div class="tw-flex tw-mb-4">
+          <!-- <div class="tw-flex tw-mb-4">
             <WalletIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
             <p>xxx-xxx</p>
-          </div>
+          </div> -->
           <div class="tw-flex tw-mb-4">
             <MailCheckIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>xxx-xxx</p>
+            <p>{{ project.user?.email }}</p>
           </div>
           <div class="tw-flex tw-mb-4">
             <UserCheck2Icon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>xxx-xxx</p>
+            <p>{{ project.user?.firstName + ' ' + project.user?.lastName }}</p>
           </div>
           <div class="tw-flex tw-mb-4">
             <PhoneIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
-            <p>xxx-xxx</p>
+            <p>{{ project.user?.extraFields?.phone.value }}</p>
           </div>
         </div>
       </aside>

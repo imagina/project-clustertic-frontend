@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const slide = ref(1)
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-vue-next'
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 const categoriesStore = useCategoryStore()
@@ -18,6 +17,11 @@ onMounted(() => {
 })
 
 const category = computed(() => categoriesStore.selected)
+
+function handleSelectCategory(category: any) {
+  debugger
+  Helper.redirectTo(`/companies/?skill=${category.title}`)
+}
 </script>
 
 <template>
@@ -47,14 +51,18 @@ const category = computed(() => categoriesStore.selected)
         <ul
           class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 tw-gap-3"
         >
-          <li class="tw-flex tw-text-sm md:tw-text-base">
+          <li
+            @click="handleSelectCategory(category)"
+            class="tw-flex tw-text-sm md:tw-text-base tw-cursor-pointer hover:tw-underline"
+          >
             <span><ChevronRightIcon class="tw-text-sky-600" :size="25" /></span>
             {{ category?.title }}
           </li>
           <li
             v-for="subCategory in category?.children"
+            @click="handleSelectCategory(subCategory)"
             :key="`sub-sub-category-${subCategory.id}`"
-            class="tw-flex tw-text-sm md:tw-text-base"
+            class="tw-flex tw-text-sm md:tw-text-base tw-cursor-pointer hover:tw-underline"
           >
             <span><ChevronRightIcon class="tw-text-sky-600" :size="25" /></span>
             {{ subCategory.title }}

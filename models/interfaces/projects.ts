@@ -175,6 +175,7 @@ export interface UserInfo {
   updatedAt: Date | string
   updatedBy: number
   userName: null
+  extraFields?: any
 }
 export interface MediaData {
   id: number

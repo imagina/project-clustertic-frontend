@@ -83,14 +83,14 @@ onMounted(() => {
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Términos</p>
               <a
-                href="/DataProcessingPolicy"
+                href="/data_processing_policy"
                 target="_blank"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Política de Tratamiento de Datos
               </a>
               <a
-                href="/TermsAndConditions"
+                href="/terms_and_conditions"
                 target="_blank"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >

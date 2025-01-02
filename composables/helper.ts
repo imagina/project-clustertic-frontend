@@ -334,7 +334,7 @@ export const Helper = {
       else
         return (
           (<Record<string, any>>listItem)[searchField] ===
-          (<Record<string, any>>listItem)[searchField]
+          (<Record<string, any>>item)[searchField]
         )
     })
     if (itemIndex >= 0) {

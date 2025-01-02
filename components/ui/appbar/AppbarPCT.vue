@@ -143,11 +143,12 @@ function handleToggleMenu() {
           </ul>
         </client-only>
       </nav>
-      <div class="tw-flex tw-justify-center tw-grow-0 tw-basis-auto tw-items-center">
-        
-        <li class="tw-flex tw-items-center  md:tw-justify-end tw-pl-2">
-              <TraductionSelector />
-            </li>
+      <div
+        class="tw-flex tw-justify-center tw-grow-0 tw-basis-auto tw-items-center"
+      >
+        <li class="tw-flex tw-items-center md:tw-justify-end tw-pl-2">
+          <TraductionSelector />
+        </li>
         <!-- <select class="tw-bg-transparent tw-border-0 tw-p-2" v-model="locale">
           <option value="en">EN</option>
           <option value="es">ES</option>

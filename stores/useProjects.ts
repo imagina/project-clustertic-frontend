@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Project, Proposal } from '~/models/interfaces/projects'
+import type { Project, Proposal, UserInfo } from '~/models/interfaces/projects'
 import type { ProjectsState } from '~/models/interfaces/stores'
 import type {
   NewProjectFormValue,
@@ -138,7 +138,7 @@ export const useProjectsStore = defineStore('projects', {
         const projectResponse: any = await apiCluster.get(
           `${apiRoutes.projects}/${id}`,
           {
-            include: 'categories,user,province,country,city',
+            include: 'categories,user.fields,province,country,city',
           },
         )
         const proposalResponse: any = await apiCluster.get(
@@ -153,7 +153,12 @@ export const useProjectsStore = defineStore('projects', {
           if (pro.creator) pro.creator = new User(pro.creator)
           return pro
         })
+        if (project.user) {
+          const user = new User(projectResponse.data.user)
+          project.user.extraFields = user.extraFields
+        }
         this.selected = project
+
         Helper.redirectTo(`/projects/${id}`)
       } catch (error) {
         console.error(error)

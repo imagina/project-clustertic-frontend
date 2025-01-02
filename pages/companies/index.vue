@@ -5,7 +5,6 @@ definePageMeta({
   layout: 'default',
 })
 
-const refForm: any = ref(null)
 const router = useRoute()
 const profilesStore = useProfilesStore()
 const page = computed(() => profilesStore.pagination.currentPage)
@@ -14,14 +13,8 @@ const totalPages = computed(() => profilesStore.pagination.lastPage)
 let debounceTimeout: any = null
 
 const filters = reactive<{
-  minPrice: string
-  maxPrice: string
-  searchSkills: string
-  skills: number[]
+  skills: string[]
 }>({
-  minPrice: '0',
-  maxPrice: '100000000',
-  searchSkills: '',
   skills: [],
 })
 
@@ -31,14 +24,14 @@ onMounted(() => {
 watch(
   () => router.query,
   (newQuery, oldQuery) => {
-    if (oldQuery['search'] !== newQuery['search']) handleRefreshPage()
+    if (oldQuery['skill'] !== newQuery['skill']) handleRefreshPage()
   },
 )
 
 function handleRefreshPage(page = 1) {
-  // profilesStore.setFilters({
-  //   search: router.query['search'] ? `${router.query['search']}` : '',
-  // })
+  profilesStore.setFilters({
+    skills: router.query['skill'] ? [`${router.query['skill']}`] : undefined,
+  })
   profilesStore.get(page, 12)
 }
 
@@ -56,9 +49,7 @@ function handleSelectUsers(user_id: number) {
         <CardTitle class="tw-font-extrabold">
           Resultados
           {{
-            router.query['search']
-              ? `que contengan "${router.query['search']}"`
-              : ``
+            router.query['skill'] ? ` sobre: "${router.query['skill']}"` : ``
           }}
           <span class="tw-font-normal tw-text-base tw-ml-5">
             Página {{ page }} de {{ totalPages }}

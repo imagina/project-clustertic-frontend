@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
-import ChangePassword from '~/pages/admin/changePassword.vue'
+import ChangePassword from '~/pages/admin/change_password.vue'
 import type { LoginResponse } from '~/models/interfaces/auth'
 import type { AuthState } from '~/models/interfaces/stores'
 import { boolean } from 'zod'
@@ -224,7 +224,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    /* change the password form admin/changePassword */
+    /* change the password form admin/change_password */
     async changePassword(dataForm: {
       password: string
       newPassword: string

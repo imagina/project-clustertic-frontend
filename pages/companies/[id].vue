@@ -43,6 +43,14 @@ onMounted(() => {
 onBeforeUnmount(() => {
   profilesStore.removeSelected()
 })
+
+function handleCopyLink() {
+  const url = window.location.href
+  navigator.clipboard.writeText(url)
+  Notify.create({
+    message: 'Link copiado al portapapeles',
+  })
+}
 </script>
 
 <template>
@@ -84,6 +92,7 @@ onBeforeUnmount(() => {
           type="button"
           variant="outline"
           class="tw-border-none profile-btn"
+          @click="handleCopyLink"
         >
           <ShareSVG filled class="tw-text-xl" />
         </Button>

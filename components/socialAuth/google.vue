@@ -40,11 +40,11 @@ async function loadClientId() {
       context: 'use',
     })
 
-    google.accounts.id.renderButton(
-      document.getElementById("googleButton"),
-      {theme: "outline", size: "large"}
-    );
-    google.accounts.id.prompt(); // also display the One Tap dialog
+    google.accounts.id.renderButton(document.getElementById('googleButton'), {
+      theme: 'outline',
+      size: 'large',
+    })
+    google.accounts.id.prompt() // also display the One Tap dialog
   }, 800)
 }
 
@@ -70,9 +70,5 @@ async function login(response) {
 </script>
 
 <template>
-  <div
-    v-if="clientIdGoogle"
-    id="googleButton"
-  >
-  </div>
+  <div v-if="clientIdGoogle" id="googleButton"></div>
 </template>
