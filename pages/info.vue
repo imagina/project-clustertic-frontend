@@ -79,6 +79,9 @@ function handleSubmit() {
   debugger
   apiCluster.post('/api/iform/v4/leads', data).then((response: any) => {
     console.log(response)
+    Notify.create({
+      message: 'Enviado exitosamente',
+    })
   })
 }
 </script>
