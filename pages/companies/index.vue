@@ -58,17 +58,15 @@ function handleSelectUsers(user_id: number) {
       </CardHeader>
     </Card>
     <ul class="profile-list">
-      <li
-        v-for="user in profilesStore.users"
-        :key="`user-card=${user.id}`"
-        @click="handleSelectUsers(user.id)"
-      >
+      <li v-for="user in profilesStore.users" :key="`user-card=${user.id}`">
         <CardSmallProfile
           class="tw-h-full"
           :id="user.id"
           :name="user?.extraFields?.companyName?.value ?? user.fullName"
+          :web="user?.socialMedia?.web"
           :img="user?.mediaFiles.profile.path ?? user?.mediumImage"
           location="xx, zz"
+          @view-profile="handleSelectUsers(user.id)"
         >
           <!-- number-jobs="x"
           price="0" -->

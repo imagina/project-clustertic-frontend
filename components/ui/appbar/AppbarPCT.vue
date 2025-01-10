@@ -12,12 +12,19 @@ import LogoSVG from '~/assets/svg/logo.svg'
 import type { UserData } from '~/models/interfaces/user'
 // const { locale } = useI18n()
 
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
 const authStore = useAuthStore()
 const menu = ref<HTMLInputElement | null>(null)
 const user = computed<UserData | null>(() => authStore.user)
 
+watch(route, (to, from) => {
+  const target = menu.value as HTMLInputElement
+  target.classList.remove('!tw-max-h-[48rem]')
+})
 function handleToggleMenu() {
-  console.log(menu)
   debugger
   const target = menu.value as HTMLInputElement
   target.classList.toggle('!tw-max-h-[48rem]')
@@ -31,20 +38,24 @@ function handleToggleMenu() {
   >
     <div class="md:tw-container md:tw-flex">
       <div class="tw-grow-0 tw-basis-auto">
-        <NuxtLink class="tw-flex tw-items-center" to="/">
-          <LogoSVG filled class="tw-text-primary tw-text-5xl" />
-          <div class="tw-ml-1">
-            <p class="tw-m-0 tw-leading-3 tw-text-xs">CLÚSTER</p>
-            <p class="tw-m-0 tw-leading-3 tw-text-xs">TECNOLÓGICO</p>
-            <p class="tw-m-0 tw-leading-3 tw-text-xs">DEL TOLIMA</p>
-          </div>
+        <div class="tw-flex tw-items-center">
+          <NuxtLink to="/">
+            <LogoSVG filled class="tw-text-primary tw-text-5xl" />
+          </NuxtLink>
+          <NuxtLink to="/">
+            <div class="tw-ml-1">
+              <p class="tw-m-0 tw-leading-3 tw-text-xs">CLÚSTER</p>
+              <p class="tw-m-0 tw-leading-3 tw-text-xs">TECNOLÓGICO</p>
+              <p class="tw-m-0 tw-leading-3 tw-text-xs">DEL TOLIMA</p>
+            </div>
+          </NuxtLink>
           <div class="tw-flex-grow"></div>
           <div class="md:tw-hidden">
             <button type="button" @click="handleToggleMenu">
               <MenuIcon />
             </button>
           </div>
-        </NuxtLink>
+        </div>
       </div>
 
       <nav

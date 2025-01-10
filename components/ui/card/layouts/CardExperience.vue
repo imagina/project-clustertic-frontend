@@ -25,7 +25,7 @@ const dateDiff = computed(() =>
 </script>
 
 <template>
-  <div class="tw-flex tw-gap-8 tw-p-4" :class="props.class">
+  <div class="tw-flex tw-flex-wrap tw-gap-8 tw-p-4" :class="props.class">
     <div
       class="tw-h-24 tw-w-24 tw-rounded-3xl tw-bg-secondary tw-text-primary tw-flex-none img-container"
     >
@@ -40,21 +40,21 @@ const dateDiff = computed(() =>
       ></div>
     </div>
     <div class="tw-flex-grow">
-      <p class="tw-text-lg tw-text-muted-custom tw-font-light">
+      <p class="tw-text-base md:tw-text-lg tw-text-muted-custom tw-font-light">
         <slot name="skills"></slot>
       </p>
       <div class="tw-flex tw-justify-between tw-mb-2">
-        <p class="tw-text-lg tw-text-black tw-font-semibold">
+        <p class="tw-text-base md:tw-text-lg tw-text-black tw-font-semibold">
           <slot name="title"></slot>
         </p>
-        <p class="tw-text-md tw-text-black tw-font-semibold">
+        <p class="tw-text-sm md:tw-text-md tw-text-black tw-font-semibold">
           <!-- TODO: colocar rango de inicio -->
           {{ dateInit }} - {{ dateEnd }}
         </p>
       </div>
-      <div class="tw-flex tw-justify-between tw-gap-40 tw-mb-3">
+      <div class="tw-flex tw-justify-between tw-gap-5 tw-mb-3">
         <p
-          class="tw-text-base tw-font-light tw-line-clamp-3"
+          class="tw-text-sm md:tw-text-base tw-font-light tw-line-clamp-3"
           style="color: hsla(213, 11%, 29%, 1)"
         >
           <slot name="description"></slot>

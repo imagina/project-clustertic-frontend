@@ -72,7 +72,7 @@ onMounted(() => {
 <style scoped>
 .categories-container {
   & > * {
-    @apply md:tw-border-r-2 tw-border-muted-light tw-px-6;
+    @apply md:tw-border-r-2 tw-border-muted-light md:tw-px-6;
   }
   & > *:nth-child(4n) {
     @apply tw-border-none;
@@ -86,7 +86,7 @@ onMounted(() => {
       @apply tw-px-3 tw-py-2 tw-border-r-2 tw-border-muted-foreground;
     }
     & > h4 {
-      @apply tw-font-medium tw-text-base  tw-text-start tw-whitespace-normal tw-pl-3;
+      @apply tw-font-medium tw-text-sm md:tw-text-base tw-text-start tw-whitespace-normal tw-pl-3;
     }
   }
 }

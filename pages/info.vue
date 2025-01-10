@@ -76,7 +76,7 @@ function handleSubmit() {
     contactData.value.asunto
   data.attributes[`${contactFormKeys.value['mensaje']}`] =
     contactData.value.mensaje
-  debugger
+
   apiCluster.post('/api/iform/v4/leads', data).then((response: any) => {
     console.log(response)
     Notify.create({
@@ -97,7 +97,7 @@ function handleSubmit() {
       <div class="tw-flex tw-justify-between tw-flex-col lg:tw-flex-row">
         <div class="tw-basis-5/12 tw-flex tw-flex-col tw-justify-center">
           <h1
-            class="tw-text-black tw-font-light tw-text-[30px] sm:tw-text-[45px] md:tw-text-[55px] tw-leading-tight tw-mb-12"
+            class="tw-text-black tw-font-light tw-text-[30px] sm:tw-text-[45px] md:tw-text-[55px] tw-leading-tight tw-mb-12 tw-mt-6"
           >
             Impulsando la
             <span class="tw-font-bold tw-block">Innovación Tecnológica</span>

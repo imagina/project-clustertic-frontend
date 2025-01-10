@@ -41,8 +41,10 @@ function handleSelectProposal() {
     @click="handleSelectProposal"
   >
     <div class="tw-p-5">
-      <div class="tw-flex tw-mb-10">
-        <div class="user-img tw-rounded tw-w-20 tw-h-20 tw-bg-secondary">
+      <div class="md:tw-flex tw-mb-10">
+        <div
+          class="user-img tw-mb-5 md:tw-mb-0 tw-flex-auto tw-flex-shrink-0 tw-flex-grow-0 tw-rounded tw-w-20 tw-h-20 tw-bg-secondary"
+        >
           <div
             :style="
               img
@@ -53,20 +55,20 @@ function handleSelectProposal() {
             "
           ></div>
         </div>
-        <div class="tw-pl-7 tw-grow">
-          <div class="tw-flex tw-mb-1">
-            <CardTitle class="tw-font-bold tw-text-xl">
+        <div class="md:tw-pl-7 tw-grow">
+          <div class="md:tw-flex tw-mb-1">
+            <CardTitle class="tw-font-bold tw-text-lg md:tw-text-xl">
               <slot name="name">Titulo de ejemplo</slot>
               <span class="tw-ml-3 tw-font-light tw-text-blue-500">
                 <slot name="username">@titulo_de_ejemplo</slot>
               </span>
             </CardTitle>
             <div class="tw-grow"></div>
-            <p class="tw-font-bold tw-text-xl tw-mb-0">
+            <p class="tw-font-bold tw-text-lg md:tw-text-xl tw-mb-0">
               ${{ props.amount }} USD
             </p>
           </div>
-          <div class="tw-flex tw-gap-3 tw-mb-1">
+          <div class="tw-flex tw-flex-wrap tw-gap-3 tw-mb-1">
             <div class="tw-flex">
               <RatingIndicator
                 starClass="tw-text-base tw-mr-1"
@@ -76,7 +78,7 @@ function handleSelectProposal() {
                 {{ props.rating?.toFixed(1) ?? '' }}
               </p>
             </div>
-            <div class="tw-flex">
+            <!-- <div class="tw-flex">
               <MessageSquareTextIcon class="comment-icon tw-mr-2" :size="20" />
               <p>50</p>
             </div>
@@ -97,7 +99,7 @@ function handleSelectProposal() {
             <div class="tw-flex">
               <FlagIcon class="flag-icon tw-mr-2" :size="20" />
               <p>50</p>
-            </div>
+            </div> -->
             <div class="tw-grow"></div>
             <p>En {{ props.deliveryDays }} Dia(s)</p>
           </div>

@@ -92,7 +92,7 @@ onMounted(() => {
           <div class="tw-relative">
             <DeskLandingSVG
               filled
-              class="tw-text-[10rem] sm:tw-text-[20rem] md:tw-text-[30rem] tw-mx-auto lg:tw-text-[36rem] !tw-my-0"
+              class="tw-text-[20rem] md:tw-text-[30rem] tw-mx-auto lg:tw-text-[36rem] !tw-my-0"
             />
             <div
               class="float-label tw-items-center tw-opacity-0 first add-shadow tw-top-[5px]"
