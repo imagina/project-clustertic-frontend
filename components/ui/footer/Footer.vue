@@ -107,25 +107,25 @@ onMounted(() => {
             <div class="tw-text-white tw-ml-3 tw-h-full">
               <p class="tw-mb-10 tw-text-sm tw-font-bold">Categorías</p>
               <NuxtLink
-                to="/categories"
+                :to="`/companies/?skill=Soluciones de infraestructura TI y Conectividad`"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Infraestructura TI y Conectividad
               </NuxtLink>
               <NuxtLink
-                to="/categories"
+                :to="`/companies/?skill=Transformación Digital y Desarrollo de Software`"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Transformación Digital y Desarrollo de Software
               </NuxtLink>
               <NuxtLink
-                to="/categories"
+                :to="`/companies/?skill=Producción de Contenidos y Marketing Digital`"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Producción de Contenidos y Marketing Digital
               </NuxtLink>
               <NuxtLink
-                to="/categories"
+                :to="`/companies/?skill=Videojuegos, Realidad Aumentada y virtual`"
                 class="tw-mb-3 tw-text-xs tw-font-extralight tw-block"
               >
                 Videojuegos, Realidad Aumentada y Virtual

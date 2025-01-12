@@ -122,13 +122,13 @@ function searchCategories(query?: string) {
           <div class="filter-money tw-mb-2">
             <DollarSignIcon class="tw-w-4 tw-mr-3" />
             <input outlined type="number" v-model="filters.minPrice" />
-            <p class="tw-mb-0">USD</p>
+            <!-- <p class="tw-mb-0">USD</p> -->
           </div>
           <label class="tw-text-xs tw-font-extralight">max</label>
           <div class="filter-money tw-mb-2">
             <DollarSignIcon class="tw-w-4 tw-mr-3" />
             <input outlined type="number" v-model="filters.maxPrice" />
-            <p class="tw-mb-0">USD</p>
+            <!-- <p class="tw-mb-0">USD</p> -->
           </div>
         </q-form>
 
@@ -225,7 +225,8 @@ function searchCategories(query?: string) {
           >
             <template v-slot:title>{{ project.title }}</template>
             <template v-slot:subtitle>
-              Presupuesto {{ project.minPrice }} - {{ project.maxPrice }}$
+              Presupuesto ${{ project.minPrice }} - ${{ project.maxPrice }}
+              {{ project.options?.currency || 'COP' }}
             </template>
             <template v-slot:description>
               {{ project.description }}

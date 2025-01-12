@@ -16,6 +16,7 @@ const props = defineProps<{
   id: number
   rating?: number
   amount?: number
+  currency?: string
   deliveryDays?: number
   selected?: boolean
   img?: string
@@ -65,7 +66,7 @@ function handleSelectProposal() {
             </CardTitle>
             <div class="tw-grow"></div>
             <p class="tw-font-bold tw-text-lg md:tw-text-xl tw-mb-0">
-              ${{ props.amount }} USD
+              ${{ props.amount }} {{ currency }}
             </p>
           </div>
           <div class="tw-flex tw-flex-wrap tw-gap-3 tw-mb-1">

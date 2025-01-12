@@ -25,7 +25,6 @@ watch(route, (to, from) => {
   target.classList.remove('!tw-max-h-[48rem]')
 })
 function handleToggleMenu() {
-  debugger
   const target = menu.value as HTMLInputElement
   target.classList.toggle('!tw-max-h-[48rem]')
 }
@@ -140,7 +139,8 @@ function handleToggleMenu() {
                 </Button>
               </NuxtLink>
             </li>
-            <li v-if="user">
+
+            <!-- <li v-if="user">
               <Button variant="ghost">
                 <MessageSquareIcon :size="20" />
               </Button>
@@ -150,7 +150,7 @@ function handleToggleMenu() {
               <Button variant="ghost">
                 <BellIcon :size="20" />
               </Button>
-            </li>
+            </li> -->
           </ul>
         </client-only>
       </nav>

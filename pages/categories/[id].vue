@@ -4,22 +4,21 @@ import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 const categoriesStore = useCategoryStore()
 const route = useRoute()
 
-onMounted(() => {
-  categoriesStore.requestParentsCategories()
-})
+// onMounted(() => {
+//   categoriesStore.requestParentsCategories()
+// })
 onMounted(() => {
   if (
     !categoriesStore.selected ||
     `${categoriesStore.selected.id}` !== `${route.params.id}`
   ) {
-    categoriesStore.viewDetails(parseInt(`${route.params.id}`))
+    categoriesStore.getById(parseInt(`${route.params.id}`))
   }
 })
 
 const category = computed(() => categoriesStore.selected)
 
 function handleSelectCategory(category: any) {
-  debugger
   Helper.redirectTo(`/companies/?skill=${category.title}`)
 }
 </script>

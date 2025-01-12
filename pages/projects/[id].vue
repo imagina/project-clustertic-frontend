@@ -348,6 +348,7 @@ function handleSelectProposal(proposal: Proposal) {
                 :id="proposal.id"
                 :delivery-days="proposal.deliveryDays"
                 :amount="proposal.amount"
+                :currency="project.options?.currency ?? 'COP'"
                 :img="proposal.creator?.mediaFiles.profile.path"
               >
                 <template v-slot:name>
@@ -391,13 +392,15 @@ function handleSelectProposal(proposal: Proposal) {
             />
             <p>{{ project.country?.name }}</p>
           </div>
+          <!-- 
           <div class="tw-flex tw-mb-4">
             <UserIcon
               class="tw-text-primary tw-inline-block tw-mr-3"
               :size="20"
             />
             <RatingIndicator starClass="tw-text-lg tw-mr-1" :rating="4" />
-          </div>
+          </div> 
+          -->
           <div class="tw-flex tw-mb-4">
             <Clock9Icon
               class="tw-text-primary tw-inline-block tw-mr-3"

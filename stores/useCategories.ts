@@ -106,8 +106,10 @@ export const useCategoryStore = defineStore('categories', {
 
     async viewDetails(id: number) {
       try {
-        this.getById(id)
-        Helper.redirectTo(`/categories/${id}`)
+        await this.getById(id)
+        if (this.selected?.children && this.selected.children?.length === 0)
+          Helper.redirectTo(`/companies/?skill=${this.selected.title}`)
+        else Helper.redirectTo(`/categories/${id}`)
       } catch (error) {
         console.error(error)
         throw error

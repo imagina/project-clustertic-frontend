@@ -48,12 +48,19 @@ onMounted(() => {
   categoriesStore.requestParentsCategories()
   apiCluster.get('/api/iform/v4/forms/2').then((response: any) => {
     const fields = response.data.fields
-    debugger
+
     fields.forEach((field: any) => {
       contactFormKeys.value[`${field.label}`.toLowerCase()] = field.name
     })
   })
 })
+
+function handleSelectCategory(category: any) {
+  Helper.redirectTo(`/companies/?skill=${category.title}`)
+}
+function handleSelectSubCategory(category: any) {
+  categoriesStore.viewDetails(parseInt(`${category.id}`))
+}
 const refForm = ref(null)
 
 function handleSubmit() {
@@ -195,7 +202,10 @@ function handleSubmit() {
           class="tw-flex tw-items-center tw-mb-4"
         >
           <div class="tw-h-full tw-w-full">
-            <div class="category-header">
+            <div
+              @click="handleSelectCategory(category)"
+              class="category-header tw-cursor-pointer"
+            >
               <span>
                 <SolarPanelSVG
                   v-if="category.id === 1"
@@ -219,13 +229,14 @@ function handleSubmit() {
               </h4>
             </div>
             <template v-if="category.children">
-              <NuxtLink
-                :to="`/categories/${subCategory.id}`"
+              <p
+                class="sub-category tw-cursor-pointer"
+                @click="handleSelectSubCategory(subCategory)"
                 v-for="subCategory in category.children"
                 :key="`sub-category-${subCategory.id}`"
               >
                 {{ subCategory.title }}
-              </NuxtLink>
+              </p>
             </template>
           </div>
         </div>
@@ -473,7 +484,7 @@ function handleSubmit() {
   & > *:nth-child(4n) {
     @apply tw-border-none;
   }
-  & a {
+  & .sub-category {
     @apply tw-mb-6 tw-text-xs tw-font-normal tw-block tw-w-full;
   }
   & .category-header {

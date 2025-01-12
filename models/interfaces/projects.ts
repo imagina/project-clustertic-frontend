@@ -69,7 +69,7 @@ export interface Project {
   url: string
   userId: number
   options?: {
-    currency: String
+    currency: string
   }
   user?: UserInfo
 }
