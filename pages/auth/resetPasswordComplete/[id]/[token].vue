@@ -52,7 +52,7 @@ async function reset() {
     <div
       class="tw-max-w-screen-xl tw-m-0 sm:tw-m-10 sm:tw-rounded-lg tw-flex tw-justify-center tw-flex-1"
     >
-      <div class="lg:tw-w-1/2 xl:tw-w-5/12 tw-p-6 sm:tw-p-12">
+      <div class="tw-p-6 sm:tw-p-12">
         <div class="tw-mt-12 tw-flex tw-flex-col tw-items-center">
           <div class="tw-mb-8">
             <img src="@/assets/svg/logo-green-text.svg" alt="" />
