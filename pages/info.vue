@@ -169,14 +169,18 @@ function handleSubmit() {
         </button>
       </div>
       <div class="tw-basis-3/12 lg:tw-basis-6/12">
-        <div
+        <!-- <div
           class="tw-w-full tw-max-w-[880px] tw-pb-[56.25%] tw-rounded-3xl tw-bg-black tw-relative"
         >
           <PlayVideoSVG
             Filled
             class="tw-text-6xl md:tw-text-9xl lg:tw-text-6xl xl:tw-text-9xl tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
           />
-        </div>
+        </div> -->
+        <img
+          class="tw-w-full tw-max-w-[880px] tw-rounded-3xl"
+          src="https://s3.wasabisys.com/assets.cluster/assets/media/assets/video-cap.jpg"
+        />
       </div>
     </div>
   </div>
@@ -184,7 +188,7 @@ function handleSubmit() {
   <div class="tw-bg-black tw-py-20">
     <div class="tw-container">
       <h2
-        class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
+        class="tw-text-white tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-12 lg:tw-pl-24"
       >
         Lineas de servicio
         <ArrowSVG
@@ -250,7 +254,7 @@ function handleSubmit() {
   <div class="tw-bg-white tw-pt-20">
     <div class="tw-container">
       <h2
-        class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative lg:tw-pl-24"
+        class="tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative tw-pl-12 lg:tw-pl-24"
       >
         Beneficios de Ser Parte del Clúster
         <ArrowSVG
@@ -317,7 +321,7 @@ function handleSubmit() {
 
     <div class="tw-container tw-max-w-[1000px]">
       <q-form
-        class="tw-pt-40 tw-bg-white tw-bg-opacity-80"
+        class="tw-p-4 tw-mt-40 tw-bg-white tw-bg-opacity-80"
         @submit.prevent.stop="handleSubmit"
         ref="refForm"
       >
@@ -443,7 +447,7 @@ function handleSubmit() {
           <button
             type="submit"
             :disabled="!contactData.agreement"
-            class="tw-bg-primary tw-py-3 text-league-spartan tw-px-16 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl"
+            class="tw-bg-primary tw-py-3 text-league-spartan tw-px-8 md:tw-px-16 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl tw-mt-4"
           >
             ¡Únete al Clúster!
           </button>

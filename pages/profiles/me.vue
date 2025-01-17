@@ -73,7 +73,7 @@ function handleCopyLink() {
             @click="show_modal_editPhoto = true"
             type="button"
             variant="outline"
-            class="tw-border-none profile-btn !tw-p-3"
+            class="tw-mx-1 tw-border-none profile-btn !tw-p-3"
           >
             <SquarePenIcon :size="20" />
           </Button>
@@ -101,14 +101,14 @@ function handleCopyLink() {
         type="button"
         variant="outline"
         @click="auth.logout"
-        class="tw-border-none profile-btn"
+        class="tw-mx-1 tw-border-none profile-btn"
       >
         Cerrar sesión
       </Button>
       <Button
         type="button"
         variant="outline"
-        class="tw-border-none profile-btn"
+        class="tw-mx-1 tw-border-none profile-btn"
         @click="handleCopyLink"
       >
         <ShareSVG filled class="tw-text-xl" />
@@ -117,7 +117,7 @@ function handleCopyLink() {
         @click="show_modal_editSkills = true"
         type="button"
         variant="outline"
-        class="tw-border-none profile-btn"
+        class="tw-mx-1 tw-border-none profile-btn"
       >
         <SquarePenIcon :size="15" class="tw-mr-2" />
         Editar
@@ -125,22 +125,26 @@ function handleCopyLink() {
     </div>
     <div class="md:tw-flex tw-gap-8 tw-mt-10">
       <div class="tw-basis-full lg:tw-flex-1 tw-overflow-hidden tw-pr-4">
-        <h4 class="tw-text-xl tw-text-muted-custom tw-mb-5">Descripción</h4>
-        <p class="tw-text-md sm:tw-text-lg tw-mb-10">
+        <h4 class="tw-text-base lg:tw-text-xl tw-text-muted-custom tw-mb-5">
+          Descripción
+        </h4>
+        <p class="tw-text-sm sm:tw-text-lg tw-mb-10">
           {{ description }}
         </p>
 
-        <div class="tw-flex tw-justify-between">
-          <h4 class="tw-text-xl tw-text-muted-custom tw-mb-8">Habilidades</h4>
+        <div class="tw-flex tw-flex-wrap tw-justify-between tw-mb-8">
+          <h4 class="tw-text-base lg:tw-text-xl tw-text-muted-custom">
+            Habilidades
+          </h4>
 
           <Button
             @click="show_modal_addSkill = true"
             type="button"
             variant="outline"
-            class="tw-border-none profile-btn"
+            class="tw-mx-1 tw-border-none profile-btn"
           >
-            <SquarePenIcon :size="15" class="tw-mr-2" />
-            Modificar habilidades
+            <SquarePenIcon :size="15" class="md:tw-mr-2" />
+            <span class="tw-hidden md:tw-block">Modificar habilidades</span>
           </Button>
         </div>
         <ul class="tw-flex tw-gap-4 tw-flex-wrap">
@@ -159,7 +163,7 @@ function handleCopyLink() {
             <Button
               type="button"
               variant="outline"
-              class="tw-border-none profile-btn"
+              class="tw-mx-1 tw-border-none profile-btn"
             >
               <SquarePenIcon :size="15" class="tw-mr-2" />
               Administrar portafolio
@@ -235,17 +239,19 @@ function handleCopyLink() {
           </div> -->
 
         <div class="tw-flex tw-mt-32 tw-mb-10">
-          <h4 class="tw-font-bold tw-text-4xl">Experiencia</h4>
+          <h4 class="tw-font-bold tw-text-xl md:tw-text-2xl lg:tw-text-4xl">
+            Experiencia
+          </h4>
           <div class="tw-grow"></div>
 
           <Button
             @click="show_modal_addExperience = true"
             type="button"
             variant="outline"
-            class="tw-border-none profile-btn"
+            class="tw-mx-1 tw-border-none profile-btn"
           >
-            <SquarePenIcon :size="15" class="tw-mr-2" />
-            Agregar experiencia
+            <SquarePenIcon :size="15" class="md:tw-mr-2" />
+            <span class="tw-hidden md:tw-block">Agregar experiencia</span>
           </Button>
         </div>
         <div>

@@ -106,7 +106,7 @@ async function handleSaveInfo() {
           label="Lugar"
           required
         ></InputCPA>
-        <div class="tw-grid tw-grid-cols-2 tw-gap-4">
+        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
           <div>
             <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">
               Fecha de inicio*
