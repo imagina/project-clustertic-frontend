@@ -43,15 +43,29 @@ const contactFormKeys = ref<any>({
   asunto: '',
   mensaje: '',
 })
+const what_ist_tolima_section = ref<{
+  title: string
+  description: string
+  img: string
+} | null>(null)
 const categoriesStore = useCategoryStore()
 onMounted(() => {
   categoriesStore.requestParentsCategories()
   apiCluster.get('/api/iform/v4/forms/2').then((response: any) => {
     const fields = response.data.fields
-
     fields.forEach((field: any) => {
       contactFormKeys.value[`${field.label}`.toLowerCase()] = field.name
     })
+  })
+
+  apiCluster.get('/api/iblog/v1/posts/8').then((response: any) => {
+    what_ist_tolima_section.value = {
+      title: response.data.title,
+      description: response.data.description,
+      img:
+        response?.data?.mainImage?.path ||
+        'https://s3.wasabisys.com/assets.cluster/assets/media/assets/video-cap.jpg',
+    }
   })
 })
 
@@ -138,13 +152,16 @@ function handleSubmit() {
       </div>
     </div>
   </div>
-  <div class="tw-container tw-py-24 play-container">
+  <div
+    v-if="what_ist_tolima_section"
+    class="tw-container tw-py-24 play-container"
+  >
     <div class="tw-flex tw-flex-col tw-gap-20 lg:tw-flex-row">
       <div class="tw-basis-5/12 lg:tw-pl-24">
         <h2
           class="tw-text-black tw-font-bold tw-text-2xl lg:tw-text-3xl tw-leading-tight tw-mb-24 tw-relative"
         >
-          ¿Que es el cluster de Tolima?
+          {{ what_ist_tolima_section.title }}
 
           <ArrowSVG
             filled
@@ -153,14 +170,10 @@ function handleSubmit() {
           />
         </h2>
         <p class="tw-text-lg h3 tw-mb-5 tw-font-bold">Descripción general</p>
-        <p class="tw-text-md tw-font-normal tw-leading-tight tw-mb-10">
-          Nuestro clúster es un motor de innovación que conecta empresas con
-          soluciones tecnológicas vanguardistas. Ofrecemos un ecosistema
-          integral que impulsa el crecimiento y redefine cómo las organizaciones
-          prosperan. Con el respaldo de más de 79 empresas TIC del Tolima,
-          optimizamos procesos y construimos experiencias digitales que marcan
-          la diferencia en los mercados.
-        </p>
+        <p
+          class="tw-text-md tw-font-normal tw-leading-tight tw-mb-10"
+          v-html="what_ist_tolima_section.description"
+        ></p>
         <button
           size="lg"
           class="tw-bg-primary tw-py-3 text-league-spartan tw-px-6 tw-text-lg md:tw-text-xl !tw-font-normal h2 tw-border-2 tw-border-black !tw-rounded-xl"
@@ -179,7 +192,7 @@ function handleSubmit() {
         </div> -->
         <img
           class="tw-w-full tw-max-w-[880px] tw-rounded-3xl"
-          src="https://s3.wasabisys.com/assets.cluster/assets/media/assets/video-cap.jpg"
+          :src="what_ist_tolima_section.img"
         />
       </div>
     </div>
