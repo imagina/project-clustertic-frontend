@@ -252,7 +252,7 @@ function searchCategories(query?: string) {
                   @click="projectData.description = ''"
                   type="button"
                   variant="ghost"
-                  class="tw-text-white tw-underline"
+                  class="tw-text-white hover:tw-text-white hover:tw-underline"
                 >
                   {{
                     Helper.tLang('projects.create.form.description.clearBtn')
@@ -327,7 +327,7 @@ function searchCategories(query?: string) {
                 </ul>
                 <input
                   @input="handleEndWrite"
-                  class="skills-input"
+                  class="skills-input hover:tw-cursor-pointer"
                   :placeholder="
                     Helper.tLang('projects.create.form.skills.placeholder')
                   "

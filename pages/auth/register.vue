@@ -162,7 +162,7 @@ async function register() {
                   <!-- <i18n-t keypath="auth.register.inputs.termsAndCond.content">
                     <template #highlight1>
                       <NuxtLink
-                        to="/termsAndConditions"
+                        to="/terms_and_conditions"
                         class="tw-text-primary tw-font-bold"
                       >
                         {{ $t('auth.register.inputs.termsAndCond.highlight1') }}
@@ -179,7 +179,7 @@ async function register() {
                   </i18n-t> -->
                   Acepto el
                   <a
-                    href="/termsAndConditions"
+                    href="/terms_and_conditions"
                     target="_blank"
                     class="tw-text-primary tw-font-bold"
                   >
