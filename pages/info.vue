@@ -100,7 +100,7 @@ function handleSubmit() {
 
   apiCluster.post('/api/iform/v4/leads', data).then((response: any) => {
     console.log(response)
-    
+
     contactData.value = {
       nombre: '',
       apellido: '',
@@ -463,10 +463,11 @@ function handleSubmit() {
             ></Checkbox>
             <span class="tw-text-black tw-ml-2">
               Acepto los
-              <a 
-              href="/terms_and_conditions" 
-              target="_blank" 
-              class="tw-text-primary tw-underline">
+              <a
+                href="/terms_and_conditions"
+                target="_blank"
+                class="tw-text-primary tw-underline"
+              >
                 términos y condiciones.
               </a>
             </span>

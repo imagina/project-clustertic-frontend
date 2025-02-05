@@ -92,7 +92,7 @@
         "files": {
           "empty": {
             "title": "Attach Documents",
-            "description": "Drag and drop any images or documents that might help explain your project here (max file size 25 MB)"
+            "description": "Drag and drop any images or documents that might help explain your project here (max file size 10 MB)"
           },
           "loadedMsg": "Documents attached"
         },

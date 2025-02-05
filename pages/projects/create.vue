@@ -112,6 +112,7 @@ const rangePriceOptions = ref<rangePriceOptionsInterface[]>([
 
 // TODO: Reemplazar estos datos de ejemplo por datos que devuelva un endpoint de sugeridos
 const suggestedSkills = ref<ProjectTag[]>([])
+const ref_inputSearch = ref<HTMLInputElement | null>(null)
 
 const projectData = reactive<createDataInterface>({
   name: '',
@@ -300,7 +301,15 @@ function searchCategories(query?: string) {
               <div
                 class="tw-bg-input tw-rounded-2xl tw-px-4 tw-pt-3 tw-relative"
               >
-                <ul class="tw-min-h-28 tw-flex tw-flex-wrap">
+                <ul
+                  @click="
+                    (event: MouseEvent) => {
+                      if (event.target === event.currentTarget)
+                        ref_inputSearch?.focus()
+                    }
+                  "
+                  class="tw-min-h-28 tw-flex tw-flex-wrap"
+                >
                   <li
                     v-for="(item, index) in projectData.skills"
                     :key="`skill_${item.id}`"
@@ -326,6 +335,7 @@ function searchCategories(query?: string) {
                   </li>
                 </ul>
                 <input
+                  ref="ref_inputSearch"
                   @input="handleEndWrite"
                   class="skills-input hover:tw-cursor-pointer"
                   :placeholder="

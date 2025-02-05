@@ -109,11 +109,7 @@ export const useProjectsStore = defineStore('projects', {
           formData.append('disk', 's3')
           formData.append('parent_id', '0')
           formData.append('file', file)
-          const { data: dataMedia }: any = await apiCluster.post(
-            '/api/imedia/v1/files',
-            formData,
-            false,
-          )
+          const { data: dataMedia }: any = await apiCluster.fileUpload(file)
           attributes.medias_multi.documents?.files.push(dataMedia.id)
         }
       }
@@ -141,6 +137,7 @@ export const useProjectsStore = defineStore('projects', {
             include: 'categories,user.fields,province,country,city',
           },
         )
+        debugger
         const proposalResponse: any = await apiCluster.get(
           `${apiRoutes.proposals}`,
           {
@@ -195,6 +192,7 @@ export const useProjectsStore = defineStore('projects', {
             const { data: dataMedia }: any = await apiCluster.fileUpload(
               files[i],
             )
+            debugger
             attributes.medias_multi.documents?.files.push(dataMedia.id)
           }
         }

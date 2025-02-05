@@ -3,11 +3,10 @@ import {
   Paperclip,
   MapPinIcon,
   FlagIcon,
-  UserIcon,
   Clock9Icon,
   IdCardIcon,
   ShieldCheckIcon,
-  WalletIcon,
+  Loader2Icon,
   MailCheckIcon,
   UserCheck2Icon,
   PhoneIcon,
@@ -22,6 +21,7 @@ import type { User } from '~/models/UserData'
 // const project = ref<Project>(projectExample1)
 const tab = ref('details')
 const refForm: any = ref()
+const sendingProposal = ref(false)
 
 const projectsStore = useProjectsStore()
 const authStore  = useAuthStore()
@@ -60,7 +60,7 @@ onMounted(() => {
     projectsStore.viewDetails(parseInt(`${route.params.id}`))
   }
 })
-onBeforeUnmount(() => {
+onBeforeUnmount(() => {authStore.user?.id
   projectsStore.removeSelected()
 })
 async function sendProposal() {
@@ -82,7 +82,10 @@ async function sendProposal() {
 
       data.files = proposalData.files
     }
-    projectsStore.addProposal(data)
+    sendingProposal.value = true
+    projectsStore.addProposal(data).finally(()=>{
+          sendingProposal.value = false
+        })
   } catch (erro) {
     console.log(erro)
   }
@@ -164,7 +167,7 @@ function handleSelectProposal(proposal: Proposal) {
       align="justify"
     >
       <q-tab class="tw-flex-initial" name="details" label="Detalles" />
-      <q-tab class="tw-flex-initial" name="proposal" label="Propuesta" />
+      <q-tab v-if="isMyProject" class="tw-flex-initial" name="proposal" label="Propuesta" />
     </q-tabs>
 
     <q-separator />
@@ -196,7 +199,7 @@ function handleSelectProposal(proposal: Proposal) {
                 </p>
               </CardContent>
             </Card>
-            <Card class="tw-mt-10">
+            <Card v-if="!isMyProject" class="tw-mt-10">
               <CardHeader>
                 <CardTitle>Haga una oferta para este proyecto</CardTitle>
               </CardHeader>
@@ -325,10 +328,11 @@ function handleSelectProposal(proposal: Proposal) {
                     </Dropzone>
                     <div class="tw-flex tw-mt-10 tw-justify-end">
                       <Button
-                      :disabled="!(authStore.user?.id)" 
+                      :disabled="!(authStore.user?.id) || sendingProposal" 
                         type="submit"
-                        class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold"
+                        class="tw-text-lg !tw-px-16 tw-py-6 tw-font-semibold disabled:tw-opacity-75"
                       >
+                        <Loader2Icon v-if="sendingProposal" class="tw-mr-2 tw-animate-spin" />
                         Enviar propuesta
                       </Button>
                     </div>

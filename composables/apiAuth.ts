@@ -49,12 +49,31 @@ export const apiCluster = {
       params: params,
     })
   },
-  fileUpload: (img: File) => {
+  fileUpload: async (img: File) => {
     const formData = new FormData()
     formData.append('disk', 's3')
     formData.append('parent_id', '0')
     formData.append('file', img)
-    return apiCluster.post('/api/imedia/v1/files', formData)
+    try {
+      return await apiCluster.post('/api/imedia/v1/files', formData)
+    } catch (error: any) {
+      debugger
+      if (error?.response?._data.errors) {
+        const parser_error = JSON.parse(error?.response?._data.errors)
+        if (
+          parser_error['file'] &&
+          parser_error['file'].includes(
+            'Archivo es muy pesado. debe ser menor a 10 Mb MB.',
+          )
+        ) {
+          Notify.create({
+            message: 'Archivo es muy pesado. debe ser menor a 10 Mb.',
+            type: 'negative',
+          })
+        }
+      }
+      throw error
+    }
   },
 
   patch: (

@@ -17,5 +17,5 @@ iframe[id=':2.container'] {
   z-index: -1 !important;
 }
 .text-league-spartan {
-  font-family: 'League Spartan', sans-serif;
+  font-family: 'League Spartan', sans-serif !important;
 }

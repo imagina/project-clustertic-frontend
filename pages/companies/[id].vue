@@ -51,6 +51,9 @@ function handleCopyLink() {
     message: 'Link copiado al portapapeles',
   })
 }
+function handleSelectCategory(category: any) {
+  Helper.redirectTo(`/companies/?skill=${category.title}`)
+}
 </script>
 
 <template>
@@ -112,7 +115,8 @@ function handleCopyLink() {
           <li
             v-for="(item, index) in user?.skills"
             :key="`skill_${index}`"
-            class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min"
+            @click="handleSelectCategory(item)"
+            class="tw-border tw-border-secondary tw-rounded-md tw-flex tw-px-10 tw-py-2 tw-h-min tw-cursor-pointer"
           >
             {{ item.title }}
           </li>

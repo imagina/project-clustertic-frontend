@@ -92,7 +92,7 @@
         "files": {
           "empty": {
             "title": "Adjuntar Documentos",
-            "description": "Arrastra y suelta cualquier imagen o documento que podría resultar útil para explicar aquí tu proyecto (tamaño de archivo máx 25 MB)"
+            "description": "Arrastra y suelta cualquier imagen o documento que podría resultar útil para explicar aquí tu proyecto (tamaño de archivo máx 10 MB)"
           },
           "loadedMsg": "Documentos adjuntados"
         },
