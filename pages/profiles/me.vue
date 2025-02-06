@@ -7,11 +7,10 @@ import {
   SquarePenIcon,
   GlobeIcon,
 } from 'lucide-vue-next'
-import StarSVG from '@/assets/svg/star.svg'
+
 import ShareSVG from '~/assets/svg/share.svg'
 import ProfileEdit from '~/components/modals/ProfileEdit.vue'
 import ProfileChangeProfileImage from '~/components/modals/ProfileChangeProfileImage.vue'
-import ModalsProfileSkillsEdit from '~/components/modals/ProfileSkillsEdit.vue'
 import type { ExperienceUserInformation } from '~/models/interfaces/user'
 
 import FacebookSVG from '@/assets/svg/brand/facebook-filled.svg'

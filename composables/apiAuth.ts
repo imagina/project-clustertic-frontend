@@ -57,7 +57,6 @@ export const apiCluster = {
     try {
       return await apiCluster.post('/api/imedia/v1/files', formData)
     } catch (error: any) {
-      debugger
       if (error?.response?._data.errors) {
         const parser_error = JSON.parse(error?.response?._data.errors)
         if (

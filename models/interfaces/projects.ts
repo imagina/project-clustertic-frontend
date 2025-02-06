@@ -93,6 +93,7 @@ export interface Proposal {
   updatedAt: string | Date
   updatedBy: number
   creator?: UserData
+  files?: File[]
 }
 
 export interface StatusLabel {

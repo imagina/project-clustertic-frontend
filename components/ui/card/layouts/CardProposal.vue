@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 
 const emits = defineEmits<{
   (event: 'onSelectProposal', value: number): void
+  (event: 'onViewAttached', value: any): void
 }>()
 
 const props = defineProps<{
@@ -20,6 +21,7 @@ const props = defineProps<{
   deliveryDays?: number
   selected?: boolean
   img?: string
+  hasAttached?: boolean
 }>()
 
 function handleSelectProposal() {
@@ -35,12 +37,12 @@ function handleSelectProposal() {
     :class="
       cn(
         props.class,
-        'tw-mb-2 tw-cursor-pointer proposal-card',
+        'tw-mb-2 tw-cursor-pointer proposal-card tw-relative',
         props.selected ? 'proposal-selected' : '',
       )
     "
-    @click="handleSelectProposal"
   >
+    <div @click="handleSelectProposal" class="tw-absolute tw-inset-0"></div>
     <div class="tw-p-5">
       <div class="md:tw-flex tw-mb-10">
         <div
@@ -117,7 +119,15 @@ function handleSelectProposal() {
     </div>
     <CardFooter>
       <div class="tw-flex">
-        <div class="tw-flex"></div>
+        <div class="tw-flex tw-z-50 tw-text-yellow-400">
+          <Button
+            @click="emits('onViewAttached', props.id)"
+            v-if="hasAttached"
+            class="tw-mt-5"
+          >
+            Ver Archivos adjuntos
+          </Button>
+        </div>
       </div>
     </CardFooter>
   </Card>

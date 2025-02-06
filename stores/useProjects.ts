@@ -134,15 +134,15 @@ export const useProjectsStore = defineStore('projects', {
         const projectResponse: any = await apiCluster.get(
           `${apiRoutes.projects}/${id}`,
           {
-            include: 'categories,user.fields,province,country,city',
+            include: 'categories,user.fields,province,country,city,files',
           },
         )
-        debugger
+
         const proposalResponse: any = await apiCluster.get(
           `${apiRoutes.proposals}`,
           {
             filter: JSON.stringify(filtros),
-            include: 'creator.ratings',
+            include: 'creator.ratings,files',
           },
         )
         const project: Project = projectResponse.data
@@ -192,8 +192,7 @@ export const useProjectsStore = defineStore('projects', {
             const { data: dataMedia }: any = await apiCluster.fileUpload(
               files[i],
             )
-            debugger
-            attributes.medias_multi.documents?.files.push(dataMedia.id)
+            attributes.medias_multi.documents!.files.push(dataMedia.id)
           }
         }
         const response: any = await apiCluster.post(apiRoutes.proposals, {

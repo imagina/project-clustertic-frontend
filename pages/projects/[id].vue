@@ -14,14 +14,18 @@ import {
 import LoadingScreen from '~/components/sections/LoadingScreen.vue'
 import type { Project, Proposal } from '~/models/interfaces/projects'
 import type { NewProposalFormValue } from '~/models/interfaces/stores'
+import DownloadAttached from '~/components/modals/DownloadAttached.vue'
 import { projectExample1 } from '~/utils/examples/project'
 import Swal from 'sweetalert2'
 import type { User } from '~/models/UserData'
+import type { File } from '~/models/interfaces/projects'
 
 // const project = ref<Project>(projectExample1)
 const tab = ref('details')
 const refForm: any = ref()
 const sendingProposal = ref(false)
+const modalAttached = ref(false)
+const attachedFiles = ref<File[]>([])
 
 const projectsStore = useProjectsStore()
 const authStore  = useAuthStore()
@@ -116,6 +120,16 @@ function handleSelectProposal(proposal: Proposal) {
     })
   }
 }
+
+function handleViewAttached(items:File[]){
+  attachedFiles.value = items
+  if (attachedFiles.value.length>0)
+    modalAttached.value = true
+  else 
+    modalAttached.value = false
+
+}
+
 </script>
 
 <template>
@@ -194,6 +208,9 @@ function handleSelectProposal(proposal: Proposal) {
                     {{ item.title }}
                   </li>
                 </ul>
+                <Button v-if="project.files && project.files.length>0" @click="handleViewAttached(project.files)" class="tw-mt-5">
+                  Ver Archivos adjuntos
+                </Button>
                 <p class="tw-mb-0 tw-text-xs tw-mt-5">
                   ID del proyecto: {{ project.id }}
                 </p>
@@ -346,7 +363,8 @@ function handleSelectProposal(proposal: Proposal) {
             <div class="tw-mb-10">
               <CardProposal
                 v-for="proposal in project.bids"
-                v-on:on-select-proposal="handleSelectProposal(proposal)"
+                @on-select-proposal="handleSelectProposal(proposal)"
+                @on-view-attached="handleViewAttached(proposal.files ?? [])"
                 :selected="proposal.selected === 1"
                 :key="`proposal_${proposal.id}`"
                 :id="proposal.id"
@@ -354,6 +372,7 @@ function handleSelectProposal(proposal: Proposal) {
                 :amount="proposal.amount"
                 :currency="project.options?.currency ?? 'COP'"
                 :img="proposal.creator?.mediaFiles.profile.path"
+                :has-attached="proposal.files && proposal.files.length>0"
               >
                 <template v-slot:name>
                   {{ (<User>proposal.creator).extraFields.companyName?.value ?? proposal.creator?.fullName }}
@@ -468,6 +487,7 @@ function handleSelectProposal(proposal: Proposal) {
       </aside>
     </div>
   </div>
+  <DownloadAttached v-model="modalAttached" :attached-files="attachedFiles"/>
 </template>
 
 <style lang="css" scoped>

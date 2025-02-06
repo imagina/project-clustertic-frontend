@@ -71,8 +71,7 @@ async function handleSaveInfo() {
 
       <q-card-section class="q-pt-none">
         <p class="tw-text-sm tw-font-normal tw-text-white">
-          You will have the ability to choose wich profile to display in your
-          bids.dddd
+          Tendrás la capacidad de elegir qué perfil mostrar en tus ofertas.
         </p>
         <p class="tw-text-sm tw-font-semibold tw-text-white tw-my-5">Titulo*</p>
         <InputCPA
