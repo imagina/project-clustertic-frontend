@@ -68,7 +68,7 @@ function handleSelectProject(id: number) {
   projectsStore.viewDetails(id)
 }
 function handleToggleSkill(skill: ProjectTag) {
-  filters.skills = Helper.toggleItem(filters.skills, skill, 'id')
+  filters.skills = [skill]//Helper.toggleItem(filters.skills, skill, 'id')
 }
 function handleEndWrite() {
   clearTimeout(debounceTimeout)

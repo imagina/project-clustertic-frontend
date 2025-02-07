@@ -50,9 +50,13 @@ export const useProjectsStore = defineStore('projects', {
           to: filters.maxPrice > 0 ? filters.maxPrice : 1000000000000,
         }
 
-      if (Array.isArray(filters.categories))
-        this.filters['categories'] =
-          filters.categories.length > 0 ? filters.categories : undefined
+      if (Array.isArray(filters.categories)) {
+        if (filters.categories.length == 1)
+          this.filters['category'] =  filters.categories[0]
+        else
+          this.filters['categories'] =
+            filters.categories.length > 0 ? filters.categories : undefined
+      }
     },
     async get(page: number, take: number = 10) {
       // if (this.pagination.currentPage === page && !force) return
